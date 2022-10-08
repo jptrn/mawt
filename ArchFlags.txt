@@ -1,0 +1,5 @@
+# Required CPU Flags to make the project work
+# Use with `cmake -DARCH_FLAGS="..." ..` to build the project if your CPU does not support the CPU flags natively
+# Use the Intel Software Development Emulator (https://www.intel.com/content/www/us/en/developer/articles/tool/software-development-emulator.html) to run the project
+
+-mavx512f -mavx512bw -mavx512bitalg -mavx512vpopcntdq -mavx512vbmi -mavx512vbmi2 -mavx512vl -mbmi2

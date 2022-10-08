@@ -1,0 +1,714 @@
+% i still have no clue how i wanna do this
+% doing everything for all texts and 1, 2, 4, 8 and 16 threads is way too much
+% maybe i can reduce the set of texts to just "interesting" ones
+% maybe i can also discard some of my implementations that are not on the pareto front
+
+\documentclass[a4]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+
+\usepackage{amsmath,amsfonts,amssymb}
+\usepackage{fullpage}
+\usepackage{verbatim}
+\usepackage{cleveref}
+
+\usepackage{tikz,pgfplots}
+\usetikzlibrary{patterns, patterns.meta}
+\usepgfplotslibrary{groupplots}
+
+\makeatletter
+\newcommand{\resetspaceplots}[1]{
+  \makeatletter
+  \pgfplots@stacked@isfirstplottrue
+  \makeatother
+  \addplot[forget plot, draw = none] coordinates {(#1, 0)};
+}
+\makeatother
+
+\pgfplotscreateplotcyclelist{wtddcycles} {
+  red, every mark/.append style = {solid}, mark = square*\\
+  black, every mark/.append style = {solid}, mark = square*\\
+  orange!75!black, every mark/.append style = {solid}, mark = square*\\
+  blue, every mark/.append style = {solid}, mark = triangle*\\
+  green!50!black, every mark/.append style = {solid}, mark = triangle*\\
+  violet, every mark/.append style = {solid}, mark = triangle*\\  
+}
+
+\pgfplotsset{
+  /pgfplots/bar cycle list/.style = {
+    /pgfplots/cycle list = {
+      { fill = red!30, mark = none },
+      { fill = green!60, mark = none },
+      { fill = blue!50, mark = none },
+      { fill = blue!50!green!75, mark = none },% PWM PC
+      { fill = red!75!blue!50, mark = none },  % PWM PC SS
+      { fill = brown!50, mark = none }         % PWM PS
+    }
+  }
+}
+
+
+\pgfplotsset{
+    major grid style = { thin, dotted, color = black!50 },
+    minor grid style = { thin, dotted, color = black!50 },
+    grid,
+    ymin = 0,
+    legend cell align = left,
+    legend pos = north west,
+	  /pgfplots/ybar legend/.style = {
+		  /pgfplots/legend image code/.code={%
+			  \draw[##1,/tikz/.cd,yshift=-0.35em]
+      (0cm,0cm) rectangle (0.7em,0.8em);},
+	  },  
+}
+
+
+\begin{document}
+
+\title{WT Benchmark}
+\author{Jan-Philipp Tarnowski}
+\maketitle
+
+\clearpage
+
+
+% IMPORT-DATA stats ../results-space-reg-huff.out
+
+% SQL UPDATE stats SET type = 'lwtpext322', ds_order = 0 WHERE type LIKE 'lwt_pext_32_2'
+% SQL UPDATE stats SET type = 'lwtpext164', ds_order = 1 WHERE type LIKE 'lwt_pext_16_4'
+% SQL UPDATE stats SET type = 'lwtpext88', ds_order = 1 WHERE type LIKE 'lwt_pext_8_8'
+% SQL UPDATE stats SET type = 'lwtpwmpc', ds_order = 3 WHERE type LIKE 'pwm_%_pcI%tree'
+% SQL UPDATE stats SET type = 'lwtpwmpcss', ds_order = 4 WHERE type LIKE 'pwm_%_pc_ssI%tree'
+% SQL UPDATE stats SET type = 'lwtpwmps', ds_order = 5 WHERE type LIKE 'pwm_%_psI%tree'
+
+% SQL UPDATE stats SET type = 'wmpext322', ds_order = 0 WHERE type LIKE 'wm_pext_32_2'
+% SQL UPDATE stats SET type = 'wmpext164', ds_order = 1 WHERE type LIKE 'wm_pext_16_4'
+% SQL UPDATE stats SET type = 'wmpext88', ds_order = 1 WHERE type LIKE 'wm_pext_8_8'
+% SQL UPDATE stats SET type = 'wmpwmpc', ds_order = 3 WHERE type LIKE 'pwm_%_pcI%matrix'
+% SQL UPDATE stats SET type = 'wmpwmpcss', ds_order = 4 WHERE type LIKE 'pwm_%_pc_ssI%matrix'
+% SQL UPDATE stats SET type = 'wmpwmps', ds_order = 3 WHERE type LIKE 'pwm_%_psI%matrix'
+
+% SQL UPDATE stats SET type = 'hufflwtpext322', ds_order = 0 WHERE type LIKE 'lwt_huffman_pext_32_2'
+% SQL UPDATE stats SET type = 'hufflwtpext164', ds_order = 1 WHERE type LIKE 'lwt_huffman_pext_16_4'
+% SQL UPDATE stats SET type = 'hufflwtpext88', ds_order = 1 WHERE type LIKE 'lwt_huffman_pext_8_8'
+% SQL UPDATE stats SET type = 'hufflwtpwmpc', ds_order = 3 WHERE type LIKE 'pwm_%_pcI%tree_huffman'
+% SQL UPDATE stats SET type = 'hufflwtpwmpcss', ds_order = 4 WHERE type LIKE 'pwm_%_pc_ssI%tree_huffman'
+% SQL UPDATE stats SET type = 'hufflwtpwmps', ds_order = 5 WHERE type LIKE 'pwm_%_psI%tree_huffman'
+
+% SQL UPDATE stats SET type = 'huffwmpext322', ds_order = 0 WHERE type LIKE 'wm_huffman_pext_32_2'
+% SQL UPDATE stats SET type = 'huffwmpext164', ds_order = 1 WHERE type LIKE 'wm_huffman_pext_16_4'
+% SQL UPDATE stats SET type = 'huffwmpext88', ds_order = 1 WHERE type LIKE 'wm_huffman_pext_8_8'
+% SQL UPDATE stats SET type = 'huffwmpwmpc', ds_order = 3 WHERE type LIKE 'pwm_%_pcI%matrix_huffman'
+% SQL UPDATE stats SET type = 'huffwmpwmpcss', ds_order = 4 WHERE type LIKE 'pwm_%_pc_ssI%matrix_huffman'
+% SQL UPDATE stats SET type = 'huffwmpwmps', ds_order = 3 WHERE type LIKE 'pwm_%_psI%matrix_huffman'
+
+% SQL DELETE FROM stats WHERE type LIKE '%\_%' ESCAPE '\'
+% SQL DELETE FROM stats WHERE LOG(2, size) != 26
+
+% SQL CREATE TABLE stats_joined AS SELECT a.type, a.size, a.alpha_bits, a.ds_order, a.space_in_bytes, a.working_space, b.space_in_bytes AS uncompressed_space_in_bytes, b.working_space AS uncompressed_working_space FROM stats a JOIN stats b ON a.type LIKE 'huff' || b.type AND a.size = b.size AND a.alpha_bits = b.alpha_bits
+% SQL DROP TABLE stats
+% SQL ALTER TABLE stats_joined RENAME TO stats
+
+
+\clearpage
+
+\begin{figure}[t]
+    \begin{center}
+        \begin{tikzpicture}
+            \begin{groupplot} [
+                ybar stacked,
+                width = 0.385\textwidth,
+                height = 6.5cm,
+                enlarge x limits = 0.2,
+                group style = { 
+                    vertical sep = 1.5cm,
+                    horizontal sep = 0.0cm,
+                    group size = { 
+                        3 by 2
+                    } 
+                },
+                legend style = { 
+                    at = {(0.5, -0.15)},
+                    anchor = north,
+                    legend columns = 6,
+                    column sep = 2ex
+                },
+                title style = {
+                    at = {(0.5, 0.96)}
+                },
+                xticklabels = { , 1, 2, 4, 8, 16 },
+                xtick distance = 1,
+                enlarge x limits = 0.175,
+                ytick distance = 1
+            ]
+
+            \node at (7.25, 5.80) { \centering{Wavelet Tree} };
+            \node at (7.25, -0.60) { \centering{Wavelet Matrix} };
+            
+            
+            \nextgroupplot [
+                bar width = 0.185cm,
+                title = $\log \sigma {=} 4$,
+                ylabel = $\text{Space in bytes}/n$,
+                bar shift = 0,
+                symbolic x coords = { zero, hufflwtpext322, hufflwtpext164, hufflwtpext88, hufflwtpwmpc, hufflwtpwmpcss, hufflwtpwmps, one },
+                xticklabels = {},
+                ymax = 10.75
+            ]
+
+
+                %\addplot +[draw=none,fill=red!30] coordinates { (hufflwtpext322, 0) };
+                %\addplot +[draw=none,fill=green!60] coordinates { (hufflwtpext164, 0) };
+                %\addplot +[draw=none,fill=blue!50] coordinates { (hufflwtpext88, 0) };
+                %\addplot +[draw=none,fill=blue!50!green!75] coordinates { (hufflwtpwmpc, 0) };
+                %\addplot +[draw=none,fill=red!75!blue!50] coordinates { (hufflwtpwmpcss, 0) };
+                %\addplot +[draw=none,fill=brown!50] coordinates { (hufflwtpwmps, 0) };
+                %\resetspaceplots{hufflwtpext322}
+
+                %% PLOT SELECT type AS x, MEDIAN(CAST(uncompressed_working_space AS FLOAT) / size) AS y
+                %% FROM stats WHERE (type LIKE 'hufflwtpext322') AND (alpha_bits = 4) GROUP BY x ORDER BY ds_order,x
+                \addplot +[fill=red!30] coordinates { (hufflwtpext322,3.00001) };
+                \addlegendentry{type=hufflwtpext322};
+                %% PLOT SELECT type AS x, MEDIAN(CAST(working_space - uncompressed_working_space AS FLOAT) / size) AS y
+                %% FROM stats WHERE (type LIKE 'hufflwtpext322') AND (alpha_bits = 4) GROUP BY x ORDER BY ds_order,x
+                \addplot +[fill=black!15] coordinates { (hufflwtpext322,0.625083) };
+                \resetspaceplots{hufflwtpext322}
+
+                %% MULTIPLOT(type) SELECT type AS x, MEDIAN(CAST(uncompressed_working_space AS FLOAT) / size) AS y,MULTIPLOT
+                %% FROM stats WHERE (type LIKE 'hufflwtpext164') AND (alpha_bits = 4) GROUP BY x ORDER BY ds_order,x
+                \addplot +[fill=green!60] coordinates { (hufflwtpext164,3.50001) };
+                \addlegendentry{type=hufflwtpext164};
+                %% PLOT SELECT type AS x, MEDIAN(CAST(working_space - uncompressed_working_space AS FLOAT) / size) AS y
+                %% FROM stats WHERE (type LIKE 'hufflwtpext164') AND (alpha_bits = 4) GROUP BY x ORDER BY ds_order,x
+                \addplot +[fill=black!15] coordinates { (hufflwtpext164,1.12508) };
+                \resetspaceplots{hufflwtpext322}
+
+                %% MULTIPLOT(type) SELECT type AS x, MEDIAN(CAST(uncompressed_working_space AS FLOAT) / size) AS y,MULTIPLOT
+                %% FROM stats WHERE (type LIKE 'hufflwtpext88') AND (alpha_bits = 4) GROUP BY x ORDER BY ds_order,x
+                \addplot +[fill=blue!50]  coordinates { (hufflwtpext88,4.50001) };
+                \addlegendentry{type=hufflwtpext88};
+                %% PLOT SELECT type AS x, MEDIAN(CAST(working_space - uncompressed_working_space AS FLOAT) / size) AS y
+                %% FROM stats WHERE (type LIKE 'hufflwtpext88') AND (alpha_bits = 4) GROUP BY x ORDER BY ds_order,x
+                \addplot +[fill=black!15] coordinates { (hufflwtpext88,2.12508) };
+                \resetspaceplots{hufflwtpext322}
+
+                %% MULTIPLOT(type) SELECT type AS x, MEDIAN(CAST(uncompressed_working_space AS FLOAT) / size) AS y,MULTIPLOT
+                %% FROM stats WHERE (type LIKE 'hufflwtpwmpc') AND (alpha_bits = 4) GROUP BY x ORDER BY ds_order,x
+                \addplot +[fill=blue!50!green!75] coordinates { (hufflwtpwmpc,0.500034) };
+                \addlegendentry{type=hufflwtpwmpc};
+                %% PLOT SELECT type AS x, MEDIAN(CAST(working_space - uncompressed_working_space AS FLOAT) / size) AS y
+                %% FROM stats WHERE (type LIKE 'hufflwtpwmpc') AND (alpha_bits = 4) GROUP BY x ORDER BY ds_order,x
+                \addplot +[fill=black!15] coordinates { (hufflwtpwmpc,1.00002) };
+                \resetspaceplots{hufflwtpext322}
+
+                %% MULTIPLOT(type) SELECT type AS x, MEDIAN(CAST(uncompressed_working_space AS FLOAT) / size) AS y,MULTIPLOT
+                %% FROM stats WHERE (type LIKE 'hufflwtpwmpcss') AND (alpha_bits = 4) GROUP BY x ORDER BY ds_order,x
+                \addplot +[fill=red!75!blue!50] coordinates { (hufflwtpwmpcss,0.500054) };
+                \addlegendentry{type=hufflwtpwmpcss};
+                %% PLOT SELECT type AS x, MEDIAN(CAST(working_space - uncompressed_working_space AS FLOAT) / size) AS y
+                %% FROM stats WHERE (type LIKE 'hufflwtpwmpcss') AND (alpha_bits = 4) GROUP BY x ORDER BY ds_order,x
+                \addplot +[fill=black!15] coordinates { (hufflwtpwmpcss,1.78814e-05) };
+                \resetspaceplots{hufflwtpext322}
+
+                %% MULTIPLOT(type) SELECT type AS x, MEDIAN(CAST(uncompressed_working_space AS FLOAT) / size) AS y,MULTIPLOT
+                %% FROM stats WHERE (type LIKE 'hufflwtpwmps') AND (alpha_bits = 4) GROUP BY x ORDER BY ds_order,x
+                \addplot +[fill=brown!50] coordinates { (hufflwtpwmps,1.50001) };
+                \addlegendentry{type=hufflwtpwmps};
+                %% PLOT SELECT type AS x, MEDIAN(CAST(working_space - uncompressed_working_space AS FLOAT) / size) AS y
+                %% FROM stats WHERE (type LIKE 'hufflwtpwmps') AND (alpha_bits = 4) GROUP BY x ORDER BY ds_order,x
+                \addplot +[fill=black!15] coordinates { (hufflwtpwmps,1.00005) };
+                \resetspaceplots{hufflwtpext322}
+
+                % thanks pgfplots
+                \begin{comment}
+                %% PLOT SELECT type AS x, MEDIAN(CAST(uncompressed_space_in_bytes AS FLOAT) / size) AS y
+                %% FROM stats WHERE (type LIKE 'hufflwt%') AND (alpha_bits = 4) GROUP BY x ORDER BY ds_order,x                    
+                \addplot coordinates { (hufflwtpext322,0.500005) (hufflwtpext164,0.500005) (hufflwtpext88,0.500005) (hufflwtpwmpc,0.500008) (hufflwtpwmpcss,0.500005) (hufflwtpwmps,0.500005) };
+                \end{comment}
+
+                \draw [gray, thick] 
+                    ({axis cs:zero,0.500011}) |-
+                    ({axis cs:hufflwtpext322,0.500001}) |- 
+                    ({axis cs:hufflwtpext164,0.500001}) |-
+                    ({axis cs:hufflwtpext164,0.500001}) |-
+                    ({axis cs:hufflwtpext88,0.500001})  |-
+                    ({axis cs:hufflwtpwmpc,0.500001}) |-
+                    ({axis cs:hufflwtpwmpc,0.500001}) |-
+                    ({axis cs:hufflwtpwmpc,0.500001}) |-
+                    ({axis cs:one,0.500001}) 
+                ;
+
+
+
+                \legend{};
+                
+                \nextgroupplot [
+                    bar width = 0.185cm,
+                    title = $\log \sigma {=} 8$,
+                    ylabel = ,
+                    bar shift = 0,
+                    ymax = 10.75,
+                    symbolic x coords = { zero, hufflwtpext322, hufflwtpext164, hufflwtpext88, hufflwtpwmpc, hufflwtpwmpcss, hufflwtpwmps, one },
+                    xticklabels = {},
+                    yticklabels = {},
+                ]
+    
+    
+                %% PLOT SELECT type AS x, MEDIAN(CAST(uncompressed_working_space AS FLOAT) / size) AS y
+                %% FROM stats WHERE (type LIKE 'hufflwtpext322') AND (alpha_bits = 8) GROUP BY x ORDER BY ds_order,x
+                \addplot +[fill=red!30] coordinates { (hufflwtpext322,3.50005) };
+                \addlegendentry{type=hufflwtpext322};
+                %% PLOT SELECT type AS x, MEDIAN(CAST(working_space - uncompressed_working_space AS FLOAT) / size) AS y
+                %% FROM stats WHERE (type LIKE 'hufflwtpext322') AND (alpha_bits = 8) GROUP BY x ORDER BY ds_order,x
+                \addplot +[fill=black!15] coordinates { (hufflwtpext322,0.62525) };
+                \resetspaceplots{hufflwtpext322}
+
+                %% MULTIPLOT(type) SELECT type AS x, MEDIAN(CAST(uncompressed_working_space AS FLOAT) / size) AS y,MULTIPLOT
+                %% FROM stats WHERE (type LIKE 'hufflwtpext164') AND (alpha_bits = 8) GROUP BY x ORDER BY ds_order,x
+                \addplot +[fill=green!60] coordinates { (hufflwtpext164,4.00005) };
+                \addlegendentry{type=hufflwtpext164};
+                %% PLOT SELECT type AS x, MEDIAN(CAST(working_space - uncompressed_working_space AS FLOAT) / size) AS y
+                %% FROM stats WHERE (type LIKE 'hufflwtpext164') AND (alpha_bits = 8) GROUP BY x ORDER BY ds_order,x
+                \addplot +[fill=black!15] coordinates { (hufflwtpext164,1.12526) };
+                \resetspaceplots{hufflwtpext322}
+
+                %% MULTIPLOT(type) SELECT type AS x, MEDIAN(CAST(uncompressed_working_space AS FLOAT) / size) AS y,MULTIPLOT
+                %% FROM stats WHERE (type LIKE 'hufflwtpext88') AND (alpha_bits = 8) GROUP BY x ORDER BY ds_order,x
+                \addplot +[fill=blue!50]  coordinates { (hufflwtpext88,5.00005) };
+                \addlegendentry{type=hufflwtpext88};
+                %% PLOT SELECT type AS x, MEDIAN(CAST(working_space - uncompressed_working_space AS FLOAT) / size) AS y
+                %% FROM stats WHERE (type LIKE 'hufflwtpext88') AND (alpha_bits = 8) GROUP BY x ORDER BY ds_order,x
+                \addplot +[fill=black!15] coordinates { (hufflwtpext88,2.12526) };
+                \resetspaceplots{hufflwtpext322}
+
+                %% MULTIPLOT(type) SELECT type AS x, MEDIAN(CAST(uncompressed_working_space AS FLOAT) / size) AS y,MULTIPLOT
+                %% FROM stats WHERE (type LIKE 'hufflwtpwmpc') AND (alpha_bits = 8) GROUP BY x ORDER BY ds_order,x
+                \addplot +[fill=blue!50!green!75] coordinates { (hufflwtpwmpc,1.00009) };
+                \addlegendentry{type=hufflwtpwmpc};
+                %% PLOT SELECT type AS x, MEDIAN(CAST(working_space - uncompressed_working_space AS FLOAT) / size) AS y
+                %% FROM stats WHERE (type LIKE 'hufflwtpwmpc') AND (alpha_bits = 8) GROUP BY x ORDER BY ds_order,x
+                \addplot +[fill=black!15] coordinates { (hufflwtpwmpc,1.00061) };
+                \resetspaceplots{hufflwtpext322}
+
+                %% MULTIPLOT(type) SELECT type AS x, MEDIAN(CAST(uncompressed_working_space AS FLOAT) / size) AS y,MULTIPLOT
+                %% FROM stats WHERE (type LIKE 'hufflwtpwmpcss') AND (alpha_bits = 8) GROUP BY x ORDER BY ds_order,x
+                \addplot +[fill=red!75!blue!50] coordinates { (hufflwtpwmpcss,1.00017) };
+                \addlegendentry{type=hufflwtpwmpcss};
+                %% PLOT SELECT type AS x, MEDIAN(CAST(working_space - uncompressed_working_space AS FLOAT) / size) AS y
+                %% FROM stats WHERE (type LIKE 'hufflwtpwmpcss') AND (alpha_bits = 8) GROUP BY x ORDER BY ds_order,x
+                \addplot +[fill=black!15] coordinates { (hufflwtpwmpcss,0.000589371) };
+                \resetspaceplots{hufflwtpext322}
+
+                %% MULTIPLOT(type) SELECT type AS x, MEDIAN(CAST(uncompressed_working_space AS FLOAT) / size) AS y,MULTIPLOT
+                %% FROM stats WHERE (type LIKE 'hufflwtpwmps') AND (alpha_bits = 8) GROUP BY x ORDER BY ds_order,x
+                \addplot +[fill=brown!50] coordinates { (hufflwtpwmps,2.00007) };
+                \addlegendentry{type=hufflwtpwmps};
+                %% PLOT SELECT type AS x, MEDIAN(CAST(working_space - uncompressed_working_space AS FLOAT) / size) AS y
+                %% FROM stats WHERE (type LIKE 'hufflwtpwmps') AND (alpha_bits = 8) GROUP BY x ORDER BY ds_order,x
+                \addplot +[fill=black!15] coordinates { (hufflwtpwmps,1.00064) };
+                \resetspaceplots{hufflwtpext322}
+
+                    % thanks pgfplots
+                    \begin{comment}
+                        %% PLOT SELECT type AS x, MEDIAN(CAST(uncompressed_space_in_bytes AS FLOAT) / size) AS y
+                        %% FROM stats WHERE (type LIKE 'hufflwt%') AND (alpha_bits = 8) GROUP BY x ORDER BY ds_order,x                    
+                        \addplot coordinates { (hufflwtpext322,1.00001) (hufflwtpext164,1.00001) (hufflwtpext88,1.00001) (hufflwtpwmpc,1.00001) (hufflwtpwmpcss,1.00001) (hufflwtpwmps,1.00001) };
+                        \end{comment}
+    
+                    \draw [gray, thick] 
+                        ({axis cs:zero,1}) |-
+                        ({axis cs:hufflwtpext322,1}) |- 
+                        ({axis cs:hufflwtpext164,1}) |-
+                        ({axis cs:hufflwtpext164,1}) |-
+                        ({axis cs:hufflwtpext88,1})  |-
+                        ({axis cs:hufflwtpwmpc,1}) |-
+                        ({axis cs:hufflwtpwmpc,1}) |-
+                        ({axis cs:hufflwtpwmpc,1}) |-
+                        ({axis cs:one,1}) 
+                    ;
+
+                    \legend{};
+
+                    \nextgroupplot [
+                        bar width = 0.185cm,
+                        title = $\log \sigma {=} 16$,
+                        ylabel = ,
+                        bar shift = 0,
+                        ymax = 10.75,
+                        symbolic x coords = { zero, hufflwtpext322, hufflwtpext164, hufflwtpext88, hufflwtpwmpc, hufflwtpwmpcss, hufflwtpwmps, one },
+                        xticklabels = {},
+                        yticklabels = {},
+                    ]
+        
+        
+                %% PLOT SELECT type AS x, MEDIAN(CAST(uncompressed_working_space AS FLOAT) / size) AS y
+                %% FROM stats WHERE (type LIKE 'hufflwtpext322') AND (alpha_bits = 16) GROUP BY x ORDER BY ds_order,x
+                \addplot +[fill=red!30] coordinates { (hufflwtpext322,6.51028) };
+                \addlegendentry{type=hufflwtpext322};
+                %% PLOT SELECT type AS x, MEDIAN(CAST(working_space - uncompressed_working_space AS FLOAT) / size) AS y
+                %% FROM stats WHERE (type LIKE 'hufflwtpext322') AND (alpha_bits = 16) GROUP BY x ORDER BY ds_order,x
+                \addplot +[fill=black!15] coordinates { (hufflwtpext322,0.685147) };
+                \resetspaceplots{hufflwtpext322}
+
+                %% MULTIPLOT(type) SELECT type AS x, MEDIAN(CAST(uncompressed_working_space AS FLOAT) / size) AS y,MULTIPLOT
+                %% FROM stats WHERE (type LIKE 'hufflwtpext164') AND (alpha_bits = 16) GROUP BY x ORDER BY ds_order,x
+                \addplot +[fill=green!60] coordinates { (hufflwtpext164,7.00836) };
+                \addlegendentry{type=hufflwtpext164};
+                %% PLOT SELECT type AS x, MEDIAN(CAST(working_space - uncompressed_working_space AS FLOAT) / size) AS y
+                %% FROM stats WHERE (type LIKE 'hufflwtpext164') AND (alpha_bits = 16) GROUP BY x ORDER BY ds_order,x
+                \addplot +[fill=black!15] coordinates { (hufflwtpext164,1.18707) };
+                \resetspaceplots{hufflwtpext322}
+
+                %% MULTIPLOT(type) SELECT type AS x, MEDIAN(CAST(uncompressed_working_space AS FLOAT) / size) AS y,MULTIPLOT
+                %% FROM stats WHERE (type LIKE 'hufflwtpext88') AND (alpha_bits = 16) GROUP BY x ORDER BY ds_order,x
+                \addplot +[fill=blue!50]  coordinates { (hufflwtpext88,8.00787) };
+                \addlegendentry{type=hufflwtpext88};
+                %% PLOT SELECT type AS x, MEDIAN(CAST(working_space - uncompressed_working_space AS FLOAT) / size) AS y
+                %% FROM stats WHERE (type LIKE 'hufflwtpext88') AND (alpha_bits = 16) GROUP BY x ORDER BY ds_order,x
+                \addplot +[fill=black!15] coordinates { (hufflwtpext88,2.18756) };
+                \resetspaceplots{hufflwtpext322}
+
+                %% MULTIPLOT(type) SELECT type AS x, MEDIAN(CAST(uncompressed_working_space AS FLOAT) / size) AS y,MULTIPLOT
+                %% FROM stats WHERE (type LIKE 'hufflwtpwmpc') AND (alpha_bits = 16) GROUP BY x ORDER BY ds_order,x
+                \addplot +[fill=blue!50!green!75] coordinates { (hufflwtpwmpc,2.01566) };
+                \addlegendentry{type=hufflwtpwmpc};
+                %% PLOT SELECT type AS x, MEDIAN(CAST(working_space - uncompressed_working_space AS FLOAT) / size) AS y
+                %% FROM stats WHERE (type LIKE 'hufflwtpwmpc') AND (alpha_bits = 16) GROUP BY x ORDER BY ds_order,x
+                \addplot +[fill=black!15] coordinates { (hufflwtpwmpc,2.15793) };
+                \resetspaceplots{hufflwtpext322}
+
+                %% MULTIPLOT(type) SELECT type AS x, MEDIAN(CAST(uncompressed_working_space AS FLOAT) / size) AS y,MULTIPLOT
+                %% FROM stats WHERE (type LIKE 'hufflwtpwmpcss') AND (alpha_bits = 16) GROUP BY x ORDER BY ds_order,x
+                \addplot +[fill=red!75!blue!50] coordinates { (hufflwtpwmpcss,2.03131) };
+                \addlegendentry{type=hufflwtpwmpcss};
+                %% PLOT SELECT type AS x, MEDIAN(CAST(working_space - uncompressed_working_space AS FLOAT) / size) AS y
+                %% FROM stats WHERE (type LIKE 'hufflwtpwmpcss') AND (alpha_bits = 16) GROUP BY x ORDER BY ds_order,x
+                \addplot +[fill=black!15] coordinates { (hufflwtpwmpcss,0.15489) };
+                \resetspaceplots{hufflwtpext322}
+
+                %% MULTIPLOT(type) SELECT type AS x, MEDIAN(CAST(uncompressed_working_space AS FLOAT) / size) AS y,MULTIPLOT
+                %% FROM stats WHERE (type LIKE 'hufflwtpwmps') AND (alpha_bits = 16) GROUP BY x ORDER BY ds_order,x
+                \addplot +[fill=brown!50] coordinates { (hufflwtpwmps,4.01563) };
+                \addlegendentry{type=hufflwtpwmps};
+                %% PLOT SELECT type AS x, MEDIAN(CAST(working_space - uncompressed_working_space AS FLOAT) / size) AS y
+                %% FROM stats WHERE (type LIKE 'hufflwtpwmps') AND (alpha_bits = 16) GROUP BY x ORDER BY ds_order,x
+                \addplot +[fill=black!15] coordinates { (hufflwtpwmps,2.15795) };
+                \resetspaceplots{hufflwtpext322}
+
+                    % thanks pgfplots
+                    \begin{comment}
+                        %% PLOT SELECT type AS x, MEDIAN(CAST(uncompressed_space_in_bytes AS FLOAT) / size) AS y
+                        %% FROM stats WHERE (type LIKE 'hufflwt%') AND (alpha_bits = 16) GROUP BY x ORDER BY ds_order,x                    
+                        \addplot coordinates { (hufflwtpext322,2.00002) (hufflwtpext164,2.00002) (hufflwtpext88,2.00002) (hufflwtpwmpc,2.00001) (hufflwtpwmpcss,2.00001) (hufflwtpwmps,2.00001) };
+                        \end{comment}
+                        \draw [gray, thick] 
+                            ({axis cs:zero,2.0088}) |-
+                            ({axis cs:hufflwtpext322,2.00001}) |- 
+                            ({axis cs:hufflwtpext164,2.00001}) |-
+                            ({axis cs:hufflwtpext164,2.00001}) |-
+                            ({axis cs:hufflwtpext88,2.00001})  |-
+                            ({axis cs:hufflwtpwmpc,2}) |-
+                            ({axis cs:hufflwtpwmpc,2}) |-
+                            ({axis cs:hufflwtpwmpc,2}) |-
+                            ({axis cs:one,2}) 
+                        ;
+        
+        
+        
+                        \legend{};
+
+                        \nextgroupplot [
+                bar width = 0.185cm,
+                title = $\log \sigma {=} 4$,
+                ylabel = $\text{Space in bytes}/n$,
+                bar shift = 0,
+                symbolic x coords = { zero, huffwmpext322, huffwmpext164, huffwmpext88, huffwmpwmpc, huffwmpwmpcss, huffwmpwmps, one },
+                xticklabels = {},
+                ymax = 10.75
+            ]
+
+                %% PLOT SELECT type AS x, MEDIAN(CAST(uncompressed_working_space AS FLOAT) / size) AS y
+                %% FROM stats WHERE (type LIKE 'huffwmpext322') AND (alpha_bits = 4) GROUP BY x ORDER BY ds_order,x
+                \addplot +[fill=red!30] coordinates { (huffwmpext322,3.00001) };
+                \addlegendentry{type=huffwmpext322};
+                %% PLOT SELECT type AS x, MEDIAN(CAST(working_space - uncompressed_working_space AS FLOAT) / size) AS y
+                %% FROM stats WHERE (type LIKE 'huffwmpext322') AND (alpha_bits = 4) GROUP BY x ORDER BY ds_order,x
+                \addplot +[fill=black!15] coordinates { (huffwmpext322,0.625084) };
+                \resetspaceplots{huffwmpext322}
+
+                %% MULTIPLOT(type) SELECT type AS x, MEDIAN(CAST(uncompressed_working_space AS FLOAT) / size) AS y,MULTIPLOT
+                %% FROM stats WHERE (type LIKE 'huffwmpext164') AND (alpha_bits = 4) GROUP BY x ORDER BY ds_order,x
+                \addplot +[fill=green!60] coordinates { (huffwmpext164,3.50001) };
+                \addlegendentry{type=huffwmpext164};
+                %% PLOT SELECT type AS x, MEDIAN(CAST(working_space - uncompressed_working_space AS FLOAT) / size) AS y
+                %% FROM stats WHERE (type LIKE 'huffwmpext164') AND (alpha_bits = 4) GROUP BY x ORDER BY ds_order,x
+                \addplot +[fill=black!15] coordinates { (huffwmpext164,1.12508) };
+                \resetspaceplots{huffwmpext322}
+
+                %% MULTIPLOT(type) SELECT type AS x, MEDIAN(CAST(uncompressed_working_space AS FLOAT) / size) AS y,MULTIPLOT
+                %% FROM stats WHERE (type LIKE 'huffwmpext88') AND (alpha_bits = 4) GROUP BY x ORDER BY ds_order,x
+                \addplot +[fill=blue!50]  coordinates { (huffwmpext88,4.50001) };
+                \addlegendentry{type=huffwmpext88};
+                %% PLOT SELECT type AS x, MEDIAN(CAST(working_space - uncompressed_working_space AS FLOAT) / size) AS y
+                %% FROM stats WHERE (type LIKE 'huffwmpext88') AND (alpha_bits = 4) GROUP BY x ORDER BY ds_order,x
+                \addplot +[fill=black!15] coordinates { (huffwmpext88,2.12508) };
+                \resetspaceplots{huffwmpext322}
+
+                %% MULTIPLOT(type) SELECT type AS x, MEDIAN(CAST(uncompressed_working_space AS FLOAT) / size) AS y,MULTIPLOT
+                %% FROM stats WHERE (type LIKE 'huffwmpwmpc') AND (alpha_bits = 4) GROUP BY x ORDER BY ds_order,x
+                \addplot +[fill=blue!50!green!75] coordinates { (huffwmpwmpc,0.500032) };
+                \addlegendentry{type=huffwmpwmpc};
+                %% PLOT SELECT type AS x, MEDIAN(CAST(working_space - uncompressed_working_space AS FLOAT) / size) AS y
+                %% FROM stats WHERE (type LIKE 'huffwmpwmpc') AND (alpha_bits = 4) GROUP BY x ORDER BY ds_order,x
+                \addplot +[fill=black!15] coordinates { (huffwmpwmpc,1.00003) };
+                \resetspaceplots{huffwmpext322}
+
+                %% MULTIPLOT(type) SELECT type AS x, MEDIAN(CAST(uncompressed_working_space AS FLOAT) / size) AS y,MULTIPLOT
+                %% FROM stats WHERE (type LIKE 'huffwmpwmpcss') AND (alpha_bits = 4) GROUP BY x ORDER BY ds_order,x
+                \addplot +[fill=red!75!blue!50] coordinates { (huffwmpwmpcss,0.500057) };
+                \addlegendentry{type=huffwmpwmpcss};
+                %% PLOT SELECT type AS x, MEDIAN(CAST(working_space - uncompressed_working_space AS FLOAT) / size) AS y
+                %% FROM stats WHERE (type LIKE 'huffwmpwmpcss') AND (alpha_bits = 4) GROUP BY x ORDER BY ds_order,x
+                \addplot +[fill=black!15] coordinates { (huffwmpwmpcss,1.78814e-05) };
+                \resetspaceplots{huffwmpext322}
+
+                %% MULTIPLOT(type) SELECT type AS x, MEDIAN(CAST(uncompressed_working_space AS FLOAT) / size) AS y,MULTIPLOT
+                %% FROM stats WHERE (type LIKE 'huffwmpwmps') AND (alpha_bits = 4) GROUP BY x ORDER BY ds_order,x
+                \addplot +[fill=brown!50] coordinates { (huffwmpwmps,1.50001) };
+                \addlegendentry{type=huffwmpwmps};
+                %% PLOT SELECT type AS x, MEDIAN(CAST(working_space - uncompressed_working_space AS FLOAT) / size) AS y
+                %% FROM stats WHERE (type LIKE 'huffwmpwmps') AND (alpha_bits = 4) GROUP BY x ORDER BY ds_order,x
+                \addplot +[fill=black!15] coordinates { (huffwmpwmps,1.00005) };
+                \resetspaceplots{huffwmpext322}
+
+                % thanks pgfplots
+                \begin{comment}
+                %% PLOT SELECT type AS x, MEDIAN(CAST(uncompressed_space_in_bytes AS FLOAT) / size) AS y
+                %% FROM stats WHERE (type LIKE 'huffwm%') AND (alpha_bits = 4) GROUP BY x ORDER BY ds_order,x                    
+                \addplot coordinates { (huffwmpext322,0.500005) (huffwmpext164,0.500005) (huffwmpext88,0.500005) (huffwmpwmpc,0.500005) (huffwmpwmps,0.500005) (huffwmpwmpcss,0.500005) };
+                \end{comment}
+
+                \draw [gray, thick] 
+                    ({axis cs:zero,0.500011}) |-
+                    ({axis cs:huffwmpext322,0.500001}) |- 
+                    ({axis cs:huffwmpext164,0.500001}) |-
+                    ({axis cs:huffwmpext164,0.500001}) |-
+                    ({axis cs:huffwmpext88,0.500001})  |-
+                    ({axis cs:huffwmpwmpc,0.500001}) |-
+                    ({axis cs:huffwmpwmpc,0.500001}) |-
+                    ({axis cs:huffwmpwmpc,0.500001}) |-
+                    ({axis cs:one,0.500001}) 
+                ;
+
+
+
+                \legend{};
+                
+                \nextgroupplot [
+                    bar width = 0.185cm,
+                    title = $\log \sigma {=} 8$,
+                    ylabel = ,
+                    bar shift = 0,
+                    ymax = 10.75,
+                    symbolic x coords = { zero, huffwmpext322, huffwmpext164, huffwmpext88, huffwmpwmpc, huffwmpwmpcss, huffwmpwmps, one },
+                    xticklabels = {},
+                    yticklabels = {},
+                ]
+
+                \addplot +[draw=none,fill=red!30] coordinates { (huffwmpext322, 0) };
+                \addplot +[draw=none,fill=green!60] coordinates { (huffwmpext164, 0) };
+                \addplot +[draw=none,fill=blue!50] coordinates { (huffwmpext88, 0) };
+                \addplot +[draw=none,fill=blue!50!green!75] coordinates { (huffwmpwmpc, 0) };
+                \addplot +[draw=none,fill=red!75!blue!50] coordinates { (huffwmpwmpcss, 0) };
+                \addplot +[draw=none,fill=brown!50] coordinates { (huffwmpwmps, 0) };
+                \resetspaceplots{huffwmpext322}
+    
+    
+                %% PLOT SELECT type AS x, MEDIAN(CAST(uncompressed_working_space AS FLOAT) / size) AS y
+                %% FROM stats WHERE (type LIKE 'huffwmpext322') AND (alpha_bits = 8) GROUP BY x ORDER BY ds_order,x
+                \addplot +[fill=red!30] coordinates { (huffwmpext322,3.50001) };
+                \addlegendentry{type=huffwmpext322};
+                %% PLOT SELECT type AS x, MEDIAN(CAST(working_space - uncompressed_working_space AS FLOAT) / size) AS y
+                %% FROM stats WHERE (type LIKE 'huffwmpext322') AND (alpha_bits = 8) GROUP BY x ORDER BY ds_order,x
+                \addplot +[fill=black!15] coordinates { (huffwmpext322,0.625285) };
+                \resetspaceplots{huffwmpext322}
+
+                %% MULTIPLOT(type) SELECT type AS x, MEDIAN(CAST(uncompressed_working_space AS FLOAT) / size) AS y,MULTIPLOT
+                %% FROM stats WHERE (type LIKE 'huffwmpext164') AND (alpha_bits = 8) GROUP BY x ORDER BY ds_order,x
+                \addplot +[fill=green!60] coordinates { (huffwmpext164,4.00002) };
+                \addlegendentry{type=huffwmpext164};
+                %% PLOT SELECT type AS x, MEDIAN(CAST(working_space - uncompressed_working_space AS FLOAT) / size) AS y
+                %% FROM stats WHERE (type LIKE 'huffwmpext164') AND (alpha_bits = 8) GROUP BY x ORDER BY ds_order,x
+                \addplot +[fill=black!15] coordinates { (huffwmpext164,1.12528) };
+                \resetspaceplots{huffwmpext322}
+
+                %% MULTIPLOT(type) SELECT type AS x, MEDIAN(CAST(uncompressed_working_space AS FLOAT) / size) AS y,MULTIPLOT
+                %% FROM stats WHERE (type LIKE 'huffwmpext88') AND (alpha_bits = 8) GROUP BY x ORDER BY ds_order,x
+                \addplot +[fill=blue!50]  coordinates { (huffwmpext88,5.00001) };
+                \addlegendentry{type=huffwmpext88};
+                %% PLOT SELECT type AS x, MEDIAN(CAST(working_space - uncompressed_working_space AS FLOAT) / size) AS y
+                %% FROM stats WHERE (type LIKE 'huffwmpext88') AND (alpha_bits = 8) GROUP BY x ORDER BY ds_order,x
+                \addplot +[fill=black!15] coordinates { (huffwmpext88,2.12529) };
+                \resetspaceplots{huffwmpext322}
+
+                %% MULTIPLOT(type) SELECT type AS x, MEDIAN(CAST(uncompressed_working_space AS FLOAT) / size) AS y,MULTIPLOT
+                %% FROM stats WHERE (type LIKE 'huffwmpwmpc') AND (alpha_bits = 8) GROUP BY x ORDER BY ds_order,x
+                \addplot +[fill=blue!50!green!75] coordinates { (huffwmpwmpc,1.00011) };
+                \addlegendentry{type=huffwmpwmpc};
+                %% PLOT SELECT type AS x, MEDIAN(CAST(working_space - uncompressed_working_space AS FLOAT) / size) AS y
+                %% FROM stats WHERE (type LIKE 'huffwmpwmpc') AND (alpha_bits = 8) GROUP BY x ORDER BY ds_order,x
+                \addplot +[fill=black!15] coordinates { (huffwmpwmpc,1.00063) };
+                \resetspaceplots{huffwmpext322}
+
+                %% MULTIPLOT(type) SELECT type AS x, MEDIAN(CAST(uncompressed_working_space AS FLOAT) / size) AS y,MULTIPLOT
+                %% FROM stats WHERE (type LIKE 'huffwmpwmpcss') AND (alpha_bits = 8) GROUP BY x ORDER BY ds_order,x
+                \addplot +[fill=red!75!blue!50] coordinates { (huffwmpwmpcss,1.00021) };
+                \addlegendentry{type=huffwmpwmpcss};
+                %% PLOT SELECT type AS x, MEDIAN(CAST(working_space - uncompressed_working_space AS FLOAT) / size) AS y
+                %% FROM stats WHERE (type LIKE 'huffwmpwmpcss') AND (alpha_bits = 8) GROUP BY x ORDER BY ds_order,x
+                \addplot +[fill=black!15] coordinates { (huffwmpwmpcss,0.000589728) };
+                \resetspaceplots{huffwmpext322}
+
+                %% MULTIPLOT(type) SELECT type AS x, MEDIAN(CAST(uncompressed_working_space AS FLOAT) / size) AS y,MULTIPLOT
+                %% FROM stats WHERE (type LIKE 'huffwmpwmps') AND (alpha_bits = 8) GROUP BY x ORDER BY ds_order,x
+                \addplot +[fill=brown!50] coordinates { (huffwmpwmps,2.00008) };
+                \addlegendentry{type=huffwmpwmps};
+                %% PLOT SELECT type AS x, MEDIAN(CAST(working_space - uncompressed_working_space AS FLOAT) / size) AS y
+                %% FROM stats WHERE (type LIKE 'huffwmpwmps') AND (alpha_bits = 8) GROUP BY x ORDER BY ds_order,x
+                \addplot +[fill=black!15] coordinates { (huffwmpwmps,1.00065) };
+                \resetspaceplots{huffwmpext322}
+
+                    % thanks pgfplots
+                    \begin{comment}
+                        %% PLOT SELECT type AS x, MEDIAN(CAST(uncompressed_space_in_bytes AS FLOAT) / size) AS y
+                        %% FROM stats WHERE (type LIKE 'huffwm%') AND (alpha_bits = 8) GROUP BY x ORDER BY ds_order,x                    
+                        \addplot coordinates { (huffwmpext322,1.00001) (huffwmpext164,1.00001) (huffwmpext88,1.00001) (huffwmpwmpc,1.00001) (huffwmpwmps,1.00001) (huffwmpwmpcss,1.00001) };
+                        \end{comment}
+    
+                    \draw [gray, thick] 
+                        ({axis cs:zero,1}) |-
+                        ({axis cs:huffwmpext322,1}) |- 
+                        ({axis cs:huffwmpext164,1}) |-
+                        ({axis cs:huffwmpext164,1}) |-
+                        ({axis cs:huffwmpext88,1})  |-
+                        ({axis cs:huffwmpwmpc,1}) |-
+                        ({axis cs:huffwmpwmpc,1}) |-
+                        ({axis cs:huffwmpwmpc,1}) |-
+                        ({axis cs:one,1}) 
+                    ;
+
+                    \legend{
+                        $\tau = 2$\\
+                        $\tau = 4$\\
+                        $\tau = 8$\\
+                        \texttt{pc} \cite{fischer21}\\
+                        \texttt{pc-ss} \cite{fischer21}\\
+                        \texttt{ps} \cite{fischer21}\\
+                    };
+
+                    \nextgroupplot [
+                        bar width = 0.185cm,
+                        title = $\log \sigma {=} 16$,
+                        ylabel = ,
+                        bar shift = 0,
+                        ymax = 10.75,
+                        symbolic x coords = { zero, huffwmpext322, huffwmpext164, huffwmpext88, huffwmpwmpc, huffwmpwmpcss, huffwmpwmps, one },
+                        xticklabels = {},
+                        yticklabels = {},
+                    ]
+        
+        
+                %% PLOT SELECT type AS x, MEDIAN(CAST(uncompressed_working_space AS FLOAT) / size) AS y
+                %% FROM stats WHERE (type LIKE 'huffwmpext322') AND (alpha_bits = 16) GROUP BY x ORDER BY ds_order,x
+                \addplot +[fill=red!30] coordinates { (huffwmpext322,6.50003) };
+                \addlegendentry{type=huffwmpext322};
+                %% PLOT SELECT type AS x, MEDIAN(CAST(working_space - uncompressed_working_space AS FLOAT) / size) AS y
+                %% FROM stats WHERE (type LIKE 'huffwmpext322') AND (alpha_bits = 16) GROUP BY x ORDER BY ds_order,x
+                \addplot +[fill=black!15] coordinates { (huffwmpext322,0.695324) };
+                \resetspaceplots{huffwmpext322}
+
+                %% MULTIPLOT(type) SELECT type AS x, MEDIAN(CAST(uncompressed_working_space AS FLOAT) / size) AS y,MULTIPLOT
+                %% FROM stats WHERE (type LIKE 'huffwmpext164') AND (alpha_bits = 16) GROUP BY x ORDER BY ds_order,x
+                \addplot +[fill=green!60] coordinates { (huffwmpext164,7.00003) };
+                \addlegendentry{type=huffwmpext164};
+                %% PLOT SELECT type AS x, MEDIAN(CAST(working_space - uncompressed_working_space AS FLOAT) / size) AS y
+                %% FROM stats WHERE (type LIKE 'huffwmpext164') AND (alpha_bits = 16) GROUP BY x ORDER BY ds_order,x
+                \addplot +[fill=black!15] coordinates { (huffwmpext164,1.19532) };
+                \resetspaceplots{huffwmpext322}
+
+                %% MULTIPLOT(type) SELECT type AS x, MEDIAN(CAST(uncompressed_working_space AS FLOAT) / size) AS y,MULTIPLOT
+                %% FROM stats WHERE (type LIKE 'huffwmpext88') AND (alpha_bits = 16) GROUP BY x ORDER BY ds_order,x
+                \addplot +[fill=blue!50]  coordinates { (huffwmpext88,8.00009) };
+                \addlegendentry{type=huffwmpext88};
+                %% PLOT SELECT type AS x, MEDIAN(CAST(working_space - uncompressed_working_space AS FLOAT) / size) AS y
+                %% FROM stats WHERE (type LIKE 'huffwmpext88') AND (alpha_bits = 16) GROUP BY x ORDER BY ds_order,x
+                \addplot +[fill=black!15] coordinates { (huffwmpext88,2.19526) };
+                \resetspaceplots{huffwmpext322}
+
+                %% MULTIPLOT(type) SELECT type AS x, MEDIAN(CAST(uncompressed_working_space AS FLOAT) / size) AS y,MULTIPLOT
+                %% FROM stats WHERE (type LIKE 'huffwmpwmpc') AND (alpha_bits = 16) GROUP BY x ORDER BY ds_order,x
+                \addplot +[fill=blue!50!green!75] coordinates { (huffwmpwmpc,2.01956) };
+                \addlegendentry{type=huffwmpwmpc};
+                %% PLOT SELECT type AS x, MEDIAN(CAST(working_space - uncompressed_working_space AS FLOAT) / size) AS y
+                %% FROM stats WHERE (type LIKE 'huffwmpwmpc') AND (alpha_bits = 16) GROUP BY x ORDER BY ds_order,x
+                \addplot +[fill=black!15] coordinates { (huffwmpwmpc,2.16184) };
+                \resetspaceplots{huffwmpext322}
+
+                %% MULTIPLOT(type) SELECT type AS x, MEDIAN(CAST(uncompressed_working_space AS FLOAT) / size) AS y,MULTIPLOT
+                %% FROM stats WHERE (type LIKE 'huffwmpwmpcss') AND (alpha_bits = 16) GROUP BY x ORDER BY ds_order,x
+                \addplot +[fill=red!75!blue!50] coordinates { (huffwmpwmpcss,2.03913) };
+                \addlegendentry{type=huffwmpwmpcss};
+                %% PLOT SELECT type AS x, MEDIAN(CAST(working_space - uncompressed_working_space AS FLOAT) / size) AS y
+                %% FROM stats WHERE (type LIKE 'huffwmpwmpcss') AND (alpha_bits = 16) GROUP BY x ORDER BY ds_order,x
+                \addplot +[fill=black!15] coordinates { (huffwmpwmpcss,0.15489) };
+                \resetspaceplots{huffwmpext322}
+
+                %% MULTIPLOT(type) SELECT type AS x, MEDIAN(CAST(uncompressed_working_space AS FLOAT) / size) AS y,MULTIPLOT
+                %% FROM stats WHERE (type LIKE 'huffwmpwmps') AND (alpha_bits = 16) GROUP BY x ORDER BY ds_order,x
+                \addplot +[fill=brown!50] coordinates { (huffwmpwmps,4.01954) };
+                \addlegendentry{type=huffwmpwmps};
+                %% PLOT SELECT type AS x, MEDIAN(CAST(working_space - uncompressed_working_space AS FLOAT) / size) AS y
+                %% FROM stats WHERE (type LIKE 'huffwmpwmps') AND (alpha_bits = 16) GROUP BY x ORDER BY ds_order,x
+                \addplot +[fill=black!15] coordinates { (huffwmpwmps,2.16186) };
+                \resetspaceplots{huffwmpext322}
+
+                    % thanks pgfplots
+                    \begin{comment}
+                        %% PLOT SELECT type AS x, MEDIAN(CAST(uncompressed_space_in_bytes AS FLOAT) / size) AS y
+                        %% FROM stats WHERE (type LIKE 'huffwm%') AND (alpha_bits = 16) GROUP BY x ORDER BY ds_order,x                    
+                        \addplot coordinates { (huffwmpext322,2.00002) (huffwmpext164,2.00002) (huffwmpext88,2.00002) (huffwmpwmpc,2.00001) (huffwmpwmps,2.00001) (huffwmpwmpcss,2.00001) };
+                        \end{comment}
+                        \draw [gray, thick] 
+                            ({axis cs:zero,2.00001}) |-
+                            ({axis cs:huffwmpext322,2.00001}) |- 
+                            ({axis cs:huffwmpext164,2.00001}) |-
+                            ({axis cs:huffwmpext164,2.00001}) |-
+                            ({axis cs:huffwmpext88,2.00001})  |-
+                            ({axis cs:huffwmpwmpc,2}) |-
+                            ({axis cs:huffwmpwmpc,2}) |-
+                            ({axis cs:huffwmpwmpc,2}) |-
+                            ({axis cs:one,2}) 
+                        ;
+        
+        
+        
+                        \legend{};
+
+            \end{groupplot}
+
+    
+
+        \end{tikzpicture}
+\end{center}             
+\caption{
+    The peak working space for constructing wavelet trees and matrices for an input text of $2^{26}$ elements and varying sizes of $\sigma$, measured in bytes allocated on the heap.
+    All results are normalized by the input size, meaning that we measure the number of bytes of working space required per symbol of the input text.
+    The horizontal line in gray shows the space required by the final wavelet tree/matrix.
+    The section of each bar highlighted in gray represents the extra working space required when construcing Huffman-shaped wavelet trees and matrices.
+    In this case, we need to allocate extra space to hold the buffers for $L_j$ and $L_{j + 1}$, further requiring space proportional to $n$.
+    The visualization style has been adopted from \cite{fischer21}.
+} 
+\label{fig:eval-space-st}
+\end{figure}
+\end{document}

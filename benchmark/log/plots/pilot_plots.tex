@@ -1,0 +1,120 @@
+% -*- mode: latex; mode: flyspell; ispell-local-dictionary: "en_US"; coding: utf-8; fill-column: 80 -*-
+
+\documentclass{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+
+\usepackage{amsmath,amsfonts,amssymb}
+\usepackage{fullpage}
+\usepackage{verbatim}
+
+\usepackage{tikz,pgfplots}
+
+
+\pgfplotscreateplotcyclelist{wtcycles} {
+	green!50!black, every mark/.append style = {solid}, mark = x\\   % BASIC
+	brown, every mark/.append style = {solid},  mark = square*\\     % LUT, tau = 4, N = 4
+	red, every mark/.append style = {solid}, mark = square* \\       % PEXT/PEXT
+	black, every mark/.append style = {solid}, mark = square* \\     % PEXT/PSHUFB
+  	violet, every mark/.append style = {solid}, mark = triangle*\\ % PWM PS
+	blue, every mark/.append style = {solid}, mark = triangle*\\     % PWM PC
+}
+
+
+\pgfplotsset{
+  width = 150mm,
+  height = 100mm,
+  major grid style = { thin, dotted, color = black!50 },
+  minor grid style = { thin, dotted, color = black!50 },
+  grid,
+  xtick distance = 1,
+  every axis/.append style = {
+    line width = 0.5pt,
+    tick style = {
+      line cap = round,
+      thin,
+      major tick length = 4pt,
+      minor tick length = 2pt,
+    },
+  },
+  legend cell align = left,
+  legend pos = north west,
+  cycle list name = {wtcycles},
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+
+\title{WT Benchmark}
+\author{Jan-Philipp Tarnowski}
+\maketitle
+
+
+% IMPORT-DATA stats   out-2022-01-20--11-28-13.out
+% IMPORT-DATA stats_2 results-2022-01-21--15-09-49.out
+
+% SQL INSERT INTO stats SELECT * FROM stats_2
+
+\begin{center}
+\begin{tikzpicture}
+  \begin{axis}[
+  title={WT Construction Time, $\log \sigma = 8$},
+  legend style = { at = {(0.5, -0.15)}, anchor = north},
+	xlabel={Element Count [$\log_2$]},
+	ylabel={MBit/s},
+    ]
+
+			%% ~MULTIPLOT(type) SELECT LOG(2, size) AS x, MEDIAN((8 * (size / CAST(time_in_s AS Float))) / (1024 * 1024)) AS y,MULTIPLOT
+			%% ~FROM stats WHERE alphabet_size = 256 AND size <= 4294967296 AND type <> 'twophase_4_4_no_lut' GROUP BY MULTIPLOT,x ORDER BY MULTIPLOT,x
+   \addplot coordinates { (28.0,183.407) (29.0,203.215) (30.0,204.839) (31.0,191.173) (32.0,187.971) };
+   \addlegendentry{Naive};
+   \addplot coordinates { (28.0,225.451) (29.0,213.155) (30.0,217.595) (31.0,212.922) (32.0,207.962) };
+   \addlegendentry{$\tau = 4, N = 4$, LUT};
+   \addplot coordinates { (28.0,554.914) (29.0,561.848) (30.0,568.419) (31.0,541.14) (32.0,530.712) };
+   \addlegendentry{$\tau = 8, N = 8$, \texttt{pext}/\texttt{pext}};
+   \addplot coordinates { (28.0,559.945) (29.0,541.016) (30.0,550.316) (31.0,526.741) (32.0,516.753) };
+   \addlegendentry{$\tau = 8, N = 8$, \texttt{pext}/\texttt{pshufb}};
+    \addplot coordinates { (28.0,910.72) (29.0,911.851) (30.0,914.564) (31.0,916.188) (32.0,920.739) };
+   \addlegendentry{[PWM] seq.pc};
+   \addplot coordinates { (28.0,545.871) (29.0,545.658) (30.0,545.341) (31.0,545.094) (32.0,545.334) };
+   \addlegendentry{[PWM] seq.ps};
+
+  \end{axis}
+\end{tikzpicture}
+\end{center}
+
+
+\begin{center}
+\begin{tikzpicture}
+  \begin{axis}[
+  title={WT Construction Time, $\log \sigma = 16$},
+  legend style = { at = {(0.5, -0.15)}, anchor = north},
+	xlabel={Element Count [$\log_2$]},
+	ylabel={MBit/s},
+    ]
+
+			%% +MULTIPLOT(type) SELECT LOG(2, size) AS x, MEDIAN((16 * (size / CAST(time_in_s AS Float))) / (1024 * 1024)) AS y,MULTIPLOT
+			%% ~FROM stats WHERE alphabet_size = 65536 AND size <= 4294967296 AND type <> 'twophase_4_4_no_lut' GROUP BY MULTIPLOT,x ORDER BY MULTIPLOT,x
+   \addplot coordinates { (28.0,224.01) (29.0,201.212) (30.0,203.393) (31.0,198.69) (32.0,192.98) };
+   \addlegendentry{Naive};
+   \addplot coordinates { (28.0,215.88) (29.0,213.087) (30.0,216.984) (31.0,213.715) (32.0,211.05) };
+   \addlegendentry{$\tau = 4, N = 4$, LUT};
+   \addplot coordinates { (28.0,519.917) (29.0,501.822) (30.0,504.656) (31.0,480.25) (32.0,465.868) };
+   \addlegendentry{$\tau = 8, N = 8$, \texttt{pext}/\texttt{pext}};
+   \addplot coordinates { (28.0,503.757) (29.0,498.965) (30.0,490.04) (31.0,468.316) (32.0,463.054) };
+   \addlegendentry{$\tau = 8, N = 8$, \texttt{pext}/\texttt{pshufb}};
+  \addplot coordinates { (28.0,571.048) (29.0,526.465) (30.0,457.443) (31.0,412.062) (32.0,385.54) };
+   \addlegendentry{[PWM] seq.pc};
+   \addplot coordinates { (28.0,293.85) (29.0,287.185) (30.0,276.991) (31.0,267.485) (32.0,245.522) };
+   \addlegendentry{[PWM] seq.ps};
+
+  \end{axis}
+\end{tikzpicture}
+\end{center}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\end{document}

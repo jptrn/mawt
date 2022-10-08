@@ -1,0 +1,692 @@
+% i still have no clue how i wanna do this
+% doing everything for all texts and 1, 2, 4, 8 and 16 threads is way too much
+% maybe i can reduce the set of texts to just "interesting" ones
+% maybe i can also discard some of my implementations that are not on the pareto front
+
+\documentclass[a4]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+
+\usepackage{amsmath,amsfonts,amssymb}
+\usepackage{fullpage}
+\usepackage{verbatim}
+
+\usepackage{tikz,pgfplots}
+\usetikzlibrary{patterns, patterns.meta}
+\usepgfplotslibrary{groupplots}
+
+
+
+\pgfplotscreateplotcyclelist{wtddcycles} {
+  red, every mark/.append style = {solid}, mark = square*\\
+  black, every mark/.append style = {solid}, mark = square*\\
+  orange!75!black, every mark/.append style = {solid}, mark = square*\\
+  blue, every mark/.append style = {solid}, mark = triangle*\\
+  green!50!black, every mark/.append style = {solid}, mark = triangle*\\
+  violet, every mark/.append style = {solid}, mark = triangle*\\  
+}
+
+
+\pgfplotsset{
+    major grid style = { thin, dotted, color = black!50 },
+    minor grid style = { thin, dotted, color = black!50 },
+    grid,
+    ymin = 0,
+    legend cell align = left,
+    legend pos = north west,
+	  /pgfplots/ybar legend/.style = {
+		  /pgfplots/legend image code/.code={%
+			  \draw[##1,/tikz/.cd,yshift=-0.35em]
+      (0cm,0cm) rectangle (0.7em,0.8em);},
+	  },  
+}
+
+
+\begin{document}
+
+\title{WT Benchmark}
+\author{Jan-Philipp Tarnowski}
+\maketitle
+
+\clearpage
+
+
+% IMPORT-DATA stats ../results-pcc-regular.out
+
+% IMPORT-DATA stats_a ../results-lightweight-regular.out
+% IMPORT-DATA stats_b ../results-large.out
+% IMPORT-DATA stats_c ../results-pcc-dd.out
+% IMPORT-DATA stats_d ../results-lightweight-dd.out
+% IMPORT-DATA stats_e ../results-dd-large.out
+
+% TODO - large dd texts
+
+% SQL INSERT INTO stats SELECT * FROM stats_a
+% SQL INSERT INTO stats SELECT * FROM stats_b
+% SQL INSERT INTO stats SELECT * FROM stats_c
+% SQL INSERT INTO stats SELECT * FROM stats_d
+% SQL INSERT INTO stats SELECT * FROM stats_e
+
+% Normalize DS Names and orders
+% SQL UPDATE stats SET type = 'lwtlut1644', ds_order = 0 WHERE type LIKE 'lwt%lut_16_4_4%'
+% SQL UPDATE stats SET type = 'lwtpext164', ds_order = 1 WHERE type LIKE 'lwt%pext_16_4%'
+% SQL UPDATE stats SET type = 'lwtshuffle88', ds_order = 2 WHERE type LIKE 'lwt%shuffle_8_8%'
+% SQL UPDATE stats SET type = 'lwtshuffle168', ds_order = 3 WHERE type LIKE 'lwt%shuffle_16_8%'
+% SQL UPDATE stats SET type = 'lwtshuffle328', ds_order = 4 WHERE type LIKE 'lwt%shuffle_32_8%'
+% SQL UPDATE stats SET type = 'lwtshuffle648', ds_order = 5 WHERE type LIKE 'lwt%shuffle_64_8%'
+
+% SQL UPDATE stats SET type = 'wmlut1644', ds_order = 0 WHERE type LIKE 'wm%lut_16_4_4%'
+% SQL UPDATE stats SET type = 'wmpext88', ds_order = 1 WHERE type LIKE 'wm%pext_8_8%'
+% SQL UPDATE stats SET type = 'wmshuffle88', ds_order = 2 WHERE type LIKE 'wm%shuffle_8_8%'
+% SQL UPDATE stats SET type = 'wmshuffle168', ds_order = 3 WHERE type LIKE 'wm%shuffle_16_8%'
+% SQL UPDATE stats SET type = 'wmshuffle328', ds_order = 4 WHERE type LIKE 'wm%shuffle_32_8%'
+% SQL UPDATE stats SET type = 'wmshuffle648', ds_order = 5 WHERE type LIKE 'wm%shuffle_64_8%'
+
+% SQL UPDATE stats SET ext_split = time_in_s WHERE threads = 1
+
+% SQL DELETE FROM stats WHERE type LIKE '%\_%' ESCAPE '\'
+
+
+% SQL UPDATE stats SET file = 'dblp.xml' WHERE file LIKE '%/dblp.xml'
+% SQL UPDATE stats SET file = 'dna' WHERE file LIKE '%/dna'
+% SQL UPDATE stats SET file = 'english' WHERE file LIKE '%/english'
+% SQL UPDATE stats SET file = 'pitches' WHERE file LIKE '%/pitches'
+% SQL UPDATE stats SET file = 'proteins' WHERE file LIKE '%/proteins'
+% SQL UPDATE stats SET file = 'sources' WHERE file LIKE '%/sources'
+
+% SQL UPDATE stats SET file = 'chr22.dna' WHERE file LIKE '%/chr22.dna'
+% SQL UPDATE stats SET file = 'etext99' WHERE file LIKE '%/etext99'
+% SQL UPDATE stats SET file = 'gcc-3.0.tar' WHERE file LIKE '%/gcc-3.0.tar'
+% SQL UPDATE stats SET file = 'howto' WHERE file LIKE '%/howto'
+% SQL UPDATE stats SET file = 'jdk13c' WHERE file LIKE '%/jdk13c'
+% SQL UPDATE stats SET file = 'linux-2.4.5.tar' WHERE file LIKE '%/linux-2.4.5.tar'
+% SQL UPDATE stats SET file = 'rctail96' WHERE file LIKE '%/rctail96'
+% SQL UPDATE stats SET file = 'rfc' WHERE file LIKE '%/rfc'
+% SQL UPDATE stats SET file = 'sprot34.dat' WHERE file LIKE '%/sprot34.dat'
+% SQL UPDATE stats SET file = 'w3c2' WHERE file LIKE '%/w3c2'
+
+% SQL UPDATE stats SET file = 'cc.16gib' WHERE file LIKE '%/cc.txt'
+% SQL UPDATE stats SET file = 'dna.16gib' WHERE file LIKE '%/dna.txt'
+% SQL UPDATE stats SET file = 'wiki.16gib' WHERE file LIKE '%/wiki.txt'
+
+
+
+
+\clearpage
+
+\begin{figure}[t]
+\begin{center}
+    \begin{tikzpicture}
+        \begin{groupplot} [
+            width = 0.4\textwidth,
+            height = 6.4cm,
+            enlarge x limits = 0.075,
+            group style = { 
+                vertical sep = 1.0cm,
+                horizontal sep = 0.0cm,
+                group size = { 
+                    3 by 3
+                } 
+            },
+            cycle list name = wtddcycles,
+            legend style = { 
+                at = {(0.5, -0.275)},
+                anchor = north,
+                legend columns = 6,
+                column sep = 2ex
+            },
+            ylabel style = {
+                at = {(0.11, 0.5)}
+            },
+            title style = {
+                at = {(0.5, 0.96)}
+            },
+            xticklabels = { , 1, 2, 4, 8, 16 },
+            xtick distance = 1,
+            ytick distance = 1,
+            ymax = 7.0,
+        ]
+        
+        
+        \nextgroupplot [
+            title = dblp.xml,
+            ylabel = $\text{GiBit} / s$,
+        ]
+
+
+			%% MULTIPLOT(type) SELECT LOG(2, threads) AS x, MEDIAN((alpha_bits * (size / CAST(time_in_s AS Float))) / (1024 * 1024 * 1024)) AS y,MULTIPLOT
+			%% FROM stats WHERE (type LIKE 'lwt%') AND (file LIKE 'dblp.xml') GROUP BY MULTIPLOT,x ORDER BY ds_order,MULTIPLOT,x
+   \addplot coordinates { (0.0,0.423277) (1.0,0.805035) (2.0,1.4801) (3.0,2.82811) (4.0,2.97692) };
+   \addlegendentry{type=lwtlut1644};
+   \addplot coordinates { (0.0,0.705278) (1.0,1.26055) (2.0,2.25815) (3.0,4.00846) (4.0,4.29409) };
+   \addlegendentry{type=lwtpext164};
+   \addplot coordinates { (0.0,0.599844) (1.0,1.11231) (2.0,2.09309) (3.0,3.65589) (4.0,3.95847) };
+   \addlegendentry{type=lwtshuffle88};
+   \addplot coordinates { (0.0,0.815347) (1.0,1.45431) (2.0,2.60074) (3.0,3.85885) (4.0,3.87149) };
+   \addlegendentry{type=lwtshuffle168};
+   \addplot coordinates { (0.0,1.16973) (1.0,1.93722) (2.0,3.02735) (3.0,4.06369) (4.0,3.90999) };
+   \addlegendentry{type=lwtshuffle328};
+   \addplot coordinates { (0.0,1.44314) (1.0,2.17009) (2.0,3.14611) (3.0,4.06877) (4.0,3.98953) };
+   \addlegendentry{type=lwtshuffle648};
+
+
+            \legend{};
+
+   \nextgroupplot [
+    ylabel = ,
+    yticklabels = {},
+    title = dna
+]
+
+
+    %% MULTIPLOT(type) SELECT LOG(2, threads) AS x, MEDIAN((alpha_bits * (size / CAST(time_in_s AS Float))) / (1024 * 1024 * 1024)) AS y,MULTIPLOT
+    %% FROM stats WHERE (type LIKE 'lwt%') AND (file LIKE 'dna') GROUP BY MULTIPLOT,x ORDER BY ds_order,MULTIPLOT,x
+    \addplot coordinates { (0.0,0.516911) (1.0,0.990253) (2.0,1.87017) (3.0,3.14996) (4.0,3.82189) };
+    \addlegendentry{type=lwtlut1644};
+    \addplot coordinates { (0.0,0.862305) (1.0,1.54148) (2.0,2.83026) (3.0,4.27393) (4.0,5.50718) };
+    \addlegendentry{type=lwtpext164};
+    \addplot coordinates { (0.0,0.549913) (1.0,1.11545) (2.0,2.04779) (3.0,3.46802) (4.0,4.28214) };
+    \addlegendentry{type=lwtshuffle88};
+    \addplot coordinates { (0.0,0.65325) (1.0,1.27246) (2.0,2.2904) (3.0,3.37122) (4.0,3.96311) };
+    \addlegendentry{type=lwtshuffle168};
+    \addplot coordinates { (0.0,0.842279) (1.0,1.64414) (2.0,2.76389) (3.0,3.5342) (4.0,3.9736) };
+    \addlegendentry{type=lwtshuffle328};
+    \addplot coordinates { (0.0,0.987743) (1.0,1.87797) (2.0,2.9713) (3.0,3.73286) (4.0,4.11103) };
+    \addlegendentry{type=lwtshuffle648};
+
+
+    \legend{};
+
+\nextgroupplot [
+    ylabel = ,
+    yticklabels = {},
+    title = english
+]
+
+
+    %% MULTIPLOT(type) SELECT LOG(2, threads) AS x, MEDIAN((alpha_bits * (size / CAST(time_in_s AS Float))) / (1024 * 1024 * 1024)) AS y,MULTIPLOT
+    %% FROM stats WHERE (type LIKE 'lwt%') AND (file LIKE 'english') GROUP BY MULTIPLOT,x ORDER BY ds_order,MULTIPLOT,x
+    \addplot coordinates { (0.0,0.446201) (1.0,0.81082) (2.0,1.44884) (3.0,2.44453) (4.0,2.73719) };
+    \addlegendentry{type=lwtlut1644};
+    \addplot coordinates { (0.0,0.752488) (1.0,1.23721) (2.0,2.14718) (3.0,3.30205) (4.0,3.87677) };
+    \addlegendentry{type=lwtpext164};
+    \addplot coordinates { (0.0,0.662067) (1.0,1.15112) (2.0,1.96613) (3.0,3.04263) (4.0,3.44291) };
+    \addlegendentry{type=lwtshuffle88};
+    \addplot coordinates { (0.0,0.885173) (1.0,1.49264) (2.0,2.42777) (3.0,3.26929) (4.0,3.43042) };
+    \addlegendentry{type=lwtshuffle168};
+    \addplot coordinates { (0.0,1.27422) (1.0,1.99816) (2.0,2.85235) (3.0,3.36062) (4.0,3.45184) };
+    \addlegendentry{type=lwtshuffle328};
+    \addplot coordinates { (0.0,1.60419) (1.0,2.29549) (2.0,3.02229) (3.0,3.40405) (4.0,3.54444) };
+    \addlegendentry{type=lwtshuffle648};
+    
+
+
+
+    \legend{};
+
+    \nextgroupplot [
+    ylabel = $\text{GiBit} / s$,
+    title = pitches
+]
+
+
+
+    %% MULTIPLOT(type) SELECT LOG(2, threads) AS x, MEDIAN((alpha_bits * (size / CAST(time_in_s AS Float))) / (1024 * 1024 * 1024)) AS y,MULTIPLOT
+    %% FROM stats WHERE (type LIKE 'lwt%') AND (file LIKE 'pitches') GROUP BY MULTIPLOT,x ORDER BY ds_order,MULTIPLOT,x
+    \addplot coordinates { (0.0,0.437522) (1.0,0.897912) (2.0,1.6962) (3.0,3.08813) (4.0,3.35937) };
+    \addlegendentry{type=lwtlut1644};
+    \addplot coordinates { (0.0,0.731677) (1.0,1.45791) (2.0,2.68991) (3.0,4.60632) (4.0,5.18283) };
+    \addlegendentry{type=lwtpext164};
+    \addplot coordinates { (0.0,0.670778) (1.0,1.38679) (2.0,2.54283) (3.0,4.33437) (4.0,4.69826) };
+    \addlegendentry{type=lwtshuffle88};
+    \addplot coordinates { (0.0,0.865841) (1.0,1.87784) (2.0,3.26073) (3.0,4.61529) (4.0,4.67686) };
+    \addlegendentry{type=lwtshuffle168};
+    \addplot coordinates { (0.0,1.24644) (1.0,2.71891) (2.0,3.96688) (3.0,4.76978) (4.0,4.7343) };
+    \addlegendentry{type=lwtshuffle328};
+    \addplot coordinates { (0.0,1.54706) (1.0,3.2496) (2.0,4.21464) (3.0,4.84252) (4.0,4.85288) };
+    \addlegendentry{type=lwtshuffle648};
+
+
+            \legend{};
+
+   \nextgroupplot [
+    ylabel = ,
+    yticklabels = {},
+    title = proteins
+]
+
+
+    %% MULTIPLOT(type) SELECT LOG(2, threads) AS x, MEDIAN((alpha_bits * (size / CAST(time_in_s AS Float))) / (1024 * 1024 * 1024)) AS y,MULTIPLOT
+    %% FROM stats WHERE (type LIKE 'lwt%') AND (file LIKE 'proteins') GROUP BY MULTIPLOT,x ORDER BY ds_order,MULTIPLOT,x
+    \addplot coordinates { (0.0,0.366925) (1.0,0.670268) (2.0,1.2303) (3.0,2.08097) (4.0,2.43604) };
+    \addlegendentry{type=lwtlut1644};
+    \addplot coordinates { (0.0,0.562486) (1.0,0.967345) (2.0,1.7118) (3.0,2.68665) (4.0,3.43264) };
+    \addlegendentry{type=lwtpext164};
+    \addplot coordinates { (0.0,0.552371) (1.0,0.99178) (2.0,1.73522) (3.0,2.67854) (4.0,3.16196) };
+    \addlegendentry{type=lwtshuffle88};
+    \addplot coordinates { (0.0,0.690655) (1.0,1.17767) (2.0,1.99591) (3.0,2.75682) (4.0,3.18652) };
+    \addlegendentry{type=lwtshuffle168};
+    \addplot coordinates { (0.0,0.96226) (1.0,1.52032) (2.0,2.35023) (3.0,2.86958) (4.0,3.3) };
+    \addlegendentry{type=lwtshuffle328};
+    \addplot coordinates { (0.0,1.15041) (1.0,1.70138) (2.0,2.46128) (3.0,2.92386) (4.0,3.4318) };
+    \addlegendentry{type=lwtshuffle648};
+
+
+    \legend{};
+
+\nextgroupplot [
+    ylabel = ,
+    yticklabels = {},
+    title = sources
+]
+
+
+    %% MULTIPLOT(type) SELECT LOG(2, threads) AS x, MEDIAN((alpha_bits * (size / CAST(time_in_s AS Float))) / (1024 * 1024 * 1024)) AS y,MULTIPLOT
+    %% FROM stats WHERE (type LIKE 'lwt%') AND (file LIKE 'sources') GROUP BY MULTIPLOT,x ORDER BY ds_order,MULTIPLOT,x
+    \addplot coordinates { (0.0,0.440667) (1.0,0.854293) (2.0,1.64753) (3.0,2.9477) (4.0,3.17222) };
+    \addlegendentry{type=lwtlut1644};
+    \addplot coordinates { (0.0,0.739993) (1.0,1.35764) (2.0,2.54256) (3.0,4.16381) (4.0,4.75474) };
+    \addlegendentry{type=lwtpext164};
+    \addplot coordinates { (0.0,0.634977) (1.0,1.20325) (2.0,2.2394) (3.0,3.8256) (4.0,4.29834) };
+    \addlegendentry{type=lwtshuffle88};
+    \addplot coordinates { (0.0,0.861772) (1.0,1.6002) (2.0,3.01745) (3.0,4.14953) (4.0,4.24311) };
+    \addlegendentry{type=lwtshuffle168};
+    \addplot coordinates { (0.0,1.26641) (1.0,2.2873) (2.0,3.74079) (3.0,4.23673) (4.0,4.15785) };
+    \addlegendentry{type=lwtshuffle328};
+    \addplot coordinates { (0.0,1.59458) (1.0,2.69611) (2.0,3.90428) (3.0,4.19953) (4.0,4.2299) };
+    \addlegendentry{type=lwtshuffle648};
+    
+    \legend{};
+
+    \nextgroupplot [
+    ylabel = $\text{GiBit} / s$,
+    title = cc.16gib
+]
+
+
+
+    %% MULTIPLOT(type) SELECT LOG(2, threads) AS x, MEDIAN((alpha_bits * (size / CAST(time_in_s AS Float))) / (1024 * 1024 * 1024)) AS y,MULTIPLOT
+    %% FROM stats WHERE (type LIKE 'lwt%') AND (file LIKE 'cc.16gib') GROUP BY MULTIPLOT,x ORDER BY ds_order,MULTIPLOT,x
+    \addplot coordinates { (0.0,0.443327) (1.0,0.788313) (2.0,1.42343) (3.0,2.40266) (4.0,2.58442) };
+    \addlegendentry{type=lwtlut1644};
+    \addplot coordinates { (0.0,0.712481) (1.0,1.254) (2.0,2.17339) (3.0,3.33391) (4.0,3.59033) };
+    \addlegendentry{type=lwtpext164};
+    \addplot coordinates { (0.0,0.637936) (1.0,1.07914) (2.0,1.84704) (3.0,2.83861) (4.0,3.06419) };
+    \addlegendentry{type=lwtshuffle88};
+    \addplot coordinates { (0.0,0.855089) (1.0,1.41159) (2.0,2.30386) (3.0,3.15987) (4.0,3.17258) };
+    \addlegendentry{type=lwtshuffle168};
+    \addplot coordinates { (0.0,1.23562) (1.0,1.90808) (2.0,2.75519) (3.0,3.27593) (4.0,3.2784) };
+    \addlegendentry{type=lwtshuffle328};
+    \addplot coordinates { (0.0,1.56723) (1.0,2.23623) (2.0,2.93657) (3.0,3.3392) (4.0,3.36159) };
+    \addlegendentry{type=lwtshuffle648};
+
+
+            \legend{};
+
+   \nextgroupplot [
+    xlabel = Threads,
+    yticklabels = {},
+    title = dna.16gib
+]
+
+
+%% MULTIPLOT(type) SELECT LOG(2, threads) AS x, MEDIAN((alpha_bits * (size / CAST(time_in_s AS Float))) / (1024 * 1024 * 1024)) AS y,MULTIPLOT
+%% FROM stats WHERE (type LIKE 'lwt%') AND (file LIKE 'dna.16gib') GROUP BY MULTIPLOT,x ORDER BY ds_order,MULTIPLOT,x
+\addplot coordinates { (0.0,0.426648) (1.0,0.792007) (2.0,1.4306) (3.0,2.3308) (4.0,2.52888) };
+\addlegendentry{type=lwtlut1644};
+\addplot coordinates { (0.0,0.628984) (1.0,0.981616) (2.0,1.73057) (3.0,2.69412) (4.0,2.98107) };
+\addlegendentry{type=lwtpext164};
+\addplot coordinates { (0.0,0.472119) (1.0,0.785147) (2.0,1.38672) (3.0,2.15097) (4.0,2.3104) };
+\addlegendentry{type=lwtshuffle88};
+\addplot coordinates { (0.0,0.440752) (1.0,0.780895) (2.0,1.3698) (3.0,2.09901) (4.0,2.27115) };
+\addlegendentry{type=lwtshuffle168};
+\addplot coordinates { (0.0,0.524769) (1.0,0.909538) (2.0,1.54653) (3.0,2.25285) (4.0,2.37803) };
+\addlegendentry{type=lwtshuffle328};
+\addplot coordinates { (0.0,0.580036) (1.0,0.998954) (2.0,1.67152) (3.0,2.32379) (4.0,2.43209) };
+\addlegendentry{type=lwtshuffle648};
+
+
+
+    \legend{
+        \texttt{lut},
+        \texttt{pext},
+        \texttt{shuffle8},
+        \texttt{shuffle16},
+        \texttt{shuffle32},
+        \texttt{shuffle64}
+    };
+
+\nextgroupplot [
+    ylabel = ,
+    yticklabels = {},
+    title = wiki.16gib
+]
+
+
+    %% MULTIPLOT(type) SELECT LOG(2, threads) AS x, MEDIAN((alpha_bits * (size / CAST(time_in_s AS Float))) / (1024 * 1024 * 1024)) AS y,MULTIPLOT
+    %% FROM stats WHERE (type LIKE 'lwt%') AND (file LIKE 'wiki.16gib') GROUP BY MULTIPLOT,x ORDER BY ds_order,MULTIPLOT,x
+    \addplot coordinates { (0.0,0.437453) (1.0,0.782745) (2.0,1.40363) (3.0,2.38339) (4.0,2.57486) };
+    \addlegendentry{type=lwtlut1644};
+    \addplot coordinates { (0.0,0.697673) (1.0,1.2317) (2.0,2.11823) (3.0,3.30834) (4.0,3.58332) };
+    \addlegendentry{type=lwtpext164};
+    \addplot coordinates { (0.0,0.620026) (1.0,1.04515) (2.0,1.80146) (3.0,2.82847) (4.0,3.06112) };
+    \addlegendentry{type=lwtshuffle88};
+    \addplot coordinates { (0.0,0.850724) (1.0,1.40093) (2.0,2.28547) (3.0,3.09781) (4.0,3.16107) };
+    \addlegendentry{type=lwtshuffle168};
+    \addplot coordinates { (0.0,1.23798) (1.0,1.89865) (2.0,2.73044) (3.0,3.28504) (4.0,3.26877) };
+    \addlegendentry{type=lwtshuffle328};
+    \addplot coordinates { (0.0,1.56679) (1.0,2.22287) (2.0,2.92168) (3.0,3.34223) (4.0,3.36072) };
+    \addlegendentry{type=lwtshuffle648};
+    
+
+
+
+    \legend{};
+
+        \end{groupplot}
+        \end{tikzpicture}
+    \end{center}
+\caption{
+    The parallel construction throughput in $\text{MiBit}/s$ for wavelet trees using the domain decomposition algorithm.
+    We look at the texts of the Pizza \& Chili corpus and our large $16$ GiB texts.
+    While the single-threaded performance of \texttt{shuffle64} is usually best, it levels out when the number of threads increases and is eventually overtaken by \texttt{pext} for all texts.
+}
+\label{fig:eval-dd-texts-wt}
+\end{figure}
+
+\clearpage
+
+
+\begin{figure}[t]
+    \begin{center}
+        \begin{tikzpicture}
+            \begin{groupplot} [
+                width = 0.4\textwidth,
+                height = 6.4cm,
+                enlarge x limits = 0.075,
+                group style = { 
+                    vertical sep = 1.0cm,
+                    horizontal sep = 0.0cm,
+                    group size = { 
+                        3 by 3
+                    } 
+                },
+                cycle list name = wtddcycles,
+                legend style = { 
+                    at = {(0.5, -0.275)},
+                    anchor = north,
+                    legend columns = 6,
+                    column sep = 2ex
+                },
+                ylabel style = {
+                    at = {(0.11, 0.5)}
+                },
+                title style = {
+                    at = {(0.5, 0.96)}
+                },
+                xticklabels = { , 1, 2, 4, 8, 16 },
+                xtick distance = 1,
+                ytick distance = 1,
+                ymax = 7.0,
+            ]
+            
+            
+            \nextgroupplot [
+                title = dblp.xml,
+                ylabel = $\text{GiBit} / s$,
+            ]
+    
+    
+                %% MULTIPLOT(type) SELECT LOG(2, threads) AS x, MEDIAN((alpha_bits * (size / CAST(time_in_s AS Float))) / (1024 * 1024 * 1024)) AS y,MULTIPLOT
+                %% FROM stats WHERE (type LIKE 'wm%') AND (file LIKE 'dblp.xml') GROUP BY MULTIPLOT,x ORDER BY ds_order,MULTIPLOT,x
+                \addplot coordinates { (0.0,0.416983) (1.0,0.783136) (2.0,1.43126) (3.0,2.67254) (4.0,2.78188) };
+                \addlegendentry{type=wmlut1644};
+                \addplot coordinates { (0.0,0.628411) (1.0,1.18267) (2.0,2.04236) (3.0,3.42973) (4.0,3.8382) };
+                \addlegendentry{type=wmpext88};
+                \addplot coordinates { (0.0,0.629528) (1.0,1.17405) (2.0,2.0385) (3.0,3.4741) (4.0,3.87515) };
+                \addlegendentry{type=wmshuffle88};
+                \addplot coordinates { (0.0,0.843861) (1.0,1.49547) (2.0,2.5037) (3.0,3.62036) (4.0,3.75856) };
+                \addlegendentry{type=wmshuffle168};
+                \addplot coordinates { (0.0,1.15036) (1.0,1.96884) (2.0,2.86244) (3.0,3.70957) (4.0,3.78492) };
+                \addlegendentry{type=wmshuffle328};
+                \addplot coordinates { (0.0,1.44496) (1.0,2.19872) (2.0,2.93828) (3.0,3.75918) (4.0,3.83876) };
+                \addlegendentry{type=wmshuffle648};
+    
+    
+                \legend{};
+    
+       \nextgroupplot [
+        ylabel = ,
+        yticklabels = {},
+        title = dna
+    ]
+    
+    
+        %% MULTIPLOT(type) SELECT LOG(2, threads) AS x, MEDIAN((alpha_bits * (size / CAST(time_in_s AS Float))) / (1024 * 1024 * 1024)) AS y,MULTIPLOT
+        %% FROM stats WHERE (type LIKE 'wm%') AND (file LIKE 'dna') GROUP BY MULTIPLOT,x ORDER BY ds_order,MULTIPLOT,x
+        \addplot coordinates { (0.0,0.550082) (1.0,1.02777) (2.0,1.92862) (3.0,3.20864) (4.0,3.93057) };
+        \addlegendentry{type=wmlut1644};
+        \addplot coordinates { (0.0,0.570404) (1.0,1.14499) (2.0,2.09681) (3.0,3.44156) (4.0,4.32863) };
+        \addlegendentry{type=wmpext88};
+        \addplot coordinates { (0.0,0.582892) (1.0,1.15078) (2.0,2.11446) (3.0,3.56775) (4.0,4.39286) };
+        \addlegendentry{type=wmshuffle88};
+        \addplot coordinates { (0.0,0.686736) (1.0,1.30963) (2.0,2.34894) (3.0,3.60795) (4.0,3.97683) };
+        \addlegendentry{type=wmshuffle168};
+        \addplot coordinates { (0.0,0.836022) (1.0,1.61979) (2.0,2.73525) (3.0,3.83662) (4.0,4.0126) };
+        \addlegendentry{type=wmshuffle328};
+        \addplot coordinates { (0.0,0.990885) (1.0,1.86772) (2.0,2.74456) (3.0,3.76561) (4.0,4.11778) };
+        \addlegendentry{type=wmshuffle648};
+    
+    
+        \legend{};
+    
+    \nextgroupplot [
+        ylabel = ,
+        yticklabels = {},
+        title = english
+    ]
+    
+    
+        %% MULTIPLOT(type) SELECT LOG(2, threads) AS x, MEDIAN((alpha_bits * (size / CAST(time_in_s AS Float))) / (1024 * 1024 * 1024)) AS y,MULTIPLOT
+        %% FROM stats WHERE (type LIKE 'wm%') AND (file LIKE 'english') GROUP BY MULTIPLOT,x ORDER BY ds_order,MULTIPLOT,x
+        \addplot coordinates { (0.0,0.441141) (1.0,0.780139) (2.0,1.38912) (3.0,2.34155) (4.0,2.62032) };
+        \addlegendentry{type=wmlut1644};
+        \addplot coordinates { (0.0,0.693371) (1.0,1.19001) (2.0,2.00924) (3.0,3.07524) (4.0,3.45253) };
+        \addlegendentry{type=wmpext88};
+        \addplot coordinates { (0.0,0.673303) (1.0,1.15786) (2.0,1.95923) (3.0,3.02463) (4.0,3.38263) };
+        \addlegendentry{type=wmshuffle88};
+        \addplot coordinates { (0.0,0.919881) (1.0,1.5289) (2.0,2.45713) (3.0,3.26076) (4.0,3.39925) };
+        \addlegendentry{type=wmshuffle168};
+        \addplot coordinates { (0.0,1.25866) (1.0,1.98089) (2.0,2.83973) (3.0,3.32265) (4.0,3.46603) };
+        \addlegendentry{type=wmshuffle328};
+        \addplot coordinates { (0.0,1.60688) (1.0,2.27574) (2.0,2.99399) (3.0,3.36195) (4.0,3.50125) };
+        \addlegendentry{type=wmshuffle648};
+        
+    
+    
+    
+        \legend{};
+    
+        \nextgroupplot [
+        ylabel = $\text{GiBit} / s$,
+        title = pitches
+    ]
+    
+    
+    
+        %% MULTIPLOT(type) SELECT LOG(2, threads) AS x, MEDIAN((alpha_bits * (size / CAST(time_in_s AS Float))) / (1024 * 1024 * 1024)) AS y,MULTIPLOT
+        %% FROM stats WHERE (type LIKE 'wm%') AND (file LIKE 'pitches') GROUP BY MULTIPLOT,x ORDER BY ds_order,MULTIPLOT,x
+        \addplot coordinates { (0.0,0.431169) (1.0,0.842234) (2.0,1.59548) (3.0,2.87946) (4.0,3.03975) };
+        \addlegendentry{type=wmlut1644};
+        \addplot coordinates { (0.0,0.699725) (1.0,1.43566) (2.0,2.63525) (3.0,4.3783) (4.0,4.73264) };
+        \addlegendentry{type=wmpext88};
+        \addplot coordinates { (0.0,0.683279) (1.0,1.3822) (2.0,2.54944) (3.0,4.26144) (4.0,4.62754) };
+        \addlegendentry{type=wmshuffle88};
+        \addplot coordinates { (0.0,0.912517) (1.0,1.91122) (2.0,3.36955) (3.0,4.6791) (4.0,4.62182) };
+        \addlegendentry{type=wmshuffle168};
+        \addplot coordinates { (0.0,1.24452) (1.0,2.70295) (2.0,4.08299) (3.0,4.72655) (4.0,4.68464) };
+        \addlegendentry{type=wmshuffle328};
+        \addplot coordinates { (0.0,1.55694) (1.0,3.22531) (2.0,4.22138) (3.0,4.79025) (4.0,4.76879) };
+        \addlegendentry{type=wmshuffle648};
+    
+    
+                \legend{};
+    
+       \nextgroupplot [
+        ylabel = ,
+        yticklabels = {},
+        title = proteins
+    ]
+    
+    
+        %% MULTIPLOT(type) SELECT LOG(2, threads) AS x, MEDIAN((alpha_bits * (size / CAST(time_in_s AS Float))) / (1024 * 1024 * 1024)) AS y,MULTIPLOT
+        %% FROM stats WHERE (type LIKE 'wm%') AND (file LIKE 'proteins') GROUP BY MULTIPLOT,x ORDER BY ds_order,MULTIPLOT,x
+        \addplot coordinates { (0.0,0.354734) (1.0,0.634312) (2.0,1.13974) (3.0,1.97854) (4.0,2.22961) };
+        \addlegendentry{type=wmlut1644};
+        \addplot coordinates { (0.0,0.569602) (1.0,1.0166) (2.0,1.76076) (3.0,2.7412) (4.0,2.93265) };
+        \addlegendentry{type=wmpext88};
+        \addplot coordinates { (0.0,0.577331) (1.0,1.01739) (2.0,1.77266) (3.0,2.76485) (4.0,2.97758) };
+        \addlegendentry{type=wmshuffle88};
+        \addplot coordinates { (0.0,0.721559) (1.0,1.19253) (2.0,2.02447) (3.0,2.78724) (4.0,2.86087) };
+        \addlegendentry{type=wmshuffle168};
+        \addplot coordinates { (0.0,0.951545) (1.0,1.51361) (2.0,2.32114) (3.0,2.86078) (4.0,2.94207) };
+        \addlegendentry{type=wmshuffle328};
+        \addplot coordinates { (0.0,1.15425) (1.0,1.694) (2.0,2.41913) (3.0,2.8868) (4.0,2.9463) };
+        \addlegendentry{type=wmshuffle648};
+    
+    
+        \legend{};
+    
+    \nextgroupplot [
+        ylabel = ,
+        yticklabels = {},
+        title = sources
+    ]
+    
+    
+        %% MULTIPLOT(type) SELECT LOG(2, threads) AS x, MEDIAN((alpha_bits * (size / CAST(time_in_s AS Float))) / (1024 * 1024 * 1024)) AS y,MULTIPLOT
+        %% FROM stats WHERE (type LIKE 'wm%') AND (file LIKE 'sources') GROUP BY MULTIPLOT,x ORDER BY ds_order,MULTIPLOT,x
+        \addplot coordinates { (0.0,0.441265) (1.0,0.82093) (2.0,1.58756) (3.0,2.87582) (4.0,3.18293) };
+        \addlegendentry{type=wmlut1644};
+        \addplot coordinates { (0.0,0.658869) (1.0,1.22973) (2.0,2.31441) (3.0,3.89114) (4.0,4.29159) };
+        \addlegendentry{type=wmpext88};
+        \addplot coordinates { (0.0,0.644447) (1.0,1.18863) (2.0,2.25336) (3.0,3.83928) (4.0,4.20489) };
+        \addlegendentry{type=wmshuffle88};
+        \addplot coordinates { (0.0,0.898324) (1.0,1.62324) (2.0,3.07796) (3.0,4.26376) (4.0,4.23869) };
+        \addlegendentry{type=wmshuffle168};
+        \addplot coordinates { (0.0,1.26029) (1.0,2.25078) (2.0,3.78194) (3.0,4.22914) (4.0,4.36579) };
+        \addlegendentry{type=wmshuffle328};
+        \addplot coordinates { (0.0,1.60099) (1.0,2.62369) (2.0,3.99986) (3.0,4.21023) (4.0,4.22294) };
+        \addlegendentry{type=wmshuffle648};
+        
+        \legend{};
+    
+        \nextgroupplot [
+        ylabel = $\text{GiBit} / s$,
+        title = cc.16gib
+    ]
+    
+    
+    
+        %% MULTIPLOT(type) SELECT LOG(2, threads) AS x, MEDIAN((alpha_bits * (size / CAST(time_in_s AS Float))) / (1024 * 1024 * 1024)) AS y,MULTIPLOT
+        %% FROM stats WHERE (type LIKE 'wm%') AND (file LIKE 'cc.16gib') GROUP BY MULTIPLOT,x ORDER BY ds_order,MULTIPLOT,x
+        \addplot coordinates { (0.0,0.409414) (1.0,0.749735) (2.0,1.35635) (3.0,2.31268) (4.0,2.49078) };
+        \addlegendentry{type=wmlut1644};
+        \addplot coordinates { (0.0,0.661772) (1.0,1.12311) (2.0,1.9145) (3.0,2.91864) (4.0,3.15527) };
+        \addlegendentry{type=wmpext88};
+        \addplot coordinates { (0.0,0.658331) (1.0,1.09934) (2.0,1.90472) (3.0,2.87701) (4.0,3.06103) };
+        \addlegendentry{type=wmshuffle88};
+        \addplot coordinates { (0.0,0.876574) (1.0,1.47807) (2.0,2.38605) (3.0,3.18236) (4.0,3.24829) };
+        \addlegendentry{type=wmshuffle168};
+        \addplot coordinates { (0.0,1.24402) (1.0,1.88244) (2.0,2.74231) (3.0,3.23654) (4.0,3.20299) };
+        \addlegendentry{type=wmshuffle328};
+        \addplot coordinates { (0.0,1.57234) (1.0,2.22083) (2.0,2.90834) (3.0,3.30726) (4.0,3.33253) };
+        \addlegendentry{type=wmshuffle648};
+    
+    
+                \legend{};
+    
+       \nextgroupplot [
+        xlabel = Threads,
+        yticklabels = {},
+        title = dna.16gib
+    ]
+    
+    
+    %% MULTIPLOT(type) SELECT LOG(2, threads) AS x, MEDIAN((alpha_bits * (size / CAST(time_in_s AS Float))) / (1024 * 1024 * 1024)) AS y,MULTIPLOT
+    %% FROM stats WHERE (type LIKE 'wm%') AND (file LIKE 'dna.16gib') GROUP BY MULTIPLOT,x ORDER BY ds_order,MULTIPLOT,x
+    \addplot coordinates { (0.0,0.453957) (1.0,0.789804) (2.0,1.4231) (3.0,2.32354) (4.0,2.53644) };
+    \addlegendentry{type=wmlut1644};
+    \addplot coordinates { (0.0,0.450906) (1.0,0.844793) (2.0,1.48217) (3.0,2.24953) (4.0,2.44012) };
+    \addlegendentry{type=wmpext88};
+    \addplot coordinates { (0.0,0.474742) (1.0,0.870665) (2.0,1.49443) (3.0,2.31259) (4.0,2.48988) };
+    \addlegendentry{type=wmshuffle88};
+    \addplot coordinates { (0.0,0.453061) (1.0,0.865405) (2.0,1.49277) (3.0,2.25993) (4.0,2.43583) };
+    \addlegendentry{type=wmshuffle168};
+    \addplot coordinates { (0.0,0.525997) (1.0,0.902344) (2.0,1.53778) (3.0,2.26363) (4.0,2.37844) };
+    \addlegendentry{type=wmshuffle328};
+    \addplot coordinates { (0.0,0.580348) (1.0,0.996537) (2.0,1.65101) (3.0,2.31896) (4.0,2.38845) };
+    \addlegendentry{type=wmshuffle648};
+    
+    
+    
+    \legend{
+        \texttt{lut},
+        \texttt{pext},
+        \texttt{shuffle8},
+        \texttt{shuffle16},
+        \texttt{shuffle32},
+        \texttt{shuffle64}
+    };
+    
+    \nextgroupplot [
+        ylabel = ,
+        yticklabels = {},
+        title = wiki.16gib
+    ]
+    
+    
+        %% MULTIPLOT(type) SELECT LOG(2, threads) AS x, MEDIAN((alpha_bits * (size / CAST(time_in_s AS Float))) / (1024 * 1024 * 1024)) AS y,MULTIPLOT
+        %% FROM stats WHERE (type LIKE 'wm%') AND (file LIKE 'wiki.16gib') GROUP BY MULTIPLOT,x ORDER BY ds_order,MULTIPLOT,x
+        \addplot coordinates { (0.0,0.408163) (1.0,0.751619) (2.0,1.3499) (3.0,2.30703) (4.0,2.48153) };
+        \addlegendentry{type=wmlut1644};
+        \addplot coordinates { (0.0,0.665523) (1.0,1.10778) (2.0,1.88853) (3.0,2.87736) (4.0,3.13893) };
+        \addlegendentry{type=wmpext88};
+        \addplot coordinates { (0.0,0.661085) (1.0,1.0973) (2.0,1.8709) (3.0,2.81272) (4.0,3.04395) };
+        \addlegendentry{type=wmshuffle88};
+        \addplot coordinates { (0.0,0.866551) (1.0,1.47811) (2.0,2.37689) (3.0,3.16629) (4.0,3.24593) };
+        \addlegendentry{type=wmshuffle168};
+        \addplot coordinates { (0.0,1.23206) (1.0,1.85335) (2.0,2.71582) (3.0,3.24614) (4.0,3.19748) };
+        \addlegendentry{type=wmshuffle328};
+        \addplot coordinates { (0.0,1.56344) (1.0,2.1576) (2.0,2.89717) (3.0,3.30712) (4.0,3.31665) };
+        \addlegendentry{type=wmshuffle648};
+        
+    
+    
+    
+        \legend{};
+    
+            \end{groupplot}
+            \end{tikzpicture}
+        \end{center}
+    \caption{
+        We now show the construction throughput for wavelet matrices.
+    }
+    \label{fig:eval-dd-texts-wm}
+    \end{figure}
+    
+    \clearpage
+
+
+    \pgfplotsset{
+        /pgfplots/bar cycle list/.style = {
+          /pgfplots/cycle list = {
+            { fill = red!50, mark = none },          % LUT
+            { fill = green!65, mark = none },        % PEXT
+            { fill = yellow!80, mark = none },       % PSHUFB 64-8
+          }
+        }
+      }
+
+\end{document}

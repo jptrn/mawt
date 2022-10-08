@@ -1,0 +1,567 @@
+\documentclass[a4]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+
+\usepackage{amsmath,amsfonts,amssymb}
+\usepackage{fullpage}
+\usepackage{verbatim}
+
+\usepackage{tikz,pgfplots}
+\usetikzlibrary{patterns, patterns.meta}
+\usepgfplotslibrary{groupplots}
+
+
+
+\pgfplotsset{
+    width = 150mm,
+    height = 100mm,
+    major grid style = { thin, dotted, color = black!50 },
+    minor grid style = { thin, dotted, color = black!50 },
+    grid,
+    xtick distance = 1,
+    ymin = 0,
+    legend cell align = left,
+    legend pos = north west,
+	  /pgfplots/ybar legend/.style = {
+		  /pgfplots/legend image code/.code={%
+			  \draw[##1,/tikz/.cd,yshift=-0.35em]
+      (0cm,0cm) rectangle (0.7em,0.8em);},
+	  },  
+}
+
+
+\begin{document}
+
+\title{WT Benchmark}
+\author{Jan-Philipp Tarnowski}
+\maketitle
+
+\clearpage
+
+
+% IMPORT-DATA stats ../results-pcc-regular.out
+
+% SQL UPDATE stats SET file = 'dblp.xml' WHERE file LIKE '%dblp.xml'
+% SQL UPDATE stats SET file = 'dna' WHERE file LIKE '%dna'
+% SQL UPDATE stats SET file = 'english' WHERE file LIKE '%english'
+% SQL UPDATE stats SET file = 'pitches' WHERE file LIKE '%pitches'
+% SQL UPDATE stats SET file = 'proteins' WHERE file LIKE '%proteins'
+% SQL UPDATE stats SET file = 'sources' WHERE file LIKE '%sources'
+
+% SQL UPDATE stats SET type = 'lwt-pext-8-2' WHERE type LIKE 'lwt_pext_8_2'
+% SQL UPDATE stats SET type = 'lwt-pext-4-4' WHERE type LIKE 'lwt_pext_4_4'
+% SQL UPDATE stats SET type = 'lwt-pext-2-8' WHERE type LIKE 'lwt_pext_2_8'
+% SQL UPDATE stats SET type = 'lwt-pext-16-2' WHERE type LIKE 'lwt_pext_16_2'
+% SQL UPDATE stats SET type = 'lwt-pext-8-4' WHERE type LIKE 'lwt_pext_8_4'
+% SQL UPDATE stats SET type = 'lwt-pext-4-8' WHERE type LIKE 'lwt_pext_4_8'
+% SQL UPDATE stats SET type = 'lwt-pext-32-2' WHERE type LIKE 'lwt_pext_32_2'
+% SQL UPDATE stats SET type = 'lwt-pext-16-4' WHERE type LIKE 'lwt_pext_16_4'
+% SQL UPDATE stats SET type = 'lwt-pext-8-8' WHERE type LIKE 'lwt_pext_8_8'
+
+% SQL UPDATE stats SET type = 'wm-pext-8-2' WHERE type LIKE 'wm_pext_8_2'
+% SQL UPDATE stats SET type = 'wm-pext-4-4' WHERE type LIKE 'wm_pext_4_4'
+% SQL UPDATE stats SET type = 'wm-pext-2-8' WHERE type LIKE 'wm_pext_2_8'
+% SQL UPDATE stats SET type = 'wm-pext-16-2' WHERE type LIKE 'wm_pext_16_2'
+% SQL UPDATE stats SET type = 'wm-pext-8-4' WHERE type LIKE 'wm_pext_8_4'
+% SQL UPDATE stats SET type = 'wm-pext-4-8' WHERE type LIKE 'wm_pext_4_8'
+% SQL UPDATE stats SET type = 'wm-pext-32-2' WHERE type LIKE 'wm_pext_32_2'
+% SQL UPDATE stats SET type = 'wm-pext-16-4' WHERE type LIKE 'wm_pext_16_4'
+% SQL UPDATE stats SET type = 'wm-pext-8-8' WHERE type LIKE 'wm_pext_8_8'
+
+\pgfplotsset{
+  /pgfplots/bar cycle list/.style = {
+    /pgfplots/cycle list = {
+      { fill = red!30, mark = none },
+      { fill = green!60, mark = none },
+      { fill = blue!50, mark = none }
+    }
+  }
+}
+
+\begin{center}
+    \begin{tikzpicture}
+        \begin{groupplot} [
+            width = 0.45\textwidth,
+            height = 4cm,
+            ybar,
+            group style = { 
+                vertical sep = 1.5cm,
+                horizontal sep = 1.2cm,
+                group size = { 
+                    2 by 3
+                } 
+            },
+            ylabel = MiBit/s,
+            legend style = { 
+                at = {(-0.15, -0.325)},
+                anchor = north,
+                legend columns = -1,
+                column sep = 2ex
+            },
+            symbolic x coords = {
+                lwt-pext-8-2,
+                lwt-pext-4-4,
+                lwt-pext-2-8,
+                ,
+                lwt-pext-16-2,
+                lwt-pext-8-4,
+                lwt-pext-4-8,
+                ,
+                lwt-pext-32-2,
+                lwt-pext-16-4,
+                lwt-pext-8-8
+            },
+            xticklabels = {
+                , ,
+                , $w = 16$, , ,
+                , $w = 32$, , ,
+                , $w = 64$, , ,
+            },
+            ytick distance = 200,
+        ]
+        
+        
+        \nextgroupplot [
+            title = dblp.xml\strut,
+            bar width = 0.2cm,
+            bar shift = 0,
+        ]
+
+
+			%% MULTIPLOT(type) SELECT type AS x, MEDIAN((height * (size / CAST(time_in_s AS Float))) / (1024 * 1024)) AS y,MULTIPLOT
+			%% FROM stats WHERE type LIKE 'lwt_pext_%' AND file LIKE 'dblp.xml' GROUP BY MULTIPLOT,x ORDER BY ds_order,MULTIPLOT,x
+   \addplot coordinates { (lwt-pext-8-2,339.952) };
+   \addlegendentry{type=lwt-pext-8-2};
+   \addplot coordinates { (lwt-pext-4-4,299.521) };
+   \addlegendentry{type=lwt-pext-4-4};
+   \addplot coordinates { (lwt-pext-2-8,187.747) };
+   \addlegendentry{type=lwt-pext-2-8};
+   \addplot coordinates { (lwt-pext-16-2,401.355) };
+   \addlegendentry{type=lwt-pext-16-2};
+   \addplot coordinates { (lwt-pext-8-4,479.373) };
+   \addlegendentry{type=lwt-pext-8-4};
+   \addplot coordinates { (lwt-pext-4-8,335.421) };
+   \addlegendentry{type=lwt-pext-4-8};
+   \addplot coordinates { (lwt-pext-32-2,502.724) };
+   \addlegendentry{type=lwt-pext-32-2};
+   \addplot coordinates { (lwt-pext-16-4,722.205) };
+   \addlegendentry{type=lwt-pext-16-4};
+   \addplot coordinates { (lwt-pext-8-8,624.837) };
+   \addlegendentry{type=lwt-pext-8-8};
+
+
+
+   \legend{};
+   
+
+   \nextgroupplot [
+    title = dna\strut,
+    bar width = 0.2cm,
+    bar shift = 0,
+    ylabel =
+]
+
+			%% MULTIPLOT(type) SELECT type AS x, MEDIAN((height * (size / CAST(time_in_s AS Float))) / (1024 * 1024)) AS y,MULTIPLOT
+			%% FROM stats WHERE type LIKE 'lwt_pext_%' AND file LIKE 'dna' GROUP BY MULTIPLOT,x ORDER BY ds_order,MULTIPLOT,x
+   \addplot coordinates { (lwt-pext-8-2,403.164) };
+   \addlegendentry{type=lwt-pext-8-2};
+   \addplot coordinates { (lwt-pext-4-4,330.218) };
+   \addlegendentry{type=lwt-pext-4-4};
+   \addplot coordinates { (lwt-pext-2-8,180.398) };
+   \addlegendentry{type=lwt-pext-2-8};
+   \addplot coordinates { (lwt-pext-16-2,475.227) };
+   \addlegendentry{type=lwt-pext-16-2};
+   \addplot coordinates { (lwt-pext-8-4,568.38) };
+   \addlegendentry{type=lwt-pext-8-4};
+   \addplot coordinates { (lwt-pext-4-8,321.669) };
+   \addlegendentry{type=lwt-pext-4-8};
+   \addplot coordinates { (lwt-pext-32-2,629.216) };
+   \addlegendentry{type=lwt-pext-32-2};
+   \addplot coordinates { (lwt-pext-16-4,883) };
+   \addlegendentry{type=lwt-pext-16-4};
+   \addplot coordinates { (lwt-pext-8-8,579.993) };
+   \addlegendentry{type=lwt-pext-8-8};
+         
+   \legend{};
+
+           
+   \nextgroupplot [
+    title = english\strut,
+    bar width = 0.2cm,
+    bar shift = 0,
+]
+
+
+    %% MULTIPLOT(type) SELECT type AS x, MEDIAN((height * (size / CAST(time_in_s AS Float))) / (1024 * 1024)) AS y,MULTIPLOT
+    %% FROM stats WHERE type LIKE 'lwt_pext_%' AND file LIKE 'english' GROUP BY MULTIPLOT,x ORDER BY ds_order,MULTIPLOT,x
+    \addplot coordinates { (lwt-pext-8-2,368.236) };
+    \addlegendentry{type=lwt-pext-8-2};
+    \addplot coordinates { (lwt-pext-4-4,304.829) };
+    \addlegendentry{type=lwt-pext-4-4};
+    \addplot coordinates { (lwt-pext-2-8,177.738) };
+    \addlegendentry{type=lwt-pext-2-8};
+    \addplot coordinates { (lwt-pext-16-2,434.038) };
+    \addlegendentry{type=lwt-pext-16-2};
+    \addplot coordinates { (lwt-pext-8-4,514.067) };
+    \addlegendentry{type=lwt-pext-8-4};
+    \addplot coordinates { (lwt-pext-4-8,340.911) };
+    \addlegendentry{type=lwt-pext-4-8};
+    \addplot coordinates { (lwt-pext-32-2,560.817) };
+    \addlegendentry{type=lwt-pext-32-2};
+    \addplot coordinates { (lwt-pext-16-4,770.548) };
+    \addlegendentry{type=lwt-pext-16-4};
+    \addplot coordinates { (lwt-pext-8-8,656.812) };
+    \addlegendentry{type=lwt-pext-8-8};
+
+
+
+\legend{};
+
+
+\nextgroupplot [
+title = pitches\strut,
+bar width = 0.2cm,
+bar shift = 0,
+ylabel =
+]
+
+    %% MULTIPLOT(type) SELECT type AS x, MEDIAN((height * (size / CAST(time_in_s AS Float))) / (1024 * 1024)) AS y,MULTIPLOT
+    %% FROM stats WHERE type LIKE 'lwt_pext_%' AND file LIKE 'pitches' GROUP BY MULTIPLOT,x ORDER BY ds_order,MULTIPLOT,x
+    \addplot coordinates { (lwt-pext-8-2,371.168) };
+    \addlegendentry{type=lwt-pext-8-2};
+    \addplot coordinates { (lwt-pext-4-4,310.522) };
+    \addlegendentry{type=lwt-pext-4-4};
+    \addplot coordinates { (lwt-pext-2-8,189.193) };
+    \addlegendentry{type=lwt-pext-2-8};
+    \addplot coordinates { (lwt-pext-16-2,430.733) };
+    \addlegendentry{type=lwt-pext-16-2};
+    \addplot coordinates { (lwt-pext-8-4,507.915) };
+    \addlegendentry{type=lwt-pext-8-4};
+    \addplot coordinates { (lwt-pext-4-8,349.575) };
+    \addlegendentry{type=lwt-pext-4-8};
+    \addplot coordinates { (lwt-pext-32-2,557.835) };
+    \addlegendentry{type=lwt-pext-32-2};
+    \addplot coordinates { (lwt-pext-16-4,749.238) };
+    \addlegendentry{type=lwt-pext-16-4};
+    \addplot coordinates { (lwt-pext-8-8,663.348) };
+    \addlegendentry{type=lwt-pext-8-8};
+ 
+    \legend{};
+
+
+\nextgroupplot [
+    title = proteins\strut,
+    bar width = 0.2cm,
+    bar shift = 0,
+]
+
+
+    %% MULTIPLOT(type) SELECT type AS x, MEDIAN((height * (size / CAST(time_in_s AS Float))) / (1024 * 1024)) AS y,MULTIPLOT
+    %% FROM stats WHERE type LIKE 'lwt_pext_%' AND file LIKE 'proteins' GROUP BY MULTIPLOT,x ORDER BY ds_order,MULTIPLOT,x
+    \addplot coordinates { (lwt-pext-8-2,337.189) };
+    \addlegendentry{type=lwt-pext-8-2};
+    \addplot coordinates { (lwt-pext-4-4,270.543) };
+    \addlegendentry{type=lwt-pext-4-4};
+    \addplot coordinates { (lwt-pext-2-8,170.024) };
+    \addlegendentry{type=lwt-pext-2-8};
+    \addplot coordinates { (lwt-pext-16-2,397.429) };
+    \addlegendentry{type=lwt-pext-16-2};
+    \addplot coordinates { (lwt-pext-8-4,419.858) };
+    \addlegendentry{type=lwt-pext-8-4};
+    \addplot coordinates { (lwt-pext-4-8,311.395) };
+    \addlegendentry{type=lwt-pext-4-8};
+    \addplot coordinates { (lwt-pext-32-2,492.537) };
+    \addlegendentry{type=lwt-pext-32-2};
+    \addplot coordinates { (lwt-pext-16-4,575.985) };
+    \addlegendentry{type=lwt-pext-16-4};
+    \addplot coordinates { (lwt-pext-8-8,578.634) };
+    \addlegendentry{type=lwt-pext-8-8};
+
+
+
+\legend{};
+
+
+\nextgroupplot [
+title = sources\strut,
+bar width = 0.2cm,
+bar shift = 0,
+ylabel =
+]
+
+    %% MULTIPLOT(type) SELECT type AS x, MEDIAN((height * (size / CAST(time_in_s AS Float))) / (1024 * 1024)) AS y,MULTIPLOT
+    %% FROM stats WHERE type LIKE 'lwt_pext_%' AND file LIKE 'sources' GROUP BY MULTIPLOT,x ORDER BY ds_order,MULTIPLOT,x
+    \addplot coordinates { (lwt-pext-8-2,360.472) };
+    \addlegendentry{type=lwt-pext-8-2};
+    \addplot coordinates { (lwt-pext-4-4,298.842) };
+    \addlegendentry{type=lwt-pext-4-4};
+    \addplot coordinates { (lwt-pext-2-8,179.737) };
+    \addlegendentry{type=lwt-pext-2-8};
+    \addplot coordinates { (lwt-pext-16-2,430.766) };
+    \addlegendentry{type=lwt-pext-16-2};
+    \addplot coordinates { (lwt-pext-8-4,496.119) };
+    \addlegendentry{type=lwt-pext-8-4};
+    \addplot coordinates { (lwt-pext-4-8,331.251) };
+    \addlegendentry{type=lwt-pext-4-8};
+    \addplot coordinates { (lwt-pext-32-2,564.155) };
+    \addlegendentry{type=lwt-pext-32-2};
+    \addplot coordinates { (lwt-pext-16-4,757.753) };
+    \addlegendentry{type=lwt-pext-16-4};
+    \addplot coordinates { (lwt-pext-8-8,628.999) };
+    \addlegendentry{type=lwt-pext-8-8};
+ 
+    \legend{};
+
+
+
+   \legend{$\tau = 2$, $\tau = 4$, $\tau = 8$}
+
+        \end{groupplot}
+    \end{tikzpicture}
+\end{center}
+
+
+\begin{center}
+    \begin{tikzpicture}
+        \begin{groupplot} [
+            width = 0.45\textwidth,
+            height = 4cm,
+            ybar,
+            group style = { 
+                vertical sep = 1.5cm,
+                horizontal sep = 1.2cm,
+                group size = { 
+                    2 by 3
+                } 
+            },
+            ylabel = MiBit/s,
+            legend style = { 
+                at = {(-0.15, -0.325)},
+                anchor = north,
+                legend columns = -1,
+                column sep = 2ex
+            },
+            symbolic x coords = {
+                wm-pext-8-2,
+                wm-pext-4-4,
+                wm-pext-2-8,
+                ,
+                wm-pext-16-2,
+                wm-pext-8-4,
+                wm-pext-4-8,
+                ,
+                wm-pext-32-2,
+                wm-pext-16-4,
+                wm-pext-8-8
+            },
+            xticklabels = {
+                , ,
+                , $w = 16$, , ,
+                , $w = 32$, , ,
+                , $w = 64$, , ,
+            },
+            ytick distance = 200,
+        ]
+        
+        
+        \nextgroupplot [
+            title = dblp.xml\strut,
+            bar width = 0.2cm,
+            bar shift = 0,
+        ]
+
+
+			%% MULTIPLOT(type) SELECT type AS x, MEDIAN((height * (size / CAST(time_in_s AS Float))) / (1024 * 1024)) AS y,MULTIPLOT
+			%% FROM stats WHERE type LIKE 'wm_pext_%' AND file LIKE 'dblp.xml' GROUP BY MULTIPLOT,x ORDER BY ds_order,MULTIPLOT,x
+   \addplot coordinates { (wm-pext-8-2,287.81) };
+   \addlegendentry{type=wm-pext-8-2};
+   \addplot coordinates { (wm-pext-4-4,291.175) };
+   \addlegendentry{type=wm-pext-4-4};
+   \addplot coordinates { (wm-pext-2-8,191.692) };
+   \addlegendentry{type=wm-pext-2-8};
+   \addplot coordinates { (wm-pext-16-2,334.013) };
+   \addlegendentry{type=wm-pext-16-2};
+   \addplot coordinates { (wm-pext-8-4,460.267) };
+   \addlegendentry{type=wm-pext-8-4};
+   \addplot coordinates { (wm-pext-4-8,343.637) };
+   \addlegendentry{type=wm-pext-4-8};
+   \addplot coordinates { (wm-pext-32-2,403) };
+   \addlegendentry{type=wm-pext-32-2};
+   \addplot coordinates { (wm-pext-16-4,640.348) };
+   \addlegendentry{type=wm-pext-16-4};
+   \addplot coordinates { (wm-pext-8-8,643.493) };
+   \addlegendentry{type=wm-pext-8-8};
+
+
+
+   \legend{};
+   
+
+   \nextgroupplot [
+    title = dna\strut,
+    bar width = 0.2cm,
+    bar shift = 0,
+    ylabel =
+]
+
+			%% MULTIPLOT(type) SELECT type AS x, MEDIAN((height * (size / CAST(time_in_s AS Float))) / (1024 * 1024)) AS y,MULTIPLOT
+			%% FROM stats WHERE type LIKE 'wm_pext_%' AND file LIKE 'dna' GROUP BY MULTIPLOT,x ORDER BY ds_order,MULTIPLOT,x
+   \addplot coordinates { (wm-pext-8-2,359.714) };
+   \addlegendentry{type=wm-pext-8-2};
+   \addplot coordinates { (wm-pext-4-4,326.327) };
+   \addlegendentry{type=wm-pext-4-4};
+   \addplot coordinates { (wm-pext-2-8,183.083) };
+   \addlegendentry{type=wm-pext-2-8};
+   \addplot coordinates { (wm-pext-16-2,426.469) };
+   \addlegendentry{type=wm-pext-16-2};
+   \addplot coordinates { (wm-pext-8-4,576.821) };
+   \addlegendentry{type=wm-pext-8-4};
+   \addplot coordinates { (wm-pext-4-8,322.268) };
+   \addlegendentry{type=wm-pext-4-8};
+   \addplot coordinates { (wm-pext-32-2,547.447) };
+   \addlegendentry{type=wm-pext-32-2};
+   \addplot coordinates { (wm-pext-16-4,855.849) };
+   \addlegendentry{type=wm-pext-16-4};
+   \addplot coordinates { (wm-pext-8-8,584.094) };
+   \addlegendentry{type=wm-pext-8-8};
+         
+   \legend{};
+
+           
+   \nextgroupplot [
+    title = english\strut,
+    bar width = 0.2cm,
+    bar shift = 0,
+]
+
+
+    %% MULTIPLOT(type) SELECT type AS x, MEDIAN((height * (size / CAST(time_in_s AS Float))) / (1024 * 1024)) AS y,MULTIPLOT
+    %% FROM stats WHERE type LIKE 'wm_pext_%' AND file LIKE 'english' GROUP BY MULTIPLOT,x ORDER BY ds_order,MULTIPLOT,x
+    \addplot coordinates { (wm-pext-8-2,307.154) };
+    \addlegendentry{type=wm-pext-8-2};
+    \addplot coordinates { (wm-pext-4-4,296.261) };
+    \addlegendentry{type=wm-pext-4-4};
+    \addplot coordinates { (wm-pext-2-8,181.098) };
+    \addlegendentry{type=wm-pext-2-8};
+    \addplot coordinates { (wm-pext-16-2,358.357) };
+    \addlegendentry{type=wm-pext-16-2};
+    \addplot coordinates { (wm-pext-8-4,490.36) };
+    \addlegendentry{type=wm-pext-8-4};
+    \addplot coordinates { (wm-pext-4-8,350.029) };
+    \addlegendentry{type=wm-pext-4-8};
+    \addplot coordinates { (wm-pext-32-2,441.511) };
+    \addlegendentry{type=wm-pext-32-2};
+    \addplot coordinates { (wm-pext-16-4,687.986) };
+    \addlegendentry{type=wm-pext-16-4};
+    \addplot coordinates { (wm-pext-8-8,710.011) };
+    \addlegendentry{type=wm-pext-8-8};
+
+
+
+\legend{};
+
+
+\nextgroupplot [
+title = pitches\strut,
+bar width = 0.2cm,
+bar shift = 0,
+ylabel =
+]
+
+    %% MULTIPLOT(type) SELECT type AS x, MEDIAN((height * (size / CAST(time_in_s AS Float))) / (1024 * 1024)) AS y,MULTIPLOT
+    %% FROM stats WHERE type LIKE 'wm_pext_%' AND file LIKE 'pitches' GROUP BY MULTIPLOT,x ORDER BY ds_order,MULTIPLOT,x
+    \addplot coordinates { (wm-pext-8-2,301.613) };
+    \addlegendentry{type=wm-pext-8-2};
+    \addplot coordinates { (wm-pext-4-4,295.284) };
+    \addlegendentry{type=wm-pext-4-4};
+    \addplot coordinates { (wm-pext-2-8,189.548) };
+    \addlegendentry{type=wm-pext-2-8};
+    \addplot coordinates { (wm-pext-16-2,348.668) };
+    \addlegendentry{type=wm-pext-16-2};
+    \addplot coordinates { (wm-pext-8-4,476.695) };
+    \addlegendentry{type=wm-pext-8-4};
+    \addplot coordinates { (wm-pext-4-8,355.13) };
+    \addlegendentry{type=wm-pext-4-8};
+    \addplot coordinates { (wm-pext-32-2,430.413) };
+    \addlegendentry{type=wm-pext-32-2};
+    \addplot coordinates { (wm-pext-16-4,664.15) };
+    \addlegendentry{type=wm-pext-16-4};
+    \addplot coordinates { (wm-pext-8-8,716.518) };
+    \addlegendentry{type=wm-pext-8-8};
+ 
+    \legend{};
+
+
+\nextgroupplot [
+    title = proteins\strut,
+    bar width = 0.2cm,
+    bar shift = 0,
+]
+
+
+    %% MULTIPLOT(type) SELECT type AS x, MEDIAN((height * (size / CAST(time_in_s AS Float))) / (1024 * 1024)) AS y,MULTIPLOT
+    %% FROM stats WHERE type LIKE 'wm_pext_%' AND file LIKE 'proteins' GROUP BY MULTIPLOT,x ORDER BY ds_order,MULTIPLOT,x
+    \addplot coordinates { (wm-pext-8-2,293.827) };
+    \addlegendentry{type=wm-pext-8-2};
+    \addplot coordinates { (wm-pext-4-4,252.607) };
+    \addlegendentry{type=wm-pext-4-4};
+    \addplot coordinates { (wm-pext-2-8,162.772) };
+    \addlegendentry{type=wm-pext-2-8};
+    \addplot coordinates { (wm-pext-16-2,345.31) };
+    \addlegendentry{type=wm-pext-16-2};
+    \addplot coordinates { (wm-pext-8-4,391.301) };
+    \addlegendentry{type=wm-pext-8-4};
+    \addplot coordinates { (wm-pext-4-8,307.701) };
+    \addlegendentry{type=wm-pext-4-8};
+    \addplot coordinates { (wm-pext-32-2,415.563) };
+    \addlegendentry{type=wm-pext-32-2};
+    \addplot coordinates { (wm-pext-16-4,515.541) };
+    \addlegendentry{type=wm-pext-16-4};
+    \addplot coordinates { (wm-pext-8-8,583.272) };
+    \addlegendentry{type=wm-pext-8-8};
+
+
+
+\legend{};
+
+
+\nextgroupplot [
+title = sources\strut,
+bar width = 0.2cm,
+bar shift = 0,
+ylabel =
+]
+
+    %% MULTIPLOT(type) SELECT type AS x, MEDIAN((height * (size / CAST(time_in_s AS Float))) / (1024 * 1024)) AS y,MULTIPLOT
+    %% FROM stats WHERE type LIKE 'wm_pext_%' AND file LIKE 'sources' GROUP BY MULTIPLOT,x ORDER BY ds_order,MULTIPLOT,x
+    \addplot coordinates { (wm-pext-8-2,306.236) };
+    \addlegendentry{type=wm-pext-8-2};
+    \addplot coordinates { (wm-pext-4-4,285.441) };
+    \addlegendentry{type=wm-pext-4-4};
+    \addplot coordinates { (wm-pext-2-8,182.262) };
+    \addlegendentry{type=wm-pext-2-8};
+    \addplot coordinates { (wm-pext-16-2,364.019) };
+    \addlegendentry{type=wm-pext-16-2};
+    \addplot coordinates { (wm-pext-8-4,476.845) };
+    \addlegendentry{type=wm-pext-8-4};
+    \addplot coordinates { (wm-pext-4-8,332.754) };
+    \addlegendentry{type=wm-pext-4-8};
+    \addplot coordinates { (wm-pext-32-2,455.839) };
+    \addlegendentry{type=wm-pext-32-2};
+    \addplot coordinates { (wm-pext-16-4,690.288) };
+    \addlegendentry{type=wm-pext-16-4};
+    \addplot coordinates { (wm-pext-8-8,674.681) };
+    \addlegendentry{type=wm-pext-8-8};
+ 
+    \legend{};
+
+
+
+   \legend{$\tau = 2$, $\tau = 4$, $\tau = 8$}
+
+        \end{groupplot}
+    \end{tikzpicture}
+\end{center}
+
+\end{document}

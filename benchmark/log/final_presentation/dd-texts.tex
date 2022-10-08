@@ -1,0 +1,354 @@
+% i still have no clue how i wanna do this
+% doing everything for all texts and 1, 2, 4, 8 and 16 threads is way too much
+% maybe i can reduce the set of texts to just "interesting" ones
+% maybe i can also discard some of my implementations that are not on the pareto front
+
+\documentclass[a4]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+
+\usepackage{amsmath,amsfonts,amssymb}
+\usepackage{fullpage}
+\usepackage{verbatim}
+
+\usepackage{tikz,pgfplots}
+\usetikzlibrary{patterns, patterns.meta}
+\usepgfplotslibrary{groupplots}
+
+
+
+\pgfplotscreateplotcyclelist{wtddcycles} {
+  red, every mark/.append style = {solid}, mark = square*\\
+  black, every mark/.append style = {solid}, mark = square*\\
+  orange!75!black, every mark/.append style = {solid}, mark = square*\\
+  blue, every mark/.append style = {solid}, mark = triangle*\\
+  green!50!black, every mark/.append style = {solid}, mark = triangle*\\
+  violet, every mark/.append style = {solid}, mark = triangle*\\  
+}
+
+
+\pgfplotsset{
+    major grid style = { thin, dotted, color = black!50 },
+    minor grid style = { thin, dotted, color = black!50 },
+    grid,
+    ymin = 0,
+    legend cell align = left,
+    legend pos = north west,
+	  /pgfplots/ybar legend/.style = {
+		  /pgfplots/legend image code/.code={%
+			  \draw[##1,/tikz/.cd,yshift=-0.35em]
+      (0cm,0cm) rectangle (0.7em,0.8em);},
+	  },  
+}
+
+
+\begin{document}
+
+\title{WT Benchmark}
+\author{Jan-Philipp Tarnowski}
+\maketitle
+
+\clearpage
+
+
+% IMPORT-DATA stats ../final/results-pcc-regular.out
+
+% IMPORT-DATA stats_a ../final/results-lightweight-regular.out
+% IMPORT-DATA stats_b ../final/results-large.out
+% IMPORT-DATA stats_c ../final/results-pcc-dd.out
+% IMPORT-DATA stats_d ../final/results-lightweight-dd.out
+% IMPORT-DATA stats_e ../final/results-dd-large.out
+
+% SQL INSERT INTO stats SELECT * FROM stats_a
+% SQL INSERT INTO stats SELECT * FROM stats_b
+% SQL INSERT INTO stats SELECT * FROM stats_c
+% SQL INSERT INTO stats SELECT * FROM stats_d
+% SQL INSERT INTO stats SELECT * FROM stats_e
+
+% Normalize DS Names and orders
+% SQL UPDATE stats SET type = 'lwtlut1644', ds_order = 0 WHERE type LIKE 'lwt%lut_16_4_4%'
+% SQL UPDATE stats SET type = 'lwtpext164', ds_order = 1 WHERE type LIKE 'lwt%pext_16_4%'
+% SQL UPDATE stats SET type = 'lwtshuffle648', ds_order = 2 WHERE type LIKE 'lwt%shuffle_64_8%'
+% SQL UPDATE stats SET type = 'lwtpwmpc', ds_order = 3 WHERE type LIKE 'pwm_%_pcI%tree'
+% SQL UPDATE stats SET type = 'lwtpwmpcss', ds_order = 4 WHERE type LIKE 'pwm_%_pc_ssI%tree'
+% SQL UPDATE stats SET type = 'lwtpwmps', ds_order = 5 WHERE type LIKE 'pwm_%_psI%tree'
+
+% SQL UPDATE stats SET type = 'wmlut1644', ds_order = 0 WHERE type LIKE 'wm%lut_16_4_4%'
+% SQL UPDATE stats SET type = 'wmpext88', ds_order = 1 WHERE type LIKE 'wm%pext_8_8%'
+% SQL UPDATE stats SET type = 'wmshuffle648', ds_order = 2 WHERE type LIKE 'wm%shuffle_64_8%'
+% SQL UPDATE stats SET type = 'wmpwmpc', ds_order = 3 WHERE type LIKE 'pwm_%_pcI%matrix'
+% SQL UPDATE stats SET type = 'wmpwmpcss', ds_order = 4 WHERE type LIKE 'pwm_%_pc_ssI%matrix'
+% SQL UPDATE stats SET type = 'wmpwmps', ds_order = 5 WHERE type LIKE 'pwm_%_psI%matrix'
+
+% SQL UPDATE stats SET ext_split = time_in_s WHERE threads = 1
+
+% SQL DELETE FROM stats WHERE type LIKE '%\_%' ESCAPE '\'
+
+
+% SQL UPDATE stats SET file = 'dblp.xml' WHERE file LIKE '%/dblp.xml'
+% SQL UPDATE stats SET file = 'dna' WHERE file LIKE '%/dna'
+% SQL UPDATE stats SET file = 'english' WHERE file LIKE '%/english'
+% SQL UPDATE stats SET file = 'pitches' WHERE file LIKE '%/pitches'
+% SQL UPDATE stats SET file = 'proteins' WHERE file LIKE '%/proteins'
+% SQL UPDATE stats SET file = 'sources' WHERE file LIKE '%/sources'
+
+% SQL UPDATE stats SET file = 'chr22.dna' WHERE file LIKE '%/chr22.dna'
+% SQL UPDATE stats SET file = 'etext99' WHERE file LIKE '%/etext99'
+% SQL UPDATE stats SET file = 'gcc-3.0.tar' WHERE file LIKE '%/gcc-3.0.tar'
+% SQL UPDATE stats SET file = 'howto' WHERE file LIKE '%/howto'
+% SQL UPDATE stats SET file = 'jdk13c' WHERE file LIKE '%/jdk13c'
+% SQL UPDATE stats SET file = 'linux-2.4.5.tar' WHERE file LIKE '%/linux-2.4.5.tar'
+% SQL UPDATE stats SET file = 'rctail96' WHERE file LIKE '%/rctail96'
+% SQL UPDATE stats SET file = 'rfc' WHERE file LIKE '%/rfc'
+% SQL UPDATE stats SET file = 'sprot34.dat' WHERE file LIKE '%/sprot34.dat'
+% SQL UPDATE stats SET file = 'w3c2' WHERE file LIKE '%/w3c2'
+
+% SQL UPDATE stats SET file = 'cc.16gib' WHERE file LIKE '%/cc.txt'
+% SQL UPDATE stats SET file = 'dna.16gib' WHERE file LIKE '%/dna.txt'
+% SQL UPDATE stats SET file = 'wiki.16gib' WHERE file LIKE '%/wiki.txt'
+
+
+\centering
+\begin{tikzpicture}
+    \begin{groupplot} [
+        width = 0.4\textwidth,
+        height = 6.4cm,
+        enlarge x limits = 0.075,
+        group style = { 
+            vertical sep = 1.0cm,
+            horizontal sep = 0.0cm,
+            group size = { 
+                3 by 1
+            } 
+        },
+        cycle list name = wtddcycles,
+        legend style = { 
+            at = {(0.5, -0.275)},
+            anchor = north,
+            legend columns = 6,
+            column sep = 2ex
+        },
+        ylabel style = {
+            at = {(0.11, 0.5)}
+        },
+        title style = {
+            at = {(0.5, 0.96)}
+        },
+        xticklabels = { , 1, 2, 4, 8, 16 },
+        xtick distance = 1,
+        ytick distance = 1,
+        ymax = 7.0,
+    ]
+    
+    
+\nextgroupplot [
+ylabel = $\text{GiBit} / s$,
+title = cc.16gib
+]
+
+
+
+%% MULTIPLOT(type) SELECT LOG(2, threads) AS x, MEDIAN((alpha_bits * (size / CAST(time_in_s AS Float))) / (1024 * 1024 * 1024)) AS y,MULTIPLOT
+%% FROM stats WHERE (type LIKE 'lwt%') AND (file LIKE 'cc.16gib') GROUP BY MULTIPLOT,x ORDER BY ds_order,MULTIPLOT,x
+\addplot coordinates { (0.0,0.443327) (1.0,0.788313) (2.0,1.42343) (3.0,2.40266) (4.0,2.58442) };
+\addlegendentry{type=lwtlut1644};
+\addplot coordinates { (0.0,0.712481) (1.0,1.254) (2.0,2.17339) (3.0,3.33391) (4.0,3.59033) };
+\addlegendentry{type=lwtpext164};
+\addplot coordinates { (0.0,1.56723) (1.0,2.23623) (2.0,2.93657) (3.0,3.3392) (4.0,3.36159) };
+\addlegendentry{type=lwtshuffle648};
+\addplot coordinates { (0.0,0.613726) (1.0,1.19013) (2.0,2.33221) (3.0,4.55077) (4.0,5.84809) };
+\addlegendentry{type=lwtpwmpc};
+\addplot coordinates { (0.0,0.735319) (1.0,1.35319) (2.0,2.64463) (3.0,5.35679) (4.0,5.58974) };
+\addlegendentry{type=lwtpwmpcss};
+\addplot coordinates { (0.0,0.533065) (1.0,1.02348) (2.0,1.99796) (3.0,3.89877) (4.0,5.01084) };
+\addlegendentry{type=lwtpwmps};
+
+
+        \legend{};
+
+\nextgroupplot [
+xlabel = Threads,
+yticklabels = {},
+title = dna.16gib
+]
+
+
+%% MULTIPLOT(type) SELECT LOG(2, threads) AS x, MEDIAN((alpha_bits * (size / CAST(time_in_s AS Float))) / (1024 * 1024 * 1024)) AS y,MULTIPLOT
+%% FROM stats WHERE (type LIKE 'lwt%') AND (file LIKE 'dna.16gib') GROUP BY MULTIPLOT,x ORDER BY ds_order,MULTIPLOT,x
+\addplot coordinates { (0.0,0.426648) (1.0,0.792007) (2.0,1.4306) (3.0,2.3308) (4.0,2.52888) };
+\addlegendentry{type=lwtlut1644};
+\addplot coordinates { (0.0,0.628984) (1.0,0.981616) (2.0,1.73057) (3.0,2.69412) (4.0,2.98107) };
+\addlegendentry{type=lwtpext164};
+\addplot coordinates { (0.0,0.580036) (1.0,0.998954) (2.0,1.67152) (3.0,2.32379) (4.0,2.43209) };
+\addlegendentry{type=lwtshuffle648};
+\addplot coordinates { (0.0,0.654002) (1.0,1.26076) (2.0,2.4888) (3.0,4.79059) (4.0,6.639) };
+\addlegendentry{type=lwtpwmpc};
+\addplot coordinates { (0.0,0.635092) (1.0,1.24706) (2.0,2.46381) (3.0,4.72785) (4.0,5.66111) };
+\addlegendentry{type=lwtpwmpcss};
+\addplot coordinates { (0.0,0.617385) (1.0,1.15787) (2.0,2.2476) (3.0,4.15904) (4.0,5.16829) };
+\addlegendentry{type=lwtpwmps};
+
+
+
+\legend{
+    \texttt{lut},
+    \texttt{extract},
+    \texttt{shuffle64},
+    \texttt{pc},
+    \texttt{pc-ss},
+    \texttt{ps}
+};
+
+\nextgroupplot [
+ylabel = ,
+yticklabels = {},
+title = wiki.16gib
+]
+
+
+%% MULTIPLOT(type) SELECT LOG(2, threads) AS x, MEDIAN((alpha_bits * (size / CAST(time_in_s AS Float))) / (1024 * 1024 * 1024)) AS y,MULTIPLOT
+%% FROM stats WHERE (type LIKE 'lwt%') AND (file LIKE 'wiki.16gib') GROUP BY MULTIPLOT,x ORDER BY ds_order,MULTIPLOT,x
+\addplot coordinates { (0.0,0.437453) (1.0,0.782745) (2.0,1.40363) (3.0,2.38339) (4.0,2.57486) };
+\addlegendentry{type=lwtlut1644};
+\addplot coordinates { (0.0,0.697673) (1.0,1.2317) (2.0,2.11823) (3.0,3.30834) (4.0,3.58332) };
+\addlegendentry{type=lwtpext164};
+\addplot coordinates { (0.0,1.56679) (1.0,2.22287) (2.0,2.92168) (3.0,3.34223) (4.0,3.36072) };
+\addlegendentry{type=lwtshuffle648};
+\addplot coordinates { (0.0,0.577162) (1.0,1.11604) (2.0,2.21247) (3.0,4.29457) (4.0,5.78434) };
+\addlegendentry{type=lwtpwmpc};
+\addplot coordinates { (0.0,0.7354) (1.0,1.40221) (2.0,2.70328) (3.0,5.36299) (4.0,5.64598) };
+\addlegendentry{type=lwtpwmpcss};
+\addplot coordinates { (0.0,0.522607) (1.0,1.01052) (2.0,1.98289) (3.0,3.85138) (4.0,5.00219) };
+\addlegendentry{type=lwtpwmps};
+
+
+
+
+\legend{};
+
+    \end{groupplot}
+        \end{tikzpicture}
+
+        \centering
+        \begin{tikzpicture}
+            \begin{groupplot} [
+                width = 0.4\textwidth,
+                height = 6.4cm,
+                enlarge x limits = 0.075,
+                group style = { 
+                    vertical sep = 1.0cm,
+                    horizontal sep = 0.0cm,
+                    group size = { 
+                        3 by 1
+                    } 
+                },
+                cycle list name = wtddcycles,
+                legend style = { 
+                    at = {(0.5, -0.275)},
+                    anchor = north,
+                    legend columns = 6,
+                    column sep = 2ex
+                },
+                ylabel style = {
+                    at = {(0.11, 0.5)}
+                },
+                title style = {
+                    at = {(0.5, 0.96)}
+                },
+                xticklabels = { , 1, 2, 4, 8, 16 },
+                xtick distance = 1,
+                ytick distance = 1,
+                ymax = 7.0,
+            ]
+            
+            
+        \nextgroupplot [
+        ylabel = $\text{GiBit} / s$,
+        title = cc.16gib
+        ]
+        
+                
+        
+        %% MULTIPLOT(type) SELECT LOG(2, threads) AS x, MEDIAN((alpha_bits * (size / CAST(time_in_s AS Float))) / (1024 * 1024 * 1024)) AS y,MULTIPLOT
+        %% FROM stats WHERE (type LIKE 'wm%') AND (file LIKE 'cc.16gib') GROUP BY MULTIPLOT,x ORDER BY ds_order,MULTIPLOT,x
+        \addplot coordinates { (0.0,0.409414) (1.0,0.749735) (2.0,1.35635) (3.0,2.31268) (4.0,2.49078) };
+        \addlegendentry{type=wmlut1644};
+        \addplot coordinates { (0.0,0.661772) (1.0,1.12311) (2.0,1.9145) (3.0,2.91864) (4.0,3.15527) };
+        \addlegendentry{type=wmpext88};
+        \addplot coordinates { (0.0,1.57234) (1.0,2.22083) (2.0,2.90834) (3.0,3.30726) (4.0,3.33253) };
+        \addlegendentry{type=wmshuffle648};
+        \addplot coordinates { (0.0,0.610911) (1.0,1.18809) (2.0,2.32754) (3.0,4.54107) (4.0,5.844) };
+        \addlegendentry{type=wmpwmpc};
+        \addplot coordinates { (0.0,0.740137) (1.0,1.38949) (2.0,2.65797) (3.0,5.33087) (4.0,5.57785) };
+        \addlegendentry{type=wmpwmpcss};
+        \addplot coordinates { (0.0,0.537359) (1.0,1.01635) (2.0,1.98304) (3.0,3.86331) (4.0,5.00174) };
+        \addlegendentry{type=wmpwmps};
+        
+        
+                \legend{};
+        
+        \nextgroupplot [
+        xlabel = Threads,
+        yticklabels = {},
+        title = dna.16gib
+        ]
+        
+        
+        %% MULTIPLOT(type) SELECT LOG(2, threads) AS x, MEDIAN((alpha_bits * (size / CAST(time_in_s AS Float))) / (1024 * 1024 * 1024)) AS y,MULTIPLOT
+        %% FROM stats WHERE (type LIKE 'wm%') AND (file LIKE 'dna.16gib') GROUP BY MULTIPLOT,x ORDER BY ds_order,MULTIPLOT,x
+        \addplot coordinates { (0.0,0.453957) (1.0,0.789804) (2.0,1.4231) (3.0,2.32354) (4.0,2.53644) };
+        \addlegendentry{type=wmlut1644};
+        \addplot coordinates { (0.0,0.450906) (1.0,0.844793) (2.0,1.48217) (3.0,2.24953) (4.0,2.44012) };
+        \addlegendentry{type=wmpext88};
+        \addplot coordinates { (0.0,0.580348) (1.0,0.996537) (2.0,1.65101) (3.0,2.31896) (4.0,2.38845) };
+        \addlegendentry{type=wmshuffle648};
+        \addplot coordinates { (0.0,0.636412) (1.0,1.25342) (2.0,2.47538) (3.0,4.7671) (4.0,6.65202) };
+        \addlegendentry{type=wmpwmpc};
+        \addplot coordinates { (0.0,0.658524) (1.0,1.2171) (2.0,2.37973) (3.0,4.66325) (4.0,5.56515) };
+        \addlegendentry{type=wmpwmpcss};
+        \addplot coordinates { (0.0,0.618507) (1.0,1.14662) (2.0,2.22695) (3.0,4.12437) (4.0,5.10158) };
+        \addlegendentry{type=wmpwmps};
+        
+        
+        
+        \legend{
+            \texttt{lut},
+            \texttt{extract},
+            \texttt{shuffle64},
+            \texttt{pc},
+            \texttt{pc-ss},
+            \texttt{ps}
+        };
+        
+        \nextgroupplot [
+        ylabel = ,
+        yticklabels = {},
+        title = wiki.16gib
+        ]
+        
+        
+        %% MULTIPLOT(type) SELECT LOG(2, threads) AS x, MEDIAN((alpha_bits * (size / CAST(time_in_s AS Float))) / (1024 * 1024 * 1024)) AS y,MULTIPLOT
+        %% FROM stats WHERE (type LIKE 'wm%') AND (file LIKE 'wiki.16gib') GROUP BY MULTIPLOT,x ORDER BY ds_order,MULTIPLOT,x
+        \addplot coordinates { (0.0,0.408163) (1.0,0.751619) (2.0,1.3499) (3.0,2.30703) (4.0,2.48153) };
+        \addlegendentry{type=wmlut1644};
+        \addplot coordinates { (0.0,0.665523) (1.0,1.10778) (2.0,1.88853) (3.0,2.87736) (4.0,3.13893) };
+        \addlegendentry{type=wmpext88};
+        \addplot coordinates { (0.0,1.56344) (1.0,2.1576) (2.0,2.89717) (3.0,3.30712) (4.0,3.31665) };
+        \addlegendentry{type=wmshuffle648};
+        \addplot coordinates { (0.0,0.574656) (1.0,1.11522) (2.0,2.20924) (3.0,4.28969) (4.0,5.7798) };
+        \addlegendentry{type=wmpwmpc};
+        \addplot coordinates { (0.0,0.739884) (1.0,1.38477) (2.0,2.67653) (3.0,5.3288) (4.0,5.61436) };
+        \addlegendentry{type=wmpwmpcss};
+        \addplot coordinates { (0.0,0.529481) (1.0,1.00265) (2.0,1.97913) (3.0,3.82044) (4.0,4.99378) };
+        \addlegendentry{type=wmpwmps};
+        
+        
+        
+        
+        \legend{};
+        
+            \end{groupplot}
+                \end{tikzpicture}
+    
+\end{document}

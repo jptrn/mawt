@@ -1,0 +1,583 @@
+\documentclass[a4]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+
+\usepackage{amsmath,amsfonts,amssymb}
+\usepackage{fullpage}
+\usepackage{verbatim}
+
+\usepackage{tikz,pgfplots}
+\usetikzlibrary{patterns, patterns.meta}
+\usepgfplotslibrary{groupplots}
+
+
+
+\pgfplotsset{
+    major grid style = { thin, dotted, color = black!50 },
+    minor grid style = { thin, dotted, color = black!50 },
+    grid,
+    xtick distance = 1,
+    ymin = 0,
+    legend cell align = left,
+	  /pgfplots/ybar legend/.style = {
+		  /pgfplots/legend image code/.code={%
+			  \draw[##1,/tikz/.cd,yshift=-0.35em]
+      (0cm,0cm) rectangle (0.7em,0.8em);},
+	  },  
+}
+
+
+\begin{document}
+
+\title{WT Benchmark}
+\author{Jan-Philipp Tarnowski}
+\maketitle
+
+\clearpage
+
+
+% IMPORT-DATA stats ../results-huff-pcc-2.out
+
+% IMPORT-DATA text_info ../results-stats.log
+
+% SQL CREATE TABLE stats_joined AS SELECT * FROM stats JOIN text_info ON stats.file = text_info.file
+% SQL DROP TABLE stats
+% SQL ALTER TABLE stats_joined RENAME TO stats
+
+% SQL UPDATE stats SET file = 'dblp.xml' WHERE file LIKE '%dblp.xml'
+% SQL UPDATE stats SET file = 'dna' WHERE file LIKE '%dna'
+% SQL UPDATE stats SET file = 'english' WHERE file LIKE '%english'
+% SQL UPDATE stats SET file = 'pitches' WHERE file LIKE '%pitches'
+% SQL UPDATE stats SET file = 'proteins' WHERE file LIKE '%proteins'
+% SQL UPDATE stats SET file = 'sources' WHERE file LIKE '%sources'
+
+% SQL UPDATE stats SET type = 'lwt-huffman-pext-8-2' WHERE type LIKE 'lwt_huffman_pext_8_2'
+% SQL UPDATE stats SET type = 'lwt-huffman-pext-4-4' WHERE type LIKE 'lwt_huffman_pext_4_4'
+% SQL UPDATE stats SET type = 'lwt-huffman-pext-2-8' WHERE type LIKE 'lwt_huffman_pext_2_8'
+% SQL UPDATE stats SET type = 'lwt-huffman-pext-16-2' WHERE type LIKE 'lwt_huffman_pext_16_2'
+% SQL UPDATE stats SET type = 'lwt-huffman-pext-8-4' WHERE type LIKE 'lwt_huffman_pext_8_4'
+% SQL UPDATE stats SET type = 'lwt-huffman-pext-4-8' WHERE type LIKE 'lwt_huffman_pext_4_8'
+% SQL UPDATE stats SET type = 'lwt-huffman-pext-32-2' WHERE type LIKE 'lwt_huffman_pext_32_2'
+% SQL UPDATE stats SET type = 'lwt-huffman-pext-16-4' WHERE type LIKE 'lwt_huffman_pext_16_4'
+% SQL UPDATE stats SET type = 'lwt-huffman-pext-8-8' WHERE type LIKE 'lwt_huffman_pext_8_8'
+
+% SQL UPDATE stats SET type = 'wm-huffman-pext-8-2' WHERE type LIKE 'wm_huffman_pext_8_2'
+% SQL UPDATE stats SET type = 'wm-huffman-pext-4-4' WHERE type LIKE 'wm_huffman_pext_4_4'
+% SQL UPDATE stats SET type = 'wm-huffman-pext-2-8' WHERE type LIKE 'wm_huffman_pext_2_8'
+% SQL UPDATE stats SET type = 'wm-huffman-pext-16-2' WHERE type LIKE 'wm_huffman_pext_16_2'
+% SQL UPDATE stats SET type = 'wm-huffman-pext-8-4' WHERE type LIKE 'wm_huffman_pext_8_4'
+% SQL UPDATE stats SET type = 'wm-huffman-pext-4-8' WHERE type LIKE 'wm_huffman_pext_4_8'
+% SQL UPDATE stats SET type = 'wm-huffman-pext-32-2' WHERE type LIKE 'wm_huffman_pext_32_2'
+% SQL UPDATE stats SET type = 'wm-huffman-pext-16-4' WHERE type LIKE 'wm_huffman_pext_16_4'
+% SQL UPDATE stats SET type = 'wm-huffman-pext-8-8' WHERE type LIKE 'wm_huffman_pext_8_8'
+
+
+
+\pgfplotsset{
+  /pgfplots/bar cycle list/.style = {
+    /pgfplots/cycle list = {
+      { fill = red!30, mark = none },
+      { fill = green!60, mark = none },
+      { fill = blue!50, mark = none }
+    }
+  }
+}
+
+\begin{center}
+    \begin{tikzpicture}
+        \begin{groupplot} [
+            width = 0.45\textwidth,
+            height = 4cm,
+            ybar,
+            group style = { 
+                vertical sep = 1.5cm,
+                horizontal sep = 1.2cm,
+                group size = { 
+                    2 by 3
+                } 
+            },
+            ylabel = MBit/s,
+            legend style = { 
+                at = {(-0.15, -0.325)},
+                anchor = north,
+                legend columns = -1,
+                column sep = 2ex
+            },
+            symbolic x coords = {
+                lwt-huffman-pext-8-2,
+                lwt-huffman-pext-4-4,
+                lwt-huffman-pext-2-8,
+                ,
+                lwt-huffman-pext-16-2,
+                lwt-huffman-pext-8-4,
+                lwt-huffman-pext-4-8,
+                ,
+                lwt-huffman-pext-32-2,
+                lwt-huffman-pext-16-4,
+                lwt-huffman-pext-8-8
+            },
+            xticklabels = {
+                , ,
+                , $w = 16$, , ,
+                , $w = 32$, , ,
+                , $w = 64$, , ,
+            }
+        ]
+        
+        
+        \nextgroupplot [
+            title = dblp.xml,
+            bar width = 0.2cm,
+            bar shift = 0,
+            ytick distance = 100
+        ]
+
+
+			%% MULTIPLOT(type) SELECT type AS x, MEDIAN((huff_bit_size / CAST(time_in_s AS FLOAT)) / (1024 * 1024)) AS y,MULTIPLOT
+			%% FROM stats WHERE type LIKE 'lwt_huffman_pext_%' AND file LIKE 'dblp.xml' GROUP BY MULTIPLOT,x ORDER BY ds_order,MULTIPLOT,x
+   \addplot coordinates { (lwt-huffman-pext-8-2,186.348) };
+   \addlegendentry{type=lwt-huffman-pext-8-2};
+   \addplot coordinates { (lwt-huffman-pext-4-4,134.324) };
+   \addlegendentry{type=lwt-huffman-pext-4-4};
+   \addplot coordinates { (lwt-huffman-pext-2-8,86.2049) };
+   \addlegendentry{type=lwt-huffman-pext-2-8};
+   \addplot coordinates { (lwt-huffman-pext-16-2,245.85) };
+   \addlegendentry{type=lwt-huffman-pext-16-2};
+   \addplot coordinates { (lwt-huffman-pext-8-4,214.172) };
+   \addlegendentry{type=lwt-huffman-pext-8-4};
+   \addplot coordinates { (lwt-huffman-pext-4-8,149.177) };
+   \addlegendentry{type=lwt-huffman-pext-4-8};
+   \addplot coordinates { (lwt-huffman-pext-32-2,278.667) };
+   \addlegendentry{type=lwt-huffman-pext-32-2};
+   \addplot coordinates { (lwt-huffman-pext-16-4,293.115) };
+   \addlegendentry{type=lwt-huffman-pext-16-4};
+   \addplot coordinates { (lwt-huffman-pext-8-8,239.77) };
+   \addlegendentry{type=lwt-huffman-pext-8-8};
+
+
+
+   \legend{};
+   
+
+   \nextgroupplot [
+    title = dna,
+    bar width = 0.2cm,
+    bar shift = 0,
+    ytick distance = 100,
+    ylabel =
+]
+
+			%% MULTIPLOT(type) SELECT type AS x, MEDIAN((huff_bit_size / CAST(time_in_s AS FLOAT)) / (1024 * 1024)) AS y,MULTIPLOT
+			%% FROM stats WHERE type LIKE 'lwt_huffman_pext_%' AND file LIKE 'dna' GROUP BY MULTIPLOT,x ORDER BY ds_order,MULTIPLOT,x
+   \addplot coordinates { (lwt-huffman-pext-8-2,136.613) };
+   \addlegendentry{type=lwt-huffman-pext-8-2};
+   \addplot coordinates { (lwt-huffman-pext-4-4,117.044) };
+   \addlegendentry{type=lwt-huffman-pext-4-4};
+   \addplot coordinates { (lwt-huffman-pext-2-8,70.3205) };
+   \addlegendentry{type=lwt-huffman-pext-2-8};
+   \addplot coordinates { (lwt-huffman-pext-16-2,168.283) };
+   \addlegendentry{type=lwt-huffman-pext-16-2};
+   \addplot coordinates { (lwt-huffman-pext-8-4,175.931) };
+   \addlegendentry{type=lwt-huffman-pext-8-4};
+   \addplot coordinates { (lwt-huffman-pext-4-8,117.703) };
+   \addlegendentry{type=lwt-huffman-pext-4-8};
+   \addplot coordinates { (lwt-huffman-pext-32-2,182.57) };
+   \addlegendentry{type=lwt-huffman-pext-32-2};
+   \addplot coordinates { (lwt-huffman-pext-16-4,223.306) };
+   \addlegendentry{type=lwt-huffman-pext-16-4};
+   \addplot coordinates { (lwt-huffman-pext-8-8,167.542) };
+   \addlegendentry{type=lwt-huffman-pext-8-8};
+         
+   \legend{};
+
+           
+   \nextgroupplot [
+    title = english,
+    bar width = 0.2cm,
+    ytick distance = 100,
+    bar shift = 0,
+]
+
+
+    %% MULTIPLOT(type) SELECT type AS x, MEDIAN((huff_bit_size / CAST(time_in_s AS FLOAT)) / (1024 * 1024)) AS y,MULTIPLOT
+    %% FROM stats WHERE type LIKE 'lwt_huffman_pext_%' AND file LIKE 'english' GROUP BY MULTIPLOT,x ORDER BY ds_order,MULTIPLOT,x
+    \addplot coordinates { (lwt-huffman-pext-8-2,177.801) };
+    \addlegendentry{type=lwt-huffman-pext-8-2};
+    \addplot coordinates { (lwt-huffman-pext-4-4,120.016) };
+    \addlegendentry{type=lwt-huffman-pext-4-4};
+    \addplot coordinates { (lwt-huffman-pext-2-8,80.6522) };
+    \addlegendentry{type=lwt-huffman-pext-2-8};
+    \addplot coordinates { (lwt-huffman-pext-16-2,232.913) };
+    \addlegendentry{type=lwt-huffman-pext-16-2};
+    \addplot coordinates { (lwt-huffman-pext-8-4,185.815) };
+    \addlegendentry{type=lwt-huffman-pext-8-4};
+    \addplot coordinates { (lwt-huffman-pext-4-8,142.203) };
+    \addlegendentry{type=lwt-huffman-pext-4-8};
+    \addplot coordinates { (lwt-huffman-pext-32-2,264.26) };
+    \addlegendentry{type=lwt-huffman-pext-32-2};
+    \addplot coordinates { (lwt-huffman-pext-16-4,236.198) };
+    \addlegendentry{type=lwt-huffman-pext-16-4};
+    \addplot coordinates { (lwt-huffman-pext-8-8,233.261) };
+    \addlegendentry{type=lwt-huffman-pext-8-8};
+
+
+
+\legend{};
+
+
+\nextgroupplot [
+title = pitches,
+bar width = 0.2cm,
+bar shift = 0,
+ytick distance = 100,
+ylabel =
+]
+
+    %% MULTIPLOT(type) SELECT type AS x, MEDIAN((huff_bit_size / CAST(time_in_s AS FLOAT)) / (1024 * 1024)) AS y,MULTIPLOT
+    %% FROM stats WHERE type LIKE 'lwt_huffman_pext_%' AND file LIKE 'pitches' GROUP BY MULTIPLOT,x ORDER BY ds_order,MULTIPLOT,x
+    \addplot coordinates { (lwt-huffman-pext-8-2,194.856) };
+    \addlegendentry{type=lwt-huffman-pext-8-2};
+    \addplot coordinates { (lwt-huffman-pext-4-4,141.582) };
+    \addlegendentry{type=lwt-huffman-pext-4-4};
+    \addplot coordinates { (lwt-huffman-pext-2-8,89.0723) };
+    \addlegendentry{type=lwt-huffman-pext-2-8};
+    \addplot coordinates { (lwt-huffman-pext-16-2,254.142) };
+    \addlegendentry{type=lwt-huffman-pext-16-2};
+    \addplot coordinates { (lwt-huffman-pext-8-4,233.695) };
+    \addlegendentry{type=lwt-huffman-pext-8-4};
+    \addplot coordinates { (lwt-huffman-pext-4-8,157.23) };
+    \addlegendentry{type=lwt-huffman-pext-4-8};
+    \addplot coordinates { (lwt-huffman-pext-32-2,302.236) };
+    \addlegendentry{type=lwt-huffman-pext-32-2};
+    \addplot coordinates { (lwt-huffman-pext-16-4,308.944) };
+    \addlegendentry{type=lwt-huffman-pext-16-4};
+    \addplot coordinates { (lwt-huffman-pext-8-8,263.463) };
+    \addlegendentry{type=lwt-huffman-pext-8-8};
+ 
+    \legend{};
+
+
+\nextgroupplot [
+    title = proteins,
+    bar width = 0.2cm,
+    bar shift = 0,
+    ytick distance = 100,
+]
+
+
+    %% MULTIPLOT(type) SELECT type AS x, MEDIAN((huff_bit_size / CAST(time_in_s AS FLOAT)) / (1024 * 1024)) AS y,MULTIPLOT
+    %% FROM stats WHERE type LIKE 'lwt_huffman_pext_%' AND file LIKE 'proteins' GROUP BY MULTIPLOT,x ORDER BY ds_order,MULTIPLOT,x
+    \addplot coordinates { (lwt-huffman-pext-8-2,180.919) };
+    \addlegendentry{type=lwt-huffman-pext-8-2};
+    \addplot coordinates { (lwt-huffman-pext-4-4,125.858) };
+    \addlegendentry{type=lwt-huffman-pext-4-4};
+    \addplot coordinates { (lwt-huffman-pext-2-8,79.3514) };
+    \addlegendentry{type=lwt-huffman-pext-2-8};
+    \addplot coordinates { (lwt-huffman-pext-16-2,242.074) };
+    \addlegendentry{type=lwt-huffman-pext-16-2};
+    \addplot coordinates { (lwt-huffman-pext-8-4,201.037) };
+    \addlegendentry{type=lwt-huffman-pext-8-4};
+    \addplot coordinates { (lwt-huffman-pext-4-8,140.949) };
+    \addlegendentry{type=lwt-huffman-pext-4-8};
+    \addplot coordinates { (lwt-huffman-pext-32-2,275.406) };
+    \addlegendentry{type=lwt-huffman-pext-32-2};
+    \addplot coordinates { (lwt-huffman-pext-16-4,267.44) };
+    \addlegendentry{type=lwt-huffman-pext-16-4};
+    \addplot coordinates { (lwt-huffman-pext-8-8,230.731) };
+    \addlegendentry{type=lwt-huffman-pext-8-8};
+
+
+
+\legend{};
+
+
+\nextgroupplot [
+title = sources,
+bar width = 0.2cm,
+bar shift = 0,
+ytick distance = 100,
+ylabel =
+]
+
+    %% MULTIPLOT(type) SELECT type AS x, MEDIAN((huff_bit_size / CAST(time_in_s AS FLOAT)) / (1024 * 1024)) AS y,MULTIPLOT
+    %% FROM stats WHERE type LIKE 'lwt_huffman_pext_%' AND file LIKE 'sources' GROUP BY MULTIPLOT,x ORDER BY ds_order,MULTIPLOT,x
+    \addplot coordinates { (lwt-huffman-pext-8-2,182.47) };
+    \addlegendentry{type=lwt-huffman-pext-8-2};
+    \addplot coordinates { (lwt-huffman-pext-4-4,131.095) };
+    \addlegendentry{type=lwt-huffman-pext-4-4};
+    \addplot coordinates { (lwt-huffman-pext-2-8,83.2569) };
+    \addlegendentry{type=lwt-huffman-pext-2-8};
+    \addplot coordinates { (lwt-huffman-pext-16-2,237.14) };
+    \addlegendentry{type=lwt-huffman-pext-16-2};
+    \addplot coordinates { (lwt-huffman-pext-8-4,208.835) };
+    \addlegendentry{type=lwt-huffman-pext-8-4};
+    \addplot coordinates { (lwt-huffman-pext-4-8,147.54) };
+    \addlegendentry{type=lwt-huffman-pext-4-8};
+    \addplot coordinates { (lwt-huffman-pext-32-2,278.136) };
+    \addlegendentry{type=lwt-huffman-pext-32-2};
+    \addplot coordinates { (lwt-huffman-pext-16-4,283.535) };
+    \addlegendentry{type=lwt-huffman-pext-16-4};
+    \addplot coordinates { (lwt-huffman-pext-8-8,244.961) };
+    \addlegendentry{type=lwt-huffman-pext-8-8};
+ 
+    \legend{};
+
+
+
+   \legend{$\tau = 2$, $\tau = 4$, $\tau = 8$}
+
+        \end{groupplot}
+    \end{tikzpicture}
+\end{center}
+
+
+\begin{center}
+    \begin{tikzpicture}
+        \begin{groupplot} [
+            width = 0.45\textwidth,
+            height = 4cm,
+            ybar,
+            group style = { 
+                vertical sep = 1.5cm,
+                horizontal sep = 1.2cm,
+                group size = { 
+                    2 by 3
+                } 
+            },
+            ylabel = MBit/s,
+            legend style = { 
+                at = {(-0.15, -0.325)},
+                anchor = north,
+                legend columns = -1,
+                column sep = 2ex
+            },
+            symbolic x coords = {
+                wm-huffman-pext-8-2,
+                wm-huffman-pext-4-4,
+                wm-huffman-pext-2-8,
+                ,
+                wm-huffman-pext-16-2,
+                wm-huffman-pext-8-4,
+                wm-huffman-pext-4-8,
+                ,
+                wm-huffman-pext-32-2,
+                wm-huffman-pext-16-4,
+                wm-huffman-pext-8-8
+            },
+            xticklabels = {
+                , ,
+                , $w = 16$, , ,
+                , $w = 32$, , ,
+                , $w = 64$, , ,
+            },
+            ytick distance = 100,
+        ]
+        
+        
+        \nextgroupplot [
+            title = dblp.xml,
+            bar width = 0.2cm,
+            bar shift = 0,
+            ytick distance = 100,
+        ]
+
+
+			%% MULTIPLOT(type) SELECT type AS x, MEDIAN((huff_bit_size / CAST(time_in_s AS FLOAT)) / (1024 * 1024)) AS y,MULTIPLOT
+			%% FROM stats WHERE type LIKE 'wm_huffman_pext_%' AND file LIKE 'dblp.xml' GROUP BY MULTIPLOT,x ORDER BY ds_order,MULTIPLOT,x
+   \addplot coordinates { (wm-huffman-pext-8-2,135.602) };
+   \addlegendentry{type=wm-huffman-pext-8-2};
+   \addplot coordinates { (wm-huffman-pext-4-4,124.957) };
+   \addlegendentry{type=wm-huffman-pext-4-4};
+   \addplot coordinates { (wm-huffman-pext-2-8,83.6912) };
+   \addlegendentry{type=wm-huffman-pext-2-8};
+   \addplot coordinates { (wm-huffman-pext-16-2,158.561) };
+   \addlegendentry{type=wm-huffman-pext-16-2};
+   \addplot coordinates { (wm-huffman-pext-8-4,189.046) };
+   \addlegendentry{type=wm-huffman-pext-8-4};
+   \addplot coordinates { (wm-huffman-pext-4-8,144.646) };
+   \addlegendentry{type=wm-huffman-pext-4-8};
+   \addplot coordinates { (wm-huffman-pext-32-2,182.536) };
+   \addlegendentry{type=wm-huffman-pext-32-2};
+   \addplot coordinates { (wm-huffman-pext-16-4,253.836) };
+   \addlegendentry{type=wm-huffman-pext-16-4};
+   \addplot coordinates { (wm-huffman-pext-8-8,234.35) };
+   \addlegendentry{type=wm-huffman-pext-8-8};
+
+
+
+   \legend{};
+   
+
+   \nextgroupplot [
+    title = dna,
+    bar width = 0.2cm,
+    bar shift = 0,
+    ytick distance = 100,
+    ylabel =
+]
+
+			%% MULTIPLOT(type) SELECT type AS x, MEDIAN((huff_bit_size / CAST(time_in_s AS FLOAT)) / (1024 * 1024)) AS y,MULTIPLOT
+			%% FROM stats WHERE type LIKE 'wm_huffman_pext_%' AND file LIKE 'dna' GROUP BY MULTIPLOT,x ORDER BY ds_order,MULTIPLOT,x
+   \addplot coordinates { (wm-huffman-pext-8-2,115.434) };
+   \addlegendentry{type=wm-huffman-pext-8-2};
+   \addplot coordinates { (wm-huffman-pext-4-4,113.4) };
+   \addlegendentry{type=wm-huffman-pext-4-4};
+   \addplot coordinates { (wm-huffman-pext-2-8,69.3032) };
+   \addlegendentry{type=wm-huffman-pext-2-8};
+   \addplot coordinates { (wm-huffman-pext-16-2,132.687) };
+   \addlegendentry{type=wm-huffman-pext-16-2};
+   \addplot coordinates { (wm-huffman-pext-8-4,169.024) };
+   \addlegendentry{type=wm-huffman-pext-8-4};
+   \addplot coordinates { (wm-huffman-pext-4-8,111.809) };
+   \addlegendentry{type=wm-huffman-pext-4-8};
+   \addplot coordinates { (wm-huffman-pext-32-2,150.925) };
+   \addlegendentry{type=wm-huffman-pext-32-2};
+   \addplot coordinates { (wm-huffman-pext-16-4,218.42) };
+   \addlegendentry{type=wm-huffman-pext-16-4};
+   \addplot coordinates { (wm-huffman-pext-8-8,162.37) };
+   \addlegendentry{type=wm-huffman-pext-8-8};
+         
+   \legend{};
+
+           
+   \nextgroupplot [
+    title = english,
+    bar width = 0.2cm,
+    bar shift = 0,
+    ytick distance = 100,
+]
+
+
+    %% MULTIPLOT(type) SELECT type AS x, MEDIAN((huff_bit_size / CAST(time_in_s AS FLOAT)) / (1024 * 1024)) AS y,MULTIPLOT
+    %% FROM stats WHERE type LIKE 'wm_huffman_pext_%' AND file LIKE 'english' GROUP BY MULTIPLOT,x ORDER BY ds_order,MULTIPLOT,x
+    \addplot coordinates { (wm-huffman-pext-8-2,123.744) };
+    \addlegendentry{type=wm-huffman-pext-8-2};
+    \addplot coordinates { (wm-huffman-pext-4-4,107.066) };
+    \addlegendentry{type=wm-huffman-pext-4-4};
+    \addplot coordinates { (wm-huffman-pext-2-8,78.7024) };
+    \addlegendentry{type=wm-huffman-pext-2-8};
+    \addplot coordinates { (wm-huffman-pext-16-2,143.047) };
+    \addlegendentry{type=wm-huffman-pext-16-2};
+    \addplot coordinates { (wm-huffman-pext-8-4,154.45) };
+    \addlegendentry{type=wm-huffman-pext-8-4};
+    \addplot coordinates { (wm-huffman-pext-4-8,137.872) };
+    \addlegendentry{type=wm-huffman-pext-4-8};
+    \addplot coordinates { (wm-huffman-pext-32-2,162.894) };
+    \addlegendentry{type=wm-huffman-pext-32-2};
+    \addplot coordinates { (wm-huffman-pext-16-4,192.703) };
+    \addlegendentry{type=wm-huffman-pext-16-4};
+    \addplot coordinates { (wm-huffman-pext-8-8,222.977) };
+    \addlegendentry{type=wm-huffman-pext-8-8};
+
+
+
+\legend{};
+
+
+\nextgroupplot [
+title = pitches,
+bar width = 0.2cm,
+bar shift = 0,
+ytick distance = 100,
+ylabel =
+]
+
+    %% MULTIPLOT(type) SELECT type AS x, MEDIAN((huff_bit_size / CAST(time_in_s AS FLOAT)) / (1024 * 1024)) AS y,MULTIPLOT
+    %% FROM stats WHERE type LIKE 'wm_huffman_pext_%' AND file LIKE 'pitches' GROUP BY MULTIPLOT,x ORDER BY ds_order,MULTIPLOT,x
+    \addplot coordinates { (wm-huffman-pext-8-2,169.404) };
+    \addlegendentry{type=wm-huffman-pext-8-2};
+    \addplot coordinates { (wm-huffman-pext-4-4,137.324) };
+    \addlegendentry{type=wm-huffman-pext-4-4};
+    \addplot coordinates { (wm-huffman-pext-2-8,89.3329) };
+    \addlegendentry{type=wm-huffman-pext-2-8};
+    \addplot coordinates { (wm-huffman-pext-16-2,205.65) };
+    \addlegendentry{type=wm-huffman-pext-16-2};
+    \addplot coordinates { (wm-huffman-pext-8-4,215.935) };
+    \addlegendentry{type=wm-huffman-pext-8-4};
+    \addplot coordinates { (wm-huffman-pext-4-8,156.332) };
+    \addlegendentry{type=wm-huffman-pext-4-8};
+    \addplot coordinates { (wm-huffman-pext-32-2,247.714) };
+    \addlegendentry{type=wm-huffman-pext-32-2};
+    \addplot coordinates { (wm-huffman-pext-16-4,293.692) };
+    \addlegendentry{type=wm-huffman-pext-16-4};
+    \addplot coordinates { (wm-huffman-pext-8-8,258.581) };
+    \addlegendentry{type=wm-huffman-pext-8-8};
+ 
+    \legend{};
+
+
+\nextgroupplot [
+    title = proteins,
+    bar width = 0.2cm,
+    ytick distance = 100,
+    bar shift = 0,
+]
+
+
+    %% MULTIPLOT(type) SELECT type AS x, MEDIAN((huff_bit_size / CAST(time_in_s AS FLOAT)) / (1024 * 1024)) AS y,MULTIPLOT
+    %% FROM stats WHERE type LIKE 'wm_huffman_pext_%' AND file LIKE 'proteins' GROUP BY MULTIPLOT,x ORDER BY ds_order,MULTIPLOT,x
+    \addplot coordinates { (wm-huffman-pext-8-2,144.175) };
+    \addlegendentry{type=wm-huffman-pext-8-2};
+    \addplot coordinates { (wm-huffman-pext-4-4,117.893) };
+    \addlegendentry{type=wm-huffman-pext-4-4};
+    \addplot coordinates { (wm-huffman-pext-2-8,79.3088) };
+    \addlegendentry{type=wm-huffman-pext-2-8};
+    \addplot coordinates { (wm-huffman-pext-16-2,171.061) };
+    \addlegendentry{type=wm-huffman-pext-16-2};
+    \addplot coordinates { (wm-huffman-pext-8-4,178.826) };
+    \addlegendentry{type=wm-huffman-pext-8-4};
+    \addplot coordinates { (wm-huffman-pext-4-8,140.744) };
+    \addlegendentry{type=wm-huffman-pext-4-8};
+    \addplot coordinates { (wm-huffman-pext-32-2,201.31) };
+    \addlegendentry{type=wm-huffman-pext-32-2};
+    \addplot coordinates { (wm-huffman-pext-16-4,233.918) };
+    \addlegendentry{type=wm-huffman-pext-16-4};
+    \addplot coordinates { (wm-huffman-pext-8-8,228.586) };
+    \addlegendentry{type=wm-huffman-pext-8-8};
+
+
+
+\legend{};
+
+
+\nextgroupplot [
+title = sources,
+bar width = 0.2cm,
+bar shift = 0,
+ytick distance = 100,
+ylabel =
+]
+
+    %% MULTIPLOT(type) SELECT type AS x, MEDIAN((huff_bit_size / CAST(time_in_s AS FLOAT)) / (1024 * 1024)) AS y,MULTIPLOT
+    %% FROM stats WHERE type LIKE 'wm_huffman_pext_%' AND file LIKE 'sources' GROUP BY MULTIPLOT,x ORDER BY ds_order,MULTIPLOT,x
+    \addplot coordinates { (wm-huffman-pext-8-2,140.263) };
+    \addlegendentry{type=wm-huffman-pext-8-2};
+    \addplot coordinates { (wm-huffman-pext-4-4,122.476) };
+    \addlegendentry{type=wm-huffman-pext-4-4};
+    \addplot coordinates { (wm-huffman-pext-2-8,81.8859) };
+    \addlegendentry{type=wm-huffman-pext-2-8};
+    \addplot coordinates { (wm-huffman-pext-16-2,166.029) };
+    \addlegendentry{type=wm-huffman-pext-16-2};
+    \addplot coordinates { (wm-huffman-pext-8-4,184.822) };
+    \addlegendentry{type=wm-huffman-pext-8-4};
+    \addplot coordinates { (wm-huffman-pext-4-8,143.895) };
+    \addlegendentry{type=wm-huffman-pext-4-8};
+    \addplot coordinates { (wm-huffman-pext-32-2,193.937) };
+    \addlegendentry{type=wm-huffman-pext-32-2};
+    \addplot coordinates { (wm-huffman-pext-16-4,246.025) };
+    \addlegendentry{type=wm-huffman-pext-16-4};
+    \addplot coordinates { (wm-huffman-pext-8-8,234.838) };
+    \addlegendentry{type=wm-huffman-pext-8-8};
+ 
+    \legend{};
+
+
+
+   \legend{$\tau = 2$, $\tau = 4$, $\tau = 8$}
+
+        \end{groupplot}
+    \end{tikzpicture}
+\end{center}
+
+\end{document}

@@ -1,0 +1,1143 @@
+
+Running WT Benchmark at 2022-03-14--16-33-46...
+Git branch: master
+Git commit: c9f7a9fe3f9ea534e1fb4ad65192adc8feb927ec
+Git commit (short): c9f7a9f
+Build Type: Release
+
+Command: /scratch/tarnowski/mawt/build/benchmark/benchmark_wt/benchmark_wt --min 256MiB --max 1GiB --iterations 3 --alpha-min 8 --alpha-max 16 --alpha-step 8
+
+Starting Wavelet Tree Benchmark
+Current time: 2022-03-14-16-33-46
+
+Config:
+
+Iterations: 3
+Generating random text...
+Size (Min): 268435456
+Size (Max): 1073741824
+Alphabet Size (Min): 256 (8 bits)
+Alphabet Size (Max): 65536 (16 bits)
+Alphabet Bits Increment: 8
+Distribution: uniform
+Implementations: dummy, basic, twophase_no_lut, twophase_4_4, twophase_pext_pext, twophase_pext_pshufb, lwt_basic, lwt_twophase_no_lut, lwt_twophase_4_4, lwt_twophase_pext_pext, lwt_twophase_pext_pshufb, pwm_pc, pwm_ps
+Distribution: uniform
+Is random seed: false
+Seed: 0
+Verifying Results: false
+Computing Effective Alphabet: false
+Real Seed: 0
+
+Starting Benchmark...
+Iteration 0...
+Size: 268435456...
+Alphabet Bits: 8...
+Generating random text with size 268435456, alphabet size: 256 using distribution: 'uniform'...
+Alphabet of text 256 characters, depth: 8
+Text width: 1 byte(s) (was 1 byte(s))
+[ EXPECTED ]: 47, 118, 224, height: 8
+Benchmark: lwt_pext_32_2
+RESULT iteration=0 type=lwt_pext_32_2 operation=ctor file=- size=268435456 depth=8 alphabet_size=256 time_in_s=2.23729 mode=fixed seed=0 ds_order=0
+Sentinel values: 47, 118, 224, height: 8
+Benchmark: lwt_pext_16_4
+RESULT iteration=0 type=lwt_pext_16_4 operation=ctor file=- size=268435456 depth=8 alphabet_size=256 time_in_s=1.87597 mode=fixed seed=0 ds_order=1
+Sentinel values: 47, 118, 224, height: 8
+Benchmark: lwt_pext_8_8
+RESULT iteration=0 type=lwt_pext_8_8 operation=ctor file=- size=268435456 depth=8 alphabet_size=256 time_in_s=2.13915 mode=fixed seed=0 ds_order=2
+Sentinel values: 47, 118, 224, height: 8
+Benchmark: lwt_shuffle_8_8
+RESULT iteration=0 type=lwt_shuffle_8_8 operation=ctor file=- size=268435456 depth=8 alphabet_size=256 time_in_s=2.24321 mode=fixed seed=0 ds_order=3
+Sentinel values: 47, 118, 224, height: 8
+Benchmark: lwt_shuffle_16_8
+RESULT iteration=0 type=lwt_shuffle_16_8 operation=ctor file=- size=268435456 depth=8 alphabet_size=256 time_in_s=1.60797 mode=fixed seed=0 ds_order=4
+Sentinel values: 47, 118, 224, height: 8
+Benchmark: lwt_shuffle_32_8
+RESULT iteration=0 type=lwt_shuffle_32_8 operation=ctor file=- size=268435456 depth=8 alphabet_size=256 time_in_s=1.11673 mode=fixed seed=0 ds_order=5
+Sentinel values: 47, 118, 224, height: 8
+Benchmark: lwt_shuffle_64_8
+RESULT iteration=0 type=lwt_shuffle_64_8 operation=ctor file=- size=268435456 depth=8 alphabet_size=256 time_in_s=0.921619 mode=fixed seed=0 ds_order=6
+Sentinel values: 47, 118, 224, height: 8
+Benchmark: pwm_5wx_pcIhLb1EE_tree
+RESULT iteration=0 type=pwm_5wx_pcIhLb1EE_tree operation=ctor file=- size=268435456 depth=8 alphabet_size=256 time_in_s=2.02116 mode=fixed seed=0 ds_order=7
+Sentinel values: 47, 118, 224, height: 8
+Benchmark: pwm_5wx_psIhLb1EE_tree
+RESULT iteration=0 type=pwm_5wx_psIhLb1EE_tree operation=ctor file=- size=268435456 depth=8 alphabet_size=256 time_in_s=2.35233 mode=fixed seed=0 ds_order=8
+Sentinel values: 47, 118, 224, height: 8
+Benchmark: wm_pext_32_2
+RESULT iteration=0 type=wm_pext_32_2 operation=ctor file=- size=268435456 depth=8 alphabet_size=256 time_in_s=2.78452 mode=fixed seed=0 ds_order=9
+Sentinel values: 47, 118, 224, height: 8
+Benchmark: wm_pext_16_4
+RESULT iteration=0 type=wm_pext_16_4 operation=ctor file=- size=268435456 depth=8 alphabet_size=256 time_in_s=1.95298 mode=fixed seed=0 ds_order=10
+Sentinel values: 47, 118, 224, height: 8
+Benchmark: wm_pext_8_8
+RESULT iteration=0 type=wm_pext_8_8 operation=ctor file=- size=268435456 depth=8 alphabet_size=256 time_in_s=2.06862 mode=fixed seed=0 ds_order=11
+Sentinel values: 47, 118, 224, height: 8
+Benchmark: wm_shuffle_8_8
+RESULT iteration=0 type=wm_shuffle_8_8 operation=ctor file=- size=268435456 depth=8 alphabet_size=256 time_in_s=2.09495 mode=fixed seed=0 ds_order=12
+Sentinel values: 47, 118, 224, height: 8
+Benchmark: wm_shuffle_16_8
+RESULT iteration=0 type=wm_shuffle_16_8 operation=ctor file=- size=268435456 depth=8 alphabet_size=256 time_in_s=1.67901 mode=fixed seed=0 ds_order=13
+Sentinel values: 47, 118, 224, height: 8
+Benchmark: wm_shuffle_32_8
+RESULT iteration=0 type=wm_shuffle_32_8 operation=ctor file=- size=268435456 depth=8 alphabet_size=256 time_in_s=1.10871 mode=fixed seed=0 ds_order=14
+Sentinel values: 47, 118, 224, height: 8
+Benchmark: wm_shuffle_64_8
+RESULT iteration=0 type=wm_shuffle_64_8 operation=ctor file=- size=268435456 depth=8 alphabet_size=256 time_in_s=0.92277 mode=fixed seed=0 ds_order=15
+Sentinel values: 47, 118, 224, height: 8
+Benchmark: pwm_5wx_pcIhLb0EE_matrix
+RESULT iteration=0 type=pwm_5wx_pcIhLb0EE_matrix operation=ctor file=- size=268435456 depth=8 alphabet_size=256 time_in_s=2.02088 mode=fixed seed=0 ds_order=16
+Sentinel values: 47, 118, 224, height: 8
+Benchmark: pwm_5wx_psIhLb0EE_matrix
+RESULT iteration=0 type=pwm_5wx_psIhLb0EE_matrix operation=ctor file=- size=268435456 depth=8 alphabet_size=256 time_in_s=2.23102 mode=fixed seed=0 ds_order=17
+Sentinel values: 47, 118, 224, height: 8
+
+
+Alphabet Bits: 16...
+Generating random text with size 268435456, alphabet size: 65536 using distribution: 'uniform'...
+Alphabet of text 65536 characters, depth: 16
+Text width: 2 byte(s) (was 2 byte(s))
+[ EXPECTED ]: 62202, 14563, 2038, height: 16
+Benchmark: lwt_pext_32_2
+RESULT iteration=0 type=lwt_pext_32_2 operation=ctor file=- size=268435456 depth=16 alphabet_size=65536 time_in_s=4.21299 mode=fixed seed=0 ds_order=0
+Sentinel values: 62202, 14563, 2038, height: 16
+Benchmark: lwt_pext_16_4
+RESULT iteration=0 type=lwt_pext_16_4 operation=ctor file=- size=268435456 depth=16 alphabet_size=65536 time_in_s=3.79098 mode=fixed seed=0 ds_order=1
+Sentinel values: 62202, 14563, 2038, height: 16
+Benchmark: lwt_pext_8_8
+RESULT iteration=0 type=lwt_pext_8_8 operation=ctor file=- size=268435456 depth=16 alphabet_size=65536 time_in_s=4.78509 mode=fixed seed=0 ds_order=2
+Sentinel values: 62202, 14563, 2038, height: 16
+Benchmark: lwt_shuffle_8_8
+RESULT iteration=0 type=lwt_shuffle_8_8 operation=ctor file=- size=268435456 depth=16 alphabet_size=65536 time_in_s=4.8846 mode=fixed seed=0 ds_order=3
+Sentinel values: 62202, 14563, 2038, height: 16
+Benchmark: lwt_shuffle_16_8
+RESULT iteration=0 type=lwt_shuffle_16_8 operation=ctor file=- size=268435456 depth=16 alphabet_size=65536 time_in_s=3.61958 mode=fixed seed=0 ds_order=4
+Sentinel values: 62202, 14563, 2038, height: 16
+Benchmark: lwt_shuffle_32_8
+RESULT iteration=0 type=lwt_shuffle_32_8 operation=ctor file=- size=268435456 depth=16 alphabet_size=65536 time_in_s=2.38154 mode=fixed seed=0 ds_order=5
+Sentinel values: 62202, 14563, 2038, height: 16
+Benchmark: lwt_shuffle_64_8
+RESULT iteration=0 type=lwt_shuffle_64_8 operation=ctor file=- size=268435456 depth=16 alphabet_size=65536 time_in_s=1.98725 mode=fixed seed=0 ds_order=6
+Sentinel values: 62202, 14563, 2038, height: 16
+Benchmark: pwm_5wx_pcItLb1EE_tree
+RESULT iteration=0 type=pwm_5wx_pcItLb1EE_tree operation=ctor file=- size=268435456 depth=16 alphabet_size=65536 time_in_s=6.49033 mode=fixed seed=0 ds_order=7
+Sentinel values: 62202, 14563, 2038, height: 16
+Benchmark: pwm_5wx_psItLb1EE_tree
+RESULT iteration=0 type=pwm_5wx_psItLb1EE_tree operation=ctor file=- size=268435456 depth=16 alphabet_size=65536 time_in_s=11.3336 mode=fixed seed=0 ds_order=8
+Sentinel values: 62202, 14563, 2038, height: 16
+Benchmark: wm_pext_32_2
+RESULT iteration=0 type=wm_pext_32_2 operation=ctor file=- size=268435456 depth=16 alphabet_size=65536 time_in_s=5.21816 mode=fixed seed=0 ds_order=9
+Sentinel values: 62202, 14563, 2038, height: 16
+Benchmark: wm_pext_16_4
+RESULT iteration=0 type=wm_pext_16_4 operation=ctor file=- size=268435456 depth=16 alphabet_size=65536 time_in_s=4.07994 mode=fixed seed=0 ds_order=10
+Sentinel values: 62202, 14563, 2038, height: 16
+Benchmark: wm_pext_8_8
+RESULT iteration=0 type=wm_pext_8_8 operation=ctor file=- size=268435456 depth=16 alphabet_size=65536 time_in_s=4.88151 mode=fixed seed=0 ds_order=11
+Sentinel values: 62202, 14563, 2038, height: 16
+Benchmark: wm_shuffle_8_8
+RESULT iteration=0 type=wm_shuffle_8_8 operation=ctor file=- size=268435456 depth=16 alphabet_size=65536 time_in_s=4.90196 mode=fixed seed=0 ds_order=12
+Sentinel values: 62202, 14563, 2038, height: 16
+Benchmark: wm_shuffle_16_8
+RESULT iteration=0 type=wm_shuffle_16_8 operation=ctor file=- size=268435456 depth=16 alphabet_size=65536 time_in_s=3.81977 mode=fixed seed=0 ds_order=13
+Sentinel values: 62202, 14563, 2038, height: 16
+Benchmark: wm_shuffle_32_8
+RESULT iteration=0 type=wm_shuffle_32_8 operation=ctor file=- size=268435456 depth=16 alphabet_size=65536 time_in_s=2.62941 mode=fixed seed=0 ds_order=14
+Sentinel values: 62202, 14563, 2038, height: 16
+Benchmark: wm_shuffle_64_8
+RESULT iteration=0 type=wm_shuffle_64_8 operation=ctor file=- size=268435456 depth=16 alphabet_size=65536 time_in_s=2.26991 mode=fixed seed=0 ds_order=15
+Sentinel values: 62202, 14563, 2038, height: 16
+Benchmark: pwm_5wx_pcItLb0EE_matrix
+RESULT iteration=0 type=pwm_5wx_pcItLb0EE_matrix operation=ctor file=- size=268435456 depth=16 alphabet_size=65536 time_in_s=6.43829 mode=fixed seed=0 ds_order=16
+Sentinel values: 62202, 14563, 2038, height: 16
+Benchmark: pwm_5wx_psItLb0EE_matrix
+RESULT iteration=0 type=pwm_5wx_psItLb0EE_matrix operation=ctor file=- size=268435456 depth=16 alphabet_size=65536 time_in_s=11.3574 mode=fixed seed=0 ds_order=17
+Sentinel values: 62202, 14563, 2038, height: 16
+
+
+Size: 536870912...
+Alphabet Bits: 8...
+Generating random text with size 536870912, alphabet size: 256 using distribution: 'uniform'...
+Alphabet of text 256 characters, depth: 8
+Text width: 1 byte(s) (was 1 byte(s))
+[ EXPECTED ]: 123, 83, 76, height: 8
+Benchmark: lwt_pext_32_2
+RESULT iteration=0 type=lwt_pext_32_2 operation=ctor file=- size=536870912 depth=8 alphabet_size=256 time_in_s=4.45812 mode=fixed seed=0 ds_order=0
+Sentinel values: 123, 83, 76, height: 8
+Benchmark: lwt_pext_16_4
+RESULT iteration=0 type=lwt_pext_16_4 operation=ctor file=- size=536870912 depth=8 alphabet_size=256 time_in_s=3.72475 mode=fixed seed=0 ds_order=1
+Sentinel values: 123, 83, 76, height: 8
+Benchmark: lwt_pext_8_8
+RESULT iteration=0 type=lwt_pext_8_8 operation=ctor file=- size=536870912 depth=8 alphabet_size=256 time_in_s=4.28912 mode=fixed seed=0 ds_order=2
+Sentinel values: 123, 83, 76, height: 8
+Benchmark: lwt_shuffle_8_8
+RESULT iteration=0 type=lwt_shuffle_8_8 operation=ctor file=- size=536870912 depth=8 alphabet_size=256 time_in_s=4.47844 mode=fixed seed=0 ds_order=3
+Sentinel values: 123, 83, 76, height: 8
+Benchmark: lwt_shuffle_16_8
+RESULT iteration=0 type=lwt_shuffle_16_8 operation=ctor file=- size=536870912 depth=8 alphabet_size=256 time_in_s=3.2284 mode=fixed seed=0 ds_order=4
+Sentinel values: 123, 83, 76, height: 8
+Benchmark: lwt_shuffle_32_8
+RESULT iteration=0 type=lwt_shuffle_32_8 operation=ctor file=- size=536870912 depth=8 alphabet_size=256 time_in_s=2.21651 mode=fixed seed=0 ds_order=5
+Sentinel values: 123, 83, 76, height: 8
+Benchmark: lwt_shuffle_64_8
+RESULT iteration=0 type=lwt_shuffle_64_8 operation=ctor file=- size=536870912 depth=8 alphabet_size=256 time_in_s=1.83642 mode=fixed seed=0 ds_order=6
+Sentinel values: 123, 83, 76, height: 8
+Benchmark: pwm_5wx_pcIhLb1EE_tree
+RESULT iteration=0 type=pwm_5wx_pcIhLb1EE_tree operation=ctor file=- size=536870912 depth=8 alphabet_size=256 time_in_s=4.03087 mode=fixed seed=0 ds_order=7
+Sentinel values: 123, 83, 76, height: 8
+Benchmark: pwm_5wx_psIhLb1EE_tree
+RESULT iteration=0 type=pwm_5wx_psIhLb1EE_tree operation=ctor file=- size=536870912 depth=8 alphabet_size=256 time_in_s=4.69374 mode=fixed seed=0 ds_order=8
+Sentinel values: 123, 83, 76, height: 8
+Benchmark: wm_pext_32_2
+RESULT iteration=0 type=wm_pext_32_2 operation=ctor file=- size=536870912 depth=8 alphabet_size=256 time_in_s=5.55788 mode=fixed seed=0 ds_order=9
+Sentinel values: 123, 83, 76, height: 8
+Benchmark: wm_pext_16_4
+RESULT iteration=0 type=wm_pext_16_4 operation=ctor file=- size=536870912 depth=8 alphabet_size=256 time_in_s=3.92522 mode=fixed seed=0 ds_order=10
+Sentinel values: 123, 83, 76, height: 8
+Benchmark: wm_pext_8_8
+RESULT iteration=0 type=wm_pext_8_8 operation=ctor file=- size=536870912 depth=8 alphabet_size=256 time_in_s=4.19914 mode=fixed seed=0 ds_order=11
+Sentinel values: 123, 83, 76, height: 8
+Benchmark: wm_shuffle_8_8
+RESULT iteration=0 type=wm_shuffle_8_8 operation=ctor file=- size=536870912 depth=8 alphabet_size=256 time_in_s=4.2157 mode=fixed seed=0 ds_order=12
+Sentinel values: 123, 83, 76, height: 8
+Benchmark: wm_shuffle_16_8
+RESULT iteration=0 type=wm_shuffle_16_8 operation=ctor file=- size=536870912 depth=8 alphabet_size=256 time_in_s=3.38695 mode=fixed seed=0 ds_order=13
+Sentinel values: 123, 83, 76, height: 8
+Benchmark: wm_shuffle_32_8
+RESULT iteration=0 type=wm_shuffle_32_8 operation=ctor file=- size=536870912 depth=8 alphabet_size=256 time_in_s=2.20828 mode=fixed seed=0 ds_order=14
+Sentinel values: 123, 83, 76, height: 8
+Benchmark: wm_shuffle_64_8
+RESULT iteration=0 type=wm_shuffle_64_8 operation=ctor file=- size=536870912 depth=8 alphabet_size=256 time_in_s=1.84102 mode=fixed seed=0 ds_order=15
+Sentinel values: 123, 83, 76, height: 8
+Benchmark: pwm_5wx_pcIhLb0EE_matrix
+RESULT iteration=0 type=pwm_5wx_pcIhLb0EE_matrix operation=ctor file=- size=536870912 depth=8 alphabet_size=256 time_in_s=4.02768 mode=fixed seed=0 ds_order=16
+Sentinel values: 123, 83, 76, height: 8
+Benchmark: pwm_5wx_psIhLb0EE_matrix
+RESULT iteration=0 type=pwm_5wx_psIhLb0EE_matrix operation=ctor file=- size=536870912 depth=8 alphabet_size=256 time_in_s=4.46119 mode=fixed seed=0 ds_order=17
+Sentinel values: 123, 83, 76, height: 8
+
+
+Alphabet Bits: 16...
+Generating random text with size 536870912, alphabet size: 65536 using distribution: 'uniform'...
+Alphabet of text 65536 characters, depth: 16
+Text width: 2 byte(s) (was 2 byte(s))
+[ EXPECTED ]: 16071, 39007, 16366, height: 16
+Benchmark: lwt_pext_32_2
+RESULT iteration=0 type=lwt_pext_32_2 operation=ctor file=- size=536870912 depth=16 alphabet_size=65536 time_in_s=8.41013 mode=fixed seed=0 ds_order=0
+Sentinel values: 16071, 39007, 16366, height: 16
+Benchmark: lwt_pext_16_4
+RESULT iteration=0 type=lwt_pext_16_4 operation=ctor file=- size=536870912 depth=16 alphabet_size=65536 time_in_s=7.72495 mode=fixed seed=0 ds_order=1
+Sentinel values: 16071, 39007, 16366, height: 16
+Benchmark: lwt_pext_8_8
+RESULT iteration=0 type=lwt_pext_8_8 operation=ctor file=- size=536870912 depth=16 alphabet_size=65536 time_in_s=9.5331 mode=fixed seed=0 ds_order=2
+Sentinel values: 16071, 39007, 16366, height: 16
+Benchmark: lwt_shuffle_8_8
+RESULT iteration=0 type=lwt_shuffle_8_8 operation=ctor file=- size=536870912 depth=16 alphabet_size=65536 time_in_s=9.56127 mode=fixed seed=0 ds_order=3
+Sentinel values: 16071, 39007, 16366, height: 16
+Benchmark: lwt_shuffle_16_8
+RESULT iteration=0 type=lwt_shuffle_16_8 operation=ctor file=- size=536870912 depth=16 alphabet_size=65536 time_in_s=7.2354 mode=fixed seed=0 ds_order=4
+Sentinel values: 16071, 39007, 16366, height: 16
+Benchmark: lwt_shuffle_32_8
+RESULT iteration=0 type=lwt_shuffle_32_8 operation=ctor file=- size=536870912 depth=16 alphabet_size=65536 time_in_s=4.74504 mode=fixed seed=0 ds_order=5
+Sentinel values: 16071, 39007, 16366, height: 16
+Benchmark: lwt_shuffle_64_8
+RESULT iteration=0 type=lwt_shuffle_64_8 operation=ctor file=- size=536870912 depth=16 alphabet_size=65536 time_in_s=3.96556 mode=fixed seed=0 ds_order=6
+Sentinel values: 16071, 39007, 16366, height: 16
+Benchmark: pwm_5wx_pcItLb1EE_tree
+RESULT iteration=0 type=pwm_5wx_pcItLb1EE_tree operation=ctor file=- size=536870912 depth=16 alphabet_size=65536 time_in_s=14.2343 mode=fixed seed=0 ds_order=7
+Sentinel values: 16071, 39007, 16366, height: 16
+Benchmark: pwm_5wx_psItLb1EE_tree
+RESULT iteration=0 type=pwm_5wx_psItLb1EE_tree operation=ctor file=- size=536870912 depth=16 alphabet_size=65536 time_in_s=23.5807 mode=fixed seed=0 ds_order=8
+Sentinel values: 16071, 39007, 16366, height: 16
+Benchmark: wm_pext_32_2
+RESULT iteration=0 type=wm_pext_32_2 operation=ctor file=- size=536870912 depth=16 alphabet_size=65536 time_in_s=10.6951 mode=fixed seed=0 ds_order=9
+Sentinel values: 16071, 39007, 16366, height: 16
+Benchmark: wm_pext_16_4
+RESULT iteration=0 type=wm_pext_16_4 operation=ctor file=- size=536870912 depth=16 alphabet_size=65536 time_in_s=8.80591 mode=fixed seed=0 ds_order=10
+Sentinel values: 16071, 39007, 16366, height: 16
+Benchmark: wm_pext_8_8
+RESULT iteration=0 type=wm_pext_8_8 operation=ctor file=- size=536870912 depth=16 alphabet_size=65536 time_in_s=10.1481 mode=fixed seed=0 ds_order=11
+Sentinel values: 16071, 39007, 16366, height: 16
+Benchmark: wm_shuffle_8_8
+RESULT iteration=0 type=wm_shuffle_8_8 operation=ctor file=- size=536870912 depth=16 alphabet_size=65536 time_in_s=10.1337 mode=fixed seed=0 ds_order=12
+Sentinel values: 16071, 39007, 16366, height: 16
+Benchmark: wm_shuffle_16_8
+RESULT iteration=0 type=wm_shuffle_16_8 operation=ctor file=- size=536870912 depth=16 alphabet_size=65536 time_in_s=7.8191 mode=fixed seed=0 ds_order=13
+Sentinel values: 16071, 39007, 16366, height: 16
+Benchmark: wm_shuffle_32_8
+RESULT iteration=0 type=wm_shuffle_32_8 operation=ctor file=- size=536870912 depth=16 alphabet_size=65536 time_in_s=5.4038 mode=fixed seed=0 ds_order=14
+Sentinel values: 16071, 39007, 16366, height: 16
+Benchmark: wm_shuffle_64_8
+RESULT iteration=0 type=wm_shuffle_64_8 operation=ctor file=- size=536870912 depth=16 alphabet_size=65536 time_in_s=4.56892 mode=fixed seed=0 ds_order=15
+Sentinel values: 16071, 39007, 16366, height: 16
+Benchmark: pwm_5wx_pcItLb0EE_matrix
+RESULT iteration=0 type=pwm_5wx_pcItLb0EE_matrix operation=ctor file=- size=536870912 depth=16 alphabet_size=65536 time_in_s=14.3814 mode=fixed seed=0 ds_order=16
+Sentinel values: 16071, 39007, 16366, height: 16
+Benchmark: pwm_5wx_psItLb0EE_matrix
+RESULT iteration=0 type=pwm_5wx_psItLb0EE_matrix operation=ctor file=- size=536870912 depth=16 alphabet_size=65536 time_in_s=23.5841 mode=fixed seed=0 ds_order=17
+Sentinel values: 16071, 39007, 16366, height: 16
+
+
+Size: 1073741824...
+Alphabet Bits: 8...
+Generating random text with size 1073741824, alphabet size: 256 using distribution: 'uniform'...
+Alphabet of text 256 characters, depth: 8
+Text width: 1 byte(s) (was 1 byte(s))
+[ EXPECTED ]: 0, 108, 132, height: 8
+Benchmark: lwt_pext_32_2
+RESULT iteration=0 type=lwt_pext_32_2 operation=ctor file=- size=1073741824 depth=8 alphabet_size=256 time_in_s=9.14839 mode=fixed seed=0 ds_order=0
+Sentinel values: 0, 108, 132, height: 8
+Benchmark: lwt_pext_16_4
+RESULT iteration=0 type=lwt_pext_16_4 operation=ctor file=- size=1073741824 depth=8 alphabet_size=256 time_in_s=7.70083 mode=fixed seed=0 ds_order=1
+Sentinel values: 0, 108, 132, height: 8
+Benchmark: lwt_pext_8_8
+RESULT iteration=0 type=lwt_pext_8_8 operation=ctor file=- size=1073741824 depth=8 alphabet_size=256 time_in_s=8.7685 mode=fixed seed=0 ds_order=2
+Sentinel values: 0, 108, 132, height: 8
+Benchmark: lwt_shuffle_8_8
+RESULT iteration=0 type=lwt_shuffle_8_8 operation=ctor file=- size=1073741824 depth=8 alphabet_size=256 time_in_s=9.18445 mode=fixed seed=0 ds_order=3
+Sentinel values: 0, 108, 132, height: 8
+Benchmark: lwt_shuffle_16_8
+RESULT iteration=0 type=lwt_shuffle_16_8 operation=ctor file=- size=1073741824 depth=8 alphabet_size=256 time_in_s=6.52218 mode=fixed seed=0 ds_order=4
+Sentinel values: 0, 108, 132, height: 8
+Benchmark: lwt_shuffle_32_8
+RESULT iteration=0 type=lwt_shuffle_32_8 operation=ctor file=- size=1073741824 depth=8 alphabet_size=256 time_in_s=4.52764 mode=fixed seed=0 ds_order=5
+Sentinel values: 0, 108, 132, height: 8
+Benchmark: lwt_shuffle_64_8
+RESULT iteration=0 type=lwt_shuffle_64_8 operation=ctor file=- size=1073741824 depth=8 alphabet_size=256 time_in_s=3.71597 mode=fixed seed=0 ds_order=6
+Sentinel values: 0, 108, 132, height: 8
+Benchmark: pwm_5wx_pcIhLb1EE_tree
+RESULT iteration=0 type=pwm_5wx_pcIhLb1EE_tree operation=ctor file=- size=1073741824 depth=8 alphabet_size=256 time_in_s=8.27308 mode=fixed seed=0 ds_order=7
+Sentinel values: 0, 108, 132, height: 8
+Benchmark: pwm_5wx_psIhLb1EE_tree
+RESULT iteration=0 type=pwm_5wx_psIhLb1EE_tree operation=ctor file=- size=1073741824 depth=8 alphabet_size=256 time_in_s=9.67328 mode=fixed seed=0 ds_order=8
+Sentinel values: 0, 108, 132, height: 8
+Benchmark: wm_pext_32_2
+RESULT iteration=0 type=wm_pext_32_2 operation=ctor file=- size=1073741824 depth=8 alphabet_size=256 time_in_s=11.4475 mode=fixed seed=0 ds_order=9
+Sentinel values: 0, 108, 132, height: 8
+Benchmark: wm_pext_16_4
+RESULT iteration=0 type=wm_pext_16_4 operation=ctor file=- size=1073741824 depth=8 alphabet_size=256 time_in_s=8.00992 mode=fixed seed=0 ds_order=10
+Sentinel values: 0, 108, 132, height: 8
+Benchmark: wm_pext_8_8
+RESULT iteration=0 type=wm_pext_8_8 operation=ctor file=- size=1073741824 depth=8 alphabet_size=256 time_in_s=8.54286 mode=fixed seed=0 ds_order=11
+Sentinel values: 0, 108, 132, height: 8
+Benchmark: wm_shuffle_8_8
+RESULT iteration=0 type=wm_shuffle_8_8 operation=ctor file=- size=1073741824 depth=8 alphabet_size=256 time_in_s=8.56205 mode=fixed seed=0 ds_order=12
+Sentinel values: 0, 108, 132, height: 8
+Benchmark: wm_shuffle_16_8
+RESULT iteration=0 type=wm_shuffle_16_8 operation=ctor file=- size=1073741824 depth=8 alphabet_size=256 time_in_s=6.78112 mode=fixed seed=0 ds_order=13
+Sentinel values: 0, 108, 132, height: 8
+Benchmark: wm_shuffle_32_8
+RESULT iteration=0 type=wm_shuffle_32_8 operation=ctor file=- size=1073741824 depth=8 alphabet_size=256 time_in_s=4.5065 mode=fixed seed=0 ds_order=14
+Sentinel values: 0, 108, 132, height: 8
+Benchmark: wm_shuffle_64_8
+RESULT iteration=0 type=wm_shuffle_64_8 operation=ctor file=- size=1073741824 depth=8 alphabet_size=256 time_in_s=3.69777 mode=fixed seed=0 ds_order=15
+Sentinel values: 0, 108, 132, height: 8
+Benchmark: pwm_5wx_pcIhLb0EE_matrix
+RESULT iteration=0 type=pwm_5wx_pcIhLb0EE_matrix operation=ctor file=- size=1073741824 depth=8 alphabet_size=256 time_in_s=8.29059 mode=fixed seed=0 ds_order=16
+Sentinel values: 0, 108, 132, height: 8
+Benchmark: pwm_5wx_psIhLb0EE_matrix
+RESULT iteration=0 type=pwm_5wx_psIhLb0EE_matrix operation=ctor file=- size=1073741824 depth=8 alphabet_size=256 time_in_s=9.17133 mode=fixed seed=0 ds_order=17
+Sentinel values: 0, 108, 132, height: 8
+
+
+Alphabet Bits: 16...
+Generating random text with size 1073741824, alphabet size: 65536 using distribution: 'uniform'...
+Alphabet of text 65536 characters, depth: 16
+Text width: 2 byte(s) (was 2 byte(s))
+[ EXPECTED ]: 9149, 27071, 21409, height: 16
+Benchmark: lwt_pext_32_2
+RESULT iteration=0 type=lwt_pext_32_2 operation=ctor file=- size=1073741824 depth=16 alphabet_size=65536 time_in_s=17.1842 mode=fixed seed=0 ds_order=0
+Sentinel values: 9149, 27071, 21409, height: 16
+Benchmark: lwt_pext_16_4
+RESULT iteration=0 type=lwt_pext_16_4 operation=ctor file=- size=1073741824 depth=16 alphabet_size=65536 time_in_s=15.5348 mode=fixed seed=0 ds_order=1
+Sentinel values: 9149, 27071, 21409, height: 16
+Benchmark: lwt_pext_8_8
+RESULT iteration=0 type=lwt_pext_8_8 operation=ctor file=- size=1073741824 depth=16 alphabet_size=65536 time_in_s=19.5103 mode=fixed seed=0 ds_order=2
+Sentinel values: 9149, 27071, 21409, height: 16
+Benchmark: lwt_shuffle_8_8
+RESULT iteration=0 type=lwt_shuffle_8_8 operation=ctor file=- size=1073741824 depth=16 alphabet_size=65536 time_in_s=19.6734 mode=fixed seed=0 ds_order=3
+Sentinel values: 9149, 27071, 21409, height: 16
+Benchmark: lwt_shuffle_16_8
+RESULT iteration=0 type=lwt_shuffle_16_8 operation=ctor file=- size=1073741824 depth=16 alphabet_size=65536 time_in_s=14.5415 mode=fixed seed=0 ds_order=4
+Sentinel values: 9149, 27071, 21409, height: 16
+Benchmark: lwt_shuffle_32_8
+RESULT iteration=0 type=lwt_shuffle_32_8 operation=ctor file=- size=1073741824 depth=16 alphabet_size=65536 time_in_s=9.62824 mode=fixed seed=0 ds_order=5
+Sentinel values: 9149, 27071, 21409, height: 16
+Benchmark: lwt_shuffle_64_8
+RESULT iteration=0 type=lwt_shuffle_64_8 operation=ctor file=- size=1073741824 depth=16 alphabet_size=65536 time_in_s=7.93862 mode=fixed seed=0 ds_order=6
+Sentinel values: 9149, 27071, 21409, height: 16
+Benchmark: pwm_5wx_pcItLb1EE_tree
+RESULT iteration=0 type=pwm_5wx_pcItLb1EE_tree operation=ctor file=- size=1073741824 depth=16 alphabet_size=65536 time_in_s=32.9474 mode=fixed seed=0 ds_order=7
+Sentinel values: 9149, 27071, 21409, height: 16
+Benchmark: pwm_5wx_psItLb1EE_tree
+RESULT iteration=0 type=pwm_5wx_psItLb1EE_tree operation=ctor file=- size=1073741824 depth=16 alphabet_size=65536 time_in_s=46.9545 mode=fixed seed=0 ds_order=8
+Sentinel values: 9149, 27071, 21409, height: 16
+Benchmark: wm_pext_32_2
+RESULT iteration=0 type=wm_pext_32_2 operation=ctor file=- size=1073741824 depth=16 alphabet_size=65536 time_in_s=21.3249 mode=fixed seed=0 ds_order=9
+Sentinel values: 9149, 27071, 21409, height: 16
+Benchmark: wm_pext_16_4
+RESULT iteration=0 type=wm_pext_16_4 operation=ctor file=- size=1073741824 depth=16 alphabet_size=65536 time_in_s=17.2264 mode=fixed seed=0 ds_order=10
+Sentinel values: 9149, 27071, 21409, height: 16
+Benchmark: wm_pext_8_8
+RESULT iteration=0 type=wm_pext_8_8 operation=ctor file=- size=1073741824 depth=16 alphabet_size=65536 time_in_s=19.7531 mode=fixed seed=0 ds_order=11
+Sentinel values: 9149, 27071, 21409, height: 16
+Benchmark: wm_shuffle_8_8
+RESULT iteration=0 type=wm_shuffle_8_8 operation=ctor file=- size=1073741824 depth=16 alphabet_size=65536 time_in_s=19.7644 mode=fixed seed=0 ds_order=12
+Sentinel values: 9149, 27071, 21409, height: 16
+Benchmark: wm_shuffle_16_8
+RESULT iteration=0 type=wm_shuffle_16_8 operation=ctor file=- size=1073741824 depth=16 alphabet_size=65536 time_in_s=15.4395 mode=fixed seed=0 ds_order=13
+Sentinel values: 9149, 27071, 21409, height: 16
+Benchmark: wm_shuffle_32_8
+RESULT iteration=0 type=wm_shuffle_32_8 operation=ctor file=- size=1073741824 depth=16 alphabet_size=65536 time_in_s=10.7069 mode=fixed seed=0 ds_order=14
+Sentinel values: 9149, 27071, 21409, height: 16
+Benchmark: wm_shuffle_64_8
+RESULT iteration=0 type=wm_shuffle_64_8 operation=ctor file=- size=1073741824 depth=16 alphabet_size=65536 time_in_s=9.12691 mode=fixed seed=0 ds_order=15
+Sentinel values: 9149, 27071, 21409, height: 16
+Benchmark: pwm_5wx_pcItLb0EE_matrix
+RESULT iteration=0 type=pwm_5wx_pcItLb0EE_matrix operation=ctor file=- size=1073741824 depth=16 alphabet_size=65536 time_in_s=33.5449 mode=fixed seed=0 ds_order=16
+Sentinel values: 9149, 27071, 21409, height: 16
+Benchmark: pwm_5wx_psItLb0EE_matrix
+RESULT iteration=0 type=pwm_5wx_psItLb0EE_matrix operation=ctor file=- size=1073741824 depth=16 alphabet_size=65536 time_in_s=46.7754 mode=fixed seed=0 ds_order=17
+Sentinel values: 9149, 27071, 21409, height: 16
+
+
+Iteration 1...
+Size: 268435456...
+Alphabet Bits: 8...
+Generating random text with size 268435456, alphabet size: 256 using distribution: 'uniform'...
+Alphabet of text 256 characters, depth: 8
+Text width: 1 byte(s) (was 1 byte(s))
+[ EXPECTED ]: 20, 73, 110, height: 8
+Benchmark: lwt_pext_32_2
+RESULT iteration=1 type=lwt_pext_32_2 operation=ctor file=- size=268435456 depth=8 alphabet_size=256 time_in_s=2.29647 mode=fixed seed=0 ds_order=0
+Sentinel values: 20, 73, 110, height: 8
+Benchmark: lwt_pext_16_4
+RESULT iteration=1 type=lwt_pext_16_4 operation=ctor file=- size=268435456 depth=8 alphabet_size=256 time_in_s=1.92145 mode=fixed seed=0 ds_order=1
+Sentinel values: 20, 73, 110, height: 8
+Benchmark: lwt_pext_8_8
+RESULT iteration=1 type=lwt_pext_8_8 operation=ctor file=- size=268435456 depth=8 alphabet_size=256 time_in_s=2.17916 mode=fixed seed=0 ds_order=2
+Sentinel values: 20, 73, 110, height: 8
+Benchmark: lwt_shuffle_8_8
+RESULT iteration=1 type=lwt_shuffle_8_8 operation=ctor file=- size=268435456 depth=8 alphabet_size=256 time_in_s=2.2779 mode=fixed seed=0 ds_order=3
+Sentinel values: 20, 73, 110, height: 8
+Benchmark: lwt_shuffle_16_8
+RESULT iteration=1 type=lwt_shuffle_16_8 operation=ctor file=- size=268435456 depth=8 alphabet_size=256 time_in_s=1.62511 mode=fixed seed=0 ds_order=4
+Sentinel values: 20, 73, 110, height: 8
+Benchmark: lwt_shuffle_32_8
+RESULT iteration=1 type=lwt_shuffle_32_8 operation=ctor file=- size=268435456 depth=8 alphabet_size=256 time_in_s=1.13901 mode=fixed seed=0 ds_order=5
+Sentinel values: 20, 73, 110, height: 8
+Benchmark: lwt_shuffle_64_8
+RESULT iteration=1 type=lwt_shuffle_64_8 operation=ctor file=- size=268435456 depth=8 alphabet_size=256 time_in_s=0.935047 mode=fixed seed=0 ds_order=6
+Sentinel values: 20, 73, 110, height: 8
+Benchmark: pwm_5wx_pcIhLb1EE_tree
+RESULT iteration=1 type=pwm_5wx_pcIhLb1EE_tree operation=ctor file=- size=268435456 depth=8 alphabet_size=256 time_in_s=2.07611 mode=fixed seed=0 ds_order=7
+Sentinel values: 20, 73, 110, height: 8
+Benchmark: pwm_5wx_psIhLb1EE_tree
+RESULT iteration=1 type=pwm_5wx_psIhLb1EE_tree operation=ctor file=- size=268435456 depth=8 alphabet_size=256 time_in_s=2.4131 mode=fixed seed=0 ds_order=8
+Sentinel values: 20, 73, 110, height: 8
+Benchmark: wm_pext_32_2
+RESULT iteration=1 type=wm_pext_32_2 operation=ctor file=- size=268435456 depth=8 alphabet_size=256 time_in_s=2.87231 mode=fixed seed=0 ds_order=9
+Sentinel values: 20, 73, 110, height: 8
+Benchmark: wm_pext_16_4
+RESULT iteration=1 type=wm_pext_16_4 operation=ctor file=- size=268435456 depth=8 alphabet_size=256 time_in_s=2.02511 mode=fixed seed=0 ds_order=10
+Sentinel values: 20, 73, 110, height: 8
+Benchmark: wm_pext_8_8
+RESULT iteration=1 type=wm_pext_8_8 operation=ctor file=- size=268435456 depth=8 alphabet_size=256 time_in_s=2.18928 mode=fixed seed=0 ds_order=11
+Sentinel values: 20, 73, 110, height: 8
+Benchmark: wm_shuffle_8_8
+RESULT iteration=1 type=wm_shuffle_8_8 operation=ctor file=- size=268435456 depth=8 alphabet_size=256 time_in_s=2.19626 mode=fixed seed=0 ds_order=12
+Sentinel values: 20, 73, 110, height: 8
+Benchmark: wm_shuffle_16_8
+RESULT iteration=1 type=wm_shuffle_16_8 operation=ctor file=- size=268435456 depth=8 alphabet_size=256 time_in_s=1.71393 mode=fixed seed=0 ds_order=13
+Sentinel values: 20, 73, 110, height: 8
+Benchmark: wm_shuffle_32_8
+RESULT iteration=1 type=wm_shuffle_32_8 operation=ctor file=- size=268435456 depth=8 alphabet_size=256 time_in_s=1.14107 mode=fixed seed=0 ds_order=14
+Sentinel values: 20, 73, 110, height: 8
+Benchmark: wm_shuffle_64_8
+RESULT iteration=1 type=wm_shuffle_64_8 operation=ctor file=- size=268435456 depth=8 alphabet_size=256 time_in_s=0.934201 mode=fixed seed=0 ds_order=15
+Sentinel values: 20, 73, 110, height: 8
+Benchmark: pwm_5wx_pcIhLb0EE_matrix
+RESULT iteration=1 type=pwm_5wx_pcIhLb0EE_matrix operation=ctor file=- size=268435456 depth=8 alphabet_size=256 time_in_s=2.08017 mode=fixed seed=0 ds_order=16
+Sentinel values: 20, 73, 110, height: 8
+Benchmark: pwm_5wx_psIhLb0EE_matrix
+RESULT iteration=1 type=pwm_5wx_psIhLb0EE_matrix operation=ctor file=- size=268435456 depth=8 alphabet_size=256 time_in_s=2.29832 mode=fixed seed=0 ds_order=17
+Sentinel values: 20, 73, 110, height: 8
+
+
+Alphabet Bits: 16...
+Generating random text with size 268435456, alphabet size: 65536 using distribution: 'uniform'...
+Alphabet of text 65536 characters, depth: 16
+Text width: 2 byte(s) (was 2 byte(s))
+[ EXPECTED ]: 36896, 11968, 60835, height: 16
+Benchmark: lwt_pext_32_2
+RESULT iteration=1 type=lwt_pext_32_2 operation=ctor file=- size=268435456 depth=16 alphabet_size=65536 time_in_s=4.30655 mode=fixed seed=0 ds_order=0
+Sentinel values: 36896, 11968, 60835, height: 16
+Benchmark: lwt_pext_16_4
+RESULT iteration=1 type=lwt_pext_16_4 operation=ctor file=- size=268435456 depth=16 alphabet_size=65536 time_in_s=3.96838 mode=fixed seed=0 ds_order=1
+Sentinel values: 36896, 11968, 60835, height: 16
+Benchmark: lwt_pext_8_8
+RESULT iteration=1 type=lwt_pext_8_8 operation=ctor file=- size=268435456 depth=16 alphabet_size=65536 time_in_s=4.90477 mode=fixed seed=0 ds_order=2
+Sentinel values: 36896, 11968, 60835, height: 16
+Benchmark: lwt_shuffle_8_8
+RESULT iteration=1 type=lwt_shuffle_8_8 operation=ctor file=- size=268435456 depth=16 alphabet_size=65536 time_in_s=4.94274 mode=fixed seed=0 ds_order=3
+Sentinel values: 36896, 11968, 60835, height: 16
+Benchmark: lwt_shuffle_16_8
+RESULT iteration=1 type=lwt_shuffle_16_8 operation=ctor file=- size=268435456 depth=16 alphabet_size=65536 time_in_s=3.65993 mode=fixed seed=0 ds_order=4
+Sentinel values: 36896, 11968, 60835, height: 16
+Benchmark: lwt_shuffle_32_8
+RESULT iteration=1 type=lwt_shuffle_32_8 operation=ctor file=- size=268435456 depth=16 alphabet_size=65536 time_in_s=2.42315 mode=fixed seed=0 ds_order=5
+Sentinel values: 36896, 11968, 60835, height: 16
+Benchmark: lwt_shuffle_64_8
+RESULT iteration=1 type=lwt_shuffle_64_8 operation=ctor file=- size=268435456 depth=16 alphabet_size=65536 time_in_s=1.99764 mode=fixed seed=0 ds_order=6
+Sentinel values: 36896, 11968, 60835, height: 16
+Benchmark: pwm_5wx_pcItLb1EE_tree
+RESULT iteration=1 type=pwm_5wx_pcItLb1EE_tree operation=ctor file=- size=268435456 depth=16 alphabet_size=65536 time_in_s=6.57776 mode=fixed seed=0 ds_order=7
+Sentinel values: 36896, 11968, 60835, height: 16
+Benchmark: pwm_5wx_psItLb1EE_tree
+RESULT iteration=1 type=pwm_5wx_psItLb1EE_tree operation=ctor file=- size=268435456 depth=16 alphabet_size=65536 time_in_s=11.2175 mode=fixed seed=0 ds_order=8
+Sentinel values: 36896, 11968, 60835, height: 16
+Benchmark: wm_pext_32_2
+RESULT iteration=1 type=wm_pext_32_2 operation=ctor file=- size=268435456 depth=16 alphabet_size=65536 time_in_s=5.34469 mode=fixed seed=0 ds_order=9
+Sentinel values: 36896, 11968, 60835, height: 16
+Benchmark: wm_pext_16_4
+RESULT iteration=1 type=wm_pext_16_4 operation=ctor file=- size=268435456 depth=16 alphabet_size=65536 time_in_s=4.36631 mode=fixed seed=0 ds_order=10
+Sentinel values: 36896, 11968, 60835, height: 16
+Benchmark: wm_pext_8_8
+RESULT iteration=1 type=wm_pext_8_8 operation=ctor file=- size=268435456 depth=16 alphabet_size=65536 time_in_s=5.05098 mode=fixed seed=0 ds_order=11
+Sentinel values: 36896, 11968, 60835, height: 16
+Benchmark: wm_shuffle_8_8
+RESULT iteration=1 type=wm_shuffle_8_8 operation=ctor file=- size=268435456 depth=16 alphabet_size=65536 time_in_s=5.04013 mode=fixed seed=0 ds_order=12
+Sentinel values: 36896, 11968, 60835, height: 16
+Benchmark: wm_shuffle_16_8
+RESULT iteration=1 type=wm_shuffle_16_8 operation=ctor file=- size=268435456 depth=16 alphabet_size=65536 time_in_s=3.86928 mode=fixed seed=0 ds_order=13
+Sentinel values: 36896, 11968, 60835, height: 16
+Benchmark: wm_shuffle_32_8
+RESULT iteration=1 type=wm_shuffle_32_8 operation=ctor file=- size=268435456 depth=16 alphabet_size=65536 time_in_s=2.69373 mode=fixed seed=0 ds_order=14
+Sentinel values: 36896, 11968, 60835, height: 16
+Benchmark: wm_shuffle_64_8
+RESULT iteration=1 type=wm_shuffle_64_8 operation=ctor file=- size=268435456 depth=16 alphabet_size=65536 time_in_s=2.28825 mode=fixed seed=0 ds_order=15
+Sentinel values: 36896, 11968, 60835, height: 16
+Benchmark: pwm_5wx_pcItLb0EE_matrix
+RESULT iteration=1 type=pwm_5wx_pcItLb0EE_matrix operation=ctor file=- size=268435456 depth=16 alphabet_size=65536 time_in_s=6.56218 mode=fixed seed=0 ds_order=16
+Sentinel values: 36896, 11968, 60835, height: 16
+Benchmark: pwm_5wx_psItLb0EE_matrix
+RESULT iteration=1 type=pwm_5wx_psItLb0EE_matrix operation=ctor file=- size=268435456 depth=16 alphabet_size=65536 time_in_s=11.1902 mode=fixed seed=0 ds_order=17
+Sentinel values: 36896, 11968, 60835, height: 16
+
+
+Size: 536870912...
+Alphabet Bits: 8...
+Generating random text with size 536870912, alphabet size: 256 using distribution: 'uniform'...
+Alphabet of text 256 characters, depth: 8
+Text width: 1 byte(s) (was 1 byte(s))
+[ EXPECTED ]: 12, 167, 208, height: 8
+Benchmark: lwt_pext_32_2
+RESULT iteration=1 type=lwt_pext_32_2 operation=ctor file=- size=536870912 depth=8 alphabet_size=256 time_in_s=4.5731 mode=fixed seed=0 ds_order=0
+Sentinel values: 12, 167, 208, height: 8
+Benchmark: lwt_pext_16_4
+RESULT iteration=1 type=lwt_pext_16_4 operation=ctor file=- size=536870912 depth=8 alphabet_size=256 time_in_s=3.83247 mode=fixed seed=0 ds_order=1
+Sentinel values: 12, 167, 208, height: 8
+Benchmark: lwt_pext_8_8
+RESULT iteration=1 type=lwt_pext_8_8 operation=ctor file=- size=536870912 depth=8 alphabet_size=256 time_in_s=4.35169 mode=fixed seed=0 ds_order=2
+Sentinel values: 12, 167, 208, height: 8
+Benchmark: lwt_shuffle_8_8
+RESULT iteration=1 type=lwt_shuffle_8_8 operation=ctor file=- size=536870912 depth=8 alphabet_size=256 time_in_s=4.56227 mode=fixed seed=0 ds_order=3
+Sentinel values: 12, 167, 208, height: 8
+Benchmark: lwt_shuffle_16_8
+RESULT iteration=1 type=lwt_shuffle_16_8 operation=ctor file=- size=536870912 depth=8 alphabet_size=256 time_in_s=3.24257 mode=fixed seed=0 ds_order=4
+Sentinel values: 12, 167, 208, height: 8
+Benchmark: lwt_shuffle_32_8
+RESULT iteration=1 type=lwt_shuffle_32_8 operation=ctor file=- size=536870912 depth=8 alphabet_size=256 time_in_s=2.26202 mode=fixed seed=0 ds_order=5
+Sentinel values: 12, 167, 208, height: 8
+Benchmark: lwt_shuffle_64_8
+RESULT iteration=1 type=lwt_shuffle_64_8 operation=ctor file=- size=536870912 depth=8 alphabet_size=256 time_in_s=1.85612 mode=fixed seed=0 ds_order=6
+Sentinel values: 12, 167, 208, height: 8
+Benchmark: pwm_5wx_pcIhLb1EE_tree
+RESULT iteration=1 type=pwm_5wx_pcIhLb1EE_tree operation=ctor file=- size=536870912 depth=8 alphabet_size=256 time_in_s=4.03529 mode=fixed seed=0 ds_order=7
+Sentinel values: 12, 167, 208, height: 8
+Benchmark: pwm_5wx_psIhLb1EE_tree
+RESULT iteration=1 type=pwm_5wx_psIhLb1EE_tree operation=ctor file=- size=536870912 depth=8 alphabet_size=256 time_in_s=4.70077 mode=fixed seed=0 ds_order=8
+Sentinel values: 12, 167, 208, height: 8
+Benchmark: wm_pext_32_2
+RESULT iteration=1 type=wm_pext_32_2 operation=ctor file=- size=536870912 depth=8 alphabet_size=256 time_in_s=5.56852 mode=fixed seed=0 ds_order=9
+Sentinel values: 12, 167, 208, height: 8
+Benchmark: wm_pext_16_4
+RESULT iteration=1 type=wm_pext_16_4 operation=ctor file=- size=536870912 depth=8 alphabet_size=256 time_in_s=3.90211 mode=fixed seed=0 ds_order=10
+Sentinel values: 12, 167, 208, height: 8
+Benchmark: wm_pext_8_8
+RESULT iteration=1 type=wm_pext_8_8 operation=ctor file=- size=536870912 depth=8 alphabet_size=256 time_in_s=4.25562 mode=fixed seed=0 ds_order=11
+Sentinel values: 12, 167, 208, height: 8
+Benchmark: wm_shuffle_8_8
+RESULT iteration=1 type=wm_shuffle_8_8 operation=ctor file=- size=536870912 depth=8 alphabet_size=256 time_in_s=4.27584 mode=fixed seed=0 ds_order=12
+Sentinel values: 12, 167, 208, height: 8
+Benchmark: wm_shuffle_16_8
+RESULT iteration=1 type=wm_shuffle_16_8 operation=ctor file=- size=536870912 depth=8 alphabet_size=256 time_in_s=3.36785 mode=fixed seed=0 ds_order=13
+Sentinel values: 12, 167, 208, height: 8
+Benchmark: wm_shuffle_32_8
+RESULT iteration=1 type=wm_shuffle_32_8 operation=ctor file=- size=536870912 depth=8 alphabet_size=256 time_in_s=2.20596 mode=fixed seed=0 ds_order=14
+Sentinel values: 12, 167, 208, height: 8
+Benchmark: wm_shuffle_64_8
+RESULT iteration=1 type=wm_shuffle_64_8 operation=ctor file=- size=536870912 depth=8 alphabet_size=256 time_in_s=1.84259 mode=fixed seed=0 ds_order=15
+Sentinel values: 12, 167, 208, height: 8
+Benchmark: pwm_5wx_pcIhLb0EE_matrix
+RESULT iteration=1 type=pwm_5wx_pcIhLb0EE_matrix operation=ctor file=- size=536870912 depth=8 alphabet_size=256 time_in_s=4.15751 mode=fixed seed=0 ds_order=16
+Sentinel values: 12, 167, 208, height: 8
+Benchmark: pwm_5wx_psIhLb0EE_matrix
+RESULT iteration=1 type=pwm_5wx_psIhLb0EE_matrix operation=ctor file=- size=536870912 depth=8 alphabet_size=256 time_in_s=4.60049 mode=fixed seed=0 ds_order=17
+Sentinel values: 12, 167, 208, height: 8
+
+
+Alphabet Bits: 16...
+Generating random text with size 536870912, alphabet size: 65536 using distribution: 'uniform'...
+Alphabet of text 65536 characters, depth: 16
+Text width: 2 byte(s) (was 2 byte(s))
+[ EXPECTED ]: 48623, 17703, 46550, height: 16
+Benchmark: lwt_pext_32_2
+RESULT iteration=1 type=lwt_pext_32_2 operation=ctor file=- size=536870912 depth=16 alphabet_size=65536 time_in_s=8.61263 mode=fixed seed=0 ds_order=0
+Sentinel values: 48623, 17703, 46550, height: 16
+Benchmark: lwt_pext_16_4
+RESULT iteration=1 type=lwt_pext_16_4 operation=ctor file=- size=536870912 depth=16 alphabet_size=65536 time_in_s=7.85114 mode=fixed seed=0 ds_order=1
+Sentinel values: 48623, 17703, 46550, height: 16
+Benchmark: lwt_pext_8_8
+RESULT iteration=1 type=lwt_pext_8_8 operation=ctor file=- size=536870912 depth=16 alphabet_size=65536 time_in_s=9.79604 mode=fixed seed=0 ds_order=2
+Sentinel values: 48623, 17703, 46550, height: 16
+Benchmark: lwt_shuffle_8_8
+RESULT iteration=1 type=lwt_shuffle_8_8 operation=ctor file=- size=536870912 depth=16 alphabet_size=65536 time_in_s=9.79237 mode=fixed seed=0 ds_order=3
+Sentinel values: 48623, 17703, 46550, height: 16
+Benchmark: lwt_shuffle_16_8
+RESULT iteration=1 type=lwt_shuffle_16_8 operation=ctor file=- size=536870912 depth=16 alphabet_size=65536 time_in_s=7.30029 mode=fixed seed=0 ds_order=4
+Sentinel values: 48623, 17703, 46550, height: 16
+Benchmark: lwt_shuffle_32_8
+RESULT iteration=1 type=lwt_shuffle_32_8 operation=ctor file=- size=536870912 depth=16 alphabet_size=65536 time_in_s=4.83485 mode=fixed seed=0 ds_order=5
+Sentinel values: 48623, 17703, 46550, height: 16
+Benchmark: lwt_shuffle_64_8
+RESULT iteration=1 type=lwt_shuffle_64_8 operation=ctor file=- size=536870912 depth=16 alphabet_size=65536 time_in_s=3.98873 mode=fixed seed=0 ds_order=6
+Sentinel values: 48623, 17703, 46550, height: 16
+Benchmark: pwm_5wx_pcItLb1EE_tree
+RESULT iteration=1 type=pwm_5wx_pcItLb1EE_tree operation=ctor file=- size=536870912 depth=16 alphabet_size=65536 time_in_s=14.3333 mode=fixed seed=0 ds_order=7
+Sentinel values: 48623, 17703, 46550, height: 16
+Benchmark: pwm_5wx_psItLb1EE_tree
+RESULT iteration=1 type=pwm_5wx_psItLb1EE_tree operation=ctor file=- size=536870912 depth=16 alphabet_size=65536 time_in_s=23.1808 mode=fixed seed=0 ds_order=8
+Sentinel values: 48623, 17703, 46550, height: 16
+Benchmark: wm_pext_32_2
+RESULT iteration=1 type=wm_pext_32_2 operation=ctor file=- size=536870912 depth=16 alphabet_size=65536 time_in_s=10.6847 mode=fixed seed=0 ds_order=9
+Sentinel values: 48623, 17703, 46550, height: 16
+Benchmark: wm_pext_16_4
+RESULT iteration=1 type=wm_pext_16_4 operation=ctor file=- size=536870912 depth=16 alphabet_size=65536 time_in_s=8.62013 mode=fixed seed=0 ds_order=10
+Sentinel values: 48623, 17703, 46550, height: 16
+Benchmark: wm_pext_8_8
+RESULT iteration=1 type=wm_pext_8_8 operation=ctor file=- size=536870912 depth=16 alphabet_size=65536 time_in_s=9.88945 mode=fixed seed=0 ds_order=11
+Sentinel values: 48623, 17703, 46550, height: 16
+Benchmark: wm_shuffle_8_8
+RESULT iteration=1 type=wm_shuffle_8_8 operation=ctor file=- size=536870912 depth=16 alphabet_size=65536 time_in_s=9.86968 mode=fixed seed=0 ds_order=12
+Sentinel values: 48623, 17703, 46550, height: 16
+Benchmark: wm_shuffle_16_8
+RESULT iteration=1 type=wm_shuffle_16_8 operation=ctor file=- size=536870912 depth=16 alphabet_size=65536 time_in_s=7.73294 mode=fixed seed=0 ds_order=13
+Sentinel values: 48623, 17703, 46550, height: 16
+Benchmark: wm_shuffle_32_8
+RESULT iteration=1 type=wm_shuffle_32_8 operation=ctor file=- size=536870912 depth=16 alphabet_size=65536 time_in_s=5.38372 mode=fixed seed=0 ds_order=14
+Sentinel values: 48623, 17703, 46550, height: 16
+Benchmark: wm_shuffle_64_8
+RESULT iteration=1 type=wm_shuffle_64_8 operation=ctor file=- size=536870912 depth=16 alphabet_size=65536 time_in_s=4.57717 mode=fixed seed=0 ds_order=15
+Sentinel values: 48623, 17703, 46550, height: 16
+Benchmark: pwm_5wx_pcItLb0EE_matrix
+RESULT iteration=1 type=pwm_5wx_pcItLb0EE_matrix operation=ctor file=- size=536870912 depth=16 alphabet_size=65536 time_in_s=14.4328 mode=fixed seed=0 ds_order=16
+Sentinel values: 48623, 17703, 46550, height: 16
+Benchmark: pwm_5wx_psItLb0EE_matrix
+RESULT iteration=1 type=pwm_5wx_psItLb0EE_matrix operation=ctor file=- size=536870912 depth=16 alphabet_size=65536 time_in_s=23.1637 mode=fixed seed=0 ds_order=17
+Sentinel values: 48623, 17703, 46550, height: 16
+
+
+Size: 1073741824...
+Alphabet Bits: 8...
+Generating random text with size 1073741824, alphabet size: 256 using distribution: 'uniform'...
+Alphabet of text 256 characters, depth: 8
+Text width: 1 byte(s) (was 1 byte(s))
+[ EXPECTED ]: 251, 61, 71, height: 8
+Benchmark: lwt_pext_32_2
+RESULT iteration=1 type=lwt_pext_32_2 operation=ctor file=- size=1073741824 depth=8 alphabet_size=256 time_in_s=9.14451 mode=fixed seed=0 ds_order=0
+Sentinel values: 251, 61, 71, height: 8
+Benchmark: lwt_pext_16_4
+RESULT iteration=1 type=lwt_pext_16_4 operation=ctor file=- size=1073741824 depth=8 alphabet_size=256 time_in_s=7.74407 mode=fixed seed=0 ds_order=1
+Sentinel values: 251, 61, 71, height: 8
+Benchmark: lwt_pext_8_8
+RESULT iteration=1 type=lwt_pext_8_8 operation=ctor file=- size=1073741824 depth=8 alphabet_size=256 time_in_s=8.82753 mode=fixed seed=0 ds_order=2
+Sentinel values: 251, 61, 71, height: 8
+Benchmark: lwt_shuffle_8_8
+RESULT iteration=1 type=lwt_shuffle_8_8 operation=ctor file=- size=1073741824 depth=8 alphabet_size=256 time_in_s=9.22452 mode=fixed seed=0 ds_order=3
+Sentinel values: 251, 61, 71, height: 8
+Benchmark: lwt_shuffle_16_8
+RESULT iteration=1 type=lwt_shuffle_16_8 operation=ctor file=- size=1073741824 depth=8 alphabet_size=256 time_in_s=6.54925 mode=fixed seed=0 ds_order=4
+Sentinel values: 251, 61, 71, height: 8
+Benchmark: lwt_shuffle_32_8
+RESULT iteration=1 type=lwt_shuffle_32_8 operation=ctor file=- size=1073741824 depth=8 alphabet_size=256 time_in_s=4.52606 mode=fixed seed=0 ds_order=5
+Sentinel values: 251, 61, 71, height: 8
+Benchmark: lwt_shuffle_64_8
+RESULT iteration=1 type=lwt_shuffle_64_8 operation=ctor file=- size=1073741824 depth=8 alphabet_size=256 time_in_s=3.69536 mode=fixed seed=0 ds_order=6
+Sentinel values: 251, 61, 71, height: 8
+Benchmark: pwm_5wx_pcIhLb1EE_tree
+RESULT iteration=1 type=pwm_5wx_pcIhLb1EE_tree operation=ctor file=- size=1073741824 depth=8 alphabet_size=256 time_in_s=8.28509 mode=fixed seed=0 ds_order=7
+Sentinel values: 251, 61, 71, height: 8
+Benchmark: pwm_5wx_psIhLb1EE_tree
+RESULT iteration=1 type=pwm_5wx_psIhLb1EE_tree operation=ctor file=- size=1073741824 depth=8 alphabet_size=256 time_in_s=9.66667 mode=fixed seed=0 ds_order=8
+Sentinel values: 251, 61, 71, height: 8
+Benchmark: wm_pext_32_2
+RESULT iteration=1 type=wm_pext_32_2 operation=ctor file=- size=1073741824 depth=8 alphabet_size=256 time_in_s=11.4376 mode=fixed seed=0 ds_order=9
+Sentinel values: 251, 61, 71, height: 8
+Benchmark: wm_pext_16_4
+RESULT iteration=1 type=wm_pext_16_4 operation=ctor file=- size=1073741824 depth=8 alphabet_size=256 time_in_s=8.00738 mode=fixed seed=0 ds_order=10
+Sentinel values: 251, 61, 71, height: 8
+Benchmark: wm_pext_8_8
+RESULT iteration=1 type=wm_pext_8_8 operation=ctor file=- size=1073741824 depth=8 alphabet_size=256 time_in_s=8.47436 mode=fixed seed=0 ds_order=11
+Sentinel values: 251, 61, 71, height: 8
+Benchmark: wm_shuffle_8_8
+RESULT iteration=1 type=wm_shuffle_8_8 operation=ctor file=- size=1073741824 depth=8 alphabet_size=256 time_in_s=8.4861 mode=fixed seed=0 ds_order=12
+Sentinel values: 251, 61, 71, height: 8
+Benchmark: wm_shuffle_16_8
+RESULT iteration=1 type=wm_shuffle_16_8 operation=ctor file=- size=1073741824 depth=8 alphabet_size=256 time_in_s=6.80237 mode=fixed seed=0 ds_order=13
+Sentinel values: 251, 61, 71, height: 8
+Benchmark: wm_shuffle_32_8
+RESULT iteration=1 type=wm_shuffle_32_8 operation=ctor file=- size=1073741824 depth=8 alphabet_size=256 time_in_s=4.49127 mode=fixed seed=0 ds_order=14
+Sentinel values: 251, 61, 71, height: 8
+Benchmark: wm_shuffle_64_8
+RESULT iteration=1 type=wm_shuffle_64_8 operation=ctor file=- size=1073741824 depth=8 alphabet_size=256 time_in_s=3.69932 mode=fixed seed=0 ds_order=15
+Sentinel values: 251, 61, 71, height: 8
+Benchmark: pwm_5wx_pcIhLb0EE_matrix
+RESULT iteration=1 type=pwm_5wx_pcIhLb0EE_matrix operation=ctor file=- size=1073741824 depth=8 alphabet_size=256 time_in_s=8.29206 mode=fixed seed=0 ds_order=16
+Sentinel values: 251, 61, 71, height: 8
+Benchmark: pwm_5wx_psIhLb0EE_matrix
+RESULT iteration=1 type=pwm_5wx_psIhLb0EE_matrix operation=ctor file=- size=1073741824 depth=8 alphabet_size=256 time_in_s=9.16687 mode=fixed seed=0 ds_order=17
+Sentinel values: 251, 61, 71, height: 8
+
+
+Alphabet Bits: 16...
+Generating random text with size 1073741824, alphabet size: 65536 using distribution: 'uniform'...
+Alphabet of text 65536 characters, depth: 16
+Text width: 2 byte(s) (was 2 byte(s))
+[ EXPECTED ]: 26117, 64060, 39474, height: 16
+Benchmark: lwt_pext_32_2
+RESULT iteration=1 type=lwt_pext_32_2 operation=ctor file=- size=1073741824 depth=16 alphabet_size=65536 time_in_s=17.2177 mode=fixed seed=0 ds_order=0
+Sentinel values: 26117, 64060, 39474, height: 16
+Benchmark: lwt_pext_16_4
+RESULT iteration=1 type=lwt_pext_16_4 operation=ctor file=- size=1073741824 depth=16 alphabet_size=65536 time_in_s=15.7759 mode=fixed seed=0 ds_order=1
+Sentinel values: 26117, 64060, 39474, height: 16
+Benchmark: lwt_pext_8_8
+RESULT iteration=1 type=lwt_pext_8_8 operation=ctor file=- size=1073741824 depth=16 alphabet_size=65536 time_in_s=19.5843 mode=fixed seed=0 ds_order=2
+Sentinel values: 26117, 64060, 39474, height: 16
+Benchmark: lwt_shuffle_8_8
+RESULT iteration=1 type=lwt_shuffle_8_8 operation=ctor file=- size=1073741824 depth=16 alphabet_size=65536 time_in_s=19.6345 mode=fixed seed=0 ds_order=3
+Sentinel values: 26117, 64060, 39474, height: 16
+Benchmark: lwt_shuffle_16_8
+RESULT iteration=1 type=lwt_shuffle_16_8 operation=ctor file=- size=1073741824 depth=16 alphabet_size=65536 time_in_s=14.5911 mode=fixed seed=0 ds_order=4
+Sentinel values: 26117, 64060, 39474, height: 16
+Benchmark: lwt_shuffle_32_8
+RESULT iteration=1 type=lwt_shuffle_32_8 operation=ctor file=- size=1073741824 depth=16 alphabet_size=65536 time_in_s=9.64479 mode=fixed seed=0 ds_order=5
+Sentinel values: 26117, 64060, 39474, height: 16
+Benchmark: lwt_shuffle_64_8
+RESULT iteration=1 type=lwt_shuffle_64_8 operation=ctor file=- size=1073741824 depth=16 alphabet_size=65536 time_in_s=7.95427 mode=fixed seed=0 ds_order=6
+Sentinel values: 26117, 64060, 39474, height: 16
+Benchmark: pwm_5wx_pcItLb1EE_tree
+RESULT iteration=1 type=pwm_5wx_pcItLb1EE_tree operation=ctor file=- size=1073741824 depth=16 alphabet_size=65536 time_in_s=33.471 mode=fixed seed=0 ds_order=7
+Sentinel values: 26117, 64060, 39474, height: 16
+Benchmark: pwm_5wx_psItLb1EE_tree
+RESULT iteration=1 type=pwm_5wx_psItLb1EE_tree operation=ctor file=- size=1073741824 depth=16 alphabet_size=65536 time_in_s=47.2791 mode=fixed seed=0 ds_order=8
+Sentinel values: 26117, 64060, 39474, height: 16
+Benchmark: wm_pext_32_2
+RESULT iteration=1 type=wm_pext_32_2 operation=ctor file=- size=1073741824 depth=16 alphabet_size=65536 time_in_s=21.3778 mode=fixed seed=0 ds_order=9
+Sentinel values: 26117, 64060, 39474, height: 16
+Benchmark: wm_pext_16_4
+RESULT iteration=1 type=wm_pext_16_4 operation=ctor file=- size=1073741824 depth=16 alphabet_size=65536 time_in_s=17.5628 mode=fixed seed=0 ds_order=10
+Sentinel values: 26117, 64060, 39474, height: 16
+Benchmark: wm_pext_8_8
+RESULT iteration=1 type=wm_pext_8_8 operation=ctor file=- size=1073741824 depth=16 alphabet_size=65536 time_in_s=20.3141 mode=fixed seed=0 ds_order=11
+Sentinel values: 26117, 64060, 39474, height: 16
+Benchmark: wm_shuffle_8_8
+RESULT iteration=1 type=wm_shuffle_8_8 operation=ctor file=- size=1073741824 depth=16 alphabet_size=65536 time_in_s=20.275 mode=fixed seed=0 ds_order=12
+Sentinel values: 26117, 64060, 39474, height: 16
+Benchmark: wm_shuffle_16_8
+RESULT iteration=1 type=wm_shuffle_16_8 operation=ctor file=- size=1073741824 depth=16 alphabet_size=65536 time_in_s=15.5445 mode=fixed seed=0 ds_order=13
+Sentinel values: 26117, 64060, 39474, height: 16
+Benchmark: wm_shuffle_32_8
+RESULT iteration=1 type=wm_shuffle_32_8 operation=ctor file=- size=1073741824 depth=16 alphabet_size=65536 time_in_s=10.743 mode=fixed seed=0 ds_order=14
+Sentinel values: 26117, 64060, 39474, height: 16
+Benchmark: wm_shuffle_64_8
+RESULT iteration=1 type=wm_shuffle_64_8 operation=ctor file=- size=1073741824 depth=16 alphabet_size=65536 time_in_s=9.12346 mode=fixed seed=0 ds_order=15
+Sentinel values: 26117, 64060, 39474, height: 16
+Benchmark: pwm_5wx_pcItLb0EE_matrix
+RESULT iteration=1 type=pwm_5wx_pcItLb0EE_matrix operation=ctor file=- size=1073741824 depth=16 alphabet_size=65536 time_in_s=33.0918 mode=fixed seed=0 ds_order=16
+Sentinel values: 26117, 64060, 39474, height: 16
+Benchmark: pwm_5wx_psItLb0EE_matrix
+RESULT iteration=1 type=pwm_5wx_psItLb0EE_matrix operation=ctor file=- size=1073741824 depth=16 alphabet_size=65536 time_in_s=47.3677 mode=fixed seed=0 ds_order=17
+Sentinel values: 26117, 64060, 39474, height: 16
+
+
+Iteration 2...
+Size: 268435456...
+Alphabet Bits: 8...
+Generating random text with size 268435456, alphabet size: 256 using distribution: 'uniform'...
+Alphabet of text 256 characters, depth: 8
+Text width: 1 byte(s) (was 1 byte(s))
+[ EXPECTED ]: 162, 91, 131, height: 8
+Benchmark: lwt_pext_32_2
+RESULT iteration=2 type=lwt_pext_32_2 operation=ctor file=- size=268435456 depth=8 alphabet_size=256 time_in_s=2.29452 mode=fixed seed=0 ds_order=0
+Sentinel values: 162, 91, 131, height: 8
+Benchmark: lwt_pext_16_4
+RESULT iteration=2 type=lwt_pext_16_4 operation=ctor file=- size=268435456 depth=8 alphabet_size=256 time_in_s=1.91054 mode=fixed seed=0 ds_order=1
+Sentinel values: 162, 91, 131, height: 8
+Benchmark: lwt_pext_8_8
+RESULT iteration=2 type=lwt_pext_8_8 operation=ctor file=- size=268435456 depth=8 alphabet_size=256 time_in_s=2.1963 mode=fixed seed=0 ds_order=2
+Sentinel values: 162, 91, 131, height: 8
+Benchmark: lwt_shuffle_8_8
+RESULT iteration=2 type=lwt_shuffle_8_8 operation=ctor file=- size=268435456 depth=8 alphabet_size=256 time_in_s=2.29538 mode=fixed seed=0 ds_order=3
+Sentinel values: 162, 91, 131, height: 8
+Benchmark: lwt_shuffle_16_8
+RESULT iteration=2 type=lwt_shuffle_16_8 operation=ctor file=- size=268435456 depth=8 alphabet_size=256 time_in_s=1.63464 mode=fixed seed=0 ds_order=4
+Sentinel values: 162, 91, 131, height: 8
+Benchmark: lwt_shuffle_32_8
+RESULT iteration=2 type=lwt_shuffle_32_8 operation=ctor file=- size=268435456 depth=8 alphabet_size=256 time_in_s=1.13935 mode=fixed seed=0 ds_order=5
+Sentinel values: 162, 91, 131, height: 8
+Benchmark: lwt_shuffle_64_8
+RESULT iteration=2 type=lwt_shuffle_64_8 operation=ctor file=- size=268435456 depth=8 alphabet_size=256 time_in_s=0.934104 mode=fixed seed=0 ds_order=6
+Sentinel values: 162, 91, 131, height: 8
+Benchmark: pwm_5wx_pcIhLb1EE_tree
+RESULT iteration=2 type=pwm_5wx_pcIhLb1EE_tree operation=ctor file=- size=268435456 depth=8 alphabet_size=256 time_in_s=2.0205 mode=fixed seed=0 ds_order=7
+Sentinel values: 162, 91, 131, height: 8
+Benchmark: pwm_5wx_psIhLb1EE_tree
+RESULT iteration=2 type=pwm_5wx_psIhLb1EE_tree operation=ctor file=- size=268435456 depth=8 alphabet_size=256 time_in_s=2.35354 mode=fixed seed=0 ds_order=8
+Sentinel values: 162, 91, 131, height: 8
+Benchmark: wm_pext_32_2
+RESULT iteration=2 type=wm_pext_32_2 operation=ctor file=- size=268435456 depth=8 alphabet_size=256 time_in_s=2.79212 mode=fixed seed=0 ds_order=9
+Sentinel values: 162, 91, 131, height: 8
+Benchmark: wm_pext_16_4
+RESULT iteration=2 type=wm_pext_16_4 operation=ctor file=- size=268435456 depth=8 alphabet_size=256 time_in_s=1.97924 mode=fixed seed=0 ds_order=10
+Sentinel values: 162, 91, 131, height: 8
+Benchmark: wm_pext_8_8
+RESULT iteration=2 type=wm_pext_8_8 operation=ctor file=- size=268435456 depth=8 alphabet_size=256 time_in_s=2.12505 mode=fixed seed=0 ds_order=11
+Sentinel values: 162, 91, 131, height: 8
+Benchmark: wm_shuffle_8_8
+RESULT iteration=2 type=wm_shuffle_8_8 operation=ctor file=- size=268435456 depth=8 alphabet_size=256 time_in_s=2.12922 mode=fixed seed=0 ds_order=12
+Sentinel values: 162, 91, 131, height: 8
+Benchmark: wm_shuffle_16_8
+RESULT iteration=2 type=wm_shuffle_16_8 operation=ctor file=- size=268435456 depth=8 alphabet_size=256 time_in_s=1.69822 mode=fixed seed=0 ds_order=13
+Sentinel values: 162, 91, 131, height: 8
+Benchmark: wm_shuffle_32_8
+RESULT iteration=2 type=wm_shuffle_32_8 operation=ctor file=- size=268435456 depth=8 alphabet_size=256 time_in_s=1.11337 mode=fixed seed=0 ds_order=14
+Sentinel values: 162, 91, 131, height: 8
+Benchmark: wm_shuffle_64_8
+RESULT iteration=2 type=wm_shuffle_64_8 operation=ctor file=- size=268435456 depth=8 alphabet_size=256 time_in_s=0.925643 mode=fixed seed=0 ds_order=15
+Sentinel values: 162, 91, 131, height: 8
+Benchmark: pwm_5wx_pcIhLb0EE_matrix
+RESULT iteration=2 type=pwm_5wx_pcIhLb0EE_matrix operation=ctor file=- size=268435456 depth=8 alphabet_size=256 time_in_s=2.02385 mode=fixed seed=0 ds_order=16
+Sentinel values: 162, 91, 131, height: 8
+Benchmark: pwm_5wx_psIhLb0EE_matrix
+RESULT iteration=2 type=pwm_5wx_psIhLb0EE_matrix operation=ctor file=- size=268435456 depth=8 alphabet_size=256 time_in_s=2.23713 mode=fixed seed=0 ds_order=17
+Sentinel values: 162, 91, 131, height: 8
+
+
+Alphabet Bits: 16...
+Generating random text with size 268435456, alphabet size: 65536 using distribution: 'uniform'...
+Alphabet of text 65536 characters, depth: 16
+Text width: 2 byte(s) (was 2 byte(s))
+[ EXPECTED ]: 3877, 60451, 8470, height: 16
+Benchmark: lwt_pext_32_2
+RESULT iteration=2 type=lwt_pext_32_2 operation=ctor file=- size=268435456 depth=16 alphabet_size=65536 time_in_s=4.2093 mode=fixed seed=0 ds_order=0
+Sentinel values: 3877, 60451, 8470, height: 16
+Benchmark: lwt_pext_16_4
+RESULT iteration=2 type=lwt_pext_16_4 operation=ctor file=- size=268435456 depth=16 alphabet_size=65536 time_in_s=3.87775 mode=fixed seed=0 ds_order=1
+Sentinel values: 3877, 60451, 8470, height: 16
+Benchmark: lwt_pext_8_8
+RESULT iteration=2 type=lwt_pext_8_8 operation=ctor file=- size=268435456 depth=16 alphabet_size=65536 time_in_s=4.78371 mode=fixed seed=0 ds_order=2
+Sentinel values: 3877, 60451, 8470, height: 16
+Benchmark: lwt_shuffle_8_8
+RESULT iteration=2 type=lwt_shuffle_8_8 operation=ctor file=- size=268435456 depth=16 alphabet_size=65536 time_in_s=4.79201 mode=fixed seed=0 ds_order=3
+Sentinel values: 3877, 60451, 8470, height: 16
+Benchmark: lwt_shuffle_16_8
+RESULT iteration=2 type=lwt_shuffle_16_8 operation=ctor file=- size=268435456 depth=16 alphabet_size=65536 time_in_s=3.60531 mode=fixed seed=0 ds_order=4
+Sentinel values: 3877, 60451, 8470, height: 16
+Benchmark: lwt_shuffle_32_8
+RESULT iteration=2 type=lwt_shuffle_32_8 operation=ctor file=- size=268435456 depth=16 alphabet_size=65536 time_in_s=2.37616 mode=fixed seed=0 ds_order=5
+Sentinel values: 3877, 60451, 8470, height: 16
+Benchmark: lwt_shuffle_64_8
+RESULT iteration=2 type=lwt_shuffle_64_8 operation=ctor file=- size=268435456 depth=16 alphabet_size=65536 time_in_s=1.98521 mode=fixed seed=0 ds_order=6
+Sentinel values: 3877, 60451, 8470, height: 16
+Benchmark: pwm_5wx_pcItLb1EE_tree
+RESULT iteration=2 type=pwm_5wx_pcItLb1EE_tree operation=ctor file=- size=268435456 depth=16 alphabet_size=65536 time_in_s=6.43059 mode=fixed seed=0 ds_order=7
+Sentinel values: 3877, 60451, 8470, height: 16
+Benchmark: pwm_5wx_psItLb1EE_tree
+RESULT iteration=2 type=pwm_5wx_psItLb1EE_tree operation=ctor file=- size=268435456 depth=16 alphabet_size=65536 time_in_s=11.1777 mode=fixed seed=0 ds_order=8
+Sentinel values: 3877, 60451, 8470, height: 16
+Benchmark: wm_pext_32_2
+RESULT iteration=2 type=wm_pext_32_2 operation=ctor file=- size=268435456 depth=16 alphabet_size=65536 time_in_s=5.23309 mode=fixed seed=0 ds_order=9
+Sentinel values: 3877, 60451, 8470, height: 16
+Benchmark: wm_pext_16_4
+RESULT iteration=2 type=wm_pext_16_4 operation=ctor file=- size=268435456 depth=16 alphabet_size=65536 time_in_s=4.25198 mode=fixed seed=0 ds_order=10
+Sentinel values: 3877, 60451, 8470, height: 16
+Benchmark: wm_pext_8_8
+RESULT iteration=2 type=wm_pext_8_8 operation=ctor file=- size=268435456 depth=16 alphabet_size=65536 time_in_s=4.84291 mode=fixed seed=0 ds_order=11
+Sentinel values: 3877, 60451, 8470, height: 16
+Benchmark: wm_shuffle_8_8
+RESULT iteration=2 type=wm_shuffle_8_8 operation=ctor file=- size=268435456 depth=16 alphabet_size=65536 time_in_s=4.82696 mode=fixed seed=0 ds_order=12
+Sentinel values: 3877, 60451, 8470, height: 16
+Benchmark: wm_shuffle_16_8
+RESULT iteration=2 type=wm_shuffle_16_8 operation=ctor file=- size=268435456 depth=16 alphabet_size=65536 time_in_s=3.82954 mode=fixed seed=0 ds_order=13
+Sentinel values: 3877, 60451, 8470, height: 16
+Benchmark: wm_shuffle_32_8
+RESULT iteration=2 type=wm_shuffle_32_8 operation=ctor file=- size=268435456 depth=16 alphabet_size=65536 time_in_s=2.64578 mode=fixed seed=0 ds_order=14
+Sentinel values: 3877, 60451, 8470, height: 16
+Benchmark: wm_shuffle_64_8
+RESULT iteration=2 type=wm_shuffle_64_8 operation=ctor file=- size=268435456 depth=16 alphabet_size=65536 time_in_s=2.26372 mode=fixed seed=0 ds_order=15
+Sentinel values: 3877, 60451, 8470, height: 16
+Benchmark: pwm_5wx_pcItLb0EE_matrix
+RESULT iteration=2 type=pwm_5wx_pcItLb0EE_matrix operation=ctor file=- size=268435456 depth=16 alphabet_size=65536 time_in_s=6.42067 mode=fixed seed=0 ds_order=16
+Sentinel values: 3877, 60451, 8470, height: 16
+Benchmark: pwm_5wx_psItLb0EE_matrix
+RESULT iteration=2 type=pwm_5wx_psItLb0EE_matrix operation=ctor file=- size=268435456 depth=16 alphabet_size=65536 time_in_s=11.1797 mode=fixed seed=0 ds_order=17
+Sentinel values: 3877, 60451, 8470, height: 16
+
+
+Size: 536870912...
+Alphabet Bits: 8...
+Generating random text with size 536870912, alphabet size: 256 using distribution: 'uniform'...
+Alphabet of text 256 characters, depth: 8
+Text width: 1 byte(s) (was 1 byte(s))
+[ EXPECTED ]: 143, 73, 219, height: 8
+Benchmark: lwt_pext_32_2
+RESULT iteration=2 type=lwt_pext_32_2 operation=ctor file=- size=536870912 depth=8 alphabet_size=256 time_in_s=4.44638 mode=fixed seed=0 ds_order=0
+Sentinel values: 143, 73, 219, height: 8
+Benchmark: lwt_pext_16_4
+RESULT iteration=2 type=lwt_pext_16_4 operation=ctor file=- size=536870912 depth=8 alphabet_size=256 time_in_s=3.71869 mode=fixed seed=0 ds_order=1
+Sentinel values: 143, 73, 219, height: 8
+Benchmark: lwt_pext_8_8
+RESULT iteration=2 type=lwt_pext_8_8 operation=ctor file=- size=536870912 depth=8 alphabet_size=256 time_in_s=4.25285 mode=fixed seed=0 ds_order=2
+Sentinel values: 143, 73, 219, height: 8
+Benchmark: lwt_shuffle_8_8
+RESULT iteration=2 type=lwt_shuffle_8_8 operation=ctor file=- size=536870912 depth=8 alphabet_size=256 time_in_s=4.4514 mode=fixed seed=0 ds_order=3
+Sentinel values: 143, 73, 219, height: 8
+Benchmark: lwt_shuffle_16_8
+RESULT iteration=2 type=lwt_shuffle_16_8 operation=ctor file=- size=536870912 depth=8 alphabet_size=256 time_in_s=3.19645 mode=fixed seed=0 ds_order=4
+Sentinel values: 143, 73, 219, height: 8
+Benchmark: lwt_shuffle_32_8
+RESULT iteration=2 type=lwt_shuffle_32_8 operation=ctor file=- size=536870912 depth=8 alphabet_size=256 time_in_s=2.21915 mode=fixed seed=0 ds_order=5
+Sentinel values: 143, 73, 219, height: 8
+Benchmark: lwt_shuffle_64_8
+RESULT iteration=2 type=lwt_shuffle_64_8 operation=ctor file=- size=536870912 depth=8 alphabet_size=256 time_in_s=1.83564 mode=fixed seed=0 ds_order=6
+Sentinel values: 143, 73, 219, height: 8
+Benchmark: pwm_5wx_pcIhLb1EE_tree
+RESULT iteration=2 type=pwm_5wx_pcIhLb1EE_tree operation=ctor file=- size=536870912 depth=8 alphabet_size=256 time_in_s=4.03745 mode=fixed seed=0 ds_order=7
+Sentinel values: 143, 73, 219, height: 8
+Benchmark: pwm_5wx_psIhLb1EE_tree
+RESULT iteration=2 type=pwm_5wx_psIhLb1EE_tree operation=ctor file=- size=536870912 depth=8 alphabet_size=256 time_in_s=4.71158 mode=fixed seed=0 ds_order=8
+Sentinel values: 143, 73, 219, height: 8
+Benchmark: wm_pext_32_2
+RESULT iteration=2 type=wm_pext_32_2 operation=ctor file=- size=536870912 depth=8 alphabet_size=256 time_in_s=5.57643 mode=fixed seed=0 ds_order=9
+Sentinel values: 143, 73, 219, height: 8
+Benchmark: wm_pext_16_4
+RESULT iteration=2 type=wm_pext_16_4 operation=ctor file=- size=536870912 depth=8 alphabet_size=256 time_in_s=3.91844 mode=fixed seed=0 ds_order=10
+Sentinel values: 143, 73, 219, height: 8
+Benchmark: wm_pext_8_8
+RESULT iteration=2 type=wm_pext_8_8 operation=ctor file=- size=536870912 depth=8 alphabet_size=256 time_in_s=4.18472 mode=fixed seed=0 ds_order=11
+Sentinel values: 143, 73, 219, height: 8
+Benchmark: wm_shuffle_8_8
+RESULT iteration=2 type=wm_shuffle_8_8 operation=ctor file=- size=536870912 depth=8 alphabet_size=256 time_in_s=4.18872 mode=fixed seed=0 ds_order=12
+Sentinel values: 143, 73, 219, height: 8
+Benchmark: wm_shuffle_16_8
+RESULT iteration=2 type=wm_shuffle_16_8 operation=ctor file=- size=536870912 depth=8 alphabet_size=256 time_in_s=3.35846 mode=fixed seed=0 ds_order=13
+Sentinel values: 143, 73, 219, height: 8
+Benchmark: wm_shuffle_32_8
+RESULT iteration=2 type=wm_shuffle_32_8 operation=ctor file=- size=536870912 depth=8 alphabet_size=256 time_in_s=2.2123 mode=fixed seed=0 ds_order=14
+Sentinel values: 143, 73, 219, height: 8
+Benchmark: wm_shuffle_64_8
+RESULT iteration=2 type=wm_shuffle_64_8 operation=ctor file=- size=536870912 depth=8 alphabet_size=256 time_in_s=1.83802 mode=fixed seed=0 ds_order=15
+Sentinel values: 143, 73, 219, height: 8
+Benchmark: pwm_5wx_pcIhLb0EE_matrix
+RESULT iteration=2 type=pwm_5wx_pcIhLb0EE_matrix operation=ctor file=- size=536870912 depth=8 alphabet_size=256 time_in_s=4.04075 mode=fixed seed=0 ds_order=16
+Sentinel values: 143, 73, 219, height: 8
+Benchmark: pwm_5wx_psIhLb0EE_matrix
+RESULT iteration=2 type=pwm_5wx_psIhLb0EE_matrix operation=ctor file=- size=536870912 depth=8 alphabet_size=256 time_in_s=4.47168 mode=fixed seed=0 ds_order=17
+Sentinel values: 143, 73, 219, height: 8
+
+
+Alphabet Bits: 16...
+Generating random text with size 536870912, alphabet size: 65536 using distribution: 'uniform'...
+Alphabet of text 65536 characters, depth: 16
+Text width: 2 byte(s) (was 2 byte(s))
+[ EXPECTED ]: 30580, 39641, 49002, height: 16
+Benchmark: lwt_pext_32_2
+RESULT iteration=2 type=lwt_pext_32_2 operation=ctor file=- size=536870912 depth=16 alphabet_size=65536 time_in_s=8.40077 mode=fixed seed=0 ds_order=0
+Sentinel values: 30580, 39641, 49002, height: 16
+Benchmark: lwt_pext_16_4
+RESULT iteration=2 type=lwt_pext_16_4 operation=ctor file=- size=536870912 depth=16 alphabet_size=65536 time_in_s=7.72745 mode=fixed seed=0 ds_order=1
+Sentinel values: 30580, 39641, 49002, height: 16
+Benchmark: lwt_pext_8_8
+RESULT iteration=2 type=lwt_pext_8_8 operation=ctor file=- size=536870912 depth=16 alphabet_size=65536 time_in_s=9.50474 mode=fixed seed=0 ds_order=2
+Sentinel values: 30580, 39641, 49002, height: 16
+Benchmark: lwt_shuffle_8_8
+RESULT iteration=2 type=lwt_shuffle_8_8 operation=ctor file=- size=536870912 depth=16 alphabet_size=65536 time_in_s=9.53302 mode=fixed seed=0 ds_order=3
+Sentinel values: 30580, 39641, 49002, height: 16
+Benchmark: lwt_shuffle_16_8
+RESULT iteration=2 type=lwt_shuffle_16_8 operation=ctor file=- size=536870912 depth=16 alphabet_size=65536 time_in_s=7.16791 mode=fixed seed=0 ds_order=4
+Sentinel values: 30580, 39641, 49002, height: 16
+Benchmark: lwt_shuffle_32_8
+RESULT iteration=2 type=lwt_shuffle_32_8 operation=ctor file=- size=536870912 depth=16 alphabet_size=65536 time_in_s=4.72297 mode=fixed seed=0 ds_order=5
+Sentinel values: 30580, 39641, 49002, height: 16
+Benchmark: lwt_shuffle_64_8
+RESULT iteration=2 type=lwt_shuffle_64_8 operation=ctor file=- size=536870912 depth=16 alphabet_size=65536 time_in_s=3.95409 mode=fixed seed=0 ds_order=6
+Sentinel values: 30580, 39641, 49002, height: 16
+Benchmark: pwm_5wx_pcItLb1EE_tree
+RESULT iteration=2 type=pwm_5wx_pcItLb1EE_tree operation=ctor file=- size=536870912 depth=16 alphabet_size=65536 time_in_s=14.4197 mode=fixed seed=0 ds_order=7
+Sentinel values: 30580, 39641, 49002, height: 16
+Benchmark: pwm_5wx_psItLb1EE_tree
+RESULT iteration=2 type=pwm_5wx_psItLb1EE_tree operation=ctor file=- size=536870912 depth=16 alphabet_size=65536 time_in_s=22.9053 mode=fixed seed=0 ds_order=8
+Sentinel values: 30580, 39641, 49002, height: 16
+Benchmark: wm_pext_32_2
+RESULT iteration=2 type=wm_pext_32_2 operation=ctor file=- size=536870912 depth=16 alphabet_size=65536 time_in_s=10.6791 mode=fixed seed=0 ds_order=9
+Sentinel values: 30580, 39641, 49002, height: 16
+Benchmark: wm_pext_16_4
+RESULT iteration=2 type=wm_pext_16_4 operation=ctor file=- size=536870912 depth=16 alphabet_size=65536 time_in_s=8.66058 mode=fixed seed=0 ds_order=10
+Sentinel values: 30580, 39641, 49002, height: 16
+Benchmark: wm_pext_8_8
+RESULT iteration=2 type=wm_pext_8_8 operation=ctor file=- size=536870912 depth=16 alphabet_size=65536 time_in_s=10.1561 mode=fixed seed=0 ds_order=11
+Sentinel values: 30580, 39641, 49002, height: 16
+Benchmark: wm_shuffle_8_8
+RESULT iteration=2 type=wm_shuffle_8_8 operation=ctor file=- size=536870912 depth=16 alphabet_size=65536 time_in_s=10.1425 mode=fixed seed=0 ds_order=12
+Sentinel values: 30580, 39641, 49002, height: 16
+Benchmark: wm_shuffle_16_8
+RESULT iteration=2 type=wm_shuffle_16_8 operation=ctor file=- size=536870912 depth=16 alphabet_size=65536 time_in_s=7.74539 mode=fixed seed=0 ds_order=13
+Sentinel values: 30580, 39641, 49002, height: 16
+Benchmark: wm_shuffle_32_8
+RESULT iteration=2 type=wm_shuffle_32_8 operation=ctor file=- size=536870912 depth=16 alphabet_size=65536 time_in_s=5.37181 mode=fixed seed=0 ds_order=14
+Sentinel values: 30580, 39641, 49002, height: 16
+Benchmark: wm_shuffle_64_8
+RESULT iteration=2 type=wm_shuffle_64_8 operation=ctor file=- size=536870912 depth=16 alphabet_size=65536 time_in_s=4.57202 mode=fixed seed=0 ds_order=15
+Sentinel values: 30580, 39641, 49002, height: 16
+Benchmark: pwm_5wx_pcItLb0EE_matrix
+RESULT iteration=2 type=pwm_5wx_pcItLb0EE_matrix operation=ctor file=- size=536870912 depth=16 alphabet_size=65536 time_in_s=14.4373 mode=fixed seed=0 ds_order=16
+Sentinel values: 30580, 39641, 49002, height: 16
+Benchmark: pwm_5wx_psItLb0EE_matrix
+RESULT iteration=2 type=pwm_5wx_psItLb0EE_matrix operation=ctor file=- size=536870912 depth=16 alphabet_size=65536 time_in_s=22.9591 mode=fixed seed=0 ds_order=17
+Sentinel values: 30580, 39641, 49002, height: 16
+
+
+Size: 1073741824...
+Alphabet Bits: 8...
+Generating random text with size 1073741824, alphabet size: 256 using distribution: 'uniform'...
+Alphabet of text 256 characters, depth: 8
+Text width: 1 byte(s) (was 1 byte(s))
+[ EXPECTED ]: 10, 229, 168, height: 8
+Benchmark: lwt_pext_32_2
+RESULT iteration=2 type=lwt_pext_32_2 operation=ctor file=- size=1073741824 depth=8 alphabet_size=256 time_in_s=9.12515 mode=fixed seed=0 ds_order=0
+Sentinel values: 10, 229, 168, height: 8
+Benchmark: lwt_pext_16_4
+RESULT iteration=2 type=lwt_pext_16_4 operation=ctor file=- size=1073741824 depth=8 alphabet_size=256 time_in_s=7.65921 mode=fixed seed=0 ds_order=1
+Sentinel values: 10, 229, 168, height: 8
+Benchmark: lwt_pext_8_8
+RESULT iteration=2 type=lwt_pext_8_8 operation=ctor file=- size=1073741824 depth=8 alphabet_size=256 time_in_s=8.71047 mode=fixed seed=0 ds_order=2
+Sentinel values: 10, 229, 168, height: 8
+Benchmark: lwt_shuffle_8_8
+RESULT iteration=2 type=lwt_shuffle_8_8 operation=ctor file=- size=1073741824 depth=8 alphabet_size=256 time_in_s=9.10067 mode=fixed seed=0 ds_order=3
+Sentinel values: 10, 229, 168, height: 8
+Benchmark: lwt_shuffle_16_8
+RESULT iteration=2 type=lwt_shuffle_16_8 operation=ctor file=- size=1073741824 depth=8 alphabet_size=256 time_in_s=6.44715 mode=fixed seed=0 ds_order=4
+Sentinel values: 10, 229, 168, height: 8
+Benchmark: lwt_shuffle_32_8
+RESULT iteration=2 type=lwt_shuffle_32_8 operation=ctor file=- size=1073741824 depth=8 alphabet_size=256 time_in_s=4.49291 mode=fixed seed=0 ds_order=5
+Sentinel values: 10, 229, 168, height: 8
+Benchmark: lwt_shuffle_64_8
+RESULT iteration=2 type=lwt_shuffle_64_8 operation=ctor file=- size=1073741824 depth=8 alphabet_size=256 time_in_s=3.69138 mode=fixed seed=0 ds_order=6
+Sentinel values: 10, 229, 168, height: 8
+Benchmark: pwm_5wx_pcIhLb1EE_tree
+RESULT iteration=2 type=pwm_5wx_pcIhLb1EE_tree operation=ctor file=- size=1073741824 depth=8 alphabet_size=256 time_in_s=8.2615 mode=fixed seed=0 ds_order=7
+Sentinel values: 10, 229, 168, height: 8
+Benchmark: pwm_5wx_psIhLb1EE_tree
+RESULT iteration=2 type=pwm_5wx_psIhLb1EE_tree operation=ctor file=- size=1073741824 depth=8 alphabet_size=256 time_in_s=9.64958 mode=fixed seed=0 ds_order=8
+Sentinel values: 10, 229, 168, height: 8
+Benchmark: wm_pext_32_2
+RESULT iteration=2 type=wm_pext_32_2 operation=ctor file=- size=1073741824 depth=8 alphabet_size=256 time_in_s=11.4423 mode=fixed seed=0 ds_order=9
+Sentinel values: 10, 229, 168, height: 8
+Benchmark: wm_pext_16_4
+RESULT iteration=2 type=wm_pext_16_4 operation=ctor file=- size=1073741824 depth=8 alphabet_size=256 time_in_s=8.03242 mode=fixed seed=0 ds_order=10
+Sentinel values: 10, 229, 168, height: 8
+Benchmark: wm_pext_8_8
+RESULT iteration=2 type=wm_pext_8_8 operation=ctor file=- size=1073741824 depth=8 alphabet_size=256 time_in_s=8.60261 mode=fixed seed=0 ds_order=11
+Sentinel values: 10, 229, 168, height: 8
+Benchmark: wm_shuffle_8_8
+RESULT iteration=2 type=wm_shuffle_8_8 operation=ctor file=- size=1073741824 depth=8 alphabet_size=256 time_in_s=8.70406 mode=fixed seed=0 ds_order=12
+Sentinel values: 10, 229, 168, height: 8
+Benchmark: wm_shuffle_16_8
+RESULT iteration=2 type=wm_shuffle_16_8 operation=ctor file=- size=1073741824 depth=8 alphabet_size=256 time_in_s=6.7873 mode=fixed seed=0 ds_order=13
+Sentinel values: 10, 229, 168, height: 8
+Benchmark: wm_shuffle_32_8
+RESULT iteration=2 type=wm_shuffle_32_8 operation=ctor file=- size=1073741824 depth=8 alphabet_size=256 time_in_s=4.48498 mode=fixed seed=0 ds_order=14
+Sentinel values: 10, 229, 168, height: 8
+Benchmark: wm_shuffle_64_8
+RESULT iteration=2 type=wm_shuffle_64_8 operation=ctor file=- size=1073741824 depth=8 alphabet_size=256 time_in_s=3.6964 mode=fixed seed=0 ds_order=15
+Sentinel values: 10, 229, 168, height: 8
+Benchmark: pwm_5wx_pcIhLb0EE_matrix
+RESULT iteration=2 type=pwm_5wx_pcIhLb0EE_matrix operation=ctor file=- size=1073741824 depth=8 alphabet_size=256 time_in_s=8.04131 mode=fixed seed=0 ds_order=16
+Sentinel values: 10, 229, 168, height: 8
+Benchmark: pwm_5wx_psIhLb0EE_matrix
+RESULT iteration=2 type=pwm_5wx_psIhLb0EE_matrix operation=ctor file=- size=1073741824 depth=8 alphabet_size=256 time_in_s=8.93102 mode=fixed seed=0 ds_order=17
+Sentinel values: 10, 229, 168, height: 8
+
+
+Alphabet Bits: 16...
+Generating random text with size 1073741824, alphabet size: 65536 using distribution: 'uniform'...
+Alphabet of text 65536 characters, depth: 16
+Text width: 2 byte(s) (was 2 byte(s))
+[ EXPECTED ]: 51974, 36839, 33539, height: 16
+Benchmark: lwt_pext_32_2
+RESULT iteration=2 type=lwt_pext_32_2 operation=ctor file=- size=1073741824 depth=16 alphabet_size=65536 time_in_s=16.7943 mode=fixed seed=0 ds_order=0
+Sentinel values: 51974, 36839, 33539, height: 16
+Benchmark: lwt_pext_16_4
+RESULT iteration=2 type=lwt_pext_16_4 operation=ctor file=- size=1073741824 depth=16 alphabet_size=65536 time_in_s=15.3659 mode=fixed seed=0 ds_order=1
+Sentinel values: 51974, 36839, 33539, height: 16
+Benchmark: lwt_pext_8_8
+RESULT iteration=2 type=lwt_pext_8_8 operation=ctor file=- size=1073741824 depth=16 alphabet_size=65536 time_in_s=18.9795 mode=fixed seed=0 ds_order=2
+Sentinel values: 51974, 36839, 33539, height: 16
+Benchmark: lwt_shuffle_8_8
+RESULT iteration=2 type=lwt_shuffle_8_8 operation=ctor file=- size=1073741824 depth=16 alphabet_size=65536 time_in_s=19.06 mode=fixed seed=0 ds_order=3
+Sentinel values: 51974, 36839, 33539, height: 16
+Benchmark: lwt_shuffle_16_8
+RESULT iteration=2 type=lwt_shuffle_16_8 operation=ctor file=- size=1073741824 depth=16 alphabet_size=65536 time_in_s=14.4315 mode=fixed seed=0 ds_order=4
+Sentinel values: 51974, 36839, 33539, height: 16
+Benchmark: lwt_shuffle_32_8
+RESULT iteration=2 type=lwt_shuffle_32_8 operation=ctor file=- size=1073741824 depth=16 alphabet_size=65536 time_in_s=9.48798 mode=fixed seed=0 ds_order=5
+Sentinel values: 51974, 36839, 33539, height: 16
+Benchmark: lwt_shuffle_64_8
+RESULT iteration=2 type=lwt_shuffle_64_8 operation=ctor file=- size=1073741824 depth=16 alphabet_size=65536 time_in_s=7.90113 mode=fixed seed=0 ds_order=6
+Sentinel values: 51974, 36839, 33539, height: 16
+Benchmark: pwm_5wx_pcItLb1EE_tree
+RESULT iteration=2 type=pwm_5wx_pcItLb1EE_tree operation=ctor file=- size=1073741824 depth=16 alphabet_size=65536 time_in_s=32.9946 mode=fixed seed=0 ds_order=7
+Sentinel values: 51974, 36839, 33539, height: 16
+Benchmark: pwm_5wx_psItLb1EE_tree
+RESULT iteration=2 type=pwm_5wx_psItLb1EE_tree operation=ctor file=- size=1073741824 depth=16 alphabet_size=65536 time_in_s=47.7175 mode=fixed seed=0 ds_order=8
+Sentinel values: 51974, 36839, 33539, height: 16
+Benchmark: wm_pext_32_2
+RESULT iteration=2 type=wm_pext_32_2 operation=ctor file=- size=1073741824 depth=16 alphabet_size=65536 time_in_s=20.9035 mode=fixed seed=0 ds_order=9
+Sentinel values: 51974, 36839, 33539, height: 16
+Benchmark: wm_pext_16_4
+RESULT iteration=2 type=wm_pext_16_4 operation=ctor file=- size=1073741824 depth=16 alphabet_size=65536 time_in_s=17.0344 mode=fixed seed=0 ds_order=10
+Sentinel values: 51974, 36839, 33539, height: 16
+Benchmark: wm_pext_8_8
+RESULT iteration=2 type=wm_pext_8_8 operation=ctor file=- size=1073741824 depth=16 alphabet_size=65536 time_in_s=19.473 mode=fixed seed=0 ds_order=11
+Sentinel values: 51974, 36839, 33539, height: 16
+Benchmark: wm_shuffle_8_8
+RESULT iteration=2 type=wm_shuffle_8_8 operation=ctor file=- size=1073741824 depth=16 alphabet_size=65536 time_in_s=19.4385 mode=fixed seed=0 ds_order=12
+Sentinel values: 51974, 36839, 33539, height: 16
+Benchmark: wm_shuffle_16_8
+RESULT iteration=2 type=wm_shuffle_16_8 operation=ctor file=- size=1073741824 depth=16 alphabet_size=65536 time_in_s=15.4353 mode=fixed seed=0 ds_order=13
+Sentinel values: 51974, 36839, 33539, height: 16
+Benchmark: wm_shuffle_32_8
+RESULT iteration=2 type=wm_shuffle_32_8 operation=ctor file=- size=1073741824 depth=16 alphabet_size=65536 time_in_s=10.5873 mode=fixed seed=0 ds_order=14
+Sentinel values: 51974, 36839, 33539, height: 16
+Benchmark: wm_shuffle_64_8
+RESULT iteration=2 type=wm_shuffle_64_8 operation=ctor file=- size=1073741824 depth=16 alphabet_size=65536 time_in_s=9.05914 mode=fixed seed=0 ds_order=15
+Sentinel values: 51974, 36839, 33539, height: 16
+Benchmark: pwm_5wx_pcItLb0EE_matrix
+RESULT iteration=2 type=pwm_5wx_pcItLb0EE_matrix operation=ctor file=- size=1073741824 depth=16 alphabet_size=65536 time_in_s=33.1715 mode=fixed seed=0 ds_order=16
+Sentinel values: 51974, 36839, 33539, height: 16
+Benchmark: pwm_5wx_psItLb0EE_matrix
+RESULT iteration=2 type=pwm_5wx_psItLb0EE_matrix operation=ctor file=- size=1073741824 depth=16 alphabet_size=65536 time_in_s=48.0494 mode=fixed seed=0 ds_order=17
+Sentinel values: 51974, 36839, 33539, height: 16
+
+
+Done
+Finish Time: 2022-03-14-18-00-23

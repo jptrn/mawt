@@ -1,0 +1,508 @@
+% -*- mode: latex; mode: flyspell; ispell-local-dictionary: "en_US"; coding: utf-8; fill-column: 80 -*-
+
+\documentclass{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+
+\usepackage{amsmath,amsfonts,amssymb}
+\usepackage{fullpage}
+\usepackage{verbatim}
+\usepackage{subcaption}
+
+\usepackage{tikz, pgfplots}
+
+% LWT = triangle
+% LWT RECURSIVE = square
+% WT = x
+% PWM = diamond
+
+% basic = red
+% no lut = black
+% lut = blue
+% pext = violet
+% pshufb = brown
+
+\pgfplotscreateplotcyclelist{wtcycles} {
+  red, every mark/.append style = {solid}, mark = square*\\
+  black, every mark/.append style = {solid}, mark = *\\
+  orange!75!black, every mark/.append style = {solid}, mark = triangle*\\
+  blue, every mark/.append style = {solid}, mark = star\\
+  green!50!black, every mark/.append style = {solid}, mark = diamond*\\
+  violet, every mark/.append style = {solid}, mark = star\\  
+}
+
+\pgfplotsset{
+  width = 9cm,
+  height = 9cm,
+  major grid style = { thin, dotted, color = black!50 },
+  minor grid style = { thin, dotted, color = black!50 },
+  grid,
+  xtick distance = 1,
+  every axis/.append style = {
+    line width = 0.5pt,
+    tick style = {
+      line cap = round,
+      thin,
+      major tick length = 4pt,
+      minor tick length = 2pt,
+    },
+  },
+  legend cell align = left,
+  legend pos = north west,
+  cycle list name = {wtcycles},
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+
+\title{WT Benchmark}
+\author{Jan-Philipp Tarnowski}
+\maketitle
+
+
+
+% IMPORT-DATA stats results-2022-03-24--14-26-39.out
+
+% SQL DELETE FROM stats WHERE type LIKE 'pwm_8wx_ps_%'
+% SQL DELETE FROM stats WHERE type LIKE '%_shuffle_16_8'
+% SQL DELETE FROM stats WHERE type LIKE '%_shuffle_32_8'
+
+% SQL UPDATE stats SET ds_order = 0 WHERE type LIKE '%_basic'
+% SQL UPDATE stats SET ds_order = 1 WHERE type LIKE '%_pext_%'
+% SQL UPDATE stats SET ds_order = 2 WHERE type LIKE '%_shuffle_%'
+% SQL UPDATE stats SET ds_order = 3 WHERE type LIKE '%_wx_%'
+
+
+% 268435456
+% 1073741824
+
+\begin{center}
+\begin{figure}[b]
+\begin{center}
+  WT Construction Time, Domain Decomposition, $\log \sigma = 8$
+\end{center}
+\vspace{1cm}
+
+\begin{subfigure}[t]{.45\linewidth}
+  \vskip 0pt
+\begin{tikzpicture}
+  \begin{axis}[
+  title={$256$ MiB},
+  legend style = { at = {(0.5, -0.1605)}, anchor = north},
+	%xlabel={Num Threads},
+	ylabel={MBit/s (log)},
+  xticklabels={,1,2,4,8,16}
+    ]
+
+			%% MULTIPLOT(type) SELECT LOG(2, threads) AS x, LOG(2, MEDIAN((8 * (size / CAST(time_in_s AS Float))) / (1024 * 1024))) AS y,MULTIPLOT
+			%% FROM stats WHERE alphabet_size = 256 AND size = 268435456 AND (type LIKE 'lwt_%' OR type LIKE '%_tree') GROUP BY MULTIPLOT,x ORDER BY ds_order,MULTIPLOT,x
+   \addplot coordinates { (0.0,7.99366) (1.0,8.94293) (2.0,9.86374) (3.0,10.6752) (4.0,11.1037) };
+   \addlegendentry{type=lwt\_basic};
+   \addplot coordinates { (0.0,10.1224) (1.0,10.9111) (2.0,11.6909) (3.0,12.2054) (4.0,12.3276) };
+   \addlegendentry{type=lwt\_pext\_16\_4};
+   \addplot coordinates { (0.0,11.126) (1.0,11.544) (2.0,11.8456) (3.0,12.0122) (4.0,12.1492) };
+   \addlegendentry{type=lwt\_shuffle\_64\_8};
+   \addplot coordinates { (0.0,9.91694) (1.0,10.8646) (2.0,11.82) (3.0,12.6791) (4.0,12.941) };
+   \addlegendentry{type=pwm\_8wx\_pcIhLb1EE\_tree};
+   
+   %\legend{
+   %  Naive\\
+   %  \texttt{pext} / \texttt{pshufb}, $\tau = 8$, $N = 8$ (64 bits)\\
+   %  \texttt{vpshufbitqmb} / \texttt{vpcompressb}, $\tau = 8$, $N = 64$ (512 bits) \\
+   %  Prefix Counting (PWM) \\
+  %};
+  \legend{};
+
+
+  \end{axis}
+\end{tikzpicture}\\
+\begin{tikzpicture}
+  \begin{axis}[
+  title={$1024$ MiB},
+  legend style = { at = {(0.5, -0.1605)}, anchor = north},
+  xlabel={Num Threads},
+  ylabel={MBit/s (log)},
+  xticklabels={,1,2,4,8,16}
+    ]
+
+      %% MULTIPLOT(type) SELECT LOG(2, threads) AS x, LOG(2, MEDIAN((8 * (size / CAST(time_in_s AS Float))) / (1024 * 1024))) AS y,MULTIPLOT
+      %% FROM stats WHERE alphabet_size = 256 AND size = 1073741824 AND (type LIKE 'lwt_%' OR type LIKE '%_tree') GROUP BY MULTIPLOT,x ORDER BY ds_order,MULTIPLOT,x
+      \addplot coordinates { (0.0,7.9871) (1.0,8.93089) (2.0,9.84726) (3.0,10.6568) (4.0,11.052) };
+      \addlegendentry{type=lwt\_basic};
+      \addplot coordinates { (0.0,10.0969) (1.0,10.8665) (2.0,11.6167) (3.0,12.1157) (4.0,12.2026) };
+      \addlegendentry{type=lwt\_pext\_16\_4};
+      \addplot coordinates { (0.0,11.1154) (1.0,11.5205) (2.0,11.8358) (3.0,11.9219) (4.0,11.9346) };
+      \addlegendentry{type=lwt\_shuffle\_64\_8};
+      \addplot coordinates { (0.0,9.9267) (1.0,10.8639) (2.0,11.8104) (3.0,12.6689) (4.0,12.9417) };
+      \addlegendentry{type=pwm\_8wx\_pcIhLb1EE\_tree};
+   
+   \legend{};
+
+
+  \end{axis}
+\end{tikzpicture}
+\end{subfigure}\hfill\begin{subfigure}[t]{.45\linewidth}
+  \vskip 0pt 
+  \begin{tikzpicture}
+    \begin{axis}[
+    title={$512$ MiB},
+    legend style = { at = {(0.5, -0.1605)}, anchor = north},
+    %xlabel={Num Threads},
+    %ylabel={MBit/s (log)},
+    yticklabels={},
+    xticklabels={,1,2,4,8,16}
+      ]
+  
+        %% MULTIPLOT(type) SELECT LOG(2, threads) AS x, LOG(2, MEDIAN((8 * (size / CAST(time_in_s AS Float))) / (1024 * 1024))) AS y,MULTIPLOT
+        %% FROM stats WHERE alphabet_size = 256 AND size = 536870912 AND (type LIKE 'lwt_%' OR type LIKE '%_tree') GROUP BY MULTIPLOT,x ORDER BY ds_order,MULTIPLOT,x
+        \addplot coordinates { (0.0,7.99514) (1.0,8.92126) (2.0,9.85825) (3.0,10.6881) (4.0,11.1226) };
+        \addlegendentry{type=lwt\_basic};
+        \addplot coordinates { (0.0,10.1349) (1.0,10.8994) (2.0,11.7038) (3.0,12.2105) (4.0,12.3351) };
+        \addlegendentry{type=lwt\_pext\_16\_4};
+        \addplot coordinates { (0.0,11.1545) (1.0,11.559) (2.0,11.8908) (3.0,12.0099) (4.0,12.0387) };
+        \addlegendentry{type=lwt\_shuffle\_64\_8};
+        \addplot coordinates { (0.0,9.92191) (1.0,10.8611) (2.0,11.7974) (3.0,12.6938) (4.0,12.9711) };
+        \addlegendentry{type=pwm\_8wx\_pcIhLb1EE\_tree};
+             
+
+       \legend{};
+       \legend{
+        Naive\\
+        \texttt{pext} / \texttt{pshufb} (64 bits)\\
+        \texttt{vpshufbitqmb} / \texttt{vpcompressb} (512 bits) \\
+        Prefix Counsting (PWM) \\
+     };
+    \end{axis}
+
+  \end{tikzpicture}
+  \end{subfigure}
+\end{figure}
+\end{center}
+
+\clearpage
+
+\begin{center}
+  \begin{figure}[b]
+  \begin{center}
+    WM Construction Time, Domain Decomposition, $\log \sigma = 8$
+  \end{center}
+  \vspace{1cm}
+  
+  \begin{subfigure}[t]{.45\linewidth}
+    \vskip 0pt
+  \begin{tikzpicture}
+    \begin{axis}[
+    title={$256$ MiB},
+    legend style = { at = {(0.5, -0.1605)}, anchor = north},
+    %xlabel={Num Threads},
+    ylabel={MBit/s (log)},
+    xticklabels={,1,2,4,8,16}
+      ]
+  
+        %% MULTIPLOT(type) SELECT LOG(2, threads) AS x, LOG(2, MEDIAN((8 * (size / CAST(time_in_s AS Float))) / (1024 * 1024))) AS y,MULTIPLOT
+        %% FROM stats WHERE alphabet_size = 256 AND size = 268435456 AND (type LIKE 'wm_%' OR type LIKE '%_matrix') GROUP BY MULTIPLOT,x ORDER BY ds_order,MULTIPLOT,x
+        \addplot coordinates { (0.0,7.91568) (1.0,8.85809) (2.0,9.80608) (3.0,10.6083) (4.0,11.0828) };
+        \addlegendentry{type=wm\_basic};
+        \addplot coordinates { (0.0,10.0177) (1.0,10.8411) (2.0,11.6112) (3.0,12.1062) (4.0,12.2126) };
+        \addlegendentry{type=wm\_pext\_16\_4};
+        \addplot coordinates { (0.0,11.1327) (1.0,11.5311) (2.0,11.8295) (3.0,11.9919) (4.0,12.059) };
+        \addlegendentry{type=wm\_shuffle\_64\_8};
+        \addplot coordinates { (0.0,9.91474) (1.0,10.8662) (2.0,11.8111) (3.0,12.68) (4.0,12.951) };
+        \addlegendentry{type=pwm\_8wx\_pcIhLb0EE\_matrix};
+
+     
+     %\legend{
+     %  Naive\\
+     %  \texttt{pext} / \texttt{pshufb}, $\tau = 8$, $N = 8$ (64 bits)\\
+     %  \texttt{vpshufbitqmb} / \texttt{vpcompressb}, $\tau = 8$, $N = 64$ (512 bits) \\
+     %  Prefix Counting (PWM) \\
+    %};
+    \legend{};
+  
+  
+    \end{axis}
+  \end{tikzpicture}\\
+  \begin{tikzpicture}
+    \begin{axis}[
+    title={$1024$ MiB},
+    legend style = { at = {(0.5, -0.1605)}, anchor = north},
+    xlabel={Num Threads},
+    ylabel={MBit/s (log)},
+    xticklabels={,1,2,4,8,16}
+      ]
+  
+        %% MULTIPLOT(type) SELECT LOG(2, threads) AS x, LOG(2, MEDIAN((8 * (size / CAST(time_in_s AS Float))) / (1024 * 1024))) AS y,MULTIPLOT
+        %% FROM stats WHERE alphabet_size = 256 AND size = 1073741824 AND (type LIKE 'wm_%' OR type LIKE '%_matrix') GROUP BY MULTIPLOT,x ORDER BY ds_order,MULTIPLOT,x
+        \addplot coordinates { (0.0,7.9115) (1.0,8.84718) (2.0,9.76967) (3.0,10.6123) (4.0,11.0492) };
+        \addlegendentry{type=wm\_basic};
+        \addplot coordinates { (0.0,10.0123) (1.0,10.7938) (2.0,11.5256) (3.0,12.0607) (4.0,12.1114) };
+        \addlegendentry{type=wm\_pext\_16\_4};
+        \addplot coordinates { (0.0,11.1183) (1.0,11.5093) (2.0,11.824) (3.0,11.9269) (4.0,11.9494) };
+        \addlegendentry{type=wm\_shuffle\_64\_8};
+        \addplot coordinates { (0.0,9.92291) (1.0,10.8649) (2.0,11.7813) (3.0,12.6481) (4.0,12.939) };
+        \addlegendentry{type=pwm\_8wx\_pcIhLb0EE\_matrix};
+
+     
+     \legend{};
+  
+  
+    \end{axis}
+  \end{tikzpicture}
+  \end{subfigure}\hfill\begin{subfigure}[t]{.45\linewidth}
+    \vskip 0pt 
+    \begin{tikzpicture}
+      \begin{axis}[
+      title={$512$ MiB},
+      legend style = { at = {(0.5, -0.1605)}, anchor = north},
+      %xlabel={Num Threads},
+      %ylabel={MBit/s (log)},
+      yticklabels={},
+      xticklabels={,1,2,4,8,16}
+        ]
+    
+          %% MULTIPLOT(type) SELECT LOG(2, threads) AS x, LOG(2, MEDIAN((8 * (size / CAST(time_in_s AS Float))) / (1024 * 1024))) AS y,MULTIPLOT
+          %% FROM stats WHERE alphabet_size = 256 AND size = 536870912 AND (type LIKE 'wm_%' OR type LIKE '%_matrix') GROUP BY MULTIPLOT,x ORDER BY ds_order,MULTIPLOT,x
+          \addplot coordinates { (0.0,7.9185) (1.0,8.86742) (2.0,9.7904) (3.0,10.61) (4.0,11.0622) };
+          \addlegendentry{type=wm\_basic};
+          \addplot coordinates { (0.0,10.0308) (1.0,10.811) (2.0,11.5577) (3.0,12.0712) (4.0,12.1434) };
+          \addlegendentry{type=wm\_pext\_16\_4};
+          \addplot coordinates { (0.0,11.1556) (1.0,11.5075) (2.0,11.824) (3.0,11.9447) (4.0,11.974) };
+          \addlegendentry{type=wm\_shuffle\_64\_8};
+          \addplot coordinates { (0.0,9.91927) (1.0,10.857) (2.0,11.8051) (3.0,12.6648) (4.0,12.9386) };
+          \addlegendentry{type=pwm\_8wx\_pcIhLb0EE\_matrix};
+
+               
+  
+         \legend{};
+         \legend{
+          Naive\\
+          \texttt{pext} / \texttt{pshufb} (64 bits)\\
+          \texttt{vpshufbitqmb} / \texttt{vpcompressb} (512 bits) \\
+          Prefix Counsting (PWM) \\
+       };
+      \end{axis}
+  
+    \end{tikzpicture}
+    \end{subfigure}
+  \end{figure}
+  \end{center}
+
+  \clearpage
+
+  \begin{center}
+    \begin{figure}[b]
+    \begin{center}
+      WT Construction Time, Domain Decomposition, $\log \sigma = 16$
+    \end{center}
+    \vspace{1cm}
+    
+    \begin{subfigure}[t]{.45\linewidth}
+      \vskip 0pt
+    \begin{tikzpicture}
+      \begin{axis}[
+      title={$512$ MiB},
+      legend style = { at = {(0.5, -0.1605)}, anchor = north},
+      %xlabel={Num Threads},
+      ylabel={MBit/s (log)},
+      xticklabels={,1,2,4,8,16}
+        ]
+    
+          %% MULTIPLOT(type) SELECT LOG(2, threads) AS x, LOG(2, MEDIAN((8 * (size / CAST(time_in_s AS Float))) / (1024 * 1024))) AS y,MULTIPLOT
+          %% FROM stats WHERE alphabet_size = 65536 AND size = 268435456 AND (type LIKE 'lwt_%' OR type LIKE '%_tree') GROUP BY MULTIPLOT,x ORDER BY ds_order,MULTIPLOT,x
+          \addplot coordinates { (0.0,7.13222) (1.0,8.05626) (2.0,8.96274) (3.0,9.74783) (4.0,10.1093) };
+          \addlegendentry{type=lwt\_basic};
+          \addplot coordinates { (0.0,9.02957) (1.0,9.8242) (2.0,10.5617) (3.0,10.9636) (4.0,11.0178) };
+          \addlegendentry{type=lwt\_pext\_16\_4};
+          \addplot coordinates { (0.0,10.0298) (1.0,10.4378) (2.0,10.7394) (3.0,10.8574) (4.0,10.9661) };
+          \addlegendentry{type=lwt\_shuffle\_64\_8};
+          \addplot coordinates { (0.0,8.21815) (1.0,9.32887) (2.0,10.3349) (3.0,10.6029) (4.0,10.124) };
+          \addlegendentry{type=pwm\_8wx\_pcItLb1EE\_tree};
+       
+       %\legend{
+       %  Naive\\
+       %  \texttt{pext} / \texttt{pshufb}, $\tau = 8$, $N = 8$ (64 bits)\\
+       %  \texttt{vpshufbitqmb} / \texttt{vpcompressb}, $\tau = 8$, $N = 64$ (512 bits) \\
+       %  Prefix Counting (PWM) \\
+      %};
+      \legend{};
+    
+    
+      \end{axis}
+    \end{tikzpicture}\\
+    \begin{tikzpicture}
+      \begin{axis}[
+      title={$2048$ MiB},
+      legend style = { at = {(0.5, -0.1605)}, anchor = north},
+      xlabel={Num Threads},
+      ylabel={MBit/s (log)},
+      xticklabels={,1,2,4,8,16}
+        ]
+    
+          %% MULTIPLOT(type) SELECT LOG(2, threads) AS x, LOG(2, MEDIAN((8 * (size / CAST(time_in_s AS Float))) / (1024 * 1024))) AS y,MULTIPLOT
+          %% FROM stats WHERE alphabet_size = 65536 AND size = 1073741824 AND (type LIKE 'lwt_%' OR type LIKE '%_tree') GROUP BY MULTIPLOT,x ORDER BY ds_order,MULTIPLOT,x
+          \addplot coordinates { (0.0,7.12911) (1.0,8.0614) (2.0,8.94994) (3.0,9.73305) (4.0,10.0865) };
+          \addlegendentry{type=lwt\_basic};
+          \addplot coordinates { (0.0,9.03061) (1.0,9.79532) (2.0,10.5192) (3.0,10.989) (4.0,10.9885) };
+          \addlegendentry{type=lwt\_pext\_16\_4};
+          \addplot coordinates { (0.0,10.0219) (1.0,10.4367) (2.0,10.7414) (3.0,10.8565) (4.0,10.8431) };
+          \addlegendentry{type=lwt\_shuffle\_64\_8};
+          \addplot coordinates { (0.0,7.95669) (1.0,9.09164) (2.0,10.0625) (3.0,10.4821) (4.0,10.019) };
+          \addlegendentry{type=pwm\_8wx\_pcItLb1EE\_tree};
+       
+       \legend{};
+    
+    
+      \end{axis}
+    \end{tikzpicture}
+    \end{subfigure}\hfill\begin{subfigure}[t]{.45\linewidth}
+      \vskip 0pt 
+      \begin{tikzpicture}
+        \begin{axis}[
+        title={$1024$ MiB},
+        legend style = { at = {(0.5, -0.1605)}, anchor = north},
+        %xlabel={Num Threads},
+        %ylabel={MBit/s (log)},
+        yticklabels={},
+        xticklabels={,1,2,4,8,16}
+          ]
+      
+            %% MULTIPLOT(type) SELECT LOG(2, threads) AS x, LOG(2, MEDIAN((8 * (size / CAST(time_in_s AS Float))) / (1024 * 1024))) AS y,MULTIPLOT
+            %% FROM stats WHERE alphabet_size = 65536 AND size = 536870912 AND (type LIKE 'lwt_%' OR type LIKE '%_tree') GROUP BY MULTIPLOT,x ORDER BY ds_order,MULTIPLOT,x
+            \addplot coordinates { (0.0,7.12824) (1.0,8.0451) (2.0,8.9612) (3.0,9.73134) (4.0,10.0849) };
+            \addlegendentry{type=lwt\_basic};
+            \addplot coordinates { (0.0,9.01845) (1.0,9.81519) (2.0,10.5688) (3.0,10.9711) (4.0,11.001) };
+            \addlegendentry{type=lwt\_pext\_16\_4};
+            \addplot coordinates { (0.0,10.015) (1.0,10.4312) (2.0,10.7493) (3.0,10.8386) (4.0,10.8313) };
+            \addlegendentry{type=lwt\_shuffle\_64\_8};
+            \addplot coordinates { (0.0,8.09698) (1.0,9.19093) (2.0,10.2124) (3.0,10.5827) (4.0,10.0758) };
+            \addlegendentry{type=pwm\_8wx\_pcItLb1EE\_tree};
+                 
+    
+           \legend{};
+           \legend{
+            Naive\\
+            \texttt{pext} / \texttt{pshufb} (64 bits)\\
+            \texttt{vpshufbitqmb} / \texttt{vpcompressb} (512 bits) \\
+            Prefix Counsting (PWM) \\
+         };
+        \end{axis}
+    
+      \end{tikzpicture}
+      \end{subfigure}
+    \end{figure}
+    \end{center}
+    
+    \clearpage
+    
+    \begin{center}
+      \begin{figure}[b]
+      \begin{center}
+        WM Construction Time, Domain Decomposition, $\log \sigma = 16$
+      \end{center}
+      \vspace{1cm}
+      
+      \begin{subfigure}[t]{.45\linewidth}
+        \vskip 0pt
+      \begin{tikzpicture}
+        \begin{axis}[
+        title={$512$ MiB},
+        legend style = { at = {(0.5, -0.1605)}, anchor = north},
+        %xlabel={Num Threads},
+        ylabel={MBit/s (log)},
+        xticklabels={,1,2,4,8,16}
+          ]
+      
+            %% MULTIPLOT(type) SELECT LOG(2, threads) AS x, LOG(2, MEDIAN((8 * (size / CAST(time_in_s AS Float))) / (1024 * 1024))) AS y,MULTIPLOT
+            %% FROM stats WHERE alphabet_size = 65536 AND size = 268435456 AND (type LIKE 'wm_%' OR type LIKE '%_matrix') GROUP BY MULTIPLOT,x ORDER BY ds_order,MULTIPLOT,x
+            \addplot coordinates { (0.0,7.05291) (1.0,8.0104) (2.0,8.90394) (3.0,9.70186) (4.0,10.0829) };
+            \addlegendentry{type=wm\_basic};
+            \addplot coordinates { (0.0,8.88172) (1.0,9.70183) (2.0,10.4221) (3.0,10.8609) (4.0,10.9125) };
+            \addlegendentry{type=wm\_pext\_16\_4};
+            \addplot coordinates { (0.0,9.94164) (1.0,10.3656) (2.0,10.6792) (3.0,10.8157) (4.0,10.8952) };
+            \addlegendentry{type=wm\_shuffle\_64\_8};
+            \addplot coordinates { (0.0,8.21844) (1.0,9.33973) (2.0,10.3404) (3.0,10.6025) (4.0,10.1337) };
+            \addlegendentry{type=pwm\_8wx\_pcItLb0EE\_matrix};
+    
+         
+         %\legend{
+         %  Naive\\
+         %  \texttt{pext} / \texttt{pshufb}, $\tau = 8$, $N = 8$ (64 bits)\\
+         %  \texttt{vpshufbitqmb} / \texttt{vpcompressb}, $\tau = 8$, $N = 64$ (512 bits) \\
+         %  Prefix Counting (PWM) \\
+        %};
+        \legend{};
+      
+      
+        \end{axis}
+      \end{tikzpicture}\\
+      \begin{tikzpicture}
+        \begin{axis}[
+        title={$2048$ MiB},
+        legend style = { at = {(0.5, -0.1605)}, anchor = north},
+        xlabel={Num Threads},
+        ylabel={MBit/s (log)},
+        xticklabels={,1,2,4,8,16}
+          ]
+      
+            %% MULTIPLOT(type) SELECT LOG(2, threads) AS x, LOG(2, MEDIAN((8 * (size / CAST(time_in_s AS Float))) / (1024 * 1024))) AS y,MULTIPLOT
+            %% FROM stats WHERE alphabet_size = 65536 AND size = 1073741824 AND (type LIKE 'wm_%' OR type LIKE '%_matrix') GROUP BY MULTIPLOT,x ORDER BY ds_order,MULTIPLOT,x
+            \addplot coordinates { (0.0,7.04385) (1.0,7.97213) (2.0,8.88378) (3.0,9.71794) (4.0,10.0693) };
+            \addlegendentry{type=wm\_basic};
+            \addplot coordinates { (0.0,8.84215) (1.0,9.59931) (2.0,10.374) (3.0,10.8784) (4.0,10.8902) };
+            \addlegendentry{type=wm\_pext\_16\_4};
+            \addplot coordinates { (0.0,9.90834) (1.0,10.3478) (2.0,10.6865) (3.0,10.8109) (4.0,10.7994) };
+            \addlegendentry{type=wm\_shuffle\_64\_8};
+            \addplot coordinates { (0.0,7.94026) (1.0,9.06908) (2.0,10.0492) (3.0,10.4918) (4.0,10.0202) };
+            \addlegendentry{type=pwm\_8wx\_pcItLb0EE\_matrix};
+    
+         
+         \legend{};
+      
+      
+        \end{axis}
+      \end{tikzpicture}
+      \end{subfigure}\hfill\begin{subfigure}[t]{.45\linewidth}
+        \vskip 0pt 
+        \begin{tikzpicture}
+          \begin{axis}[
+          title={$1024$ MiB},
+          legend style = { at = {(0.5, -0.1605)}, anchor = north},
+          %xlabel={Num Threads},
+          %ylabel={MBit/s (log)},
+          yticklabels={},
+          xticklabels={,1,2,4,8,16}
+            ]
+        
+              %% MULTIPLOT(type) SELECT LOG(2, threads) AS x, LOG(2, MEDIAN((8 * (size / CAST(time_in_s AS Float))) / (1024 * 1024))) AS y,MULTIPLOT
+              %% FROM stats WHERE alphabet_size = 65536 AND size = 536870912 AND (type LIKE 'wm_%' OR type LIKE '%_matrix') GROUP BY MULTIPLOT,x ORDER BY ds_order,MULTIPLOT,x
+              \addplot coordinates { (0.0,7.04447) (1.0,7.98227) (2.0,8.90353) (3.0,9.71476) (4.0,10.0607) };
+              \addlegendentry{type=wm\_basic};
+              \addplot coordinates { (0.0,8.84591) (1.0,9.64771) (2.0,10.4303) (3.0,10.8718) (4.0,10.8943) };
+              \addlegendentry{type=wm\_pext\_16\_4};
+              \addplot coordinates { (0.0,9.90613) (1.0,10.3435) (2.0,10.6993) (3.0,10.8209) (4.0,10.8132) };
+              \addlegendentry{type=wm\_shuffle\_64\_8};
+              \addplot coordinates { (0.0,8.09359) (1.0,9.19898) (2.0,10.2171) (3.0,10.5878) (4.0,10.0915) };
+              \addlegendentry{type=pwm\_8wx\_pcItLb0EE\_matrix};
+    
+                   
+      
+             \legend{};
+             \legend{
+              Naive\\
+              \texttt{pext} / \texttt{pshufb} (64 bits)\\
+              \texttt{vpshufbitqmb} / \texttt{vpcompressb} (512 bits) \\
+              Prefix Counsting (PWM) \\
+           };
+          \end{axis}
+      
+        \end{tikzpicture}
+        \end{subfigure}
+      \end{figure}
+      \end{center}
+    
+      \clearpage
+
+
+\end{document}

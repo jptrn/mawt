@@ -1,0 +1,484 @@
+% -*- mode: latex; mode: flyspell; ispell-local-dictionary: "en_US"; coding: utf-8; fill-column: 80 -*-
+
+\documentclass{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+
+\usepackage{amsmath,amsfonts,amssymb}
+\usepackage{fullpage}
+\usepackage{verbatim}
+
+\usepackage{tikz,pgfplots}
+\usetikzlibrary{patterns, patterns.meta}
+
+\makeatletter
+\newcommand{\rsplwt}{
+  \makeatletter
+  \pgfplots@stacked@isfirstplottrue
+  \makeatother
+  \addplot[forget plot, draw = none] coordinates {(lwt\_pext\_16\_4,0) (lwt\_shuffle\_16\_8,0) (lwt\_shuffle\_32\_8,0) (lwt\_shuffle\_64\_8,0)};
+}
+\makeatother
+\makeatletter
+\newcommand{\rspwm}{
+  \makeatletter
+  \pgfplots@stacked@isfirstplottrue
+  \makeatother
+  \addplot[forget plot, draw = none] coordinates {(wm\_pext\_16\_4,0) (wm\_shuffle\_16\_8,0) (wm\_shuffle\_32\_8,0) (wm\_shuffle\_64\_8,0)};
+}
+\makeatother
+
+\pgfplotsset{
+  /pgfplots/bar cycle list/.style = {
+    /pgfplots/cycle list = {
+      { fill = black!30, mark = none },
+      { fill = green!60, mark = none },
+      { fill = blue!50, mark = none }
+    }
+  }
+}
+
+\pgfplotsset{
+  width = 150mm,
+  height = 100mm,
+  major grid style = { thin, dotted, color = black!50 },
+  minor grid style = { thin, dotted, color = black!50 },
+  grid,
+  xtick distance = 1,
+  ymin = 0,
+  every axis/.append style = {
+    line width = 0.5pt,
+    tick style = {
+      line cap = round,
+      thin,
+      major tick length = 4pt,
+      minor tick length = 2pt,
+    },
+  },
+  legend cell align = left,
+  legend pos = north west,
+  enlarge x limits = 0.25,
+	/pgfplots/ybar legend/.style = {
+		/pgfplots/legend image code/.code={%
+			\draw[##1,/tikz/.cd,yshift=-0.25em]
+			(0cm,0cm) rectangle (3pt,0.8em);},
+	},  
+}
+
+\begin{document}
+
+\title{WT Benchmark}
+\author{Jan-Philipp Tarnowski}
+\maketitle
+
+
+% IMPORT-DATA stats results-2022-03-24--14-26-39.out
+
+% SQL DELETE FROM stats WHERE type LIKE '%_basic'
+% SQL DELETE FROM stats WHERE type LIKE 'pwm_%'
+
+% SQL UPDATE stats SET type = 'lwt\_pext\_16\_4' WHERE type LIKE 'lwt_pext_16_4'
+% SQL UPDATE stats SET type = 'lwt\_shuffle\_16\_8' WHERE type LIKE 'lwt_shuffle_16_8'
+% SQL UPDATE stats SET type = 'lwt\_shuffle\_32\_8' WHERE type LIKE 'lwt_shuffle_32_8'
+% SQL UPDATE stats SET type = 'lwt\_shuffle\_64\_8' WHERE type LIKE 'lwt_shuffle_64_8'
+
+% SQL UPDATE stats SET type = 'wm\_pext\_16\_4' WHERE type LIKE 'wm_pext_16_4'
+% SQL UPDATE stats SET type = 'wm\_shuffle\_16\_8' WHERE type LIKE 'wm_shuffle_16_8'
+% SQL UPDATE stats SET type = 'wm\_shuffle\_32\_8' WHERE type LIKE 'wm_shuffle_32_8'
+% SQL UPDATE stats SET type = 'wm\_shuffle\_64\_8' WHERE type LIKE 'wm_shuffle_64_8'
+
+
+\begin{center}
+\begin{tikzpicture}
+  \begin{axis} [
+    ybar stacked,
+    bar width = 8pt,
+    xtick = data,
+    title = {WT Construction Time, 256 MiB, $\log \sigma = 8$, 1, 2, 4, 8 and 16 threads},
+    legend style = { at = {(0.5, -0.15)}, anchor = north},
+	  ylabel = {Time in s},
+    symbolic x coords={lwt\_pext\_16\_4,lwt\_shuffle\_16\_8,lwt\_shuffle\_32\_8,lwt\_shuffle\_64\_8}
+  ]
+
+%% MULTIPLOT(threads) SELECT type AS x, MEDIAN(time_in_s - ext_merge - ext_split) AS y,MULTIPLOT 
+%% FROM stats WHERE (type LIKE 'lwt%' OR type LIKE '%tree') AND alphabet_size = 256 AND size =  268435456 AND threads = 2 GROUP BY MULTIPLOT,x ORDER BY MULTIPLOT,x
+\addplot +[bar shift=-16pt] coordinates { (lwt\_pext\_16\_4,0.033089) (lwt\_shuffle\_16\_8,0.033109) (lwt\_shuffle\_32\_8,0.033087) (lwt\_shuffle\_64\_8,0.033093) };
+\addlegendentry{threads=2};
+
+%% MULTIPLOT(threads) SELECT type AS x, MEDIAN(ext_split) AS y,MULTIPLOT 
+%% FROM stats WHERE (type LIKE 'lwt%' OR type LIKE '%tree') AND alphabet_size = 256 AND size =  268435456 AND threads = 2 GROUP BY MULTIPLOT,x ORDER BY MULTIPLOT,x
+\addplot +[bar shift=-16pt] coordinates { (lwt\_pext\_16\_4,0.921354) (lwt\_shuffle\_16\_8,0.858529) (lwt\_shuffle\_32\_8,0.586729) (lwt\_shuffle\_64\_8,0.543509) };
+\addlegendentry{threads=2};
+
+%% MULTIPLOT(threads) SELECT type AS x, MEDIAN(ext_merge) AS y,MULTIPLOT 
+%% FROM stats WHERE (type LIKE 'lwt%' OR type LIKE '%tree') AND alphabet_size = 256 AND size =  268435456 AND threads = 2 GROUP BY MULTIPLOT,x ORDER BY MULTIPLOT,x
+\addplot +[bar shift=-16pt] coordinates { (lwt\_pext\_16\_4,0.109098) (lwt\_shuffle\_16\_8,0.109197) (lwt\_shuffle\_32\_8,0.109326) (lwt\_shuffle\_64\_8,0.109169) };
+\addlegendentry{threads=2};
+
+\rsplwt
+
+%% MULTIPLOT(threads) SELECT type AS x, MEDIAN(time_in_s - ext_merge - ext_split) AS y,MULTIPLOT 
+%% FROM stats WHERE (type LIKE 'lwt%' OR type LIKE '%tree') AND alphabet_size = 256 AND size =  268435456 AND threads = 4 GROUP BY MULTIPLOT,x ORDER BY MULTIPLOT,x
+\addplot +[bar shift=-4pt] coordinates { (lwt\_pext\_16\_4,0.032547) (lwt\_shuffle\_16\_8,0.032643) (lwt\_shuffle\_32\_8,0.032602) (lwt\_shuffle\_64\_8,0.032646) };
+\addlegendentry{threads=4};
+
+%% MULTIPLOT(threads) SELECT type AS x, MEDIAN(ext_split) AS y,MULTIPLOT 
+%% FROM stats WHERE (type LIKE 'lwt%' OR type LIKE '%tree') AND alphabet_size = 256 AND size =  268435456 AND threads = 4 GROUP BY MULTIPLOT,x ORDER BY MULTIPLOT,x
+\addplot +[bar shift=-4pt] coordinates { (lwt\_pext\_16\_4,0.477985) (lwt\_shuffle\_16\_8,0.480265) (lwt\_shuffle\_32\_8,0.423277) (lwt\_shuffle\_64\_8,0.414335) };
+\addlegendentry{threads=4};
+
+%% MULTIPLOT(threads) SELECT type AS x, MEDIAN(ext_merge) AS y,MULTIPLOT 
+%% FROM stats WHERE (type LIKE 'lwt%' OR type LIKE '%tree') AND alphabet_size = 256 AND size =  268435456 AND threads = 4 GROUP BY MULTIPLOT,x ORDER BY MULTIPLOT,x
+\addplot +[bar shift=-4pt] coordinates { (lwt\_pext\_16\_4,0.109108) (lwt\_shuffle\_16\_8,0.109402) (lwt\_shuffle\_32\_8,0.10922) (lwt\_shuffle\_64\_8,0.109496) };
+\addlegendentry{threads=4};
+
+\rsplwt
+
+%% MULTIPLOT(threads) SELECT type AS x, MEDIAN(time_in_s - ext_merge - ext_split) AS y,MULTIPLOT 
+%% FROM stats WHERE (type LIKE 'lwt%' OR type LIKE '%tree') AND alphabet_size = 256 AND size =  268435456 AND threads = 8 GROUP BY MULTIPLOT,x ORDER BY MULTIPLOT,x
+\addplot +[bar shift=8pt] coordinates { (lwt\_pext\_16\_4,0.031894) (lwt\_shuffle\_16\_8,0.031459) (lwt\_shuffle\_32\_8,0.031547) (lwt\_shuffle\_64\_8,0.031524) };
+\addlegendentry{threads=8};
+
+%% MULTIPLOT(threads) SELECT type AS x, MEDIAN(ext_split) AS y,MULTIPLOT 
+%% FROM stats WHERE (type LIKE 'lwt%' OR type LIKE '%tree') AND alphabet_size = 256 AND size =  268435456 AND threads = 8 GROUP BY MULTIPLOT,x ORDER BY MULTIPLOT,x
+\addplot +[bar shift=8pt] coordinates { (lwt\_pext\_16\_4,0.29162) (lwt\_shuffle\_16\_8,0.368687) (lwt\_shuffle\_32\_8,0.357595) (lwt\_shuffle\_64\_8,0.354161) };
+\addlegendentry{threads=8};
+
+%% MULTIPLOT(threads) SELECT type AS x, MEDIAN(ext_merge) AS y,MULTIPLOT 
+%% FROM stats WHERE (type LIKE 'lwt%' OR type LIKE '%tree') AND alphabet_size = 256 AND size =  268435456 AND threads = 8 GROUP BY MULTIPLOT,x ORDER BY MULTIPLOT,x
+\addplot +[bar shift=8pt] coordinates { (lwt\_pext\_16\_4,0.110126) (lwt\_shuffle\_16\_8,0.10987) (lwt\_shuffle\_32\_8,0.109823) (lwt\_shuffle\_64\_8,0.109789) };
+\addlegendentry{threads=8};
+
+\rsplwt
+
+%% MULTIPLOT(threads) SELECT type AS x, MEDIAN(time_in_s - ext_merge - ext_split) AS y,MULTIPLOT 
+%% FROM stats WHERE (type LIKE 'lwt%' OR type LIKE '%tree') AND alphabet_size = 256 AND size =  268435456 AND threads = 16 GROUP BY MULTIPLOT,x ORDER BY MULTIPLOT,x
+\addplot +[bar shift=20pt] coordinates { (lwt\_pext\_16\_4,0.03131) (lwt\_shuffle\_16\_8,0.031304) (lwt\_shuffle\_32\_8,0.028534) (lwt\_shuffle\_64\_8,0.0212452) };
+\addlegendentry{threads=16};
+
+%% MULTIPLOT(threads) SELECT type AS x, MEDIAN(ext_split) AS y,MULTIPLOT 
+%% FROM stats WHERE (type LIKE 'lwt%' OR type LIKE '%tree') AND alphabet_size = 256 AND size =  268435456 AND threads = 16 GROUP BY MULTIPLOT,x ORDER BY MULTIPLOT,x
+\addplot +[bar shift=20pt] coordinates { (lwt\_pext\_16\_4,0.256035) (lwt\_shuffle\_16\_8,0.347883) (lwt\_shuffle\_32\_8,0.330183) (lwt\_shuffle\_64\_8,0.327848) };
+\addlegendentry{threads=16};
+
+%% MULTIPLOT(threads) SELECT type AS x, MEDIAN(ext_merge) AS y,MULTIPLOT 
+%% FROM stats WHERE (type LIKE 'lwt%' OR type LIKE '%tree') AND alphabet_size = 256 AND size =  268435456 AND threads = 16 GROUP BY MULTIPLOT,x ORDER BY MULTIPLOT,x
+\addplot +[bar shift=20pt] coordinates { (lwt\_pext\_16\_4,0.111468) (lwt\_shuffle\_16\_8,0.111454) (lwt\_shuffle\_32\_8,0.101345) (lwt\_shuffle\_64\_8,0.101716) };
+\addlegendentry{threads=16};
+
+\rsplwt
+
+%% MULTIPLOT(threads) SELECT type AS x, MEDIAN(time_in_s) AS y,MULTIPLOT 
+%% FROM stats WHERE (type LIKE 'lwt%' OR type LIKE '%tree') AND alphabet_size = 256 AND size =  268435456 AND threads = 1 GROUP BY MULTIPLOT,x ORDER BY MULTIPLOT,x
+\addplot +[bar shift=-28pt, fill=green!60] coordinates { (lwt\_pext\_16\_4,1.83728) (lwt\_shuffle\_16\_8,1.70207) (lwt\_shuffle\_32\_8,1.09087) (lwt\_shuffle\_64\_8,0.9164) };
+\addlegendentry{threads=1};
+
+    \legend{
+      Misc.,
+      Construct Shards,
+      Merge
+    };
+
+  \end{axis}
+\end{tikzpicture} 
+\end{center}
+
+\pagebreak
+
+
+\begin{center}
+  \begin{tikzpicture}
+    \begin{axis} [
+      ybar stacked,
+      bar width = 8pt,
+      xtick = data,
+      title = {WT Construction Time, 512 MiB, $\log \sigma = 16$, 1, 2, 4, 8 and 16 threads},
+      legend style = { at = {(0.5, -0.15)}, anchor = north},
+      ylabel = {Time in s},
+      symbolic x coords={lwt\_pext\_16\_4,lwt\_shuffle\_16\_8,lwt\_shuffle\_32\_8,lwt\_shuffle\_64\_8}
+    ]
+  
+  %% MULTIPLOT(threads) SELECT type AS x, MEDIAN(time_in_s - ext_merge - ext_split) AS y,MULTIPLOT 
+  %% FROM stats WHERE (type LIKE 'lwt%' OR type LIKE '%tree') AND alphabet_size = 65536 AND size =  268435456 AND threads = 2 GROUP BY MULTIPLOT,x ORDER BY MULTIPLOT,x
+  \addplot +[bar shift=-16pt] coordinates { (lwt\_pext\_16\_4,0.09289) (lwt\_shuffle\_16\_8,0.093098) (lwt\_shuffle\_32\_8,0.093242) (lwt\_shuffle\_64\_8,0.093108) };
+  \addlegendentry{threads=2};
+  
+  %% MULTIPLOT(threads) SELECT type AS x, MEDIAN(ext_split) AS y,MULTIPLOT 
+  %% FROM stats WHERE (type LIKE 'lwt%' OR type LIKE '%tree') AND alphabet_size = 65536 AND size =  268435456 AND threads = 2 GROUP BY MULTIPLOT,x ORDER BY MULTIPLOT,x
+  \addplot +[bar shift=-16pt] coordinates { (lwt\_pext\_16\_4,1.94605) (lwt\_shuffle\_16\_8,1.82203) (lwt\_shuffle\_32\_8,1.23938) (lwt\_shuffle\_64\_8,1.15616) };
+  \addlegendentry{threads=2};
+  
+  %% MULTIPLOT(threads) SELECT type AS x, MEDIAN(ext_merge) AS y,MULTIPLOT 
+  %% FROM stats WHERE (type LIKE 'lwt%' OR type LIKE '%tree') AND alphabet_size = 65536 AND size =  268435456 AND threads = 2 GROUP BY MULTIPLOT,x ORDER BY MULTIPLOT,x
+  \addplot +[bar shift=-16pt] coordinates { (lwt\_pext\_16\_4,0.230743) (lwt\_shuffle\_16\_8,0.229969) (lwt\_shuffle\_32\_8,0.230848) (lwt\_shuffle\_64\_8,0.230228) };
+  \addlegendentry{threads=2};
+  
+  \rsplwt
+  
+  %% MULTIPLOT(threads) SELECT type AS x, MEDIAN(time_in_s - ext_merge - ext_split) AS y,MULTIPLOT 
+  %% FROM stats WHERE (type LIKE 'lwt%' OR type LIKE '%tree') AND alphabet_size = 65536 AND size =  268435456 AND threads = 4 GROUP BY MULTIPLOT,x ORDER BY MULTIPLOT,x
+  \addplot +[bar shift=-4pt] coordinates { (lwt\_pext\_16\_4,0.090413) (lwt\_shuffle\_16\_8,0.09043) (lwt\_shuffle\_32\_8,0.090386) (lwt\_shuffle\_64\_8,0.090481) };
+  \addlegendentry{threads=4};
+  
+  %% MULTIPLOT(threads) SELECT type AS x, MEDIAN(ext_split) AS y,MULTIPLOT 
+  %% FROM stats WHERE (type LIKE 'lwt%' OR type LIKE '%tree') AND alphabet_size = 65536 AND size =  268435456 AND threads = 4 GROUP BY MULTIPLOT,x ORDER BY MULTIPLOT,x
+  \addplot +[bar shift=-4pt] coordinates { (lwt\_pext\_16\_4,1.03445) (lwt\_shuffle\_16\_8,1.00369) (lwt\_shuffle\_32\_8,0.890156) (lwt\_shuffle\_64\_8,0.87467) };
+  \addlegendentry{threads=4};
+  
+  %% MULTIPLOT(threads) SELECT type AS x, MEDIAN(ext_merge) AS y,MULTIPLOT 
+  %% FROM stats WHERE (type LIKE 'lwt%' OR type LIKE '%tree') AND alphabet_size = 65536 AND size =  268435456 AND threads = 4 GROUP BY MULTIPLOT,x ORDER BY MULTIPLOT,x
+  \addplot +[bar shift=-4pt] coordinates { (lwt\_pext\_16\_4,0.234037) (lwt\_shuffle\_16\_8,0.23439) (lwt\_shuffle\_32\_8,0.234433) (lwt\_shuffle\_64\_8,0.235135) };
+  \addlegendentry{threads=4};
+  
+  \rsplwt
+  
+  %% MULTIPLOT(threads) SELECT type AS x, MEDIAN(time_in_s - ext_merge - ext_split) AS y,MULTIPLOT 
+  %% FROM stats WHERE (type LIKE 'lwt%' OR type LIKE '%tree') AND alphabet_size = 65536 AND size =  268435456 AND threads = 8 GROUP BY MULTIPLOT,x ORDER BY MULTIPLOT,x
+  \addplot +[bar shift=8pt] coordinates { (lwt\_pext\_16\_4,0.089819) (lwt\_shuffle\_16\_8,0.088518) (lwt\_shuffle\_32\_8,0.088349) (lwt\_shuffle\_64\_8,0.088236) };
+  \addlegendentry{threads=8};
+  
+  %% MULTIPLOT(threads) SELECT type AS x, MEDIAN(ext_split) AS y,MULTIPLOT 
+  %% FROM stats WHERE (type LIKE 'lwt%' OR type LIKE '%tree') AND alphabet_size = 65536 AND size =  268435456 AND threads = 8 GROUP BY MULTIPLOT,x ORDER BY MULTIPLOT,x
+  \addplot +[bar shift=8pt] coordinates { (lwt\_pext\_16\_4,0.692839) (lwt\_shuffle\_16\_8,0.788147) (lwt\_shuffle\_32\_8,0.788354) (lwt\_shuffle\_64\_8,0.781472) };
+  \addlegendentry{threads=8};
+  
+  %% MULTIPLOT(threads) SELECT type AS x, MEDIAN(ext_merge) AS y,MULTIPLOT 
+  %% FROM stats WHERE (type LIKE 'lwt%' OR type LIKE '%tree') AND alphabet_size = 65536 AND size =  268435456 AND threads = 8 GROUP BY MULTIPLOT,x ORDER BY MULTIPLOT,x
+  \addplot +[bar shift=8pt] coordinates { (lwt\_pext\_16\_4,0.243819) (lwt\_shuffle\_16\_8,0.244377) (lwt\_shuffle\_32\_8,0.243977) (lwt\_shuffle\_64\_8,0.243732) };
+  \addlegendentry{threads=8};
+  
+  \rsplwt
+  
+  %% MULTIPLOT(threads) SELECT type AS x, MEDIAN(time_in_s - ext_merge - ext_split) AS y,MULTIPLOT 
+  %% FROM stats WHERE (type LIKE 'lwt%' OR type LIKE '%tree') AND alphabet_size = 65536 AND size =  268435456 AND threads = 16 GROUP BY MULTIPLOT,x ORDER BY MULTIPLOT,x
+  \addplot +[bar shift=20pt] coordinates { (lwt\_pext\_16\_4,0.087353) (lwt\_shuffle\_16\_8,0.088612) (lwt\_shuffle\_32\_8,0.077936) (lwt\_shuffle\_64\_8,0.045654) };
+  \addlegendentry{threads=16};
+  
+  %% MULTIPLOT(threads) SELECT type AS x, MEDIAN(ext_split) AS y,MULTIPLOT 
+  %% FROM stats WHERE (type LIKE 'lwt%' OR type LIKE '%tree') AND alphabet_size = 65536 AND size =  268435456 AND threads = 16 GROUP BY MULTIPLOT,x ORDER BY MULTIPLOT,x
+  \addplot +[bar shift=20pt] coordinates { (lwt\_pext\_16\_4,0.639422) (lwt\_shuffle\_16\_8,0.783528) (lwt\_shuffle\_32\_8,0.759603) (lwt\_shuffle\_64\_8,0.739996) };
+  \addlegendentry{threads=16};
+  
+  %% MULTIPLOT(threads) SELECT type AS x, MEDIAN(ext_merge) AS y,MULTIPLOT 
+  %% FROM stats WHERE (type LIKE 'lwt%' OR type LIKE '%tree') AND alphabet_size = 65536 AND size =  268435456 AND threads = 16 GROUP BY MULTIPLOT,x ORDER BY MULTIPLOT,x
+  \addplot +[bar shift=20pt] coordinates { (lwt\_pext\_16\_4,0.26095) (lwt\_shuffle\_16\_8,0.262344) (lwt\_shuffle\_32\_8,0.261097) (lwt\_shuffle\_64\_8,0.24176) };
+  \addlegendentry{threads=16};
+  
+  \rsplwt
+  
+  %% MULTIPLOT(threads) SELECT type AS x, MEDIAN(time_in_s) AS y,MULTIPLOT 
+  %% FROM stats WHERE (type LIKE 'lwt%' OR type LIKE '%tree') AND alphabet_size = 65536 AND size =  268435456 AND threads = 1 GROUP BY MULTIPLOT,x ORDER BY MULTIPLOT,x
+  \addplot +[bar shift=-28pt, fill=green!60] coordinates { (lwt\_pext\_16\_4,3.91886) (lwt\_shuffle\_16\_8,3.58231) (lwt\_shuffle\_32\_8,2.32732) (lwt\_shuffle\_64\_8,1.95915) };
+  \addlegendentry{threads=1};
+  
+      \legend{
+        Misc.,
+        Construct Shards,
+        Merge
+      };
+  
+    \end{axis}
+  \end{tikzpicture} 
+  \end{center}
+  
+\clearpage
+
+\begin{center}
+  \begin{tikzpicture}
+    \begin{axis} [
+      ybar stacked,
+      bar width = 8pt,
+      xtick = data,
+      title = {WM Construction Time, 256 MiB, $\log \sigma = 8$, 1, 2, 4, 8 and 16 threads},
+      legend style = { at = {(0.5, -0.15)}, anchor = north},
+      ylabel = {Time in s},
+      symbolic x coords={wm\_pext\_16\_4,wm\_shuffle\_16\_8,wm\_shuffle\_32\_8,wm\_shuffle\_64\_8}
+    ]
+  
+  %% MULTIPLOT(threads) SELECT type AS x, MEDIAN(time_in_s - ext_merge - ext_split) AS y,MULTIPLOT 
+  %% FROM stats WHERE (type LIKE 'wm%' OR type LIKE '%tree') AND alphabet_size = 256 AND size =  268435456 AND threads = 2 GROUP BY MULTIPLOT,x ORDER BY MULTIPLOT,x
+  \addplot +[bar shift=-16pt] coordinates { (wm\_pext\_16\_4,0.034173) (wm\_shuffle\_16\_8,0.042769) (wm\_shuffle\_32\_8,0.041436) (wm\_shuffle\_64\_8,0.041406) };
+  \addlegendentry{threads=2};
+  
+  %% MULTIPLOT(threads) SELECT type AS x, MEDIAN(ext_split) AS y,MULTIPLOT 
+  %% FROM stats WHERE (type LIKE 'wm%' OR type LIKE '%tree') AND alphabet_size = 256 AND size =  268435456 AND threads = 2 GROUP BY MULTIPLOT,x ORDER BY MULTIPLOT,x
+  \addplot +[bar shift=-16pt] coordinates { (wm\_pext\_16\_4,0.974065) (wm\_shuffle\_16\_8,0.854122) (wm\_shuffle\_32\_8,0.58187) (wm\_shuffle\_64\_8,0.541332) };
+  \addlegendentry{threads=2};
+  
+  %% MULTIPLOT(threads) SELECT type AS x, MEDIAN(ext_merge) AS y,MULTIPLOT 
+  %% FROM stats WHERE (type LIKE 'wm%' OR type LIKE '%tree') AND alphabet_size = 256 AND size =  268435456 AND threads = 2 GROUP BY MULTIPLOT,x ORDER BY MULTIPLOT,x
+  \addplot +[bar shift=-16pt] coordinates { (wm\_pext\_16\_4,0.109832) (wm\_shuffle\_16\_8,0.109415) (wm\_shuffle\_32\_8,0.1094) (wm\_shuffle\_64\_8,0.109294) };
+  \addlegendentry{threads=2};
+  
+  \rspwm
+  
+  %% MULTIPLOT(threads) SELECT type AS x, MEDIAN(time_in_s - ext_merge - ext_split) AS y,MULTIPLOT 
+  %% FROM stats WHERE (type LIKE 'wm%' OR type LIKE '%tree') AND alphabet_size = 256 AND size =  268435456 AND threads = 4 GROUP BY MULTIPLOT,x ORDER BY MULTIPLOT,x
+  \addplot +[bar shift=-4pt] coordinates { (wm\_pext\_16\_4,0.040142) (wm\_shuffle\_16\_8,0.040063) (wm\_shuffle\_32\_8,0.040005) (wm\_shuffle\_64\_8,0.039927) };
+  \addlegendentry{threads=4};
+  
+  %% MULTIPLOT(threads) SELECT type AS x, MEDIAN(ext_split) AS y,MULTIPLOT 
+  %% FROM stats WHERE (type LIKE 'wm%' OR type LIKE '%tree') AND alphabet_size = 256 AND size =  268435456 AND threads = 4 GROUP BY MULTIPLOT,x ORDER BY MULTIPLOT,x
+  \addplot +[bar shift=-4pt] coordinates { (wm\_pext\_16\_4,0.508342) (wm\_shuffle\_16\_8,0.479759) (wm\_shuffle\_32\_8,0.42196) (wm\_shuffle\_64\_8,0.413226) };
+  \addlegendentry{threads=4};
+  
+  %% MULTIPLOT(threads) SELECT type AS x, MEDIAN(ext_merge) AS y,MULTIPLOT 
+  %% FROM stats WHERE (type LIKE 'wm%' OR type LIKE '%tree') AND alphabet_size = 256 AND size =  268435456 AND threads = 4 GROUP BY MULTIPLOT,x ORDER BY MULTIPLOT,x
+  \addplot +[bar shift=-4pt] coordinates { (wm\_pext\_16\_4,0.109226) (wm\_shuffle\_16\_8,0.109621) (wm\_shuffle\_32\_8,0.109557) (wm\_shuffle\_64\_8,0.109596) };
+  \addlegendentry{threads=4};
+  
+  \rspwm
+  
+  %% MULTIPLOT(threads) SELECT type AS x, MEDIAN(time_in_s - ext_merge - ext_split) AS y,MULTIPLOT 
+  %% FROM stats WHERE (type LIKE 'wm%' OR type LIKE '%tree') AND alphabet_size = 256 AND size =  268435456 AND threads = 8 GROUP BY MULTIPLOT,x ORDER BY MULTIPLOT,x
+  \addplot +[bar shift=8pt] coordinates { (wm\_pext\_16\_4,0.038928) (wm\_shuffle\_16\_8,0.038723) (wm\_shuffle\_32\_8,0.03871) (wm\_shuffle\_64\_8,0.038718) };
+  \addlegendentry{threads=8};
+  
+  %% MULTIPLOT(threads) SELECT type AS x, MEDIAN(ext_split) AS y,MULTIPLOT 
+  %% FROM stats WHERE (type LIKE 'wm%' OR type LIKE '%tree') AND alphabet_size = 256 AND size =  268435456 AND threads = 8 GROUP BY MULTIPLOT,x ORDER BY MULTIPLOT,x
+  \addplot +[bar shift=8pt] coordinates { (wm\_pext\_16\_4,0.314472) (wm\_shuffle\_16\_8,0.363126) (wm\_shuffle\_32\_8,0.357045) (wm\_shuffle\_64\_8,0.353706) };
+  \addlegendentry{threads=8};
+  
+  %% MULTIPLOT(threads) SELECT type AS x, MEDIAN(ext_merge) AS y,MULTIPLOT 
+  %% FROM stats WHERE (type LIKE 'wm%' OR type LIKE '%tree') AND alphabet_size = 256 AND size =  268435456 AND threads = 8 GROUP BY MULTIPLOT,x ORDER BY MULTIPLOT,x
+  \addplot +[bar shift=8pt] coordinates { (wm\_pext\_16\_4,0.110648) (wm\_shuffle\_16\_8,0.110448) (wm\_shuffle\_32\_8,0.110492) (wm\_shuffle\_64\_8,0.110542) };
+  \addlegendentry{threads=8};
+  
+  \rspwm
+  
+  %% MULTIPLOT(threads) SELECT type AS x, MEDIAN(time_in_s - ext_merge - ext_split) AS y,MULTIPLOT 
+  %% FROM stats WHERE (type LIKE 'wm%' OR type LIKE '%tree') AND alphabet_size = 256 AND size =  268435456 AND threads = 16 GROUP BY MULTIPLOT,x ORDER BY MULTIPLOT,x
+  \addplot +[bar shift=20pt] coordinates { (wm\_pext\_16\_4,0.038665) (wm\_shuffle\_16\_8,0.038804) (wm\_shuffle\_32\_8,0.046679) (wm\_shuffle\_64\_8,0.046414) };
+  \addlegendentry{threads=16};
+  
+  %% MULTIPLOT(threads) SELECT type AS x, MEDIAN(ext_split) AS y,MULTIPLOT 
+  %% FROM stats WHERE (type LIKE 'wm%' OR type LIKE '%tree') AND alphabet_size = 256 AND size =  268435456 AND threads = 16 GROUP BY MULTIPLOT,x ORDER BY MULTIPLOT,x
+  \addplot +[bar shift=20pt] coordinates { (wm\_pext\_16\_4,0.281909) (wm\_shuffle\_16\_8,0.341356) (wm\_shuffle\_32\_8,0.326667) (wm\_shuffle\_64\_8,0.322509) };
+  \addlegendentry{threads=16};
+  
+  %% MULTIPLOT(threads) SELECT type AS x, MEDIAN(ext_merge) AS y,MULTIPLOT 
+  %% FROM stats WHERE (type LIKE 'wm%' OR type LIKE '%tree') AND alphabet_size = 256 AND size =  268435456 AND threads = 16 GROUP BY MULTIPLOT,x ORDER BY MULTIPLOT,x
+  \addplot +[bar shift=20pt] coordinates { (wm\_pext\_16\_4,0.110643) (wm\_shuffle\_16\_8,0.110782) (wm\_shuffle\_32\_8,0.110762) (wm\_shuffle\_64\_8,0.110761) };
+  \addlegendentry{threads=16};
+  
+  \rspwm
+  
+  %% MULTIPLOT(threads) SELECT type AS x, MEDIAN(time_in_s) AS y,MULTIPLOT 
+  %% FROM stats WHERE (type LIKE 'wm%' OR type LIKE '%tree') AND alphabet_size = 256 AND size =  268435456 AND threads = 1 GROUP BY MULTIPLOT,x ORDER BY MULTIPLOT,x
+  \addplot +[bar shift=-28pt, fill=green!60] coordinates { (wm\_pext\_16\_4,1.97555) (wm\_shuffle\_16\_8,1.69522) (wm\_shuffle\_32\_8,1.08699) (wm\_shuffle\_64\_8,0.912118) };
+  \addlegendentry{threads=1};
+  
+      \legend{
+        Misc.,
+        Construct Shards,
+        Merge
+      };
+  
+    \end{axis}
+  \end{tikzpicture} 
+  \end{center}
+  
+  \pagebreak
+  
+  
+  \begin{center}
+    \begin{tikzpicture}
+      \begin{axis} [
+        ybar stacked,
+        bar width = 8pt,
+        xtick = data,
+        title = {WM Construction Time, 512 MiB, $\log \sigma = 16$, 1, 2, 4, 8 and 16 threads},
+        legend style = { at = {(0.5, -0.15)}, anchor = north},
+        ylabel = {Time in s},
+        symbolic x coords={wm\_pext\_16\_4,wm\_shuffle\_16\_8,wm\_shuffle\_32\_8,wm\_shuffle\_64\_8}
+      ]
+    
+    %% MULTIPLOT(threads) SELECT type AS x, MEDIAN(time_in_s - ext_merge - ext_split) AS y,MULTIPLOT 
+    %% FROM stats WHERE (type LIKE 'wm%' OR type LIKE '%tree') AND alphabet_size = 65536 AND size =  268435456 AND threads = 2 GROUP BY MULTIPLOT,x ORDER BY MULTIPLOT,x
+    \addplot +[bar shift=-16pt] coordinates { (wm\_pext\_16\_4,0.072085) (wm\_shuffle\_16\_8,0.082699) (wm\_shuffle\_32\_8,0.083919) (wm\_shuffle\_64\_8,0.089718) };
+    \addlegendentry{threads=2};
+    
+    %% MULTIPLOT(threads) SELECT type AS x, MEDIAN(ext_split) AS y,MULTIPLOT 
+    %% FROM stats WHERE (type LIKE 'wm%' OR type LIKE '%tree') AND alphabet_size = 65536 AND size =  268435456 AND threads = 2 GROUP BY MULTIPLOT,x ORDER BY MULTIPLOT,x
+    \addplot +[bar shift=-16pt] coordinates { (wm\_pext\_16\_4,2.17637) (wm\_shuffle\_16\_8,1.82304) (wm\_shuffle\_32\_8,1.31826) (wm\_shuffle\_64\_8,1.23214) };
+    \addlegendentry{threads=2};
+    
+    %% MULTIPLOT(threads) SELECT type AS x, MEDIAN(ext_merge) AS y,MULTIPLOT 
+    %% FROM stats WHERE (type LIKE 'wm%' OR type LIKE '%tree') AND alphabet_size = 65536 AND size =  268435456 AND threads = 2 GROUP BY MULTIPLOT,x ORDER BY MULTIPLOT,x
+    \addplot +[bar shift=-16pt] coordinates { (wm\_pext\_16\_4,0.211242) (wm\_shuffle\_16\_8,0.22977) (wm\_shuffle\_32\_8,0.229069) (wm\_shuffle\_64\_8,0.230412) };
+    \addlegendentry{threads=2};
+    
+    \rspwm
+    
+    %% MULTIPLOT(threads) SELECT type AS x, MEDIAN(time_in_s - ext_merge - ext_split) AS y,MULTIPLOT 
+    %% FROM stats WHERE (type LIKE 'wm%' OR type LIKE '%tree') AND alphabet_size = 65536 AND size =  268435456 AND threads = 4 GROUP BY MULTIPLOT,x ORDER BY MULTIPLOT,x
+    \addplot +[bar shift=-4pt] coordinates { (wm\_pext\_16\_4,0.105385) (wm\_shuffle\_16\_8,0.105621) (wm\_shuffle\_32\_8,0.105463) (wm\_shuffle\_64\_8,0.105325) };
+    \addlegendentry{threads=4};
+    
+    %% MULTIPLOT(threads) SELECT type AS x, MEDIAN(ext_split) AS y,MULTIPLOT 
+    %% FROM stats WHERE (type LIKE 'wm%' OR type LIKE '%tree') AND alphabet_size = 65536 AND size =  268435456 AND threads = 4 GROUP BY MULTIPLOT,x ORDER BY MULTIPLOT,x
+    \addplot +[bar shift=-4pt] coordinates { (wm\_pext\_16\_4,1.1524) (wm\_shuffle\_16\_8,1.0128) (wm\_shuffle\_32\_8,0.925979) (wm\_shuffle\_64\_8,0.908722) };
+    \addlegendentry{threads=4};
+    
+    %% MULTIPLOT(threads) SELECT type AS x, MEDIAN(ext_merge) AS y,MULTIPLOT 
+    %% FROM stats WHERE (type LIKE 'wm%' OR type LIKE '%tree') AND alphabet_size = 65536 AND size =  268435456 AND threads = 4 GROUP BY MULTIPLOT,x ORDER BY MULTIPLOT,x
+    \addplot +[bar shift=-4pt] coordinates { (wm\_pext\_16\_4,0.234935) (wm\_shuffle\_16\_8,0.235016) (wm\_shuffle\_32\_8,0.234981) (wm\_shuffle\_64\_8,0.234933) };
+    \addlegendentry{threads=4};
+    
+    \rspwm
+    
+    %% MULTIPLOT(threads) SELECT type AS x, MEDIAN(time_in_s - ext_merge - ext_split) AS y,MULTIPLOT 
+    %% FROM stats WHERE (type LIKE 'wm%' OR type LIKE '%tree') AND alphabet_size = 65536 AND size =  268435456 AND threads = 8 GROUP BY MULTIPLOT,x ORDER BY MULTIPLOT,x
+    \addplot +[bar shift=8pt] coordinates { (wm\_pext\_16\_4,0.103831) (wm\_shuffle\_16\_8,0.103818) (wm\_shuffle\_32\_8,0.103947) (wm\_shuffle\_64\_8,0.104072) };
+    \addlegendentry{threads=8};
+    
+    %% MULTIPLOT(threads) SELECT type AS x, MEDIAN(ext_split) AS y,MULTIPLOT 
+    %% FROM stats WHERE (type LIKE 'wm%' OR type LIKE '%tree') AND alphabet_size = 65536 AND size =  268435456 AND threads = 8 GROUP BY MULTIPLOT,x ORDER BY MULTIPLOT,x
+    \addplot +[bar shift=8pt] coordinates { (wm\_pext\_16\_4,0.756978) (wm\_shuffle\_16\_8,0.784731) (wm\_shuffle\_32\_8,0.795883) (wm\_shuffle\_64\_8,0.790217) };
+    \addlegendentry{threads=8};
+    
+    %% MULTIPLOT(threads) SELECT type AS x, MEDIAN(ext_merge) AS y,MULTIPLOT 
+    %% FROM stats WHERE (type LIKE 'wm%' OR type LIKE '%tree') AND alphabet_size = 65536 AND size =  268435456 AND threads = 8 GROUP BY MULTIPLOT,x ORDER BY MULTIPLOT,x
+    \addplot +[bar shift=8pt] coordinates { (wm\_pext\_16\_4,0.243153) (wm\_shuffle\_16\_8,0.243381) (wm\_shuffle\_32\_8,0.243235) (wm\_shuffle\_64\_8,0.243358) };
+    \addlegendentry{threads=8};
+    
+    \rspwm
+    
+    %% MULTIPLOT(threads) SELECT type AS x, MEDIAN(time_in_s - ext_merge - ext_split) AS y,MULTIPLOT 
+    %% FROM stats WHERE (type LIKE 'wm%' OR type LIKE '%tree') AND alphabet_size = 65536 AND size =  268435456 AND threads = 16 GROUP BY MULTIPLOT,x ORDER BY MULTIPLOT,x
+    \addplot +[bar shift=20pt] coordinates { (wm\_pext\_16\_4,0.104292) (wm\_shuffle\_16\_8,0.104008) (wm\_shuffle\_32\_8,0.099715) (wm\_shuffle\_64\_8,0.065696) };
+    \addlegendentry{threads=16};
+    
+    %% MULTIPLOT(threads) SELECT type AS x, MEDIAN(ext_split) AS y,MULTIPLOT 
+    %% FROM stats WHERE (type LIKE 'wm%' OR type LIKE '%tree') AND alphabet_size = 65536 AND size =  268435456 AND threads = 16 GROUP BY MULTIPLOT,x ORDER BY MULTIPLOT,x
+    \addplot +[bar shift=20pt] coordinates { (wm\_pext\_16\_4,0.696838) (wm\_shuffle\_16\_8,0.785382) (wm\_shuffle\_32\_8,0.768326) (wm\_shuffle\_64\_8,0.754778) };
+    \addlegendentry{threads=16};
+    
+    %% MULTIPLOT(threads) SELECT type AS x, MEDIAN(ext_merge) AS y,MULTIPLOT 
+    %% FROM stats WHERE (type LIKE 'wm%' OR type LIKE '%tree') AND alphabet_size = 65536 AND size =  268435456 AND threads = 16 GROUP BY MULTIPLOT,x ORDER BY MULTIPLOT,x
+    \addplot +[bar shift=20pt] coordinates { (wm\_pext\_16\_4,0.261461) (wm\_shuffle\_16\_8,0.262151) (wm\_shuffle\_32\_8,0.261839) (wm\_shuffle\_64\_8,0.250589) };
+    \addlegendentry{threads=16};
+    
+    \rspwm
+    
+    %% MULTIPLOT(threads) SELECT type AS x, MEDIAN(time_in_s) AS y,MULTIPLOT 
+    %% FROM stats WHERE (type LIKE 'wm%' OR type LIKE '%tree') AND alphabet_size = 65536 AND size =  268435456 AND threads = 1 GROUP BY MULTIPLOT,x ORDER BY MULTIPLOT,x
+    \addplot +[bar shift=-28pt, fill=green!60] coordinates { (wm\_pext\_16\_4,4.34177) (wm\_shuffle\_16\_8,3.59448) (wm\_shuffle\_32\_8,2.44877) (wm\_shuffle\_64\_8,2.08257) };
+    \addlegendentry{threads=1};
+    
+        \legend{
+          Misc.,
+          Construct Shards,
+          Merge
+        };
+    
+      \end{axis}
+    \end{tikzpicture} 
+    \end{center}
+    
+  \clearpage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\end{document}

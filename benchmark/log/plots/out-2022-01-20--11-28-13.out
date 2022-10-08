@@ -1,0 +1,663 @@
+
+Running WT Benchmark at 2022-01-20--11-28-13...
+Git commit: 4ea1fd6ff1cb9dbc1d78d4791d7afec4a26160c8
+Git commit (short): 4ea1fd6
+Build Type: Release
+
+Command: /scratch/tarnowski/mawt/build/benchmark/benchmark_wt --min 256MiB --max 8GiB --iterations 3 --alpha_min 8 --alpha_max 16 --alpha_step 8
+
+Starting Wavelet Tree Benchmark
+Current time: 2022-01-20-11-28-13
+
+Config:
+
+Iterations: 3
+Generating random text...
+Size (Min): 268435456
+Size (Max): 8589934592
+Alphabet Size (Min): 256
+Alphabet Size (Max): 65536
+Alphabet Size Increment: 8
+Distribution: uniform
+Implementations: 'dummy' 'basic' 'twophase_4_4' 'twophase_8_4' 'twophase_4_8' 'twophase_8_8' 'twophase_pext' 'twophase_special' 
+Using fixed seed...
+Seed: 0
+
+Starting Benchmark...
+Iteration 0...
+Size: 268435456...
+Alphabet Bits: 8...
+Generating random text with size 268435456, alphabet size: 256 using distribution: 'uniform'...
+Benchmark: basic
+RESULT iteration=0 type=basic operation=ctor size=268435456 alphabet_size=256 time_in_s=11.1664 space_in_bytes=268448696 working_space=8791468824 mode=fixed seed=0
+Sentinel values: 47, 118, 224, height: 8
+Benchmark: twophase_4_4_no_lut
+RESULT iteration=0 type=twophase_4_4_no_lut operation=ctor size=268435456 alphabet_size=256 time_in_s=15.0271 space_in_bytes=268448696 working_space=8791468824 mode=fixed seed=0
+Sentinel values: 47, 118, 224, height: 8
+Benchmark: twophase_4_4_lut_simple
+RESULT iteration=0 type=twophase_4_4_lut_simple operation=ctor size=268435456 alphabet_size=256 time_in_s=9.8229 space_in_bytes=268448696 working_space=8791468824 mode=fixed seed=0
+Sentinel values: 47, 118, 224, height: 8
+Benchmark: twophase_8_8_pext_pext
+RESULT iteration=0 type=twophase_8_8_pext_pext operation=ctor size=268435456 alphabet_size=256 time_in_s=4.0039 space_in_bytes=268448696 working_space=8791468824 mode=fixed seed=0
+Sentinel values: 47, 118, 224, height: 8
+Benchmark: twophase_8_8_pext_pshufb
+RESULT iteration=0 type=twophase_8_8_pext_pshufb operation=ctor size=268435456 alphabet_size=256 time_in_s=4.13273 space_in_bytes=268448696 working_space=8791468824 mode=fixed seed=0
+Sentinel values: 47, 118, 224, height: 8
+Alphabet Bits: 16...
+Generating random text with size 268435456, alphabet size: 65536 using distribution: 'uniform'...
+Benchmark: basic
+RESULT iteration=0 type=basic operation=ctor size=268435456 alphabet_size=65536 time_in_s=20.5465 space_in_bytes=540281968 working_space=9129597536 mode=fixed seed=0
+Sentinel values: 62202, 14563, 2038, height: 16
+Benchmark: twophase_4_4_no_lut
+RESULT iteration=0 type=twophase_4_4_no_lut operation=ctor size=268435456 alphabet_size=65536 time_in_s=29.4661 space_in_bytes=540281968 working_space=9129597536 mode=fixed seed=0
+Sentinel values: 62202, 14563, 2038, height: 16
+Benchmark: twophase_4_4_lut_simple
+RESULT iteration=0 type=twophase_4_4_lut_simple operation=ctor size=268435456 alphabet_size=65536 time_in_s=18.9735 space_in_bytes=540281968 working_space=9129597536 mode=fixed seed=0
+Sentinel values: 62202, 14563, 2038, height: 16
+Benchmark: twophase_8_8_pext_pext
+RESULT iteration=0 type=twophase_8_8_pext_pext operation=ctor size=268435456 alphabet_size=65536 time_in_s=8.20522 space_in_bytes=540281968 working_space=9129597536 mode=fixed seed=0
+Sentinel values: 62202, 14563, 2038, height: 16
+Benchmark: twophase_8_8_pext_pshufb
+RESULT iteration=0 type=twophase_8_8_pext_pshufb operation=ctor size=268435456 alphabet_size=65536 time_in_s=8.13091 space_in_bytes=540281968 working_space=9129597536 mode=fixed seed=0
+Sentinel values: 62202, 14563, 2038, height: 16
+Size: 536870912...
+Alphabet Bits: 8...
+Generating random text with size 536870912, alphabet size: 256 using distribution: 'uniform'...
+Benchmark: basic
+RESULT iteration=0 type=basic operation=ctor size=536870912 alphabet_size=256 time_in_s=20.1152 space_in_bytes=536884096 working_space=17582723056 mode=fixed seed=0
+Sentinel values: 123, 83, 76, height: 8
+Benchmark: twophase_4_4_no_lut
+RESULT iteration=0 type=twophase_4_4_no_lut operation=ctor size=536870912 alphabet_size=256 time_in_s=29.0767 space_in_bytes=536884096 working_space=17582723056 mode=fixed seed=0
+Sentinel values: 123, 83, 76, height: 8
+Benchmark: twophase_4_4_lut_simple
+RESULT iteration=0 type=twophase_4_4_lut_simple operation=ctor size=536870912 alphabet_size=256 time_in_s=19.2161 space_in_bytes=536884096 working_space=17582723056 mode=fixed seed=0
+Sentinel values: 123, 83, 76, height: 8
+Benchmark: twophase_8_8_pext_pext
+RESULT iteration=0 type=twophase_8_8_pext_pext operation=ctor size=536870912 alphabet_size=256 time_in_s=7.9794 space_in_bytes=536884096 working_space=17582723056 mode=fixed seed=0
+Sentinel values: 123, 83, 76, height: 8
+Benchmark: twophase_8_8_pext_pshufb
+RESULT iteration=0 type=twophase_8_8_pext_pshufb operation=ctor size=536870912 alphabet_size=256 time_in_s=8.21237 space_in_bytes=536884096 working_space=17582723056 mode=fixed seed=0
+Sentinel values: 123, 83, 76, height: 8
+Alphabet Bits: 16...
+Generating random text with size 536870912, alphabet size: 65536 using distribution: 'uniform'...
+Benchmark: basic
+RESULT iteration=0 type=basic operation=ctor size=536870912 alphabet_size=65536 time_in_s=41.8764 space_in_bytes=1077153592 working_space=18256178360 mode=fixed seed=0
+Sentinel values: 16071, 39007, 16366, height: 16
+Benchmark: twophase_4_4_no_lut
+RESULT iteration=0 type=twophase_4_4_no_lut operation=ctor size=536870912 alphabet_size=65536 time_in_s=59.7935 space_in_bytes=1077153592 working_space=18256178360 mode=fixed seed=0
+Sentinel values: 16071, 39007, 16366, height: 16
+Benchmark: twophase_4_4_lut_simple
+RESULT iteration=0 type=twophase_4_4_lut_simple operation=ctor size=536870912 alphabet_size=65536 time_in_s=38.4444 space_in_bytes=1077153592 working_space=18256178360 mode=fixed seed=0
+Sentinel values: 16071, 39007, 16366, height: 16
+Benchmark: twophase_8_8_pext_pext
+RESULT iteration=0 type=twophase_8_8_pext_pext operation=ctor size=536870912 alphabet_size=65536 time_in_s=16.6112 space_in_bytes=1077153592 working_space=18256178360 mode=fixed seed=0
+Sentinel values: 16071, 39007, 16366, height: 16
+Benchmark: twophase_8_8_pext_pshufb
+RESULT iteration=0 type=twophase_8_8_pext_pshufb operation=ctor size=536870912 alphabet_size=65536 time_in_s=16.418 space_in_bytes=1077153592 working_space=18256178360 mode=fixed seed=0
+Sentinel values: 16071, 39007, 16366, height: 16
+Size: 1073741824...
+Alphabet Bits: 8...
+Generating random text with size 1073741824, alphabet size: 256 using distribution: 'uniform'...
+Benchmark: basic
+RESULT iteration=0 type=basic operation=ctor size=1073741824 alphabet_size=256 time_in_s=41.5021 space_in_bytes=1073755144 working_space=35165472456 mode=fixed seed=0
+Sentinel values: 0, 108, 132, height: 8
+Benchmark: twophase_4_4_no_lut
+RESULT iteration=0 type=twophase_4_4_no_lut operation=ctor size=1073741824 alphabet_size=256 time_in_s=58.7136 space_in_bytes=1073755144 working_space=35165472456 mode=fixed seed=0
+Sentinel values: 0, 108, 132, height: 8
+Benchmark: twophase_4_4_lut_simple
+RESULT iteration=0 type=twophase_4_4_lut_simple operation=ctor size=1073741824 alphabet_size=256 time_in_s=37.648 space_in_bytes=1073755144 working_space=35165472456 mode=fixed seed=0
+Sentinel values: 0, 108, 132, height: 8
+Benchmark: twophase_8_8_pext_pext
+RESULT iteration=0 type=twophase_8_8_pext_pext operation=ctor size=1073741824 alphabet_size=256 time_in_s=14.4119 space_in_bytes=1073755144 working_space=35165472456 mode=fixed seed=0
+Sentinel values: 0, 108, 132, height: 8
+Benchmark: twophase_8_8_pext_pshufb
+RESULT iteration=0 type=twophase_8_8_pext_pshufb operation=ctor size=1073741824 alphabet_size=256 time_in_s=14.9423 space_in_bytes=1073755144 working_space=35165472456 mode=fixed seed=0
+Sentinel values: 0, 108, 132, height: 8
+Alphabet Bits: 16...
+Generating random text with size 1073741824, alphabet size: 65536 using distribution: 'uniform'...
+Benchmark: basic
+RESULT iteration=0 type=basic operation=ctor size=1073741824 alphabet_size=65536 time_in_s=79.9903 space_in_bytes=2150895720 working_space=36509320392 mode=fixed seed=0
+Sentinel values: 9149, 27071, 21409, height: 16
+Benchmark: twophase_4_4_no_lut
+RESULT iteration=0 type=twophase_4_4_no_lut operation=ctor size=1073741824 alphabet_size=65536 time_in_s=116.933 space_in_bytes=2150895720 working_space=36509320392 mode=fixed seed=0
+Sentinel values: 9149, 27071, 21409, height: 16
+Benchmark: twophase_4_4_lut_simple
+RESULT iteration=0 type=twophase_4_4_lut_simple operation=ctor size=1073741824 alphabet_size=65536 time_in_s=76.9228 space_in_bytes=2150895720 working_space=36509320392 mode=fixed seed=0
+Sentinel values: 9149, 27071, 21409, height: 16
+Benchmark: twophase_8_8_pext_pext
+RESULT iteration=0 type=twophase_8_8_pext_pext operation=ctor size=1073741824 alphabet_size=65536 time_in_s=32.7023 space_in_bytes=2150895720 working_space=36509320392 mode=fixed seed=0
+Sentinel values: 9149, 27071, 21409, height: 16
+Benchmark: twophase_8_8_pext_pshufb
+RESULT iteration=0 type=twophase_8_8_pext_pshufb operation=ctor size=1073741824 alphabet_size=65536 time_in_s=33.7049 space_in_bytes=2150895720 working_space=36509320392 mode=fixed seed=0
+Sentinel values: 9149, 27071, 21409, height: 16
+Size: 2147483648...
+Alphabet Bits: 8...
+Generating random text with size 2147483648, alphabet size: 256 using distribution: 'uniform'...
+Benchmark: basic
+RESULT iteration=0 type=basic operation=ctor size=2147483648 alphabet_size=256 time_in_s=85.7023 space_in_bytes=2147496896 working_space=70330066736 mode=fixed seed=0
+Sentinel values: 20, 239, 218, height: 8
+Benchmark: twophase_4_4_no_lut
+RESULT iteration=0 type=twophase_4_4_no_lut operation=ctor size=2147483648 alphabet_size=256 time_in_s=118.311 space_in_bytes=2147496896 working_space=70330066736 mode=fixed seed=0
+Sentinel values: 20, 239, 218, height: 8
+Benchmark: twophase_4_4_lut_simple
+RESULT iteration=0 type=twophase_4_4_lut_simple operation=ctor size=2147483648 alphabet_size=256 time_in_s=76.3752 space_in_bytes=2147496896 working_space=70330066736 mode=fixed seed=0
+Sentinel values: 20, 239, 218, height: 8
+Benchmark: twophase_8_8_pext_pext
+RESULT iteration=0 type=twophase_8_8_pext_pext operation=ctor size=2147483648 alphabet_size=256 time_in_s=30.2768 space_in_bytes=2147496896 working_space=70330066736 mode=fixed seed=0
+Sentinel values: 20, 239, 218, height: 8
+Benchmark: twophase_8_8_pext_pshufb
+RESULT iteration=0 type=twophase_8_8_pext_pshufb operation=ctor size=2147483648 alphabet_size=256 time_in_s=31.1045 space_in_bytes=2147496896 working_space=70330066736 mode=fixed seed=0
+Sentinel values: 20, 239, 218, height: 8
+Alphabet Bits: 16...
+Generating random text with size 2147483648, alphabet size: 65536 using distribution: 'uniform'...
+Benchmark: basic
+RESULT iteration=0 type=basic operation=ctor size=2147483648 alphabet_size=65536 time_in_s=167.576 space_in_bytes=4298379272 working_space=73016421080 mode=fixed seed=0
+Sentinel values: 14909, 64060, 8470, height: 16
+Benchmark: twophase_4_4_no_lut
+RESULT iteration=0 type=twophase_4_4_no_lut operation=ctor size=2147483648 alphabet_size=65536 time_in_s=240.757 space_in_bytes=4298379272 working_space=73016421080 mode=fixed seed=0
+Sentinel values: 14909, 64060, 8470, height: 16
+Benchmark: twophase_4_4_lut_simple
+RESULT iteration=0 type=twophase_4_4_lut_simple operation=ctor size=2147483648 alphabet_size=65536 time_in_s=151.36 space_in_bytes=4298379272 working_space=73016421080 mode=fixed seed=0
+Sentinel values: 14909, 64060, 8470, height: 16
+Benchmark: twophase_8_8_pext_pext
+RESULT iteration=0 type=twophase_8_8_pext_pext operation=ctor size=2147483648 alphabet_size=65536 time_in_s=68.2311 space_in_bytes=4298379272 working_space=73016421080 mode=fixed seed=0
+Sentinel values: 14909, 64060, 8470, height: 16
+Benchmark: twophase_8_8_pext_pshufb
+RESULT iteration=0 type=twophase_8_8_pext_pshufb operation=ctor size=2147483648 alphabet_size=65536 time_in_s=69.9698 space_in_bytes=4298379272 working_space=73016421080 mode=fixed seed=0
+Sentinel values: 14909, 64060, 8470, height: 16
+Size: 4294967296...
+Alphabet Bits: 8...
+Generating random text with size 4294967296, alphabet size: 256 using distribution: 'uniform'...
+Benchmark: basic
+RESULT iteration=0 type=basic operation=ctor size=4294967296 alphabet_size=256 time_in_s=170.164 space_in_bytes=4294980504 working_space=140659783320 mode=fixed seed=0
+Sentinel values: 143, 6, 132, height: 8
+Benchmark: twophase_4_4_no_lut
+RESULT iteration=0 type=twophase_4_4_no_lut operation=ctor size=4294967296 alphabet_size=256 time_in_s=239.741 space_in_bytes=4294980504 working_space=140659783320 mode=fixed seed=0
+Sentinel values: 143, 6, 132, height: 8
+Benchmark: twophase_4_4_lut_simple
+RESULT iteration=0 type=twophase_4_4_lut_simple operation=ctor size=4294967296 alphabet_size=256 time_in_s=155.498 space_in_bytes=4294980504 working_space=140659783320 mode=fixed seed=0
+Sentinel values: 143, 6, 132, height: 8
+Benchmark: twophase_8_8_pext_pext
+RESULT iteration=0 type=twophase_8_8_pext_pext operation=ctor size=4294967296 alphabet_size=256 time_in_s=61.7435 space_in_bytes=4294980504 working_space=140659783320 mode=fixed seed=0
+Sentinel values: 143, 6, 132, height: 8
+Benchmark: twophase_8_8_pext_pshufb
+RESULT iteration=0 type=twophase_8_8_pext_pshufb operation=ctor size=4294967296 alphabet_size=256 time_in_s=63.4114 space_in_bytes=4294980504 working_space=140659783320 mode=fixed seed=0
+Sentinel values: 143, 6, 132, height: 8
+Alphabet Bits: 16...
+Generating random text with size 4294967296, alphabet size: 65536 using distribution: 'uniform'...
+Benchmark: basic
+RESULT iteration=0 type=basic operation=ctor size=4294967296 alphabet_size=65536 time_in_s=337.082 space_in_bytes=8593347072 working_space=146029221856 mode=fixed seed=0
+Sentinel values: 32020, 45512, 58080, height: 16
+Benchmark: twophase_4_4_no_lut
+RESULT iteration=0 type=twophase_4_4_no_lut operation=ctor size=4294967296 alphabet_size=65536 time_in_s=485.966 space_in_bytes=8593347072 working_space=146029221856 mode=fixed seed=0
+Sentinel values: 32020, 45512, 58080, height: 16
+Benchmark: twophase_4_4_lut_simple
+RESULT iteration=0 type=twophase_4_4_lut_simple operation=ctor size=4294967296 alphabet_size=65536 time_in_s=309.539 space_in_bytes=8593347072 working_space=146029221856 mode=fixed seed=0
+Sentinel values: 32020, 45512, 58080, height: 16
+Benchmark: twophase_8_8_pext_pext
+RESULT iteration=0 type=twophase_8_8_pext_pext operation=ctor size=4294967296 alphabet_size=65536 time_in_s=141 space_in_bytes=8593347072 working_space=146029221856 mode=fixed seed=0
+Sentinel values: 32020, 45512, 58080, height: 16
+Benchmark: twophase_8_8_pext_pshufb
+RESULT iteration=0 type=twophase_8_8_pext_pshufb operation=ctor size=4294967296 alphabet_size=65536 time_in_s=141.849 space_in_bytes=8593347072 working_space=146029221856 mode=fixed seed=0
+Sentinel values: 32020, 45512, 58080, height: 16
+Size: 8589934592...
+Alphabet Bits: 8...
+Generating random text with size 8589934592, alphabet size: 256 using distribution: 'uniform'...
+Benchmark: basic
+RESULT iteration=0 type=basic operation=ctor size=8589934592 alphabet_size=256 time_in_s=544.034 space_in_bytes=8589947912 working_space=281320563384 mode=fixed seed=0
+Sentinel values: 91, 236, 122, height: 8
+Benchmark: twophase_4_4_no_lut
+RESULT iteration=0 type=twophase_4_4_no_lut operation=ctor size=8589934592 alphabet_size=256 time_in_s=665.474 space_in_bytes=8589947912 working_space=281320563384 mode=fixed seed=0
+Sentinel values: 91, 236, 122, height: 8
+Benchmark: twophase_4_4_lut_simple
+RESULT iteration=0 type=twophase_4_4_lut_simple operation=ctor size=8589934592 alphabet_size=256 time_in_s=524.779 space_in_bytes=8589947912 working_space=281320563384 mode=fixed seed=0
+Sentinel values: 91, 236, 122, height: 8
+Benchmark: twophase_8_8_pext_pext
+RESULT iteration=0 type=twophase_8_8_pext_pext operation=ctor size=8589934592 alphabet_size=256 time_in_s=170.855 space_in_bytes=8589947912 working_space=281320563384 mode=fixed seed=0
+Sentinel values: 91, 236, 122, height: 8
+Benchmark: twophase_8_8_pext_pshufb
+RESULT iteration=0 type=twophase_8_8_pext_pshufb operation=ctor size=8589934592 alphabet_size=256 time_in_s=130.075 space_in_bytes=8589947912 working_space=281320563384 mode=fixed seed=0
+Sentinel values: 91, 236, 122, height: 8
+Alphabet Bits: 16...
+Generating random text with size 8589934592, alphabet size: 65536 using distribution: 'uniform'...
+Benchmark: basic
+RESULT iteration=0 type=basic operation=ctor size=8589934592 alphabet_size=65536 time_in_s=1054.41 space_in_bytes=17183280656 working_space=292052193584 mode=fixed seed=0
+Sentinel values: 36482, 54838, 34455, height: 16
+Benchmark: twophase_4_4_no_lut
+RESULT iteration=0 type=twophase_4_4_no_lut operation=ctor size=8589934592 alphabet_size=65536 time_in_s=1144.34 space_in_bytes=17183280656 working_space=292052193584 mode=fixed seed=0
+Sentinel values: 36482, 54838, 34455, height: 16
+Benchmark: twophase_4_4_lut_simple
+RESULT iteration=0 type=twophase_4_4_lut_simple operation=ctor size=8589934592 alphabet_size=65536 time_in_s=903.974 space_in_bytes=17183280656 working_space=292052193584 mode=fixed seed=0
+Sentinel values: 36482, 54838, 34455, height: 16
+Benchmark: twophase_8_8_pext_pext
+RESULT iteration=0 type=twophase_8_8_pext_pext operation=ctor size=8589934592 alphabet_size=65536 time_in_s=389.09 space_in_bytes=17183280656 working_space=292052193584 mode=fixed seed=0
+Sentinel values: 36482, 54838, 34455, height: 16
+Benchmark: twophase_8_8_pext_pshufb
+RESULT iteration=0 type=twophase_8_8_pext_pshufb operation=ctor size=8589934592 alphabet_size=65536 time_in_s=475.278 space_in_bytes=17183280656 working_space=292052193584 mode=fixed seed=0
+Sentinel values: 36482, 54838, 34455, height: 16
+
+Iteration 1...
+Size: 268435456...
+Alphabet Bits: 8...
+Generating random text with size 268435456, alphabet size: 256 using distribution: 'uniform'...
+Benchmark: basic
+RESULT iteration=1 type=basic operation=ctor size=268435456 alphabet_size=256 time_in_s=9.84271 space_in_bytes=268448800 working_space=292052193584 mode=fixed seed=0
+Sentinel values: 56, 191, 194, height: 8
+Benchmark: twophase_4_4_no_lut
+RESULT iteration=1 type=twophase_4_4_no_lut operation=ctor size=268435456 alphabet_size=256 time_in_s=14.8074 space_in_bytes=268448800 working_space=292052193584 mode=fixed seed=0
+Sentinel values: 56, 191, 194, height: 8
+Benchmark: twophase_4_4_lut_simple
+RESULT iteration=1 type=twophase_4_4_lut_simple operation=ctor size=268435456 alphabet_size=256 time_in_s=8.8485 space_in_bytes=268448800 working_space=292052193584 mode=fixed seed=0
+Sentinel values: 56, 191, 194, height: 8
+Benchmark: twophase_8_8_pext_pext
+RESULT iteration=1 type=twophase_8_8_pext_pext operation=ctor size=268435456 alphabet_size=256 time_in_s=3.6134 space_in_bytes=268448800 working_space=292052193584 mode=fixed seed=0
+Sentinel values: 56, 191, 194, height: 8
+Benchmark: twophase_8_8_pext_pshufb
+RESULT iteration=1 type=twophase_8_8_pext_pshufb operation=ctor size=268435456 alphabet_size=256 time_in_s=3.58322 space_in_bytes=268448800 working_space=292052193584 mode=fixed seed=0
+Sentinel values: 56, 191, 194, height: 8
+Alphabet Bits: 16...
+Generating random text with size 268435456, alphabet size: 65536 using distribution: 'uniform'...
+Benchmark: basic
+RESULT iteration=1 type=basic operation=ctor size=268435456 alphabet_size=65536 time_in_s=17.762 space_in_bytes=540282984 working_space=292052193584 mode=fixed seed=0
+Sentinel values: 22195, 6658, 62951, height: 16
+Benchmark: twophase_4_4_no_lut
+RESULT iteration=1 type=twophase_4_4_no_lut operation=ctor size=268435456 alphabet_size=65536 time_in_s=27.6057 space_in_bytes=540282984 working_space=292052193584 mode=fixed seed=0
+Sentinel values: 22195, 6658, 62951, height: 16
+Benchmark: twophase_4_4_lut_simple
+RESULT iteration=1 type=twophase_4_4_lut_simple operation=ctor size=268435456 alphabet_size=65536 time_in_s=17.8604 space_in_bytes=540282984 working_space=292052193584 mode=fixed seed=0
+Sentinel values: 22195, 6658, 62951, height: 16
+Benchmark: twophase_8_8_pext_pext
+RESULT iteration=1 type=twophase_8_8_pext_pext operation=ctor size=268435456 alphabet_size=65536 time_in_s=7.87818 space_in_bytes=540282984 working_space=292052193584 mode=fixed seed=0
+Sentinel values: 22195, 6658, 62951, height: 16
+Benchmark: twophase_8_8_pext_pshufb
+RESULT iteration=1 type=twophase_8_8_pext_pshufb operation=ctor size=268435456 alphabet_size=65536 time_in_s=8.005 space_in_bytes=540282984 working_space=292052193584 mode=fixed seed=0
+Sentinel values: 22195, 6658, 62951, height: 16
+Size: 536870912...
+Alphabet Bits: 8...
+Generating random text with size 536870912, alphabet size: 256 using distribution: 'uniform'...
+Benchmark: basic
+RESULT iteration=1 type=basic operation=ctor size=536870912 alphabet_size=256 time_in_s=20.156 space_in_bytes=536884184 working_space=292052193584 mode=fixed seed=0
+Sentinel values: 62, 254, 239, height: 8
+Benchmark: twophase_4_4_no_lut
+RESULT iteration=1 type=twophase_4_4_no_lut operation=ctor size=536870912 alphabet_size=256 time_in_s=28.6985 space_in_bytes=536884184 working_space=292052193584 mode=fixed seed=0
+Sentinel values: 62, 254, 239, height: 8
+Benchmark: twophase_4_4_lut_simple
+RESULT iteration=1 type=twophase_4_4_lut_simple operation=ctor size=536870912 alphabet_size=256 time_in_s=18.8394 space_in_bytes=536884184 working_space=292052193584 mode=fixed seed=0
+Sentinel values: 62, 254, 239, height: 8
+Benchmark: twophase_8_8_pext_pext
+RESULT iteration=1 type=twophase_8_8_pext_pext operation=ctor size=536870912 alphabet_size=256 time_in_s=7.12409 space_in_bytes=536884184 working_space=292052193584 mode=fixed seed=0
+Sentinel values: 62, 254, 239, height: 8
+Benchmark: twophase_8_8_pext_pshufb
+RESULT iteration=1 type=twophase_8_8_pext_pshufb operation=ctor size=536870912 alphabet_size=256 time_in_s=7.38707 space_in_bytes=536884184 working_space=292052193584 mode=fixed seed=0
+Sentinel values: 62, 254, 239, height: 8
+Alphabet Bits: 16...
+Generating random text with size 536870912, alphabet size: 65536 using distribution: 'uniform'...
+Benchmark: basic
+RESULT iteration=1 type=basic operation=ctor size=536870912 alphabet_size=65536 time_in_s=39.2335 space_in_bytes=1077153904 working_space=292052193584 mode=fixed seed=0
+Sentinel values: 25767, 47923, 31296, height: 16
+Benchmark: twophase_4_4_no_lut
+RESULT iteration=1 type=twophase_4_4_no_lut operation=ctor size=536870912 alphabet_size=65536 time_in_s=58.2002 space_in_bytes=1077153904 working_space=292052193584 mode=fixed seed=0
+Sentinel values: 25767, 47923, 31296, height: 16
+Benchmark: twophase_4_4_lut_simple
+RESULT iteration=1 type=twophase_4_4_lut_simple operation=ctor size=536870912 alphabet_size=65536 time_in_s=37.475 space_in_bytes=1077153904 working_space=292052193584 mode=fixed seed=0
+Sentinel values: 25767, 47923, 31296, height: 16
+Benchmark: twophase_8_8_pext_pext
+RESULT iteration=1 type=twophase_8_8_pext_pext operation=ctor size=536870912 alphabet_size=65536 time_in_s=16.2036 space_in_bytes=1077153904 working_space=292052193584 mode=fixed seed=0
+Sentinel values: 25767, 47923, 31296, height: 16
+Benchmark: twophase_8_8_pext_pshufb
+RESULT iteration=1 type=twophase_8_8_pext_pshufb operation=ctor size=536870912 alphabet_size=65536 time_in_s=16.2521 space_in_bytes=1077153904 working_space=292052193584 mode=fixed seed=0
+Sentinel values: 25767, 47923, 31296, height: 16
+Size: 1073741824...
+Alphabet Bits: 8...
+Generating random text with size 1073741824, alphabet size: 256 using distribution: 'uniform'...
+Benchmark: basic
+RESULT iteration=1 type=basic operation=ctor size=1073741824 alphabet_size=256 time_in_s=39.9182 space_in_bytes=1073755040 working_space=292052193584 mode=fixed seed=0
+Sentinel values: 19, 250, 53, height: 8
+Benchmark: twophase_4_4_no_lut
+RESULT iteration=1 type=twophase_4_4_no_lut operation=ctor size=1073741824 alphabet_size=256 time_in_s=57.3982 space_in_bytes=1073755040 working_space=292052193584 mode=fixed seed=0
+Sentinel values: 19, 250, 53, height: 8
+Benchmark: twophase_4_4_lut_simple
+RESULT iteration=1 type=twophase_4_4_lut_simple operation=ctor size=1073741824 alphabet_size=256 time_in_s=37.5648 space_in_bytes=1073755040 working_space=292052193584 mode=fixed seed=0
+Sentinel values: 19, 250, 53, height: 8
+Benchmark: twophase_8_8_pext_pext
+RESULT iteration=1 type=twophase_8_8_pext_pext operation=ctor size=1073741824 alphabet_size=256 time_in_s=14.2782 space_in_bytes=1073755040 working_space=292052193584 mode=fixed seed=0
+Sentinel values: 19, 250, 53, height: 8
+Benchmark: twophase_8_8_pext_pshufb
+RESULT iteration=1 type=twophase_8_8_pext_pshufb operation=ctor size=1073741824 alphabet_size=256 time_in_s=14.8083 space_in_bytes=1073755040 working_space=292052193584 mode=fixed seed=0
+Sentinel values: 19, 250, 53, height: 8
+Alphabet Bits: 16...
+Generating random text with size 1073741824, alphabet size: 65536 using distribution: 'uniform'...
+Benchmark: basic
+RESULT iteration=1 type=basic operation=ctor size=1073741824 alphabet_size=65536 time_in_s=80.5535 space_in_bytes=2150895664 working_space=292052193584 mode=fixed seed=0
+Sentinel values: 40959, 65329, 45205, height: 16
+Benchmark: twophase_4_4_no_lut
+RESULT iteration=1 type=twophase_4_4_no_lut operation=ctor size=1073741824 alphabet_size=65536 time_in_s=114.271 space_in_bytes=2150895664 working_space=292052193584 mode=fixed seed=0
+Sentinel values: 40959, 65329, 45205, height: 16
+Benchmark: twophase_4_4_lut_simple
+RESULT iteration=1 type=twophase_4_4_lut_simple operation=ctor size=1073741824 alphabet_size=65536 time_in_s=74.9657 space_in_bytes=2150895664 working_space=292052193584 mode=fixed seed=0
+Sentinel values: 40959, 65329, 45205, height: 16
+Benchmark: twophase_8_8_pext_pext
+RESULT iteration=1 type=twophase_8_8_pext_pext operation=ctor size=1073741824 alphabet_size=65536 time_in_s=32.3117 space_in_bytes=2150895664 working_space=292052193584 mode=fixed seed=0
+Sentinel values: 40959, 65329, 45205, height: 16
+Benchmark: twophase_8_8_pext_pshufb
+RESULT iteration=1 type=twophase_8_8_pext_pshufb operation=ctor size=1073741824 alphabet_size=65536 time_in_s=33.1674 space_in_bytes=2150895664 working_space=292052193584 mode=fixed seed=0
+Sentinel values: 40959, 65329, 45205, height: 16
+Size: 2147483648...
+Alphabet Bits: 8...
+Generating random text with size 2147483648, alphabet size: 256 using distribution: 'uniform'...
+Benchmark: basic
+RESULT iteration=1 type=basic operation=ctor size=2147483648 alphabet_size=256 time_in_s=85.9546 space_in_bytes=2147496904 working_space=292052193584 mode=fixed seed=0
+Sentinel values: 133, 68, 46, height: 8
+Benchmark: twophase_4_4_no_lut
+RESULT iteration=1 type=twophase_4_4_no_lut operation=ctor size=2147483648 alphabet_size=256 time_in_s=116.53 space_in_bytes=2147496904 working_space=292052193584 mode=fixed seed=0
+Sentinel values: 133, 68, 46, height: 8
+Benchmark: twophase_4_4_lut_simple
+RESULT iteration=1 type=twophase_4_4_lut_simple operation=ctor size=2147483648 alphabet_size=256 time_in_s=76.9483 space_in_bytes=2147496904 working_space=292052193584 mode=fixed seed=0
+Sentinel values: 133, 68, 46, height: 8
+Benchmark: twophase_8_8_pext_pext
+RESULT iteration=1 type=twophase_8_8_pext_pext operation=ctor size=2147483648 alphabet_size=256 time_in_s=30.9451 space_in_bytes=2147496904 working_space=292052193584 mode=fixed seed=0
+Sentinel values: 133, 68, 46, height: 8
+Benchmark: twophase_8_8_pext_pshufb
+RESULT iteration=1 type=twophase_8_8_pext_pshufb operation=ctor size=2147483648 alphabet_size=256 time_in_s=31.8332 space_in_bytes=2147496904 working_space=292052193584 mode=fixed seed=0
+Sentinel values: 133, 68, 46, height: 8
+Alphabet Bits: 16...
+Generating random text with size 2147483648, alphabet size: 65536 using distribution: 'uniform'...
+Benchmark: basic
+RESULT iteration=1 type=basic operation=ctor size=2147483648 alphabet_size=65536 time_in_s=164.92 space_in_bytes=4298378816 working_space=292052193584 mode=fixed seed=0
+Sentinel values: 14364, 14171, 63788, height: 16
+Benchmark: twophase_4_4_no_lut
+RESULT iteration=1 type=twophase_4_4_no_lut operation=ctor size=2147483648 alphabet_size=65536 time_in_s=237.876 space_in_bytes=4298378816 working_space=292052193584 mode=fixed seed=0
+Sentinel values: 14364, 14171, 63788, height: 16
+Benchmark: twophase_4_4_lut_simple
+RESULT iteration=1 type=twophase_4_4_lut_simple operation=ctor size=2147483648 alphabet_size=65536 time_in_s=155.475 space_in_bytes=4298378816 working_space=292052193584 mode=fixed seed=0
+Sentinel values: 14364, 14171, 63788, height: 16
+Benchmark: twophase_8_8_pext_pext
+RESULT iteration=1 type=twophase_8_8_pext_pext operation=ctor size=2147483648 alphabet_size=65536 time_in_s=67.3939 space_in_bytes=4298378816 working_space=292052193584 mode=fixed seed=0
+Sentinel values: 14364, 14171, 63788, height: 16
+Benchmark: twophase_8_8_pext_pshufb
+RESULT iteration=1 type=twophase_8_8_pext_pshufb operation=ctor size=2147483648 alphabet_size=65536 time_in_s=68.9744 space_in_bytes=4298378816 working_space=292052193584 mode=fixed seed=0
+Sentinel values: 14364, 14171, 63788, height: 16
+Size: 4294967296...
+Alphabet Bits: 8...
+Generating random text with size 4294967296, alphabet size: 256 using distribution: 'uniform'...
+Benchmark: basic
+RESULT iteration=1 type=basic operation=ctor size=4294967296 alphabet_size=256 time_in_s=178.367 space_in_bytes=4294980560 working_space=292052193584 mode=fixed seed=0
+Sentinel values: 51, 6, 78, height: 8
+Benchmark: twophase_4_4_no_lut
+RESULT iteration=1 type=twophase_4_4_no_lut operation=ctor size=4294967296 alphabet_size=256 time_in_s=242.567 space_in_bytes=4294980560 working_space=292052193584 mode=fixed seed=0
+Sentinel values: 51, 6, 78, height: 8
+Benchmark: twophase_4_4_lut_simple
+RESULT iteration=1 type=twophase_4_4_lut_simple operation=ctor size=4294967296 alphabet_size=256 time_in_s=160.321 space_in_bytes=4294980560 working_space=292052193584 mode=fixed seed=0
+Sentinel values: 51, 6, 78, height: 8
+Benchmark: twophase_8_8_pext_pext
+RESULT iteration=1 type=twophase_8_8_pext_pext operation=ctor size=4294967296 alphabet_size=256 time_in_s=64.7167 space_in_bytes=4294980560 working_space=292052193584 mode=fixed seed=0
+Sentinel values: 51, 6, 78, height: 8
+Benchmark: twophase_8_8_pext_pshufb
+RESULT iteration=1 type=twophase_8_8_pext_pshufb operation=ctor size=4294967296 alphabet_size=256 time_in_s=66.5376 space_in_bytes=4294980560 working_space=292052193584 mode=fixed seed=0
+Sentinel values: 51, 6, 78, height: 8
+Alphabet Bits: 16...
+Generating random text with size 4294967296, alphabet size: 65536 using distribution: 'uniform'...
+Benchmark: basic
+RESULT iteration=1 type=basic operation=ctor size=4294967296 alphabet_size=65536 time_in_s=345.876 space_in_bytes=8593345184 working_space=292052193584 mode=fixed seed=0
+Sentinel values: 7885, 16335, 44526, height: 16
+Benchmark: twophase_4_4_no_lut
+RESULT iteration=1 type=twophase_4_4_no_lut operation=ctor size=4294967296 alphabet_size=65536 time_in_s=496.704 space_in_bytes=8593345184 working_space=292052193584 mode=fixed seed=0
+Sentinel values: 7885, 16335, 44526, height: 16
+Benchmark: twophase_4_4_lut_simple
+RESULT iteration=1 type=twophase_4_4_lut_simple operation=ctor size=4294967296 alphabet_size=65536 time_in_s=310.523 space_in_bytes=8593345184 working_space=292052193584 mode=fixed seed=0
+Sentinel values: 7885, 16335, 44526, height: 16
+Benchmark: twophase_8_8_pext_pext
+RESULT iteration=1 type=twophase_8_8_pext_pext operation=ctor size=4294967296 alphabet_size=65536 time_in_s=140.675 space_in_bytes=8593345184 working_space=292052193584 mode=fixed seed=0
+Sentinel values: 7885, 16335, 44526, height: 16
+Benchmark: twophase_8_8_pext_pshufb
+RESULT iteration=1 type=twophase_8_8_pext_pshufb operation=ctor size=4294967296 alphabet_size=65536 time_in_s=141.53 space_in_bytes=8593345184 working_space=292052193584 mode=fixed seed=0
+Sentinel values: 7885, 16335, 44526, height: 16
+Size: 8589934592...
+Alphabet Bits: 8...
+Generating random text with size 8589934592, alphabet size: 256 using distribution: 'uniform'...
+Benchmark: basic
+RESULT iteration=1 type=basic operation=ctor size=8589934592 alphabet_size=256 time_in_s=1005.99 space_in_bytes=8589947896 working_space=292052193584 mode=fixed seed=0
+Sentinel values: 152, 17, 83, height: 8
+Benchmark: twophase_4_4_no_lut
+RESULT iteration=1 type=twophase_4_4_no_lut operation=ctor size=8589934592 alphabet_size=256 time_in_s=688.186 space_in_bytes=8589947896 working_space=292052193584 mode=fixed seed=0
+Sentinel values: 152, 17, 83, height: 8
+Benchmark: twophase_4_4_lut_simple
+RESULT iteration=1 type=twophase_4_4_lut_simple operation=ctor size=8589934592 alphabet_size=256 time_in_s=500.391 space_in_bytes=8589947896 working_space=292052193584 mode=fixed seed=0
+Sentinel values: 152, 17, 83, height: 8
+Benchmark: twophase_8_8_pext_pext
+RESULT iteration=1 type=twophase_8_8_pext_pext operation=ctor size=8589934592 alphabet_size=256 time_in_s=178.392 space_in_bytes=8589947896 working_space=292052193584 mode=fixed seed=0
+Sentinel values: 152, 17, 83, height: 8
+Benchmark: twophase_8_8_pext_pshufb
+RESULT iteration=1 type=twophase_8_8_pext_pshufb operation=ctor size=8589934592 alphabet_size=256 time_in_s=127.872 space_in_bytes=8589947896 working_space=292052193584 mode=fixed seed=0
+Sentinel values: 152, 17, 83, height: 8
+Alphabet Bits: 16...
+Generating random text with size 8589934592, alphabet size: 65536 using distribution: 'uniform'...
+Benchmark: basic
+RESULT iteration=1 type=basic operation=ctor size=8589934592 alphabet_size=65536 time_in_s=1032.42 space_in_bytes=17183280480 working_space=292052193584 mode=fixed seed=0
+Sentinel values: 37848, 42028, 65137, height: 16
+Benchmark: twophase_4_4_no_lut
+RESULT iteration=1 type=twophase_4_4_no_lut operation=ctor size=8589934592 alphabet_size=65536 time_in_s=1174.53 space_in_bytes=17183280480 working_space=292052193584 mode=fixed seed=0
+Sentinel values: 37848, 42028, 65137, height: 16
+Benchmark: twophase_4_4_lut_simple
+RESULT iteration=1 type=twophase_4_4_lut_simple operation=ctor size=8589934592 alphabet_size=65536 time_in_s=892.851 space_in_bytes=17183280480 working_space=292052193584 mode=fixed seed=0
+Sentinel values: 37848, 42028, 65137, height: 16
+Benchmark: twophase_8_8_pext_pext
+RESULT iteration=1 type=twophase_8_8_pext_pext operation=ctor size=8589934592 alphabet_size=65536 time_in_s=387.257 space_in_bytes=17183280480 working_space=292052193584 mode=fixed seed=0
+Sentinel values: 37848, 42028, 65137, height: 16
+Benchmark: twophase_8_8_pext_pshufb
+RESULT iteration=1 type=twophase_8_8_pext_pshufb operation=ctor size=8589934592 alphabet_size=65536 time_in_s=525.984 space_in_bytes=17183280480 working_space=292052193584 mode=fixed seed=0
+Sentinel values: 37848, 42028, 65137, height: 16
+
+Iteration 2...
+Size: 268435456...
+Alphabet Bits: 8...
+Generating random text with size 268435456, alphabet size: 256 using distribution: 'uniform'...
+Benchmark: basic
+RESULT iteration=2 type=basic operation=ctor size=268435456 alphabet_size=256 time_in_s=11.4444 space_in_bytes=268448736 working_space=292052193584 mode=fixed seed=0
+Sentinel values: 181, 167, 52, height: 8
+Benchmark: twophase_4_4_no_lut
+RESULT iteration=2 type=twophase_4_4_no_lut operation=ctor size=268435456 alphabet_size=256 time_in_s=17.2085 space_in_bytes=268448736 working_space=292052193584 mode=fixed seed=0
+Sentinel values: 181, 167, 52, height: 8
+Benchmark: twophase_4_4_lut_simple
+RESULT iteration=2 type=twophase_4_4_lut_simple operation=ctor size=268435456 alphabet_size=256 time_in_s=9.08401 space_in_bytes=268448736 working_space=292052193584 mode=fixed seed=0
+Sentinel values: 181, 167, 52, height: 8
+Benchmark: twophase_8_8_pext_pext
+RESULT iteration=2 type=twophase_8_8_pext_pext operation=ctor size=268435456 alphabet_size=256 time_in_s=3.69066 space_in_bytes=268448736 working_space=292052193584 mode=fixed seed=0
+Sentinel values: 181, 167, 52, height: 8
+Benchmark: twophase_8_8_pext_pshufb
+RESULT iteration=2 type=twophase_8_8_pext_pshufb operation=ctor size=268435456 alphabet_size=256 time_in_s=3.6575 space_in_bytes=268448736 working_space=292052193584 mode=fixed seed=0
+Sentinel values: 181, 167, 52, height: 8
+Alphabet Bits: 16...
+Generating random text with size 268435456, alphabet size: 65536 using distribution: 'uniform'...
+Benchmark: basic
+RESULT iteration=2 type=basic operation=ctor size=268435456 alphabet_size=65536 time_in_s=18.2849 space_in_bytes=540282736 working_space=292052193584 mode=fixed seed=0
+Sentinel values: 60391, 47534, 12067, height: 16
+Benchmark: twophase_4_4_no_lut
+RESULT iteration=2 type=twophase_4_4_no_lut operation=ctor size=268435456 alphabet_size=65536 time_in_s=28.561 space_in_bytes=540282736 working_space=292052193584 mode=fixed seed=0
+Sentinel values: 60391, 47534, 12067, height: 16
+Benchmark: twophase_4_4_lut_simple
+RESULT iteration=2 type=twophase_4_4_lut_simple operation=ctor size=268435456 alphabet_size=65536 time_in_s=20.9662 space_in_bytes=540282736 working_space=292052193584 mode=fixed seed=0
+Sentinel values: 60391, 47534, 12067, height: 16
+Benchmark: twophase_8_8_pext_pext
+RESULT iteration=2 type=twophase_8_8_pext_pext operation=ctor size=268435456 alphabet_size=65536 time_in_s=7.68721 space_in_bytes=540282736 working_space=292052193584 mode=fixed seed=0
+Sentinel values: 60391, 47534, 12067, height: 16
+Benchmark: twophase_8_8_pext_pshufb
+RESULT iteration=2 type=twophase_8_8_pext_pshufb operation=ctor size=268435456 alphabet_size=65536 time_in_s=8.22213 space_in_bytes=540282736 working_space=292052193584 mode=fixed seed=0
+Sentinel values: 60391, 47534, 12067, height: 16
+Size: 536870912...
+Alphabet Bits: 8...
+Generating random text with size 536870912, alphabet size: 256 using distribution: 'uniform'...
+Benchmark: basic
+RESULT iteration=2 type=basic operation=ctor size=536870912 alphabet_size=256 time_in_s=20.4791 space_in_bytes=536884160 working_space=292052193584 mode=fixed seed=0
+Sentinel values: 33, 200, 74, height: 8
+Benchmark: twophase_4_4_no_lut
+RESULT iteration=2 type=twophase_4_4_no_lut operation=ctor size=536870912 alphabet_size=256 time_in_s=29.6951 space_in_bytes=536884160 working_space=292052193584 mode=fixed seed=0
+Sentinel values: 33, 200, 74, height: 8
+Benchmark: twophase_4_4_lut_simple
+RESULT iteration=2 type=twophase_4_4_lut_simple operation=ctor size=536870912 alphabet_size=256 time_in_s=19.9603 space_in_bytes=536884160 working_space=292052193584 mode=fixed seed=0
+Sentinel values: 33, 200, 74, height: 8
+Benchmark: twophase_8_8_pext_pext
+RESULT iteration=2 type=twophase_8_8_pext_pext operation=ctor size=536870912 alphabet_size=256 time_in_s=7.29023 space_in_bytes=536884160 working_space=292052193584 mode=fixed seed=0
+Sentinel values: 33, 200, 74, height: 8
+Benchmark: twophase_8_8_pext_pshufb
+RESULT iteration=2 type=twophase_8_8_pext_pshufb operation=ctor size=536870912 alphabet_size=256 time_in_s=7.57094 space_in_bytes=536884160 working_space=292052193584 mode=fixed seed=0
+Sentinel values: 33, 200, 74, height: 8
+Alphabet Bits: 16...
+Generating random text with size 536870912, alphabet size: 65536 using distribution: 'uniform'...
+Benchmark: basic
+RESULT iteration=2 type=basic operation=ctor size=536870912 alphabet_size=65536 time_in_s=40.7133 space_in_bytes=1077153896 working_space=292052193584 mode=fixed seed=0
+Sentinel values: 57112, 35766, 1210, height: 16
+Benchmark: twophase_4_4_no_lut
+RESULT iteration=2 type=twophase_4_4_no_lut operation=ctor size=536870912 alphabet_size=65536 time_in_s=59.3694 space_in_bytes=1077153896 working_space=292052193584 mode=fixed seed=0
+Sentinel values: 57112, 35766, 1210, height: 16
+Benchmark: twophase_4_4_lut_simple
+RESULT iteration=2 type=twophase_4_4_lut_simple operation=ctor size=536870912 alphabet_size=65536 time_in_s=38.7471 space_in_bytes=1077153896 working_space=292052193584 mode=fixed seed=0
+Sentinel values: 57112, 35766, 1210, height: 16
+Benchmark: twophase_8_8_pext_pext
+RESULT iteration=2 type=twophase_8_8_pext_pext operation=ctor size=536870912 alphabet_size=65536 time_in_s=16.3245 space_in_bytes=1077153896 working_space=292052193584 mode=fixed seed=0
+Sentinel values: 57112, 35766, 1210, height: 16
+Benchmark: twophase_8_8_pext_pshufb
+RESULT iteration=2 type=twophase_8_8_pext_pshufb operation=ctor size=536870912 alphabet_size=65536 time_in_s=16.618 space_in_bytes=1077153896 working_space=292052193584 mode=fixed seed=0
+Sentinel values: 57112, 35766, 1210, height: 16
+Size: 1073741824...
+Alphabet Bits: 8...
+Generating random text with size 1073741824, alphabet size: 256 using distribution: 'uniform'...
+Benchmark: basic
+RESULT iteration=2 type=basic operation=ctor size=1073741824 alphabet_size=256 time_in_s=39.9923 space_in_bytes=1073755128 working_space=292052193584 mode=fixed seed=0
+Sentinel values: 165, 114, 133, height: 8
+Benchmark: twophase_4_4_no_lut
+RESULT iteration=2 type=twophase_4_4_no_lut operation=ctor size=1073741824 alphabet_size=256 time_in_s=58.7856 space_in_bytes=1073755128 working_space=292052193584 mode=fixed seed=0
+Sentinel values: 165, 114, 133, height: 8
+Benchmark: twophase_4_4_lut_simple
+RESULT iteration=2 type=twophase_4_4_lut_simple operation=ctor size=1073741824 alphabet_size=256 time_in_s=38.4795 space_in_bytes=1073755128 working_space=292052193584 mode=fixed seed=0
+Sentinel values: 165, 114, 133, height: 8
+Benchmark: twophase_8_8_pext_pext
+RESULT iteration=2 type=twophase_8_8_pext_pext operation=ctor size=1073741824 alphabet_size=256 time_in_s=14.5201 space_in_bytes=1073755128 working_space=292052193584 mode=fixed seed=0
+Sentinel values: 165, 114, 133, height: 8
+Benchmark: twophase_8_8_pext_pshufb
+RESULT iteration=2 type=twophase_8_8_pext_pshufb operation=ctor size=1073741824 alphabet_size=256 time_in_s=14.886 space_in_bytes=1073755128 working_space=292052193584 mode=fixed seed=0
+Sentinel values: 165, 114, 133, height: 8
+Alphabet Bits: 16...
+Generating random text with size 1073741824, alphabet size: 65536 using distribution: 'uniform'...
+Benchmark: basic
+RESULT iteration=2 type=basic operation=ctor size=1073741824 alphabet_size=65536 time_in_s=81.5462 space_in_bytes=2150894944 working_space=292052193584 mode=fixed seed=0
+Sentinel values: 56492, 63558, 61468, height: 16
+Benchmark: twophase_4_4_no_lut
+RESULT iteration=2 type=twophase_4_4_no_lut operation=ctor size=1073741824 alphabet_size=65536 time_in_s=117.974 space_in_bytes=2150894944 working_space=292052193584 mode=fixed seed=0
+Sentinel values: 56492, 63558, 61468, height: 16
+Benchmark: twophase_4_4_lut_simple
+RESULT iteration=2 type=twophase_4_4_lut_simple operation=ctor size=1073741824 alphabet_size=65536 time_in_s=75.5078 space_in_bytes=2150894944 working_space=292052193584 mode=fixed seed=0
+Sentinel values: 56492, 63558, 61468, height: 16
+Benchmark: twophase_8_8_pext_pext
+RESULT iteration=2 type=twophase_8_8_pext_pext operation=ctor size=1073741824 alphabet_size=65536 time_in_s=32.4657 space_in_bytes=2150894944 working_space=292052193584 mode=fixed seed=0
+Sentinel values: 56492, 63558, 61468, height: 16
+Benchmark: twophase_8_8_pext_pshufb
+RESULT iteration=2 type=twophase_8_8_pext_pshufb operation=ctor size=1073741824 alphabet_size=65536 time_in_s=33.434 space_in_bytes=2150894944 working_space=292052193584 mode=fixed seed=0
+Sentinel values: 56492, 63558, 61468, height: 16
+Size: 2147483648...
+Alphabet Bits: 8...
+Generating random text with size 2147483648, alphabet size: 256 using distribution: 'uniform'...
+Benchmark: basic
+RESULT iteration=2 type=basic operation=ctor size=2147483648 alphabet_size=256 time_in_s=82.3531 space_in_bytes=2147496872 working_space=292052193584 mode=fixed seed=0
+Sentinel values: 24, 69, 107, height: 8
+Benchmark: twophase_4_4_no_lut
+RESULT iteration=2 type=twophase_4_4_no_lut operation=ctor size=2147483648 alphabet_size=256 time_in_s=118.965 space_in_bytes=2147496872 working_space=292052193584 mode=fixed seed=0
+Sentinel values: 24, 69, 107, height: 8
+Benchmark: twophase_4_4_lut_simple
+RESULT iteration=2 type=twophase_4_4_lut_simple operation=ctor size=2147483648 alphabet_size=256 time_in_s=77.6934 space_in_bytes=2147496872 working_space=292052193584 mode=fixed seed=0
+Sentinel values: 24, 69, 107, height: 8
+Benchmark: twophase_8_8_pext_pext
+RESULT iteration=2 type=twophase_8_8_pext_pext operation=ctor size=2147483648 alphabet_size=256 time_in_s=29.9543 space_in_bytes=2147496872 working_space=292052193584 mode=fixed seed=0
+Sentinel values: 24, 69, 107, height: 8
+Benchmark: twophase_8_8_pext_pshufb
+RESULT iteration=2 type=twophase_8_8_pext_pshufb operation=ctor size=2147483648 alphabet_size=256 time_in_s=30.6098 space_in_bytes=2147496872 working_space=292052193584 mode=fixed seed=0
+Sentinel values: 24, 69, 107, height: 8
+Alphabet Bits: 16...
+Generating random text with size 2147483648, alphabet size: 65536 using distribution: 'uniform'...
+Benchmark: basic
+RESULT iteration=2 type=basic operation=ctor size=2147483648 alphabet_size=65536 time_in_s=161.975 space_in_bytes=4298379464 working_space=292052193584 mode=fixed seed=0
+Sentinel values: 59091, 1326, 52690, height: 16
+Benchmark: twophase_4_4_no_lut
+RESULT iteration=2 type=twophase_4_4_no_lut operation=ctor size=2147483648 alphabet_size=65536 time_in_s=238.571 space_in_bytes=4298379464 working_space=292052193584 mode=fixed seed=0
+Sentinel values: 59091, 1326, 52690, height: 16
+Benchmark: twophase_4_4_lut_simple
+RESULT iteration=2 type=twophase_4_4_lut_simple operation=ctor size=2147483648 alphabet_size=65536 time_in_s=153.326 space_in_bytes=4298379464 working_space=292052193584 mode=fixed seed=0
+Sentinel values: 59091, 1326, 52690, height: 16
+Benchmark: twophase_8_8_pext_pext
+RESULT iteration=2 type=twophase_8_8_pext_pext operation=ctor size=2147483648 alphabet_size=65536 time_in_s=68.5529 space_in_bytes=4298379464 working_space=292052193584 mode=fixed seed=0
+Sentinel values: 59091, 1326, 52690, height: 16
+Benchmark: twophase_8_8_pext_pshufb
+RESULT iteration=2 type=twophase_8_8_pext_pshufb operation=ctor size=2147483648 alphabet_size=65536 time_in_s=70.0207 space_in_bytes=4298379464 working_space=292052193584 mode=fixed seed=0
+Sentinel values: 59091, 1326, 52690, height: 16
+Size: 4294967296...
+Alphabet Bits: 8...
+Generating random text with size 4294967296, alphabet size: 256 using distribution: 'uniform'...
+Benchmark: basic
+RESULT iteration=2 type=basic operation=ctor size=4294967296 alphabet_size=256 time_in_s=174.325 space_in_bytes=4294980560 working_space=292052193584 mode=fixed seed=0
+Sentinel values: 76, 239, 35, height: 8
+Benchmark: twophase_4_4_no_lut
+RESULT iteration=2 type=twophase_4_4_no_lut operation=ctor size=4294967296 alphabet_size=256 time_in_s=239.271 space_in_bytes=4294980560 working_space=292052193584 mode=fixed seed=0
+Sentinel values: 76, 239, 35, height: 8
+Benchmark: twophase_4_4_lut_simple
+RESULT iteration=2 type=twophase_4_4_lut_simple operation=ctor size=4294967296 alphabet_size=256 time_in_s=157.567 space_in_bytes=4294980560 working_space=292052193584 mode=fixed seed=0
+Sentinel values: 76, 239, 35, height: 8
+Benchmark: twophase_8_8_pext_pext
+RESULT iteration=2 type=twophase_8_8_pext_pext operation=ctor size=4294967296 alphabet_size=256 time_in_s=60.9394 space_in_bytes=4294980560 working_space=292052193584 mode=fixed seed=0
+Sentinel values: 76, 239, 35, height: 8
+Benchmark: twophase_8_8_pext_pshufb
+RESULT iteration=2 type=twophase_8_8_pext_pshufb operation=ctor size=4294967296 alphabet_size=256 time_in_s=63.1095 space_in_bytes=4294980560 working_space=292052193584 mode=fixed seed=0
+Sentinel values: 76, 239, 35, height: 8
+Alphabet Bits: 16...
+Generating random text with size 4294967296, alphabet size: 65536 using distribution: 'uniform'...
+Benchmark: basic
+RESULT iteration=2 type=basic operation=ctor size=4294967296 alphabet_size=65536 time_in_s=339.6 space_in_bytes=8593345384 working_space=292052193584 mode=fixed seed=0
+Sentinel values: 50527, 56124, 14030, height: 16
+Benchmark: twophase_4_4_no_lut
+RESULT iteration=2 type=twophase_4_4_no_lut operation=ctor size=4294967296 alphabet_size=65536 time_in_s=489.928 space_in_bytes=8593345384 working_space=292052193584 mode=fixed seed=0
+Sentinel values: 50527, 56124, 14030, height: 16
+Benchmark: twophase_4_4_lut_simple
+RESULT iteration=2 type=twophase_4_4_lut_simple operation=ctor size=4294967296 alphabet_size=65536 time_in_s=310.859 space_in_bytes=8593345384 working_space=292052193584 mode=fixed seed=0
+Sentinel values: 50527, 56124, 14030, height: 16
+Benchmark: twophase_8_8_pext_pext
+RESULT iteration=2 type=twophase_8_8_pext_pext operation=ctor size=4294967296 alphabet_size=65536 time_in_s=139.774 space_in_bytes=8593345384 working_space=292052193584 mode=fixed seed=0
+Sentinel values: 50527, 56124, 14030, height: 16
+Benchmark: twophase_8_8_pext_pshufb
+RESULT iteration=2 type=twophase_8_8_pext_pshufb operation=ctor size=4294967296 alphabet_size=65536 time_in_s=140.376 space_in_bytes=8593345384 working_space=292052193584 mode=fixed seed=0
+Sentinel values: 50527, 56124, 14030, height: 16
+Size: 8589934592...
+Alphabet Bits: 8...
+Generating random text with size 8589934592, alphabet size: 256 using distribution: 'uniform'...
+Benchmark: basic
+RESULT iteration=2 type=basic operation=ctor size=8589934592 alphabet_size=256 time_in_s=767.636 space_in_bytes=8589947904 working_space=292052193584 mode=fixed seed=0
+Sentinel values: 174, 144, 225, height: 8
+Benchmark: twophase_4_4_no_lut
+RESULT iteration=2 type=twophase_4_4_no_lut operation=ctor size=8589934592 alphabet_size=256 time_in_s=678.446 space_in_bytes=8589947904 working_space=292052193584 mode=fixed seed=0
+Sentinel values: 174, 144, 225, height: 8
+Benchmark: twophase_4_4_lut_simple
+RESULT iteration=2 type=twophase_4_4_lut_simple operation=ctor size=8589934592 alphabet_size=256 time_in_s=565.561 space_in_bytes=8589947904 working_space=292052193584 mode=fixed seed=0
+Sentinel values: 174, 144, 225, height: 8
+Benchmark: twophase_8_8_pext_pext
+RESULT iteration=2 type=twophase_8_8_pext_pext operation=ctor size=8589934592 alphabet_size=256 time_in_s=164.908 space_in_bytes=8589947904 working_space=292052193584 mode=fixed seed=0
+Sentinel values: 174, 144, 225, height: 8
+Benchmark: twophase_8_8_pext_pshufb
+RESULT iteration=2 type=twophase_8_8_pext_pshufb operation=ctor size=8589934592 alphabet_size=256 time_in_s=123.478 space_in_bytes=8589947904 working_space=292052193584 mode=fixed seed=0
+Sentinel values: 174, 144, 225, height: 8
+Alphabet Bits: 16...
+Generating random text with size 8589934592, alphabet size: 65536 using distribution: 'uniform'...
+Benchmark: basic
+RESULT iteration=2 type=basic operation=ctor size=8589934592 alphabet_size=65536 time_in_s=987.988 space_in_bytes=17183280992 working_space=292058163456 mode=fixed seed=0
+Sentinel values: 62113, 11307, 27804, height: 16
+Benchmark: twophase_4_4_no_lut
+RESULT iteration=2 type=twophase_4_4_no_lut operation=ctor size=8589934592 alphabet_size=65536 time_in_s=1170.59 space_in_bytes=17183280992 working_space=292058163456 mode=fixed seed=0
+Sentinel values: 62113, 11307, 27804, height: 16
+Benchmark: twophase_4_4_lut_simple
+RESULT iteration=2 type=twophase_4_4_lut_simple operation=ctor size=8589934592 alphabet_size=65536 time_in_s=808.512 space_in_bytes=17183280992 working_space=292058163456 mode=fixed seed=0
+Sentinel values: 62113, 11307, 27804, height: 16
+Benchmark: twophase_8_8_pext_pext
+RESULT iteration=2 type=twophase_8_8_pext_pext operation=ctor size=8589934592 alphabet_size=65536 time_in_s=360.262 space_in_bytes=17183280992 working_space=292058163456 mode=fixed seed=0
+Sentinel values: 62113, 11307, 27804, height: 16
+Benchmark: twophase_8_8_pext_pshufb
+RESULT iteration=2 type=twophase_8_8_pext_pshufb operation=ctor size=8589934592 alphabet_size=65536 time_in_s=533.909 space_in_bytes=17183280992 working_space=292058163456 mode=fixed seed=0
+Sentinel values: 62113, 11307, 27804, height: 16
+
+Done

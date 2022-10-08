@@ -1,0 +1,288 @@
+
+Running WT Benchmark at 2022-01-21--15-09-49...
+Git commit: cb3dc23ee999f29edcf9882fd840e34c38bf88a2
+Git commit (short): cb3dc23
+Build Type: Release
+
+Command: /scratch/tarnowski/mawt/build/benchmark/benchmark_wt --min 256MiB --max 4GiB --iterations 3 --alpha_min 8 --alpha_max 16 --alpha_step 8
+
+Starting Wavelet Tree Benchmark
+Current time: 2022-01-21-15-09-49
+
+Config:
+
+Iterations: 3
+Generating random text...
+Size (Min): 268435456
+Size (Max): 4294967296
+Alphabet Size (Min): 256
+Alphabet Size (Max): 65536
+Alphabet Size Increment: 8
+Distribution: uniform
+Implementations: 'dummy' 'basic' 'twophase_no_lut' 'twophase_4_4' 'twophase_pext_pext' 'twophase_pext_pshufb' 'twophase_pwm_pc' 'twophase_pwm_ps' 'twophase_special' 
+Using fixed seed...
+Seed: 0
+
+Starting Benchmark...
+Iteration 0...
+Size: 268435456...
+Alphabet Bits: 8...
+Generating random text with size 268435456, alphabet size: 256 using distribution: 'uniform'...
+Benchmark: pwm_5wx_pcImLb1EE_tree
+RESULT iteration=0 type=pwm_5wx_pcImLb1EE_tree operation=ctor size=268435456 alphabet_size=256 time_in_s=2.24287 space_in_bytes=268445680 working_space=1073741824 mode=fixed seed=0
+Sentinel values: 47, 118, 224, height: 8
+Benchmark: pwm_5wx_psImLb1EE_tree
+RESULT iteration=0 type=pwm_5wx_psImLb1EE_tree operation=ctor size=268435456 alphabet_size=256 time_in_s=3.80084 space_in_bytes=268435864 working_space=2415923584 mode=fixed seed=0
+Sentinel values: 47, 118, 224, height: 8
+Alphabet Bits: 16...
+Generating random text with size 268435456, alphabet size: 65536 using distribution: 'uniform'...
+Benchmark: pwm_5wx_pcImLb1EE_tree
+RESULT iteration=0 type=pwm_5wx_pcImLb1EE_tree operation=ctor size=268435456 alphabet_size=65536 time_in_s=7.15345 space_in_bytes=536871512 working_space=2415923584 mode=fixed seed=0
+Sentinel values: 62202, 14563, 2038, height: 16
+Benchmark: pwm_5wx_psImLb1EE_tree
+RESULT iteration=0 type=pwm_5wx_psImLb1EE_tree operation=ctor size=268435456 alphabet_size=65536 time_in_s=13.9391 space_in_bytes=536871512 working_space=2685403776 mode=fixed seed=0
+Sentinel values: 62202, 14563, 2038, height: 16
+Size: 536870912...
+Alphabet Bits: 8...
+Generating random text with size 536870912, alphabet size: 256 using distribution: 'uniform'...
+Benchmark: pwm_5wx_pcImLb1EE_tree
+RESULT iteration=0 type=pwm_5wx_pcImLb1EE_tree operation=ctor size=536870912 alphabet_size=256 time_in_s=4.47897 space_in_bytes=536871320 working_space=2147483648 mode=fixed seed=0
+Sentinel values: 123, 83, 76, height: 8
+Benchmark: pwm_5wx_psImLb1EE_tree
+RESULT iteration=0 type=pwm_5wx_psImLb1EE_tree operation=ctor size=536870912 alphabet_size=256 time_in_s=7.57491 space_in_bytes=536871320 working_space=4831842688 mode=fixed seed=0
+Sentinel values: 123, 83, 76, height: 8
+Alphabet Bits: 16...
+Generating random text with size 536870912, alphabet size: 65536 using distribution: 'uniform'...
+Benchmark: pwm_5wx_pcImLb1EE_tree
+RESULT iteration=0 type=pwm_5wx_pcImLb1EE_tree operation=ctor size=536870912 alphabet_size=65536 time_in_s=15.4861 space_in_bytes=1073742424 working_space=4831842688 mode=fixed seed=0
+Sentinel values: 16071, 39007, 16366, height: 16
+Benchmark: pwm_5wx_psImLb1EE_tree
+RESULT iteration=0 type=pwm_5wx_psImLb1EE_tree operation=ctor size=536870912 alphabet_size=65536 time_in_s=28.5943 space_in_bytes=1073742424 working_space=5369758336 mode=fixed seed=0
+Sentinel values: 16071, 39007, 16366, height: 16
+Size: 1073741824...
+Alphabet Bits: 8...
+Generating random text with size 1073741824, alphabet size: 256 using distribution: 'uniform'...
+Benchmark: pwm_5wx_pcImLb1EE_tree
+RESULT iteration=0 type=pwm_5wx_pcImLb1EE_tree operation=ctor size=1073741824 alphabet_size=256 time_in_s=8.95727 space_in_bytes=1073742232 working_space=4294967296 mode=fixed seed=0
+Sentinel values: 0, 108, 132, height: 8
+Benchmark: pwm_5wx_psImLb1EE_tree
+RESULT iteration=0 type=pwm_5wx_psImLb1EE_tree operation=ctor size=1073741824 alphabet_size=256 time_in_s=15.0947 space_in_bytes=1073742232 working_space=9663680896 mode=fixed seed=0
+Sentinel values: 0, 108, 132, height: 8
+Alphabet Bits: 16...
+Generating random text with size 1073741824, alphabet size: 65536 using distribution: 'uniform'...
+Benchmark: pwm_5wx_pcImLb1EE_tree
+RESULT iteration=0 type=pwm_5wx_pcImLb1EE_tree operation=ctor size=1073741824 alphabet_size=65536 time_in_s=35.6392 space_in_bytes=2147484248 working_space=9663680896 mode=fixed seed=0
+Sentinel values: 9149, 27071, 21409, height: 16
+Benchmark: pwm_5wx_psImLb1EE_tree
+RESULT iteration=0 type=pwm_5wx_psImLb1EE_tree operation=ctor size=1073741824 alphabet_size=65536 time_in_s=59.2066 space_in_bytes=2147484248 working_space=10738467456 mode=fixed seed=0
+Sentinel values: 9149, 27071, 21409, height: 16
+Size: 2147483648...
+Alphabet Bits: 8...
+Generating random text with size 2147483648, alphabet size: 256 using distribution: 'uniform'...
+Benchmark: pwm_5wx_pcImLb1EE_tree
+RESULT iteration=0 type=pwm_5wx_pcImLb1EE_tree operation=ctor size=2147483648 alphabet_size=256 time_in_s=17.8828 space_in_bytes=2147484056 working_space=8589934592 mode=fixed seed=0
+Sentinel values: 20, 239, 218, height: 8
+Benchmark: pwm_5wx_psImLb1EE_tree
+RESULT iteration=0 type=pwm_5wx_psImLb1EE_tree operation=ctor size=2147483648 alphabet_size=256 time_in_s=30.0802 space_in_bytes=2147484056 working_space=19327357312 mode=fixed seed=0
+Sentinel values: 20, 239, 218, height: 8
+Alphabet Bits: 16...
+Generating random text with size 2147483648, alphabet size: 65536 using distribution: 'uniform'...
+Benchmark: pwm_5wx_pcImLb1EE_tree
+RESULT iteration=0 type=pwm_5wx_pcImLb1EE_tree operation=ctor size=2147483648 alphabet_size=65536 time_in_s=79.522 space_in_bytes=4294967896 working_space=19327357312 mode=fixed seed=0
+Sentinel values: 14909, 64060, 8470, height: 16
+Benchmark: pwm_5wx_psImLb1EE_tree
+RESULT iteration=0 type=pwm_5wx_psImLb1EE_tree operation=ctor size=2147483648 alphabet_size=65536 time_in_s=122.365 space_in_bytes=4294967896 working_space=21475885696 mode=fixed seed=0
+Sentinel values: 14909, 64060, 8470, height: 16
+Size: 4294967296...
+Alphabet Bits: 8...
+Generating random text with size 4294967296, alphabet size: 256 using distribution: 'uniform'...
+Benchmark: pwm_5wx_pcImLb1EE_tree
+RESULT iteration=0 type=pwm_5wx_pcImLb1EE_tree operation=ctor size=4294967296 alphabet_size=256 time_in_s=35.7213 space_in_bytes=4294967704 working_space=17179869184 mode=fixed seed=0
+Sentinel values: 143, 6, 132, height: 8
+Benchmark: pwm_5wx_psImLb1EE_tree
+RESULT iteration=0 type=pwm_5wx_psImLb1EE_tree operation=ctor size=4294967296 alphabet_size=256 time_in_s=60.0592 space_in_bytes=4294967704 working_space=38654710144 mode=fixed seed=0
+Sentinel values: 143, 6, 132, height: 8
+Alphabet Bits: 16...
+Generating random text with size 4294967296, alphabet size: 65536 using distribution: 'uniform'...
+Benchmark: pwm_5wx_pcImLb1EE_tree
+RESULT iteration=0 type=pwm_5wx_pcImLb1EE_tree operation=ctor size=4294967296 alphabet_size=65536 time_in_s=168.939 space_in_bytes=8589935192 working_space=38654710144 mode=fixed seed=0
+Sentinel values: 32020, 45512, 58080, height: 16
+Benchmark: pwm_5wx_psImLb1EE_tree
+RESULT iteration=0 type=pwm_5wx_psImLb1EE_tree operation=ctor size=4294967296 alphabet_size=65536 time_in_s=260.516 space_in_bytes=8589935192 working_space=42950722176 mode=fixed seed=0
+Sentinel values: 32020, 45512, 58080, height: 16
+
+Iteration 1...
+Size: 268435456...
+Alphabet Bits: 8...
+Generating random text with size 268435456, alphabet size: 256 using distribution: 'uniform'...
+Benchmark: pwm_5wx_pcImLb1EE_tree
+RESULT iteration=1 type=pwm_5wx_pcImLb1EE_tree operation=ctor size=268435456 alphabet_size=256 time_in_s=2.24877 space_in_bytes=268435864 working_space=42950722176 mode=fixed seed=0
+Sentinel values: 91, 84, 209, height: 8
+Benchmark: pwm_5wx_psImLb1EE_tree
+RESULT iteration=1 type=pwm_5wx_psImLb1EE_tree operation=ctor size=268435456 alphabet_size=256 time_in_s=3.7518 space_in_bytes=268435864 working_space=42950722176 mode=fixed seed=0
+Sentinel values: 91, 84, 209, height: 8
+Alphabet Bits: 16...
+Generating random text with size 268435456, alphabet size: 65536 using distribution: 'uniform'...
+Benchmark: pwm_5wx_pcImLb1EE_tree
+RESULT iteration=1 type=pwm_5wx_pcImLb1EE_tree operation=ctor size=268435456 alphabet_size=65536 time_in_s=7.17278 space_in_bytes=536871512 working_space=42950722176 mode=fixed seed=0
+Sentinel values: 19849, 17235, 1602, height: 16
+Benchmark: pwm_5wx_psImLb1EE_tree
+RESULT iteration=1 type=pwm_5wx_psImLb1EE_tree operation=ctor size=268435456 alphabet_size=65536 time_in_s=13.9056 space_in_bytes=536871512 working_space=42950722176 mode=fixed seed=0
+Sentinel values: 19849, 17235, 1602, height: 16
+Size: 536870912...
+Alphabet Bits: 8...
+Generating random text with size 536870912, alphabet size: 256 using distribution: 'uniform'...
+Benchmark: pwm_5wx_pcImLb1EE_tree
+RESULT iteration=1 type=pwm_5wx_pcImLb1EE_tree operation=ctor size=536870912 alphabet_size=256 time_in_s=4.49591 space_in_bytes=536871320 working_space=42950722176 mode=fixed seed=0
+Sentinel values: 32, 64, 164, height: 8
+Benchmark: pwm_5wx_psImLb1EE_tree
+RESULT iteration=1 type=pwm_5wx_psImLb1EE_tree operation=ctor size=536870912 alphabet_size=256 time_in_s=7.50589 space_in_bytes=536871320 working_space=42950722176 mode=fixed seed=0
+Sentinel values: 32, 64, 164, height: 8
+Alphabet Bits: 16...
+Generating random text with size 536870912, alphabet size: 65536 using distribution: 'uniform'...
+Benchmark: pwm_5wx_pcImLb1EE_tree
+RESULT iteration=1 type=pwm_5wx_pcImLb1EE_tree operation=ctor size=536870912 alphabet_size=65536 time_in_s=15.5604 space_in_bytes=1073742424 working_space=42950722176 mode=fixed seed=0
+Sentinel values: 29537, 61461, 21445, height: 16
+Benchmark: pwm_5wx_psImLb1EE_tree
+RESULT iteration=1 type=pwm_5wx_psImLb1EE_tree operation=ctor size=536870912 alphabet_size=65536 time_in_s=28.4261 space_in_bytes=1073742424 working_space=42950722176 mode=fixed seed=0
+Sentinel values: 29537, 61461, 21445, height: 16
+Size: 1073741824...
+Alphabet Bits: 8...
+Generating random text with size 1073741824, alphabet size: 256 using distribution: 'uniform'...
+Benchmark: pwm_5wx_pcImLb1EE_tree
+RESULT iteration=1 type=pwm_5wx_pcImLb1EE_tree operation=ctor size=1073741824 alphabet_size=256 time_in_s=8.97346 space_in_bytes=1073742232 working_space=42950722176 mode=fixed seed=0
+Sentinel values: 22, 163, 194, height: 8
+Benchmark: pwm_5wx_psImLb1EE_tree
+RESULT iteration=1 type=pwm_5wx_psImLb1EE_tree operation=ctor size=1073741824 alphabet_size=256 time_in_s=15.0145 space_in_bytes=1073742232 working_space=42950722176 mode=fixed seed=0
+Sentinel values: 22, 163, 194, height: 8
+Alphabet Bits: 16...
+Generating random text with size 1073741824, alphabet size: 65536 using distribution: 'uniform'...
+Benchmark: pwm_5wx_pcImLb1EE_tree
+RESULT iteration=1 type=pwm_5wx_pcImLb1EE_tree operation=ctor size=1073741824 alphabet_size=65536 time_in_s=35.8165 space_in_bytes=2147484248 working_space=42950722176 mode=fixed seed=0
+Sentinel values: 57519, 57714, 24092, height: 16
+Benchmark: pwm_5wx_psImLb1EE_tree
+RESULT iteration=1 type=pwm_5wx_psImLb1EE_tree operation=ctor size=1073741824 alphabet_size=65536 time_in_s=58.9659 space_in_bytes=2147484248 working_space=42950722176 mode=fixed seed=0
+Sentinel values: 57519, 57714, 24092, height: 16
+Size: 2147483648...
+Alphabet Bits: 8...
+Generating random text with size 2147483648, alphabet size: 256 using distribution: 'uniform'...
+Benchmark: pwm_5wx_pcImLb1EE_tree
+RESULT iteration=1 type=pwm_5wx_pcImLb1EE_tree operation=ctor size=2147483648 alphabet_size=256 time_in_s=17.8613 space_in_bytes=2147484056 working_space=42950722176 mode=fixed seed=0
+Sentinel values: 160, 221, 38, height: 8
+Benchmark: pwm_5wx_psImLb1EE_tree
+RESULT iteration=1 type=pwm_5wx_psImLb1EE_tree operation=ctor size=2147483648 alphabet_size=256 time_in_s=30.0534 space_in_bytes=2147484056 working_space=42950722176 mode=fixed seed=0
+Sentinel values: 160, 221, 38, height: 8
+Alphabet Bits: 16...
+Generating random text with size 2147483648, alphabet size: 65536 using distribution: 'uniform'...
+Benchmark: pwm_5wx_pcImLb1EE_tree
+RESULT iteration=1 type=pwm_5wx_pcImLb1EE_tree operation=ctor size=2147483648 alphabet_size=65536 time_in_s=79.3837 space_in_bytes=4294967896 working_space=42950722176 mode=fixed seed=0
+Sentinel values: 47371, 53758, 54506, height: 16
+Benchmark: pwm_5wx_psImLb1EE_tree
+RESULT iteration=1 type=pwm_5wx_psImLb1EE_tree operation=ctor size=2147483648 alphabet_size=65536 time_in_s=122.504 space_in_bytes=4294967896 working_space=42950722176 mode=fixed seed=0
+Sentinel values: 47371, 53758, 54506, height: 16
+Size: 4294967296...
+Alphabet Bits: 8...
+Generating random text with size 4294967296, alphabet size: 256 using distribution: 'uniform'...
+Benchmark: pwm_5wx_pcImLb1EE_tree
+RESULT iteration=1 type=pwm_5wx_pcImLb1EE_tree operation=ctor size=4294967296 alphabet_size=256 time_in_s=35.4856 space_in_bytes=4294967704 working_space=42950722176 mode=fixed seed=0
+Sentinel values: 166, 124, 173, height: 8
+Benchmark: pwm_5wx_psImLb1EE_tree
+RESULT iteration=1 type=pwm_5wx_psImLb1EE_tree operation=ctor size=4294967296 alphabet_size=256 time_in_s=60.1695 space_in_bytes=4294967704 working_space=42950722176 mode=fixed seed=0
+Sentinel values: 166, 124, 173, height: 8
+Alphabet Bits: 16...
+Generating random text with size 4294967296, alphabet size: 65536 using distribution: 'uniform'...
+Benchmark: pwm_5wx_pcImLb1EE_tree
+RESULT iteration=1 type=pwm_5wx_pcImLb1EE_tree operation=ctor size=4294967296 alphabet_size=65536 time_in_s=174.903 space_in_bytes=8589935192 working_space=42950722176 mode=fixed seed=0
+Sentinel values: 32336, 35418, 31063, height: 16
+Benchmark: pwm_5wx_psImLb1EE_tree
+RESULT iteration=1 type=pwm_5wx_psImLb1EE_tree operation=ctor size=4294967296 alphabet_size=65536 time_in_s=271.45 space_in_bytes=8589935192 working_space=42950722176 mode=fixed seed=0
+Sentinel values: 32336, 35418, 31063, height: 16
+
+Iteration 2...
+Size: 268435456...
+Alphabet Bits: 8...
+Generating random text with size 268435456, alphabet size: 256 using distribution: 'uniform'...
+Benchmark: pwm_5wx_pcImLb1EE_tree
+RESULT iteration=2 type=pwm_5wx_pcImLb1EE_tree operation=ctor size=268435456 alphabet_size=256 time_in_s=2.25248 space_in_bytes=268435864 working_space=42950722176 mode=fixed seed=0
+Sentinel values: 215, 156, 127, height: 8
+Benchmark: pwm_5wx_psImLb1EE_tree
+RESULT iteration=2 type=pwm_5wx_psImLb1EE_tree operation=ctor size=268435456 alphabet_size=256 time_in_s=3.75141 space_in_bytes=268435864 working_space=42950722176 mode=fixed seed=0
+Sentinel values: 215, 156, 127, height: 8
+Alphabet Bits: 16...
+Generating random text with size 268435456, alphabet size: 65536 using distribution: 'uniform'...
+Benchmark: pwm_5wx_pcImLb1EE_tree
+RESULT iteration=2 type=pwm_5wx_pcImLb1EE_tree operation=ctor size=268435456 alphabet_size=65536 time_in_s=7.21856 space_in_bytes=536871512 working_space=42950722176 mode=fixed seed=0
+Sentinel values: 16764, 16746, 34455, height: 16
+Benchmark: pwm_5wx_psImLb1EE_tree
+RESULT iteration=2 type=pwm_5wx_psImLb1EE_tree operation=ctor size=268435456 alphabet_size=65536 time_in_s=13.9902 space_in_bytes=536871512 working_space=42950722176 mode=fixed seed=0
+Sentinel values: 16764, 16746, 34455, height: 16
+Size: 536870912...
+Alphabet Bits: 8...
+Generating random text with size 536870912, alphabet size: 256 using distribution: 'uniform'...
+Benchmark: pwm_5wx_pcImLb1EE_tree
+RESULT iteration=2 type=pwm_5wx_pcImLb1EE_tree operation=ctor size=536870912 alphabet_size=256 time_in_s=4.49196 space_in_bytes=536871320 working_space=42950722176 mode=fixed seed=0
+Sentinel values: 56, 179, 231, height: 8
+Benchmark: pwm_5wx_psImLb1EE_tree
+RESULT iteration=2 type=pwm_5wx_psImLb1EE_tree operation=ctor size=536870912 alphabet_size=256 time_in_s=7.50654 space_in_bytes=536871320 working_space=42950722176 mode=fixed seed=0
+Sentinel values: 56, 179, 231, height: 8
+Alphabet Bits: 16...
+Generating random text with size 536870912, alphabet size: 65536 using distribution: 'uniform'...
+Benchmark: pwm_5wx_pcImLb1EE_tree
+RESULT iteration=2 type=pwm_5wx_pcImLb1EE_tree operation=ctor size=536870912 alphabet_size=65536 time_in_s=15.679 space_in_bytes=1073742424 working_space=42950722176 mode=fixed seed=0
+Sentinel values: 39486, 1022, 6895, height: 16
+Benchmark: pwm_5wx_psImLb1EE_tree
+RESULT iteration=2 type=pwm_5wx_psImLb1EE_tree operation=ctor size=536870912 alphabet_size=65536 time_in_s=28.5252 space_in_bytes=1073742424 working_space=42950722176 mode=fixed seed=0
+Sentinel values: 39486, 1022, 6895, height: 16
+Size: 1073741824...
+Alphabet Bits: 8...
+Generating random text with size 1073741824, alphabet size: 256 using distribution: 'uniform'...
+Benchmark: pwm_5wx_pcImLb1EE_tree
+RESULT iteration=2 type=pwm_5wx_pcImLb1EE_tree operation=ctor size=1073741824 alphabet_size=256 time_in_s=8.94308 space_in_bytes=1073742232 working_space=42950722176 mode=fixed seed=0
+Sentinel values: 167, 19, 111, height: 8
+Benchmark: pwm_5wx_psImLb1EE_tree
+RESULT iteration=2 type=pwm_5wx_psImLb1EE_tree operation=ctor size=1073741824 alphabet_size=256 time_in_s=15.0218 space_in_bytes=1073742232 working_space=42950722176 mode=fixed seed=0
+Sentinel values: 167, 19, 111, height: 8
+Alphabet Bits: 16...
+Generating random text with size 1073741824, alphabet size: 65536 using distribution: 'uniform'...
+Benchmark: pwm_5wx_pcImLb1EE_tree
+RESULT iteration=2 type=pwm_5wx_pcImLb1EE_tree operation=ctor size=1073741824 alphabet_size=65536 time_in_s=35.9623 space_in_bytes=2147484248 working_space=42950722176 mode=fixed seed=0
+Sentinel values: 44794, 40959, 37367, height: 16
+Benchmark: pwm_5wx_psImLb1EE_tree
+RESULT iteration=2 type=pwm_5wx_psImLb1EE_tree operation=ctor size=1073741824 alphabet_size=65536 time_in_s=59.1499 space_in_bytes=2147484248 working_space=42950722176 mode=fixed seed=0
+Sentinel values: 44794, 40959, 37367, height: 16
+Size: 2147483648...
+Alphabet Bits: 8...
+Generating random text with size 2147483648, alphabet size: 256 using distribution: 'uniform'...
+Benchmark: pwm_5wx_pcImLb1EE_tree
+RESULT iteration=2 type=pwm_5wx_pcImLb1EE_tree operation=ctor size=2147483648 alphabet_size=256 time_in_s=17.9651 space_in_bytes=2147484056 working_space=42950722176 mode=fixed seed=0
+Sentinel values: 49, 101, 87, height: 8
+Benchmark: pwm_5wx_psImLb1EE_tree
+RESULT iteration=2 type=pwm_5wx_psImLb1EE_tree operation=ctor size=2147483648 alphabet_size=256 time_in_s=30.0572 space_in_bytes=2147484056 working_space=42950722176 mode=fixed seed=0
+Sentinel values: 49, 101, 87, height: 8
+Alphabet Bits: 16...
+Generating random text with size 2147483648, alphabet size: 65536 using distribution: 'uniform'...
+Benchmark: pwm_5wx_pcImLb1EE_tree
+RESULT iteration=2 type=pwm_5wx_pcImLb1EE_tree operation=ctor size=2147483648 alphabet_size=65536 time_in_s=79.7396 space_in_bytes=4294967896 working_space=42950722176 mode=fixed seed=0
+Sentinel values: 12571, 6759, 11155, height: 16
+Benchmark: pwm_5wx_psImLb1EE_tree
+RESULT iteration=2 type=pwm_5wx_psImLb1EE_tree operation=ctor size=2147483648 alphabet_size=65536 time_in_s=122.89 space_in_bytes=4294967896 working_space=42950722176 mode=fixed seed=0
+Sentinel values: 12571, 6759, 11155, height: 16
+Size: 4294967296...
+Alphabet Bits: 8...
+Generating random text with size 4294967296, alphabet size: 256 using distribution: 'uniform'...
+Benchmark: pwm_5wx_pcImLb1EE_tree
+RESULT iteration=2 type=pwm_5wx_pcImLb1EE_tree operation=ctor size=4294967296 alphabet_size=256 time_in_s=35.5888 space_in_bytes=4294967704 working_space=42950722176 mode=fixed seed=0
+Sentinel values: 253, 36, 239, height: 8
+Benchmark: pwm_5wx_psImLb1EE_tree
+RESULT iteration=2 type=pwm_5wx_psImLb1EE_tree operation=ctor size=4294967296 alphabet_size=256 time_in_s=60.088 space_in_bytes=4294967704 working_space=42950722176 mode=fixed seed=0
+Sentinel values: 253, 36, 239, height: 8
+Alphabet Bits: 16...
+Generating random text with size 4294967296, alphabet size: 65536 using distribution: 'uniform'...
+Benchmark: pwm_5wx_pcImLb1EE_tree
+RESULT iteration=2 type=pwm_5wx_pcImLb1EE_tree operation=ctor size=4294967296 alphabet_size=65536 time_in_s=169.985 space_in_bytes=8589935192 working_space=42950722176 mode=fixed seed=0
+Sentinel values: 16160, 56033, 20680, height: 16
+Benchmark: pwm_5wx_psImLb1EE_tree
+RESULT iteration=2 type=pwm_5wx_psImLb1EE_tree operation=ctor size=4294967296 alphabet_size=65536 time_in_s=266.925 space_in_bytes=8589935192 working_space=42950722176 mode=fixed seed=0
+Sentinel values: 16160, 56033, 20680, height: 16
+
+Done

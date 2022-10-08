@@ -1,0 +1,337 @@
+% i still have no clue how i wanna do this
+% doing everything for all texts and 1, 2, 4, 8 and 16 threads is way too much
+% maybe i can reduce the set of texts to just "interesting" ones
+% maybe i can also discard some of my implementations that are not on the pareto front
+
+\documentclass[a4]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+
+\usepackage{amsmath,amsfonts,amssymb}
+\usepackage{fullpage}
+\usepackage{verbatim}
+\usepackage{cleveref}
+
+\usepackage{tikz,pgfplots}
+\usetikzlibrary{patterns, patterns.meta}
+\usepgfplotslibrary{groupplots}
+
+\makeatletter
+\newcommand{\resetspaceplots}[1]{
+  \makeatletter
+  \pgfplots@stacked@isfirstplottrue
+  \makeatother
+  \addplot[forget plot, draw = none] coordinates {(#1, 0)};
+}
+\makeatother
+
+\pgfplotscreateplotcyclelist{wtddcycles} {
+  red, every mark/.append style = {solid}, mark = square*\\
+  black, every mark/.append style = {solid}, mark = square*\\
+  orange!75!black, every mark/.append style = {solid}, mark = square*\\
+  blue, every mark/.append style = {solid}, mark = triangle*\\
+  green!50!black, every mark/.append style = {solid}, mark = triangle*\\
+  violet, every mark/.append style = {solid}, mark = triangle*\\  
+}
+
+\pgfplotsset{
+  /pgfplots/bar cycle list/.style = {
+    /pgfplots/cycle list = {
+      { fill = red!30, mark = none },
+      { fill = green!60, mark = none },
+      { fill = blue!50, mark = none },
+      { fill = blue!50!green!75, mark = none },% PWM PC
+      { fill = red!75!blue!50, mark = none },  % PWM PC SS
+      { fill = brown!50, mark = none }         % PWM PS
+    }
+  }
+}
+
+
+\pgfplotsset{
+    major grid style = { thin, dotted, color = black!50 },
+    minor grid style = { thin, dotted, color = black!50 },
+    grid,
+    ymin = 0,
+    legend cell align = left,
+    legend pos = north west,
+	  /pgfplots/ybar legend/.style = {
+		  /pgfplots/legend image code/.code={%
+			  \draw[##1,/tikz/.cd,yshift=-0.35em]
+      (0cm,0cm) rectangle (0.7em,0.8em);},
+	  },  
+}
+
+
+\begin{document}
+
+\title{WT Benchmark}
+\author{Jan-Philipp Tarnowski}
+\maketitle
+
+\clearpage
+
+
+% IMPORT-DATA stats ../results-space-reg-huff.out
+% IMPORT-DATA stats_b ../results-space-dd.out
+% SQL INSERT INTO stats SELECT * FROM stats_b
+
+% SQL DELETE FROM stats WHERE type LIKE '%huff%'
+
+% Normalize DS Names and orders
+% SQL UPDATE stats SET type = 'lwtpext322', ds_order = 0 WHERE type LIKE 'lwt%pext_32_2%'
+% SQL UPDATE stats SET type = 'lwtpext164', ds_order = 1 WHERE type LIKE 'lwt%pext_16_4%'
+% SQL UPDATE stats SET type = 'lwtpext88', ds_order = 2 WHERE type LIKE 'lwt%pext_8_8%'
+% SQL UPDATE stats SET type = 'lwtpwmpc', ds_order = 3 WHERE type LIKE 'pwm_%_pcI%tree'
+% SQL UPDATE stats SET type = 'lwtpwmpcss', ds_order = 4 WHERE type LIKE 'pwm_%_pc_ssI%tree'
+% SQL UPDATE stats SET type = 'lwtpwmps', ds_order = 5 WHERE type LIKE 'pwm_%_psI%tree'
+
+% SQL UPDATE stats SET type = 'wmpext322', ds_order = 0 WHERE type LIKE 'wm%pext_32_2%'
+% SQL UPDATE stats SET type = 'wmpext164', ds_order = 1 WHERE type LIKE 'wm%pext_16_4%'
+% SQL UPDATE stats SET type = 'wmpext88', ds_order = 2 WHERE type LIKE 'wm%pext_8_8%'
+% SQL UPDATE stats SET type = 'wmpwmpc', ds_order = 3 WHERE type LIKE 'pwm_%_pcI%matrix'
+% SQL UPDATE stats SET type = 'wmpwmpcss', ds_order = 4 WHERE type LIKE 'pwm_%_pc_ssI%matrix'
+% SQL UPDATE stats SET type = 'wmpwmps', ds_order = 5 WHERE type LIKE 'pwm_%_psI%matrix'
+
+% SQL DELETE FROM stats WHERE type LIKE '%\_%' ESCAPE '\'
+% SQL DELETE FROM stats WHERE LOG(2, size) != 26
+
+
+
+\clearpage
+
+\begin{figure}[t]
+    \begin{center}
+        \begin{tikzpicture}
+            \begin{groupplot} [
+                width = 0.4\textwidth,
+                height = 6.4cm,
+                enlarge x limits = 0.075,
+                group style = { 
+                    vertical sep = 1.9cm,
+                    horizontal sep = 0.0cm,
+                    group size = { 
+                        3 by 2
+                    } 
+                },
+                cycle list name = wtddcycles,
+                legend style = { 
+                    at = {(0.5, -0.25)},
+                    anchor = north,
+                    legend columns = 6,
+                    column sep = 2ex
+                },
+                ylabel style = {
+                    at = {(0.11, 0.5)}
+                },
+                title style = {
+                    at = {(0.5, 0.96)}
+                },
+                xticklabels = { , 1, 2, 4, 8, 16 },
+                xtick distance = 1,
+                ytick distance = 1,
+                xmin = 0,
+                xmax = 4,
+                ymax = 8.75
+            ]
+            
+            \node at (7.50, 5.80) { \centering{Wavelet Tree} };
+            \node at (7.50, -0.90) { \centering{Wavelet Matrix} };
+            
+            \nextgroupplot [
+                title = $\log \sigma {=} 4$,
+                ylabel = $\text{Space in bytes}/n$
+            ]
+
+    
+                %% MULTIPLOT(type) SELECT LOG(2, threads) AS x, MEDIAN(CAST(working_space AS FLOAT) / size) AS y,MULTIPLOT
+                %% FROM stats WHERE (type LIKE 'lwt%') AND (alpha_bits = 4) GROUP BY MULTIPLOT,x ORDER BY ds_order,MULTIPLOT,x
+                \addplot coordinates { (0.0,3.00001) (1.0,3.00007) (2.0,3.0001) (3.0,3.00017) (4.0,3.00032) };
+                \addlegendentry{type=lwtpext322};
+                \addplot coordinates { (0.0,3.50001) (1.0,3.50003) (2.0,3.50006) (3.0,3.50011) (4.0,3.5002) };
+                \addlegendentry{type=lwtpext164};
+                \addplot coordinates { (0.0,4.50001) (1.0,4.50003) (2.0,4.50006) (3.0,4.50011) (4.0,4.5002) };
+                \addlegendentry{type=lwtpext88};
+                \addplot coordinates { (0.0,0.500034) (1.0,1.00005) (2.0,1.0001) (3.0,1.00022) (4.0,1.00049) };
+                \addlegendentry{type=lwtpwmpc};
+                \addplot coordinates { (0.0,0.500054) (1.0,1.00005) (2.0,1.0001) (3.0,1.00022) (4.0,1.0005) };
+                \addlegendentry{type=lwtpwmpcss};
+                \addplot coordinates { (0.0,1.50001) (1.0,1.50004) (2.0,1.50009) (3.0,1.50017) (4.0,1.50035) };
+                \addlegendentry{type=lwtpwmps};
+
+                %%- PLOT SELECT LOG(2, threads) AS x, MEDIAN(CAST(space_in_bytes AS FLOAT) / size) AS y
+                %%- FROM stats WHERE (type LIKE 'lwt%') AND (alpha_bits = 4) GROUP BY x ORDER BY ds_order,x
+                \addplot [black!75, dashed, thick, mark=none] coordinates { (-1,0.500001) (5.0,0.500001) };
+    
+    
+                \legend{};
+    
+       \nextgroupplot [
+        ylabel = ,
+        yticklabels = {},
+        title = $\log \sigma {=} 8$,
+    ]
+    
+                %% MULTIPLOT(type) SELECT LOG(2, threads) AS x, MEDIAN(CAST(working_space AS FLOAT) / size) AS y,MULTIPLOT
+                %% FROM stats WHERE (type LIKE 'lwt%') AND (alpha_bits = 8) GROUP BY MULTIPLOT,x ORDER BY ds_order,MULTIPLOT,x
+                \addplot coordinates { (0.0,3.50005) (1.0,3.50011) (2.0,3.50027) (3.0,3.5005) (4.0,3.501) };
+                \addlegendentry{type=lwtpext322};
+                \addplot coordinates { (0.0,4.00005) (1.0,4.00012) (2.0,4.00021) (3.0,4.00041) (4.0,4.00079) };
+                \addlegendentry{type=lwtpext164};
+                \addplot coordinates { (0.0,5.00005) (1.0,5.00011) (2.0,5.00021) (3.0,5.00039) (4.0,5.00076) };
+                \addlegendentry{type=lwtpext88};
+                \addplot coordinates { (0.0,1.00009) (1.0,2.00018) (2.0,2.00036) (3.0,2.00075) (4.0,2.00162) };
+                \addlegendentry{type=lwtpwmpc};
+                \addplot coordinates { (0.0,1.00017) (1.0,2.00018) (2.0,2.00037) (3.0,2.00076) (4.0,2.00163) };
+                \addlegendentry{type=lwtpwmpcss};
+                \addplot coordinates { (0.0,2.00007) (1.0,2.00022) (2.0,2.00044) (3.0,2.00089) (4.0,2.00178) };
+                \addlegendentry{type=lwtpwmps};
+
+                %%- PLOT SELECT LOG(2, threads) AS x, MEDIAN(CAST(space_in_bytes AS FLOAT) / size) AS y
+                %%- FROM stats WHERE (type LIKE 'lwt%') AND (alpha_bits = 8) GROUP BY x ORDER BY ds_order,x
+                \addplot [black!75, dashed, thick, mark=none] coordinates { (-1,1) (5.0,1) };
+
+    
+        \legend{};
+    
+    \nextgroupplot [
+        ylabel = ,
+        yticklabels = {},
+        title = $\log \sigma {=} 16$,
+    ]
+    
+    
+    
+                %% MULTIPLOT(type) SELECT LOG(2, threads) AS x, MEDIAN(CAST(working_space AS FLOAT) / size) AS y,MULTIPLOT
+                %% FROM stats WHERE (type LIKE 'lwt%') AND (alpha_bits = 16) GROUP BY MULTIPLOT,x ORDER BY ds_order,MULTIPLOT,x
+                \addplot coordinates { (0.0,6.51028) (1.0,6.52348) (2.0,6.54311) (3.0,6.57937) (4.0,6.66655) };
+                \addlegendentry{type=lwtpext322};
+                \addplot coordinates { (0.0,7.00836) (1.0,7.02057) (2.0,7.03722) (3.0,7.07053) (4.0,7.14105) };
+                \addlegendentry{type=lwtpext164};
+                \addplot coordinates { (0.0,8.00787) (1.0,8.01965) (2.0,8.03539) (3.0,8.06686) (4.0,8.12982) };
+                \addlegendentry{type=lwtpext88};
+                \addplot coordinates { (0.0,2.01566) (1.0,4.03134) (2.0,4.06268) (3.0,4.12542) (4.0,4.25107) };
+                \addlegendentry{type=lwtpwmpc};
+                \addplot coordinates { (0.0,2.03131) (1.0,4.03134) (2.0,4.06269) (3.0,4.12542) (4.0,4.25108) };
+                \addlegendentry{type=lwtpwmpcss};
+                \addplot coordinates { (0.0,4.01563) (1.0,4.04693) (2.0,4.09385) (3.0,4.18771) (4.0,4.37542) };
+                \addlegendentry{type=lwtpwmps};
+
+                %%- PLOT SELECT LOG(2, threads) AS x, MEDIAN(CAST(space_in_bytes AS FLOAT) / size) AS y
+                %%- FROM stats WHERE (type LIKE 'lwt%') AND (alpha_bits = 16) GROUP BY x ORDER BY ds_order,x
+                \addplot [black!75, dashed, thick, mark=none] coordinates { (-10.0,2) (5.0,2) };
+    
+        \legend{};
+    
+        \nextgroupplot [
+        ylabel = $\text{GiBit} / s$,
+        title = $\log \sigma {=} 4$,
+    ]
+    
+    
+    
+    
+                %% MULTIPLOT(type) SELECT LOG(2, threads) AS x, MEDIAN(CAST(working_space AS FLOAT) / size) AS y,MULTIPLOT
+                %% FROM stats WHERE (type LIKE 'wm%') AND (alpha_bits = 4) GROUP BY MULTIPLOT,x ORDER BY ds_order,MULTIPLOT,x
+                \addplot coordinates { (0.0,3.00001) (1.0,3.00003) (2.0,3.00005) (3.0,3.00009) (4.0,3.00017) };
+                \addlegendentry{type=wmpext322};
+                \addplot coordinates { (0.0,3.50001) (1.0,3.50002) (2.0,3.50004) (3.0,3.50008) (4.0,3.50015) };
+                \addlegendentry{type=wmpext164};
+                \addplot coordinates { (0.0,4.50001) (1.0,4.50002) (2.0,4.50004) (3.0,4.50008) (4.0,4.50015) };
+                \addlegendentry{type=wmpext88};
+                \addplot coordinates { (0.0,0.500032) (1.0,1.00005) (2.0,1.00011) (3.0,1.00022) (4.0,1.00049) };
+                \addlegendentry{type=wmpwmpc};
+                \addplot coordinates { (0.0,0.500057) (1.0,1.00006) (2.0,1.00011) (3.0,1.00022) (4.0,1.0005) };
+                \addlegendentry{type=wmpwmpcss};
+                \addplot coordinates { (0.0,1.50001) (1.0,1.50005) (2.0,1.50009) (3.0,1.50018) (4.0,1.50035) };
+                \addlegendentry{type=wmpwmps};
+
+                %%- PLOT SELECT LOG(2, threads) AS x, MEDIAN(CAST(space_in_bytes AS FLOAT) / size) AS y
+                %%- FROM stats WHERE (type LIKE 'wm%') AND (alpha_bits = 4) GROUP BY x ORDER BY ds_order,x
+                \addplot [black!75, dashed, thick, mark=none] coordinates { (-1,0.500001) (5.0,0.500001) };
+    
+    
+                \legend{};
+    
+       \nextgroupplot [
+        ylabel = ,
+        xlabel = Threads,
+        yticklabels = {},
+        title = $\log \sigma {=} 8$,
+    ]
+    
+                %% MULTIPLOT(type) SELECT LOG(2, threads) AS x, MEDIAN(CAST(working_space AS FLOAT) / size) AS y,MULTIPLOT
+                %% FROM stats WHERE (type LIKE 'wm%') AND (alpha_bits = 8) GROUP BY MULTIPLOT,x ORDER BY ds_order,MULTIPLOT,x
+                \addplot coordinates { (0.0,3.50001) (1.0,3.50004) (2.0,3.50007) (3.0,3.50013) (4.0,3.50025) };
+                \addlegendentry{type=wmpext322};
+                \addplot coordinates { (0.0,4.00002) (1.0,4.00004) (2.0,4.00008) (3.0,4.00015) (4.0,4.0003) };
+                \addlegendentry{type=wmpext164};
+                \addplot coordinates { (0.0,5.00001) (1.0,5.00004) (2.0,5.00006) (3.0,5.00012) (4.0,5.00024) };
+                \addlegendentry{type=wmpext88};
+                \addplot coordinates { (0.0,1.00011) (1.0,2.00021) (2.0,2.0004) (3.0,2.00078) (4.0,2.00165) };
+                \addlegendentry{type=wmpwmpc};
+                \addplot coordinates { (0.0,1.00021) (1.0,2.00021) (2.0,2.0004) (3.0,2.00079) (4.0,2.00166) };
+                \addlegendentry{type=wmpwmpcss};
+                \addplot coordinates { (0.0,2.00008) (1.0,2.00026) (2.0,2.00048) (3.0,2.00092) (4.0,2.00181) };
+                \addlegendentry{type=wmpwmps};
+
+                %%- PLOT SELECT LOG(2, threads) AS x, MEDIAN(CAST(space_in_bytes AS FLOAT) / size) AS y
+                %%- FROM stats WHERE (type LIKE 'wm%') AND (alpha_bits = 8) GROUP BY x ORDER BY ds_order,x
+                \addplot [black!75, dashed, thick, mark=none] coordinates { (-1,1) (5.0,1) };
+
+    
+                \legend{
+                    $\tau = 2$\\
+                    $\tau = 4$\\
+                    $\tau = 8$\\
+                    \texttt{pc} \cite{fischer21}\\
+                    \texttt{pc-ss} \cite{fischer21}\\
+                    \texttt{ps} \cite{fischer21}\\
+                };
+    
+    \nextgroupplot [
+        ylabel = ,
+        yticklabels = {},
+        title = $\log \sigma {=} 16$,
+    ]
+    
+    
+    
+                %% MULTIPLOT(type) SELECT LOG(2, threads) AS x, MEDIAN(CAST(working_space AS FLOAT) / size) AS y,MULTIPLOT
+                %% FROM stats WHERE (type LIKE 'wm%') AND (alpha_bits = 16) GROUP BY MULTIPLOT,x ORDER BY ds_order,MULTIPLOT,x
+                \addplot coordinates { (0.0,6.50003) (1.0,6.50006) (2.0,6.50011) (3.0,6.50021) (4.0,6.50042) };
+                \addlegendentry{type=wmpext322};
+                \addplot coordinates { (0.0,7.00003) (1.0,7.00006) (2.0,7.00012) (3.0,7.00024) (4.0,7.00047) };
+                \addlegendentry{type=wmpext164};
+                \addplot coordinates { (0.0,8.00009) (1.0,8.00018) (2.0,8.00035) (3.0,8.00069) (4.0,8.00138) };
+                \addlegendentry{type=wmpext88};
+                \addplot coordinates { (0.0,2.01956) (1.0,4.03916) (2.0,4.0705) (3.0,4.13324) (4.0,4.25889) };
+                \addlegendentry{type=wmpwmpc};
+                \addplot coordinates { (0.0,2.03913) (1.0,4.03916) (2.0,4.0705) (3.0,4.13324) (4.0,4.2589) };
+                \addlegendentry{type=wmpwmpcss};
+                \addplot coordinates { (0.0,4.01954) (1.0,4.05475) (2.0,4.10167) (3.0,4.19553) (4.0,4.38324) };
+                \addlegendentry{type=wmpwmps};
+
+                %%- PLOT SELECT LOG(2, threads) AS x, MEDIAN(CAST(space_in_bytes AS FLOAT) / size) AS y
+                %%- FROM stats WHERE (type LIKE 'wm%') AND (alpha_bits = 16) GROUP BY x ORDER BY ds_order,x
+                \addplot [black!75, dashed, thick, mark=none] coordinates { (-10.0,2) (5.0,2) };
+    
+        \legend{};
+    
+    
+            \end{groupplot}
+            \end{tikzpicture}
+        \end{center}
+    \caption{
+        The peak working space usage for parallel construction of wavelet trees and matrices.
+        The results for $p = 1$ again correspond to the single-threaded results shown in \cref{fig:eval-space-st}.
+        We once again show the number of bytes required per symbol of the input, for a text of $2^{26}$ elements.
+        The dashed line again shows the number of bytes required for the final wavelet tree/matrix.
+        For \texttt{pc} and \texttt{pc-ss}, the results are nearly identical, leading to their graphs overlapping in the plot.
+        Although space usage rises with the number of threads for all methods, the change is very subtle due to the relatively large size of $n$.
+    }
+    \label{fig:eval-space-dd}
+    \end{figure}
+
+\end{document}

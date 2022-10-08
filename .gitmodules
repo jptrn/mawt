@@ -1,0 +1,10 @@
+[submodule "deps/tlx"]
+	path = deps/tlx
+	url = https://github.com/tlx/tlx
+[submodule "deps/pwm"]
+	path = deps/pwm
+	url = git@github.com:kurpicz/pwm.git
+[submodule "deps/malloc_count"]
+	path = deps/malloc_count
+	url = https://github.com/ByteHamster/malloc_count
+	branch = master

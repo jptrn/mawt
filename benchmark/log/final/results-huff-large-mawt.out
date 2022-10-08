@@ -1,0 +1,537 @@
+
+Running WT Benchmark at 2022-05-19--09-02-56...
+Git branch: huff2
+Git commit: 8042ea67bad2126e2f8b630376c82ccff43c9c76
+Git commit (short): 8042ea6
+Build Type: Release
+
+Command: /scratch/tarnowski/mawt/build/benchmark/benchmark_wt/benchmark_wt --iterations 5 --file /scratch/data/large/cc.txt --file-alpha-bits 8 --file /scratch/data/large/dna.txt --file-alpha-bits 8 --file /scratch/data/large/wiki.txt --file-alpha-bits 8 --compute-effective-alphabet --min 16GiB --ext get_huffman_codes --ext make_tree --ext ctor --ext init --ext split --ext get_borders --ext merge --no-highlight
+
+Starting Wavelet Tree Benchmark
+Current time: 2022-05-19-09-02-56
+
+Config:
+
+Iterations: 5
+Reading files from disk:
+File: /scratch/data/large/cc.txt (8 bits)
+File: /scratch/data/large/dna.txt (8 bits)
+File: /scratch/data/large/wiki.txt (8 bits)
+Getting prefix of 17179869184 elements
+Implementations: dummy, basic, twophase_no_lut, twophase_4_4, twophase_pext_pext, twophase_pext_pshufb, lwt_basic, lwt_twophase_no_lut, lwt_twophase_4_4, lwt_twophase_pext_pext, lwt_twophase_pext_pshufb, pwm_pc, pwm_ps
+Distribution: uniform
+Is random seed: false
+Seed: 0
+Extra keys: get_huffman_codes, make_tree, ctor, init, split, get_borders, merge
+Verifying Results: false
+Computing Effective Alphabet: true
+Real Seed: 0
+
+Starting Benchmark...
+Text: /scratch/data/large/cc.txt (8 bits)...
+Reading text from /scratch/data/large/cc.txt...
+Reading 8 bits
+Text size: 17179869184
+Computed effective alphabet of text, 243 characters, depth: 8
+Text width: 1 byte(s) (was 1 byte(s))
+Iteration 0...
+[ EXPECTED ]: 114, 129, 32
+Benchmark: lwt_huffman_pext_16_4
+RESULT iteration=0 type=lwt_huffman_pext_16_4 operation=ctor file=/scratch/data/large/cc.txt size=17179869184 height=24 alpha_bits=8 alphabet_size=243 time_in_s=363.561 threads=1 space_in_bytes=13371595132 working_space=95461953444 mode=fixed seed=0 ds_order=0 ext_get_huffman_codes=49.9462 ext_make_tree=313.615 ext_ctor=0 ext_init=0 ext_split=0 ext_get_borders=0 ext_merge=0
+Sentinel values: 114, 129, 32
+Benchmark: lwt_huffman_shuffle_8_8
+RESULT iteration=0 type=lwt_huffman_shuffle_8_8 operation=ctor file=/scratch/data/large/cc.txt size=17179869184 height=24 alpha_bits=8 alphabet_size=243 time_in_s=498.535 threads=1 space_in_bytes=13371595132 working_space=129821691812 mode=fixed seed=0 ds_order=1 ext_get_huffman_codes=56.4586 ext_make_tree=442.076 ext_ctor=0 ext_init=0 ext_split=0 ext_get_borders=0 ext_merge=0
+Sentinel values: 114, 129, 32
+Benchmark: lwt_huffman_shuffle_16_8
+RESULT iteration=0 type=lwt_huffman_shuffle_16_8 operation=ctor file=/scratch/data/large/cc.txt size=17179869184 height=24 alpha_bits=8 alphabet_size=243 time_in_s=338.982 threads=1 space_in_bytes=13371595132 working_space=129821691812 mode=fixed seed=0 ds_order=2 ext_get_huffman_codes=56.4594 ext_make_tree=282.523 ext_ctor=0 ext_init=0 ext_split=0 ext_get_borders=0 ext_merge=0
+Sentinel values: 114, 129, 32
+Benchmark: lwt_huffman_shuffle_32_8
+RESULT iteration=0 type=lwt_huffman_shuffle_32_8 operation=ctor file=/scratch/data/large/cc.txt size=17179869184 height=24 alpha_bits=8 alphabet_size=243 time_in_s=369.255 threads=1 space_in_bytes=13371595132 working_space=129821691812 mode=fixed seed=0 ds_order=3 ext_get_huffman_codes=55.8158 ext_make_tree=313.439 ext_ctor=0 ext_init=0 ext_split=0 ext_get_borders=0 ext_merge=0
+Sentinel values: 114, 129, 32
+Benchmark: lwt_huffman_shuffle_64_8
+RESULT iteration=0 type=lwt_huffman_shuffle_64_8 operation=ctor file=/scratch/data/large/cc.txt size=17179869184 height=24 alpha_bits=8 alphabet_size=243 time_in_s=238.192 threads=1 space_in_bytes=13371595132 working_space=129821691812 mode=fixed seed=0 ds_order=4 ext_get_huffman_codes=56.1962 ext_make_tree=181.996 ext_ctor=0 ext_init=0 ext_split=0 ext_get_borders=0 ext_merge=0
+Sentinel values: 114, 129, 32
+Benchmark: wm_huffman_pext_16_4
+RESULT iteration=0 type=wm_huffman_pext_16_4 operation=ctor file=/scratch/data/large/cc.txt size=17179869184 height=24 alpha_bits=8 alphabet_size=243 time_in_s=428.313 threads=1 space_in_bytes=13371595132 working_space=129821691812 mode=fixed seed=0 ds_order=5 ext_get_huffman_codes=56.5199 ext_make_tree=371.793 ext_ctor=0 ext_init=0 ext_split=0 ext_get_borders=0 ext_merge=0
+Sentinel values: 114, 129, 32
+Benchmark: wm_huffman_shuffle_8_8
+RESULT iteration=0 type=wm_huffman_shuffle_8_8 operation=ctor file=/scratch/data/large/cc.txt size=17179869184 height=24 alpha_bits=8 alphabet_size=243 time_in_s=471.342 threads=1 space_in_bytes=13371595132 working_space=129821691812 mode=fixed seed=0 ds_order=6 ext_get_huffman_codes=49.9834 ext_make_tree=421.359 ext_ctor=0 ext_init=0 ext_split=0 ext_get_borders=0 ext_merge=0
+Sentinel values: 114, 129, 32
+Benchmark: wm_huffman_shuffle_16_8
+RESULT iteration=0 type=wm_huffman_shuffle_16_8 operation=ctor file=/scratch/data/large/cc.txt size=17179869184 height=24 alpha_bits=8 alphabet_size=243 time_in_s=368.871 threads=1 space_in_bytes=13371595132 working_space=129821691812 mode=fixed seed=0 ds_order=7 ext_get_huffman_codes=57.2941 ext_make_tree=311.577 ext_ctor=0 ext_init=0 ext_split=0 ext_get_borders=0 ext_merge=0
+Sentinel values: 114, 129, 32
+Benchmark: wm_huffman_shuffle_32_8
+RESULT iteration=0 type=wm_huffman_shuffle_32_8 operation=ctor file=/scratch/data/large/cc.txt size=17179869184 height=24 alpha_bits=8 alphabet_size=243 time_in_s=302.204 threads=1 space_in_bytes=13371595132 working_space=129821691812 mode=fixed seed=0 ds_order=8 ext_get_huffman_codes=57.2397 ext_make_tree=244.964 ext_ctor=0 ext_init=0 ext_split=0 ext_get_borders=0 ext_merge=0
+Sentinel values: 114, 129, 32
+Benchmark: wm_huffman_shuffle_64_8
+RESULT iteration=0 type=wm_huffman_shuffle_64_8 operation=ctor file=/scratch/data/large/cc.txt size=17179869184 height=24 alpha_bits=8 alphabet_size=243 time_in_s=269.114 threads=1 space_in_bytes=13371595132 working_space=129821691812 mode=fixed seed=0 ds_order=9 ext_get_huffman_codes=57.7861 ext_make_tree=211.328 ext_ctor=0 ext_init=0 ext_split=0 ext_get_borders=0 ext_merge=0
+Sentinel values: 114, 129, 32
+
+Iteration 1...
+Benchmark: lwt_huffman_pext_16_4
+RESULT iteration=1 type=lwt_huffman_pext_16_4 operation=ctor file=/scratch/data/large/cc.txt size=17179869184 height=24 alpha_bits=8 alphabet_size=243 time_in_s=349.474 threads=1 space_in_bytes=13371595132 working_space=129821691812 mode=fixed seed=0 ds_order=0 ext_get_huffman_codes=57.2387 ext_make_tree=292.235 ext_ctor=0 ext_init=0 ext_split=0 ext_get_borders=0 ext_merge=0
+Sentinel values: 114, 129, 32
+Benchmark: lwt_huffman_shuffle_8_8
+RESULT iteration=1 type=lwt_huffman_shuffle_8_8 operation=ctor file=/scratch/data/large/cc.txt size=17179869184 height=24 alpha_bits=8 alphabet_size=243 time_in_s=485.509 threads=1 space_in_bytes=13371595132 working_space=129821691812 mode=fixed seed=0 ds_order=1 ext_get_huffman_codes=49.9494 ext_make_tree=435.559 ext_ctor=0 ext_init=0 ext_split=0 ext_get_borders=0 ext_merge=0
+Sentinel values: 114, 129, 32
+Benchmark: lwt_huffman_shuffle_16_8
+RESULT iteration=1 type=lwt_huffman_shuffle_16_8 operation=ctor file=/scratch/data/large/cc.txt size=17179869184 height=24 alpha_bits=8 alphabet_size=243 time_in_s=337.973 threads=1 space_in_bytes=13371595132 working_space=129821691812 mode=fixed seed=0 ds_order=2 ext_get_huffman_codes=57.2278 ext_make_tree=280.746 ext_ctor=0 ext_init=0 ext_split=0 ext_get_borders=0 ext_merge=0
+Sentinel values: 114, 129, 32
+Benchmark: lwt_huffman_shuffle_32_8
+RESULT iteration=1 type=lwt_huffman_shuffle_32_8 operation=ctor file=/scratch/data/large/cc.txt size=17179869184 height=24 alpha_bits=8 alphabet_size=243 time_in_s=275.213 threads=1 space_in_bytes=13371595132 working_space=129821691812 mode=fixed seed=0 ds_order=3 ext_get_huffman_codes=58.0217 ext_make_tree=217.185 ext_ctor=0 ext_init=0 ext_split=0 ext_get_borders=0 ext_merge=0
+Sentinel values: 114, 129, 32
+Benchmark: lwt_huffman_shuffle_64_8
+RESULT iteration=1 type=lwt_huffman_shuffle_64_8 operation=ctor file=/scratch/data/large/cc.txt size=17179869184 height=24 alpha_bits=8 alphabet_size=243 time_in_s=238.201 threads=1 space_in_bytes=13371595132 working_space=129821691812 mode=fixed seed=0 ds_order=4 ext_get_huffman_codes=57.7414 ext_make_tree=180.453 ext_ctor=0 ext_init=0 ext_split=0 ext_get_borders=0 ext_merge=0
+Sentinel values: 114, 129, 32
+Benchmark: wm_huffman_pext_16_4
+RESULT iteration=1 type=wm_huffman_pext_16_4 operation=ctor file=/scratch/data/large/cc.txt size=17179869184 height=24 alpha_bits=8 alphabet_size=243 time_in_s=426.66 threads=1 space_in_bytes=13371595132 working_space=129821691812 mode=fixed seed=0 ds_order=5 ext_get_huffman_codes=58.4912 ext_make_tree=368.162 ext_ctor=0 ext_init=0 ext_split=0 ext_get_borders=0 ext_merge=0
+Sentinel values: 114, 129, 32
+Benchmark: wm_huffman_shuffle_8_8
+RESULT iteration=1 type=wm_huffman_shuffle_8_8 operation=ctor file=/scratch/data/large/cc.txt size=17179869184 height=24 alpha_bits=8 alphabet_size=243 time_in_s=467.996 threads=1 space_in_bytes=13371595132 working_space=129821691812 mode=fixed seed=0 ds_order=6 ext_get_huffman_codes=50.0488 ext_make_tree=417.947 ext_ctor=0 ext_init=0 ext_split=0 ext_get_borders=0 ext_merge=0
+Sentinel values: 114, 129, 32
+Benchmark: wm_huffman_shuffle_16_8
+RESULT iteration=1 type=wm_huffman_shuffle_16_8 operation=ctor file=/scratch/data/large/cc.txt size=17179869184 height=24 alpha_bits=8 alphabet_size=243 time_in_s=370.526 threads=1 space_in_bytes=13371595132 working_space=129821691812 mode=fixed seed=0 ds_order=7 ext_get_huffman_codes=60.2899 ext_make_tree=310.236 ext_ctor=0 ext_init=0 ext_split=0 ext_get_borders=0 ext_merge=0
+Sentinel values: 114, 129, 32
+Benchmark: wm_huffman_shuffle_32_8
+RESULT iteration=1 type=wm_huffman_shuffle_32_8 operation=ctor file=/scratch/data/large/cc.txt size=17179869184 height=24 alpha_bits=8 alphabet_size=243 time_in_s=303.479 threads=1 space_in_bytes=13371595132 working_space=129821691812 mode=fixed seed=0 ds_order=8 ext_get_huffman_codes=60.0899 ext_make_tree=243.389 ext_ctor=0 ext_init=0 ext_split=0 ext_get_borders=0 ext_merge=0
+Sentinel values: 114, 129, 32
+Benchmark: wm_huffman_shuffle_64_8
+RESULT iteration=1 type=wm_huffman_shuffle_64_8 operation=ctor file=/scratch/data/large/cc.txt size=17179869184 height=24 alpha_bits=8 alphabet_size=243 time_in_s=271.265 threads=1 space_in_bytes=13371595132 working_space=129821691812 mode=fixed seed=0 ds_order=9 ext_get_huffman_codes=60.1975 ext_make_tree=211.067 ext_ctor=0 ext_init=0 ext_split=0 ext_get_borders=0 ext_merge=0
+Sentinel values: 114, 129, 32
+
+Iteration 2...
+Benchmark: lwt_huffman_pext_16_4
+RESULT iteration=2 type=lwt_huffman_pext_16_4 operation=ctor file=/scratch/data/large/cc.txt size=17179869184 height=24 alpha_bits=8 alphabet_size=243 time_in_s=353.775 threads=1 space_in_bytes=13371595132 working_space=129821691812 mode=fixed seed=0 ds_order=0 ext_get_huffman_codes=58.6687 ext_make_tree=295.106 ext_ctor=0 ext_init=0 ext_split=0 ext_get_borders=0 ext_merge=0
+Sentinel values: 114, 129, 32
+Benchmark: lwt_huffman_shuffle_8_8
+RESULT iteration=2 type=lwt_huffman_shuffle_8_8 operation=ctor file=/scratch/data/large/cc.txt size=17179869184 height=24 alpha_bits=8 alphabet_size=243 time_in_s=484.01 threads=1 space_in_bytes=13371595132 working_space=129821691812 mode=fixed seed=0 ds_order=1 ext_get_huffman_codes=49.9482 ext_make_tree=434.062 ext_ctor=0 ext_init=0 ext_split=0 ext_get_borders=0 ext_merge=0
+Sentinel values: 114, 129, 32
+Benchmark: lwt_huffman_shuffle_16_8
+RESULT iteration=2 type=lwt_huffman_shuffle_16_8 operation=ctor file=/scratch/data/large/cc.txt size=17179869184 height=24 alpha_bits=8 alphabet_size=243 time_in_s=336.472 threads=1 space_in_bytes=13371595132 working_space=129821691812 mode=fixed seed=0 ds_order=2 ext_get_huffman_codes=58.5294 ext_make_tree=277.936 ext_ctor=0 ext_init=0 ext_split=0 ext_get_borders=0 ext_merge=0
+Sentinel values: 114, 129, 32
+Benchmark: lwt_huffman_shuffle_32_8
+RESULT iteration=2 type=lwt_huffman_shuffle_32_8 operation=ctor file=/scratch/data/large/cc.txt size=17179869184 height=24 alpha_bits=8 alphabet_size=243 time_in_s=274.593 threads=1 space_in_bytes=13371595132 working_space=129821691812 mode=fixed seed=0 ds_order=3 ext_get_huffman_codes=58.9327 ext_make_tree=215.661 ext_ctor=0 ext_init=0 ext_split=0 ext_get_borders=0 ext_merge=0
+Sentinel values: 114, 129, 32
+Benchmark: lwt_huffman_shuffle_64_8
+RESULT iteration=2 type=lwt_huffman_shuffle_64_8 operation=ctor file=/scratch/data/large/cc.txt size=17179869184 height=24 alpha_bits=8 alphabet_size=243 time_in_s=238.72 threads=1 space_in_bytes=13371595132 working_space=129821691812 mode=fixed seed=0 ds_order=4 ext_get_huffman_codes=58.9295 ext_make_tree=179.79 ext_ctor=0 ext_init=0 ext_split=0 ext_get_borders=0 ext_merge=0
+Sentinel values: 114, 129, 32
+Benchmark: wm_huffman_pext_16_4
+RESULT iteration=2 type=wm_huffman_pext_16_4 operation=ctor file=/scratch/data/large/cc.txt size=17179869184 height=24 alpha_bits=8 alphabet_size=243 time_in_s=429.229 threads=1 space_in_bytes=13371595132 working_space=129821691812 mode=fixed seed=0 ds_order=5 ext_get_huffman_codes=60.5807 ext_make_tree=368.649 ext_ctor=0 ext_init=0 ext_split=0 ext_get_borders=0 ext_merge=0
+Sentinel values: 114, 129, 32
+Benchmark: wm_huffman_shuffle_8_8
+RESULT iteration=2 type=wm_huffman_shuffle_8_8 operation=ctor file=/scratch/data/large/cc.txt size=17179869184 height=24 alpha_bits=8 alphabet_size=243 time_in_s=471.072 threads=1 space_in_bytes=13371595132 working_space=129821691812 mode=fixed seed=0 ds_order=6 ext_get_huffman_codes=51.5885 ext_make_tree=419.484 ext_ctor=0 ext_init=0 ext_split=0 ext_get_borders=0 ext_merge=0
+Sentinel values: 114, 129, 32
+Benchmark: wm_huffman_shuffle_16_8
+RESULT iteration=2 type=wm_huffman_shuffle_16_8 operation=ctor file=/scratch/data/large/cc.txt size=17179869184 height=24 alpha_bits=8 alphabet_size=243 time_in_s=371.283 threads=1 space_in_bytes=13371595132 working_space=129821691812 mode=fixed seed=0 ds_order=7 ext_get_huffman_codes=60.9104 ext_make_tree=310.372 ext_ctor=0 ext_init=0 ext_split=0 ext_get_borders=0 ext_merge=0
+Sentinel values: 114, 129, 32
+Benchmark: wm_huffman_shuffle_32_8
+RESULT iteration=2 type=wm_huffman_shuffle_32_8 operation=ctor file=/scratch/data/large/cc.txt size=17179869184 height=24 alpha_bits=8 alphabet_size=243 time_in_s=304.473 threads=1 space_in_bytes=13371595132 working_space=129821691812 mode=fixed seed=0 ds_order=8 ext_get_huffman_codes=60.937 ext_make_tree=243.529 ext_ctor=0 ext_init=0 ext_split=0 ext_get_borders=0 ext_merge=0
+Sentinel values: 114, 129, 32
+Benchmark: wm_huffman_shuffle_64_8
+RESULT iteration=2 type=wm_huffman_shuffle_64_8 operation=ctor file=/scratch/data/large/cc.txt size=17179869184 height=24 alpha_bits=8 alphabet_size=243 time_in_s=270.129 threads=1 space_in_bytes=13371595132 working_space=129821691812 mode=fixed seed=0 ds_order=9 ext_get_huffman_codes=59.3789 ext_make_tree=210.743 ext_ctor=0 ext_init=0 ext_split=0 ext_get_borders=0 ext_merge=0
+Sentinel values: 114, 129, 32
+
+Iteration 3...
+Benchmark: lwt_huffman_pext_16_4
+RESULT iteration=3 type=lwt_huffman_pext_16_4 operation=ctor file=/scratch/data/large/cc.txt size=17179869184 height=24 alpha_bits=8 alphabet_size=243 time_in_s=356.645 threads=1 space_in_bytes=13371595132 working_space=129821691812 mode=fixed seed=0 ds_order=0 ext_get_huffman_codes=59.7431 ext_make_tree=296.902 ext_ctor=0 ext_init=0 ext_split=0 ext_get_borders=0 ext_merge=0
+Sentinel values: 114, 129, 32
+Benchmark: lwt_huffman_shuffle_8_8
+RESULT iteration=3 type=lwt_huffman_shuffle_8_8 operation=ctor file=/scratch/data/large/cc.txt size=17179869184 height=24 alpha_bits=8 alphabet_size=243 time_in_s=483.423 threads=1 space_in_bytes=13371595132 working_space=129821691812 mode=fixed seed=0 ds_order=1 ext_get_huffman_codes=49.9582 ext_make_tree=433.465 ext_ctor=0 ext_init=0 ext_split=0 ext_get_borders=0 ext_merge=0
+Sentinel values: 114, 129, 32
+Benchmark: lwt_huffman_shuffle_16_8
+RESULT iteration=3 type=lwt_huffman_shuffle_16_8 operation=ctor file=/scratch/data/large/cc.txt size=17179869184 height=24 alpha_bits=8 alphabet_size=243 time_in_s=338.131 threads=1 space_in_bytes=13371595132 working_space=129821691812 mode=fixed seed=0 ds_order=2 ext_get_huffman_codes=59.8013 ext_make_tree=278.323 ext_ctor=0 ext_init=0 ext_split=0 ext_get_borders=0 ext_merge=0
+Sentinel values: 114, 129, 32
+Benchmark: lwt_huffman_shuffle_32_8
+RESULT iteration=3 type=lwt_huffman_shuffle_32_8 operation=ctor file=/scratch/data/large/cc.txt size=17179869184 height=24 alpha_bits=8 alphabet_size=243 time_in_s=275.266 threads=1 space_in_bytes=13371595132 working_space=129821691812 mode=fixed seed=0 ds_order=3 ext_get_huffman_codes=59.7056 ext_make_tree=215.554 ext_ctor=0 ext_init=0 ext_split=0 ext_get_borders=0 ext_merge=0
+Sentinel values: 114, 129, 32
+Benchmark: lwt_huffman_shuffle_64_8
+RESULT iteration=3 type=lwt_huffman_shuffle_64_8 operation=ctor file=/scratch/data/large/cc.txt size=17179869184 height=24 alpha_bits=8 alphabet_size=243 time_in_s=238.98 threads=1 space_in_bytes=13371595132 working_space=129821691812 mode=fixed seed=0 ds_order=4 ext_get_huffman_codes=59.6682 ext_make_tree=179.305 ext_ctor=0 ext_init=0 ext_split=0 ext_get_borders=0 ext_merge=0
+Sentinel values: 114, 129, 32
+Benchmark: wm_huffman_pext_16_4
+RESULT iteration=3 type=wm_huffman_pext_16_4 operation=ctor file=/scratch/data/large/cc.txt size=17179869184 height=24 alpha_bits=8 alphabet_size=243 time_in_s=423.9 threads=1 space_in_bytes=13371595132 working_space=129821691812 mode=fixed seed=0 ds_order=5 ext_get_huffman_codes=59.6438 ext_make_tree=364.256 ext_ctor=0 ext_init=0 ext_split=0 ext_get_borders=0 ext_merge=0
+Sentinel values: 114, 129, 32
+Benchmark: wm_huffman_shuffle_8_8
+RESULT iteration=3 type=wm_huffman_shuffle_8_8 operation=ctor file=/scratch/data/large/cc.txt size=17179869184 height=24 alpha_bits=8 alphabet_size=243 time_in_s=467.892 threads=1 space_in_bytes=13371595132 working_space=129821691812 mode=fixed seed=0 ds_order=6 ext_get_huffman_codes=49.948 ext_make_tree=417.944 ext_ctor=0 ext_init=0 ext_split=0 ext_get_borders=0 ext_merge=0
+Sentinel values: 114, 129, 32
+Benchmark: wm_huffman_shuffle_16_8
+RESULT iteration=3 type=wm_huffman_shuffle_16_8 operation=ctor file=/scratch/data/large/cc.txt size=17179869184 height=24 alpha_bits=8 alphabet_size=243 time_in_s=371.324 threads=1 space_in_bytes=13371595132 working_space=129821691812 mode=fixed seed=0 ds_order=7 ext_get_huffman_codes=59.7312 ext_make_tree=311.586 ext_ctor=0 ext_init=0 ext_split=0 ext_get_borders=0 ext_merge=0
+Sentinel values: 114, 129, 32
+Benchmark: wm_huffman_shuffle_32_8
+RESULT iteration=3 type=wm_huffman_shuffle_32_8 operation=ctor file=/scratch/data/large/cc.txt size=17179869184 height=24 alpha_bits=8 alphabet_size=243 time_in_s=303.868 threads=1 space_in_bytes=13371595132 working_space=129821691812 mode=fixed seed=0 ds_order=8 ext_get_huffman_codes=59.8409 ext_make_tree=244.027 ext_ctor=0 ext_init=0 ext_split=0 ext_get_borders=0 ext_merge=0
+Sentinel values: 114, 129, 32
+Benchmark: wm_huffman_shuffle_64_8
+RESULT iteration=3 type=wm_huffman_shuffle_64_8 operation=ctor file=/scratch/data/large/cc.txt size=17179869184 height=24 alpha_bits=8 alphabet_size=243 time_in_s=272.554 threads=1 space_in_bytes=13371595132 working_space=129821691812 mode=fixed seed=0 ds_order=9 ext_get_huffman_codes=61.8027 ext_make_tree=210.751 ext_ctor=0 ext_init=0 ext_split=0 ext_get_borders=0 ext_merge=0
+Sentinel values: 114, 129, 32
+
+Iteration 4...
+Benchmark: lwt_huffman_pext_16_4
+RESULT iteration=4 type=lwt_huffman_pext_16_4 operation=ctor file=/scratch/data/large/cc.txt size=17179869184 height=24 alpha_bits=8 alphabet_size=243 time_in_s=354.566 threads=1 space_in_bytes=13371595132 working_space=129821691812 mode=fixed seed=0 ds_order=0 ext_get_huffman_codes=60.0237 ext_make_tree=294.542 ext_ctor=0 ext_init=0 ext_split=0 ext_get_borders=0 ext_merge=0
+Sentinel values: 114, 129, 32
+Benchmark: lwt_huffman_shuffle_8_8
+RESULT iteration=4 type=lwt_huffman_shuffle_8_8 operation=ctor file=/scratch/data/large/cc.txt size=17179869184 height=24 alpha_bits=8 alphabet_size=243 time_in_s=483.803 threads=1 space_in_bytes=13371595132 working_space=129821691812 mode=fixed seed=0 ds_order=1 ext_get_huffman_codes=49.9684 ext_make_tree=433.834 ext_ctor=0 ext_init=0 ext_split=0 ext_get_borders=0 ext_merge=0
+Sentinel values: 114, 129, 32
+Benchmark: lwt_huffman_shuffle_16_8
+RESULT iteration=4 type=lwt_huffman_shuffle_16_8 operation=ctor file=/scratch/data/large/cc.txt size=17179869184 height=24 alpha_bits=8 alphabet_size=243 time_in_s=338.272 threads=1 space_in_bytes=13371595132 working_space=129821691812 mode=fixed seed=0 ds_order=2 ext_get_huffman_codes=60.0522 ext_make_tree=278.22 ext_ctor=0 ext_init=0 ext_split=0 ext_get_borders=0 ext_merge=0
+Sentinel values: 114, 129, 32
+Benchmark: lwt_huffman_shuffle_32_8
+RESULT iteration=4 type=lwt_huffman_shuffle_32_8 operation=ctor file=/scratch/data/large/cc.txt size=17179869184 height=24 alpha_bits=8 alphabet_size=243 time_in_s=275.171 threads=1 space_in_bytes=13371595132 working_space=129821691812 mode=fixed seed=0 ds_order=3 ext_get_huffman_codes=59.9915 ext_make_tree=215.179 ext_ctor=0 ext_init=0 ext_split=0 ext_get_borders=0 ext_merge=0
+Sentinel values: 114, 129, 32
+Benchmark: lwt_huffman_shuffle_64_8
+RESULT iteration=4 type=lwt_huffman_shuffle_64_8 operation=ctor file=/scratch/data/large/cc.txt size=17179869184 height=24 alpha_bits=8 alphabet_size=243 time_in_s=238.672 threads=1 space_in_bytes=13371595132 working_space=129821691812 mode=fixed seed=0 ds_order=4 ext_get_huffman_codes=60.028 ext_make_tree=178.643 ext_ctor=0 ext_init=0 ext_split=0 ext_get_borders=0 ext_merge=0
+Sentinel values: 114, 129, 32
+Benchmark: wm_huffman_pext_16_4
+RESULT iteration=4 type=wm_huffman_pext_16_4 operation=ctor file=/scratch/data/large/cc.txt size=17179869184 height=24 alpha_bits=8 alphabet_size=243 time_in_s=427.162 threads=1 space_in_bytes=13371595132 working_space=129821691812 mode=fixed seed=0 ds_order=5 ext_get_huffman_codes=61.5752 ext_make_tree=365.587 ext_ctor=0 ext_init=0 ext_split=0 ext_get_borders=0 ext_merge=0
+Sentinel values: 114, 129, 32
+Benchmark: wm_huffman_shuffle_8_8
+RESULT iteration=4 type=wm_huffman_shuffle_8_8 operation=ctor file=/scratch/data/large/cc.txt size=17179869184 height=24 alpha_bits=8 alphabet_size=243 time_in_s=469.054 threads=1 space_in_bytes=13371595132 working_space=129821691812 mode=fixed seed=0 ds_order=6 ext_get_huffman_codes=51.5983 ext_make_tree=417.455 ext_ctor=0 ext_init=0 ext_split=0 ext_get_borders=0 ext_merge=0
+Sentinel values: 114, 129, 32
+Benchmark: wm_huffman_shuffle_16_8
+RESULT iteration=4 type=wm_huffman_shuffle_16_8 operation=ctor file=/scratch/data/large/cc.txt size=17179869184 height=24 alpha_bits=8 alphabet_size=243 time_in_s=371.56 threads=1 space_in_bytes=13371595132 working_space=129821691812 mode=fixed seed=0 ds_order=7 ext_get_huffman_codes=61.6427 ext_make_tree=309.917 ext_ctor=0 ext_init=0 ext_split=0 ext_get_borders=0 ext_merge=0
+Sentinel values: 114, 129, 32
+Benchmark: wm_huffman_shuffle_32_8
+RESULT iteration=4 type=wm_huffman_shuffle_32_8 operation=ctor file=/scratch/data/large/cc.txt size=17179869184 height=24 alpha_bits=8 alphabet_size=243 time_in_s=303.998 threads=1 space_in_bytes=13371595132 working_space=129821691812 mode=fixed seed=0 ds_order=8 ext_get_huffman_codes=61.6797 ext_make_tree=242.318 ext_ctor=0 ext_init=0 ext_split=0 ext_get_borders=0 ext_merge=0
+Sentinel values: 114, 129, 32
+Benchmark: wm_huffman_shuffle_64_8
+RESULT iteration=4 type=wm_huffman_shuffle_64_8 operation=ctor file=/scratch/data/large/cc.txt size=17179869184 height=24 alpha_bits=8 alphabet_size=243 time_in_s=271.704 threads=1 space_in_bytes=13371595132 working_space=129821691812 mode=fixed seed=0 ds_order=9 ext_get_huffman_codes=61.8846 ext_make_tree=209.82 ext_ctor=0 ext_init=0 ext_split=0 ext_get_borders=0 ext_merge=0
+Sentinel values: 114, 129, 32
+
+
+Text: /scratch/data/large/dna.txt (8 bits)...
+Reading text from /scratch/data/large/dna.txt...
+Reading 8 bits
+Text size: 17179869184
+Computed effective alphabet of text, 4 characters, depth: 2
+Text width: 1 byte(s) (was 1 byte(s))
+Iteration 0...
+[ EXPECTED ]: 2, 3, 0
+Benchmark: lwt_huffman_pext_16_4
+RESULT iteration=0 type=lwt_huffman_pext_16_4 operation=ctor file=/scratch/data/large/dna.txt size=17179869184 height=2 alpha_bits=2 alphabet_size=4 time_in_s=134.483 threads=1 space_in_bytes=4294972260 working_space=129821691811 mode=fixed seed=0 ds_order=0 ext_get_huffman_codes=49.487 ext_make_tree=84.9964 ext_ctor=0 ext_init=0 ext_split=0 ext_get_borders=0 ext_merge=0
+Sentinel values: 2, 3, 0
+Benchmark: lwt_huffman_shuffle_8_8
+RESULT iteration=0 type=lwt_huffman_shuffle_8_8 operation=ctor file=/scratch/data/large/dna.txt size=17179869184 height=2 alpha_bits=2 alphabet_size=4 time_in_s=200.657 threads=1 space_in_bytes=4294972260 working_space=129821691811 mode=fixed seed=0 ds_order=1 ext_get_huffman_codes=49.4949 ext_make_tree=151.162 ext_ctor=0 ext_init=0 ext_split=0 ext_get_borders=0 ext_merge=0
+Sentinel values: 2, 3, 0
+Benchmark: lwt_huffman_shuffle_16_8
+RESULT iteration=0 type=lwt_huffman_shuffle_16_8 operation=ctor file=/scratch/data/large/dna.txt size=17179869184 height=2 alpha_bits=2 alphabet_size=4 time_in_s=156.063 threads=1 space_in_bytes=4294972260 working_space=129821691811 mode=fixed seed=0 ds_order=2 ext_get_huffman_codes=50.684 ext_make_tree=105.379 ext_ctor=0 ext_init=0 ext_split=0 ext_get_borders=0 ext_merge=0
+Sentinel values: 2, 3, 0
+Benchmark: lwt_huffman_shuffle_32_8
+RESULT iteration=0 type=lwt_huffman_shuffle_32_8 operation=ctor file=/scratch/data/large/dna.txt size=17179869184 height=2 alpha_bits=2 alphabet_size=4 time_in_s=138.297 threads=1 space_in_bytes=4294972260 working_space=129821691811 mode=fixed seed=0 ds_order=3 ext_get_huffman_codes=49.4914 ext_make_tree=88.8057 ext_ctor=0 ext_init=0 ext_split=0 ext_get_borders=0 ext_merge=0
+Sentinel values: 2, 3, 0
+Benchmark: lwt_huffman_shuffle_64_8
+RESULT iteration=0 type=lwt_huffman_shuffle_64_8 operation=ctor file=/scratch/data/large/dna.txt size=17179869184 height=2 alpha_bits=2 alphabet_size=4 time_in_s=126.461 threads=1 space_in_bytes=4294972260 working_space=129821691811 mode=fixed seed=0 ds_order=4 ext_get_huffman_codes=49.4917 ext_make_tree=76.9692 ext_ctor=0 ext_init=0 ext_split=0 ext_get_borders=0 ext_merge=0
+Sentinel values: 2, 3, 0
+Benchmark: wm_huffman_pext_16_4
+RESULT iteration=0 type=wm_huffman_pext_16_4 operation=ctor file=/scratch/data/large/dna.txt size=17179869184 height=2 alpha_bits=2 alphabet_size=4 time_in_s=129.262 threads=1 space_in_bytes=4294972260 working_space=129821691811 mode=fixed seed=0 ds_order=5 ext_get_huffman_codes=49.8952 ext_make_tree=79.3664 ext_ctor=0 ext_init=0 ext_split=0 ext_get_borders=0 ext_merge=0
+Sentinel values: 2, 3, 0
+Benchmark: wm_huffman_shuffle_8_8
+RESULT iteration=0 type=wm_huffman_shuffle_8_8 operation=ctor file=/scratch/data/large/dna.txt size=17179869184 height=2 alpha_bits=2 alphabet_size=4 time_in_s=178.6 threads=1 space_in_bytes=4294972260 working_space=129821691811 mode=fixed seed=0 ds_order=6 ext_get_huffman_codes=49.5383 ext_make_tree=129.061 ext_ctor=0 ext_init=0 ext_split=0 ext_get_borders=0 ext_merge=0
+Sentinel values: 2, 3, 0
+Benchmark: wm_huffman_shuffle_16_8
+RESULT iteration=0 type=wm_huffman_shuffle_16_8 operation=ctor file=/scratch/data/large/dna.txt size=17179869184 height=2 alpha_bits=2 alphabet_size=4 time_in_s=153.295 threads=1 space_in_bytes=4294972260 working_space=129821691811 mode=fixed seed=0 ds_order=7 ext_get_huffman_codes=49.4911 ext_make_tree=103.804 ext_ctor=0 ext_init=0 ext_split=0 ext_get_borders=0 ext_merge=0
+Sentinel values: 2, 3, 0
+Benchmark: wm_huffman_shuffle_32_8
+RESULT iteration=0 type=wm_huffman_shuffle_32_8 operation=ctor file=/scratch/data/large/dna.txt size=17179869184 height=2 alpha_bits=2 alphabet_size=4 time_in_s=138.259 threads=1 space_in_bytes=4294972260 working_space=129821691811 mode=fixed seed=0 ds_order=8 ext_get_huffman_codes=49.4912 ext_make_tree=88.7675 ext_ctor=0 ext_init=0 ext_split=0 ext_get_borders=0 ext_merge=0
+Sentinel values: 2, 3, 0
+Benchmark: wm_huffman_shuffle_64_8
+RESULT iteration=0 type=wm_huffman_shuffle_64_8 operation=ctor file=/scratch/data/large/dna.txt size=17179869184 height=2 alpha_bits=2 alphabet_size=4 time_in_s=126.077 threads=1 space_in_bytes=4294972260 working_space=129821691811 mode=fixed seed=0 ds_order=9 ext_get_huffman_codes=49.4891 ext_make_tree=76.5879 ext_ctor=0 ext_init=0 ext_split=0 ext_get_borders=0 ext_merge=0
+Sentinel values: 2, 3, 0
+
+Iteration 1...
+Benchmark: lwt_huffman_pext_16_4
+RESULT iteration=1 type=lwt_huffman_pext_16_4 operation=ctor file=/scratch/data/large/dna.txt size=17179869184 height=2 alpha_bits=2 alphabet_size=4 time_in_s=134.039 threads=1 space_in_bytes=4294972260 working_space=129821691811 mode=fixed seed=0 ds_order=0 ext_get_huffman_codes=49.4888 ext_make_tree=84.5503 ext_ctor=0 ext_init=0 ext_split=0 ext_get_borders=0 ext_merge=0
+Sentinel values: 2, 3, 0
+Benchmark: lwt_huffman_shuffle_8_8
+RESULT iteration=1 type=lwt_huffman_shuffle_8_8 operation=ctor file=/scratch/data/large/dna.txt size=17179869184 height=2 alpha_bits=2 alphabet_size=4 time_in_s=189.866 threads=1 space_in_bytes=4294972260 working_space=129821691811 mode=fixed seed=0 ds_order=1 ext_get_huffman_codes=49.4896 ext_make_tree=140.376 ext_ctor=0 ext_init=0 ext_split=0 ext_get_borders=0 ext_merge=0
+Sentinel values: 2, 3, 0
+Benchmark: lwt_huffman_shuffle_16_8
+RESULT iteration=1 type=lwt_huffman_shuffle_16_8 operation=ctor file=/scratch/data/large/dna.txt size=17179869184 height=2 alpha_bits=2 alphabet_size=4 time_in_s=155.045 threads=1 space_in_bytes=4294972260 working_space=129821691811 mode=fixed seed=0 ds_order=2 ext_get_huffman_codes=49.4882 ext_make_tree=105.557 ext_ctor=0 ext_init=0 ext_split=0 ext_get_borders=0 ext_merge=0
+Sentinel values: 2, 3, 0
+Benchmark: lwt_huffman_shuffle_32_8
+RESULT iteration=1 type=lwt_huffman_shuffle_32_8 operation=ctor file=/scratch/data/large/dna.txt size=17179869184 height=2 alpha_bits=2 alphabet_size=4 time_in_s=138.586 threads=1 space_in_bytes=4294972260 working_space=129821691811 mode=fixed seed=0 ds_order=3 ext_get_huffman_codes=49.4846 ext_make_tree=89.1012 ext_ctor=0 ext_init=0 ext_split=0 ext_get_borders=0 ext_merge=0
+Sentinel values: 2, 3, 0
+Benchmark: lwt_huffman_shuffle_64_8
+RESULT iteration=1 type=lwt_huffman_shuffle_64_8 operation=ctor file=/scratch/data/large/dna.txt size=17179869184 height=2 alpha_bits=2 alphabet_size=4 time_in_s=126.533 threads=1 space_in_bytes=4294972260 working_space=129821691811 mode=fixed seed=0 ds_order=4 ext_get_huffman_codes=49.487 ext_make_tree=77.0463 ext_ctor=0 ext_init=0 ext_split=0 ext_get_borders=0 ext_merge=0
+Sentinel values: 2, 3, 0
+Benchmark: wm_huffman_pext_16_4
+RESULT iteration=1 type=wm_huffman_pext_16_4 operation=ctor file=/scratch/data/large/dna.txt size=17179869184 height=2 alpha_bits=2 alphabet_size=4 time_in_s=128.904 threads=1 space_in_bytes=4294972260 working_space=129821691811 mode=fixed seed=0 ds_order=5 ext_get_huffman_codes=49.4891 ext_make_tree=79.4147 ext_ctor=0 ext_init=0 ext_split=0 ext_get_borders=0 ext_merge=0
+Sentinel values: 2, 3, 0
+Benchmark: wm_huffman_shuffle_8_8
+RESULT iteration=1 type=wm_huffman_shuffle_8_8 operation=ctor file=/scratch/data/large/dna.txt size=17179869184 height=2 alpha_bits=2 alphabet_size=4 time_in_s=178.525 threads=1 space_in_bytes=4294972260 working_space=129821691811 mode=fixed seed=0 ds_order=6 ext_get_huffman_codes=49.4893 ext_make_tree=129.036 ext_ctor=0 ext_init=0 ext_split=0 ext_get_borders=0 ext_merge=0
+Sentinel values: 2, 3, 0
+Benchmark: wm_huffman_shuffle_16_8
+RESULT iteration=1 type=wm_huffman_shuffle_16_8 operation=ctor file=/scratch/data/large/dna.txt size=17179869184 height=2 alpha_bits=2 alphabet_size=4 time_in_s=153.14 threads=1 space_in_bytes=4294972260 working_space=129821691811 mode=fixed seed=0 ds_order=7 ext_get_huffman_codes=49.4885 ext_make_tree=103.651 ext_ctor=0 ext_init=0 ext_split=0 ext_get_borders=0 ext_merge=0
+Sentinel values: 2, 3, 0
+Benchmark: wm_huffman_shuffle_32_8
+RESULT iteration=1 type=wm_huffman_shuffle_32_8 operation=ctor file=/scratch/data/large/dna.txt size=17179869184 height=2 alpha_bits=2 alphabet_size=4 time_in_s=138.217 threads=1 space_in_bytes=4294972260 working_space=129821691811 mode=fixed seed=0 ds_order=8 ext_get_huffman_codes=49.4874 ext_make_tree=88.7296 ext_ctor=0 ext_init=0 ext_split=0 ext_get_borders=0 ext_merge=0
+Sentinel values: 2, 3, 0
+Benchmark: wm_huffman_shuffle_64_8
+RESULT iteration=1 type=wm_huffman_shuffle_64_8 operation=ctor file=/scratch/data/large/dna.txt size=17179869184 height=2 alpha_bits=2 alphabet_size=4 time_in_s=125.795 threads=1 space_in_bytes=4294972260 working_space=129821691811 mode=fixed seed=0 ds_order=9 ext_get_huffman_codes=49.4893 ext_make_tree=76.3057 ext_ctor=0 ext_init=0 ext_split=0 ext_get_borders=0 ext_merge=0
+Sentinel values: 2, 3, 0
+
+Iteration 2...
+Benchmark: lwt_huffman_pext_16_4
+RESULT iteration=2 type=lwt_huffman_pext_16_4 operation=ctor file=/scratch/data/large/dna.txt size=17179869184 height=2 alpha_bits=2 alphabet_size=4 time_in_s=134.122 threads=1 space_in_bytes=4294972260 working_space=129821691811 mode=fixed seed=0 ds_order=0 ext_get_huffman_codes=49.4886 ext_make_tree=84.6337 ext_ctor=0 ext_init=0 ext_split=0 ext_get_borders=0 ext_merge=0
+Sentinel values: 2, 3, 0
+Benchmark: lwt_huffman_shuffle_8_8
+RESULT iteration=2 type=lwt_huffman_shuffle_8_8 operation=ctor file=/scratch/data/large/dna.txt size=17179869184 height=2 alpha_bits=2 alphabet_size=4 time_in_s=189.737 threads=1 space_in_bytes=4294972260 working_space=129821691811 mode=fixed seed=0 ds_order=1 ext_get_huffman_codes=49.4911 ext_make_tree=140.246 ext_ctor=0 ext_init=0 ext_split=0 ext_get_borders=0 ext_merge=0
+Sentinel values: 2, 3, 0
+Benchmark: lwt_huffman_shuffle_16_8
+RESULT iteration=2 type=lwt_huffman_shuffle_16_8 operation=ctor file=/scratch/data/large/dna.txt size=17179869184 height=2 alpha_bits=2 alphabet_size=4 time_in_s=154.981 threads=1 space_in_bytes=4294972260 working_space=129821691811 mode=fixed seed=0 ds_order=2 ext_get_huffman_codes=49.4892 ext_make_tree=105.492 ext_ctor=0 ext_init=0 ext_split=0 ext_get_borders=0 ext_merge=0
+Sentinel values: 2, 3, 0
+Benchmark: lwt_huffman_shuffle_32_8
+RESULT iteration=2 type=lwt_huffman_shuffle_32_8 operation=ctor file=/scratch/data/large/dna.txt size=17179869184 height=2 alpha_bits=2 alphabet_size=4 time_in_s=138.432 threads=1 space_in_bytes=4294972260 working_space=129821691811 mode=fixed seed=0 ds_order=3 ext_get_huffman_codes=49.4889 ext_make_tree=88.9429 ext_ctor=0 ext_init=0 ext_split=0 ext_get_borders=0 ext_merge=0
+Sentinel values: 2, 3, 0
+Benchmark: lwt_huffman_shuffle_64_8
+RESULT iteration=2 type=lwt_huffman_shuffle_64_8 operation=ctor file=/scratch/data/large/dna.txt size=17179869184 height=2 alpha_bits=2 alphabet_size=4 time_in_s=126.651 threads=1 space_in_bytes=4294972260 working_space=129821691811 mode=fixed seed=0 ds_order=4 ext_get_huffman_codes=49.4877 ext_make_tree=77.1633 ext_ctor=0 ext_init=0 ext_split=0 ext_get_borders=0 ext_merge=0
+Sentinel values: 2, 3, 0
+Benchmark: wm_huffman_pext_16_4
+RESULT iteration=2 type=wm_huffman_pext_16_4 operation=ctor file=/scratch/data/large/dna.txt size=17179869184 height=2 alpha_bits=2 alphabet_size=4 time_in_s=128.967 threads=1 space_in_bytes=4294972260 working_space=129821691811 mode=fixed seed=0 ds_order=5 ext_get_huffman_codes=49.4898 ext_make_tree=79.4769 ext_ctor=0 ext_init=0 ext_split=0 ext_get_borders=0 ext_merge=0
+Sentinel values: 2, 3, 0
+Benchmark: wm_huffman_shuffle_8_8
+RESULT iteration=2 type=wm_huffman_shuffle_8_8 operation=ctor file=/scratch/data/large/dna.txt size=17179869184 height=2 alpha_bits=2 alphabet_size=4 time_in_s=178.409 threads=1 space_in_bytes=4294972260 working_space=129821691811 mode=fixed seed=0 ds_order=6 ext_get_huffman_codes=49.4878 ext_make_tree=128.921 ext_ctor=0 ext_init=0 ext_split=0 ext_get_borders=0 ext_merge=0
+Sentinel values: 2, 3, 0
+Benchmark: wm_huffman_shuffle_16_8
+RESULT iteration=2 type=wm_huffman_shuffle_16_8 operation=ctor file=/scratch/data/large/dna.txt size=17179869184 height=2 alpha_bits=2 alphabet_size=4 time_in_s=153.216 threads=1 space_in_bytes=4294972260 working_space=129821691811 mode=fixed seed=0 ds_order=7 ext_get_huffman_codes=49.4922 ext_make_tree=103.724 ext_ctor=0 ext_init=0 ext_split=0 ext_get_borders=0 ext_merge=0
+Sentinel values: 2, 3, 0
+Benchmark: wm_huffman_shuffle_32_8
+RESULT iteration=2 type=wm_huffman_shuffle_32_8 operation=ctor file=/scratch/data/large/dna.txt size=17179869184 height=2 alpha_bits=2 alphabet_size=4 time_in_s=137.979 threads=1 space_in_bytes=4294972260 working_space=129821691811 mode=fixed seed=0 ds_order=8 ext_get_huffman_codes=49.4909 ext_make_tree=88.4879 ext_ctor=0 ext_init=0 ext_split=0 ext_get_borders=0 ext_merge=0
+Sentinel values: 2, 3, 0
+Benchmark: wm_huffman_shuffle_64_8
+RESULT iteration=2 type=wm_huffman_shuffle_64_8 operation=ctor file=/scratch/data/large/dna.txt size=17179869184 height=2 alpha_bits=2 alphabet_size=4 time_in_s=125.659 threads=1 space_in_bytes=4294972260 working_space=129821691811 mode=fixed seed=0 ds_order=9 ext_get_huffman_codes=49.4914 ext_make_tree=76.1681 ext_ctor=0 ext_init=0 ext_split=0 ext_get_borders=0 ext_merge=0
+Sentinel values: 2, 3, 0
+
+Iteration 3...
+Benchmark: lwt_huffman_pext_16_4
+RESULT iteration=3 type=lwt_huffman_pext_16_4 operation=ctor file=/scratch/data/large/dna.txt size=17179869184 height=2 alpha_bits=2 alphabet_size=4 time_in_s=134.047 threads=1 space_in_bytes=4294972260 working_space=129821691811 mode=fixed seed=0 ds_order=0 ext_get_huffman_codes=49.4917 ext_make_tree=84.5557 ext_ctor=0 ext_init=0 ext_split=0 ext_get_borders=0 ext_merge=0
+Sentinel values: 2, 3, 0
+Benchmark: lwt_huffman_shuffle_8_8
+RESULT iteration=3 type=lwt_huffman_shuffle_8_8 operation=ctor file=/scratch/data/large/dna.txt size=17179869184 height=2 alpha_bits=2 alphabet_size=4 time_in_s=189.607 threads=1 space_in_bytes=4294972260 working_space=129821691811 mode=fixed seed=0 ds_order=1 ext_get_huffman_codes=49.4918 ext_make_tree=140.115 ext_ctor=0 ext_init=0 ext_split=0 ext_get_borders=0 ext_merge=0
+Sentinel values: 2, 3, 0
+Benchmark: lwt_huffman_shuffle_16_8
+RESULT iteration=3 type=lwt_huffman_shuffle_16_8 operation=ctor file=/scratch/data/large/dna.txt size=17179869184 height=2 alpha_bits=2 alphabet_size=4 time_in_s=155.478 threads=1 space_in_bytes=4294972260 working_space=129821691811 mode=fixed seed=0 ds_order=2 ext_get_huffman_codes=49.4931 ext_make_tree=105.985 ext_ctor=0 ext_init=0 ext_split=0 ext_get_borders=0 ext_merge=0
+Sentinel values: 2, 3, 0
+Benchmark: lwt_huffman_shuffle_32_8
+RESULT iteration=3 type=lwt_huffman_shuffle_32_8 operation=ctor file=/scratch/data/large/dna.txt size=17179869184 height=2 alpha_bits=2 alphabet_size=4 time_in_s=138.417 threads=1 space_in_bytes=4294972260 working_space=129821691811 mode=fixed seed=0 ds_order=3 ext_get_huffman_codes=49.4956 ext_make_tree=88.9214 ext_ctor=0 ext_init=0 ext_split=0 ext_get_borders=0 ext_merge=0
+Sentinel values: 2, 3, 0
+Benchmark: lwt_huffman_shuffle_64_8
+RESULT iteration=3 type=lwt_huffman_shuffle_64_8 operation=ctor file=/scratch/data/large/dna.txt size=17179869184 height=2 alpha_bits=2 alphabet_size=4 time_in_s=126.669 threads=1 space_in_bytes=4294972260 working_space=129821691811 mode=fixed seed=0 ds_order=4 ext_get_huffman_codes=49.4941 ext_make_tree=77.175 ext_ctor=0 ext_init=0 ext_split=0 ext_get_borders=0 ext_merge=0
+Sentinel values: 2, 3, 0
+Benchmark: wm_huffman_pext_16_4
+RESULT iteration=3 type=wm_huffman_pext_16_4 operation=ctor file=/scratch/data/large/dna.txt size=17179869184 height=2 alpha_bits=2 alphabet_size=4 time_in_s=128.967 threads=1 space_in_bytes=4294972260 working_space=129821691811 mode=fixed seed=0 ds_order=5 ext_get_huffman_codes=49.4902 ext_make_tree=79.4771 ext_ctor=0 ext_init=0 ext_split=0 ext_get_borders=0 ext_merge=0
+Sentinel values: 2, 3, 0
+Benchmark: wm_huffman_shuffle_8_8
+RESULT iteration=3 type=wm_huffman_shuffle_8_8 operation=ctor file=/scratch/data/large/dna.txt size=17179869184 height=2 alpha_bits=2 alphabet_size=4 time_in_s=178.592 threads=1 space_in_bytes=4294972260 working_space=129821691811 mode=fixed seed=0 ds_order=6 ext_get_huffman_codes=49.4848 ext_make_tree=129.107 ext_ctor=0 ext_init=0 ext_split=0 ext_get_borders=0 ext_merge=0
+Sentinel values: 2, 3, 0
+Benchmark: wm_huffman_shuffle_16_8
+RESULT iteration=3 type=wm_huffman_shuffle_16_8 operation=ctor file=/scratch/data/large/dna.txt size=17179869184 height=2 alpha_bits=2 alphabet_size=4 time_in_s=153.209 threads=1 space_in_bytes=4294972260 working_space=129821691811 mode=fixed seed=0 ds_order=7 ext_get_huffman_codes=49.4925 ext_make_tree=103.716 ext_ctor=0 ext_init=0 ext_split=0 ext_get_borders=0 ext_merge=0
+Sentinel values: 2, 3, 0
+Benchmark: wm_huffman_shuffle_32_8
+RESULT iteration=3 type=wm_huffman_shuffle_32_8 operation=ctor file=/scratch/data/large/dna.txt size=17179869184 height=2 alpha_bits=2 alphabet_size=4 time_in_s=138.04 threads=1 space_in_bytes=4294972260 working_space=129821691811 mode=fixed seed=0 ds_order=8 ext_get_huffman_codes=49.4883 ext_make_tree=88.5521 ext_ctor=0 ext_init=0 ext_split=0 ext_get_borders=0 ext_merge=0
+Sentinel values: 2, 3, 0
+Benchmark: wm_huffman_shuffle_64_8
+RESULT iteration=3 type=wm_huffman_shuffle_64_8 operation=ctor file=/scratch/data/large/dna.txt size=17179869184 height=2 alpha_bits=2 alphabet_size=4 time_in_s=125.925 threads=1 space_in_bytes=4294972260 working_space=129821691811 mode=fixed seed=0 ds_order=9 ext_get_huffman_codes=49.4904 ext_make_tree=76.4349 ext_ctor=0 ext_init=0 ext_split=0 ext_get_borders=0 ext_merge=0
+Sentinel values: 2, 3, 0
+
+Iteration 4...
+Benchmark: lwt_huffman_pext_16_4
+RESULT iteration=4 type=lwt_huffman_pext_16_4 operation=ctor file=/scratch/data/large/dna.txt size=17179869184 height=2 alpha_bits=2 alphabet_size=4 time_in_s=134.124 threads=1 space_in_bytes=4294972260 working_space=129821691811 mode=fixed seed=0 ds_order=0 ext_get_huffman_codes=49.4892 ext_make_tree=84.6345 ext_ctor=0 ext_init=0 ext_split=0 ext_get_borders=0 ext_merge=0
+Sentinel values: 2, 3, 0
+Benchmark: lwt_huffman_shuffle_8_8
+RESULT iteration=4 type=lwt_huffman_shuffle_8_8 operation=ctor file=/scratch/data/large/dna.txt size=17179869184 height=2 alpha_bits=2 alphabet_size=4 time_in_s=189.745 threads=1 space_in_bytes=4294972260 working_space=129821691811 mode=fixed seed=0 ds_order=1 ext_get_huffman_codes=49.4836 ext_make_tree=140.261 ext_ctor=0 ext_init=0 ext_split=0 ext_get_borders=0 ext_merge=0
+Sentinel values: 2, 3, 0
+Benchmark: lwt_huffman_shuffle_16_8
+RESULT iteration=4 type=lwt_huffman_shuffle_16_8 operation=ctor file=/scratch/data/large/dna.txt size=17179869184 height=2 alpha_bits=2 alphabet_size=4 time_in_s=155 threads=1 space_in_bytes=4294972260 working_space=129821691811 mode=fixed seed=0 ds_order=2 ext_get_huffman_codes=49.4874 ext_make_tree=105.513 ext_ctor=0 ext_init=0 ext_split=0 ext_get_borders=0 ext_merge=0
+Sentinel values: 2, 3, 0
+Benchmark: lwt_huffman_shuffle_32_8
+RESULT iteration=4 type=lwt_huffman_shuffle_32_8 operation=ctor file=/scratch/data/large/dna.txt size=17179869184 height=2 alpha_bits=2 alphabet_size=4 time_in_s=138.428 threads=1 space_in_bytes=4294972260 working_space=129821691811 mode=fixed seed=0 ds_order=3 ext_get_huffman_codes=49.4869 ext_make_tree=88.9409 ext_ctor=0 ext_init=0 ext_split=0 ext_get_borders=0 ext_merge=0
+Sentinel values: 2, 3, 0
+Benchmark: lwt_huffman_shuffle_64_8
+RESULT iteration=4 type=lwt_huffman_shuffle_64_8 operation=ctor file=/scratch/data/large/dna.txt size=17179869184 height=2 alpha_bits=2 alphabet_size=4 time_in_s=126.683 threads=1 space_in_bytes=4294972260 working_space=129821691811 mode=fixed seed=0 ds_order=4 ext_get_huffman_codes=49.4856 ext_make_tree=77.1974 ext_ctor=0 ext_init=0 ext_split=0 ext_get_borders=0 ext_merge=0
+Sentinel values: 2, 3, 0
+Benchmark: wm_huffman_pext_16_4
+RESULT iteration=4 type=wm_huffman_pext_16_4 operation=ctor file=/scratch/data/large/dna.txt size=17179869184 height=2 alpha_bits=2 alphabet_size=4 time_in_s=129.139 threads=1 space_in_bytes=4294972260 working_space=129821691811 mode=fixed seed=0 ds_order=5 ext_get_huffman_codes=49.4889 ext_make_tree=79.6503 ext_ctor=0 ext_init=0 ext_split=0 ext_get_borders=0 ext_merge=0
+Sentinel values: 2, 3, 0
+Benchmark: wm_huffman_shuffle_8_8
+RESULT iteration=4 type=wm_huffman_shuffle_8_8 operation=ctor file=/scratch/data/large/dna.txt size=17179869184 height=2 alpha_bits=2 alphabet_size=4 time_in_s=178.769 threads=1 space_in_bytes=4294972260 working_space=129821691811 mode=fixed seed=0 ds_order=6 ext_get_huffman_codes=49.4894 ext_make_tree=129.279 ext_ctor=0 ext_init=0 ext_split=0 ext_get_borders=0 ext_merge=0
+Sentinel values: 2, 3, 0
+Benchmark: wm_huffman_shuffle_16_8
+RESULT iteration=4 type=wm_huffman_shuffle_16_8 operation=ctor file=/scratch/data/large/dna.txt size=17179869184 height=2 alpha_bits=2 alphabet_size=4 time_in_s=153.287 threads=1 space_in_bytes=4294972260 working_space=129821691811 mode=fixed seed=0 ds_order=7 ext_get_huffman_codes=49.4869 ext_make_tree=103.8 ext_ctor=0 ext_init=0 ext_split=0 ext_get_borders=0 ext_merge=0
+Sentinel values: 2, 3, 0
+Benchmark: wm_huffman_shuffle_32_8
+RESULT iteration=4 type=wm_huffman_shuffle_32_8 operation=ctor file=/scratch/data/large/dna.txt size=17179869184 height=2 alpha_bits=2 alphabet_size=4 time_in_s=138.329 threads=1 space_in_bytes=4294972260 working_space=129821691811 mode=fixed seed=0 ds_order=8 ext_get_huffman_codes=49.486 ext_make_tree=88.8434 ext_ctor=0 ext_init=0 ext_split=0 ext_get_borders=0 ext_merge=0
+Sentinel values: 2, 3, 0
+Benchmark: wm_huffman_shuffle_64_8
+RESULT iteration=4 type=wm_huffman_shuffle_64_8 operation=ctor file=/scratch/data/large/dna.txt size=17179869184 height=2 alpha_bits=2 alphabet_size=4 time_in_s=126.011 threads=1 space_in_bytes=4294972260 working_space=129821691811 mode=fixed seed=0 ds_order=9 ext_get_huffman_codes=49.4871 ext_make_tree=76.5242 ext_ctor=0 ext_init=0 ext_split=0 ext_get_borders=0 ext_merge=0
+Sentinel values: 2, 3, 0
+
+
+Text: /scratch/data/large/wiki.txt (8 bits)...
+Reading text from /scratch/data/large/wiki.txt...
+Reading 8 bits
+Text size: 17179869184
+Computed effective alphabet of text, 212 characters, depth: 8
+Text width: 1 byte(s) (was 1 byte(s))
+Iteration 0...
+[ EXPECTED ]: 30, 2, 36
+Benchmark: lwt_huffman_pext_16_4
+RESULT iteration=0 type=lwt_huffman_pext_16_4 operation=ctor file=/scratch/data/large/wiki.txt size=17179869184 height=29 alpha_bits=8 alphabet_size=212 time_in_s=352.471 threads=1 space_in_bytes=11633304308 working_space=129821691810 mode=fixed seed=0 ds_order=0 ext_get_huffman_codes=50.0205 ext_make_tree=302.45 ext_ctor=0 ext_init=0 ext_split=0 ext_get_borders=0 ext_merge=0
+Sentinel values: 30, 2, 36
+Benchmark: lwt_huffman_shuffle_8_8
+RESULT iteration=0 type=lwt_huffman_shuffle_8_8 operation=ctor file=/scratch/data/large/wiki.txt size=17179869184 height=29 alpha_bits=8 alphabet_size=212 time_in_s=442.813 threads=1 space_in_bytes=11633304308 working_space=129821691810 mode=fixed seed=0 ds_order=1 ext_get_huffman_codes=55.6908 ext_make_tree=387.122 ext_ctor=0 ext_init=0 ext_split=0 ext_get_borders=0 ext_merge=0
+Sentinel values: 30, 2, 36
+Benchmark: lwt_huffman_shuffle_16_8
+RESULT iteration=0 type=lwt_huffman_shuffle_16_8 operation=ctor file=/scratch/data/large/wiki.txt size=17179869184 height=29 alpha_bits=8 alphabet_size=212 time_in_s=304.124 threads=1 space_in_bytes=11633304308 working_space=129821691810 mode=fixed seed=0 ds_order=2 ext_get_huffman_codes=55.6642 ext_make_tree=248.46 ext_ctor=0 ext_init=0 ext_split=0 ext_get_borders=0 ext_merge=0
+Sentinel values: 30, 2, 36
+Benchmark: lwt_huffman_shuffle_32_8
+RESULT iteration=0 type=lwt_huffman_shuffle_32_8 operation=ctor file=/scratch/data/large/wiki.txt size=17179869184 height=29 alpha_bits=8 alphabet_size=212 time_in_s=246.467 threads=1 space_in_bytes=11633304308 working_space=129821691810 mode=fixed seed=0 ds_order=3 ext_get_huffman_codes=55.1434 ext_make_tree=191.324 ext_ctor=0 ext_init=0 ext_split=0 ext_get_borders=0 ext_merge=0
+Sentinel values: 30, 2, 36
+Benchmark: lwt_huffman_shuffle_64_8
+RESULT iteration=0 type=lwt_huffman_shuffle_64_8 operation=ctor file=/scratch/data/large/wiki.txt size=17179869184 height=29 alpha_bits=8 alphabet_size=212 time_in_s=213.06 threads=1 space_in_bytes=11633304308 working_space=129821691810 mode=fixed seed=0 ds_order=4 ext_get_huffman_codes=55.3617 ext_make_tree=157.692 ext_ctor=0 ext_init=0 ext_split=0 ext_get_borders=0 ext_merge=0
+Sentinel values: 30, 2, 36
+Benchmark: wm_huffman_pext_16_4
+RESULT iteration=0 type=wm_huffman_pext_16_4 operation=ctor file=/scratch/data/large/wiki.txt size=17179869184 height=29 alpha_bits=8 alphabet_size=212 time_in_s=436.964 threads=1 space_in_bytes=11633304308 working_space=129821691810 mode=fixed seed=0 ds_order=5 ext_get_huffman_codes=56.1642 ext_make_tree=380.8 ext_ctor=0 ext_init=0 ext_split=0 ext_get_borders=0 ext_merge=0
+Sentinel values: 30, 2, 36
+Benchmark: wm_huffman_shuffle_8_8
+RESULT iteration=0 type=wm_huffman_shuffle_8_8 operation=ctor file=/scratch/data/large/wiki.txt size=17179869184 height=29 alpha_bits=8 alphabet_size=212 time_in_s=414.438 threads=1 space_in_bytes=11633304308 working_space=129821691810 mode=fixed seed=0 ds_order=6 ext_get_huffman_codes=49.9692 ext_make_tree=364.469 ext_ctor=0 ext_init=0 ext_split=0 ext_get_borders=0 ext_merge=0
+Sentinel values: 30, 2, 36
+Benchmark: wm_huffman_shuffle_16_8
+RESULT iteration=0 type=wm_huffman_shuffle_16_8 operation=ctor file=/scratch/data/large/wiki.txt size=17179869184 height=29 alpha_bits=8 alphabet_size=212 time_in_s=331.119 threads=1 space_in_bytes=11633304308 working_space=129821691810 mode=fixed seed=0 ds_order=7 ext_get_huffman_codes=56.8888 ext_make_tree=274.23 ext_ctor=0 ext_init=0 ext_split=0 ext_get_borders=0 ext_merge=0
+Sentinel values: 30, 2, 36
+Benchmark: wm_huffman_shuffle_32_8
+RESULT iteration=0 type=wm_huffman_shuffle_32_8 operation=ctor file=/scratch/data/large/wiki.txt size=17179869184 height=29 alpha_bits=8 alphabet_size=212 time_in_s=264.686 threads=1 space_in_bytes=11633304308 working_space=129821691810 mode=fixed seed=0 ds_order=8 ext_get_huffman_codes=56.9009 ext_make_tree=207.785 ext_ctor=0 ext_init=0 ext_split=0 ext_get_borders=0 ext_merge=0
+Sentinel values: 30, 2, 36
+Benchmark: wm_huffman_shuffle_64_8
+RESULT iteration=0 type=wm_huffman_shuffle_64_8 operation=ctor file=/scratch/data/large/wiki.txt size=17179869184 height=29 alpha_bits=8 alphabet_size=212 time_in_s=234.566 threads=1 space_in_bytes=11633304308 working_space=129821691810 mode=fixed seed=0 ds_order=9 ext_get_huffman_codes=56.7636 ext_make_tree=177.802 ext_ctor=0 ext_init=0 ext_split=0 ext_get_borders=0 ext_merge=0
+Sentinel values: 30, 2, 36
+
+Iteration 1...
+Benchmark: lwt_huffman_pext_16_4
+RESULT iteration=1 type=lwt_huffman_pext_16_4 operation=ctor file=/scratch/data/large/wiki.txt size=17179869184 height=29 alpha_bits=8 alphabet_size=212 time_in_s=349.894 threads=1 space_in_bytes=11633304308 working_space=129821691810 mode=fixed seed=0 ds_order=0 ext_get_huffman_codes=57.5257 ext_make_tree=292.368 ext_ctor=0 ext_init=0 ext_split=0 ext_get_borders=0 ext_merge=0
+Sentinel values: 30, 2, 36
+Benchmark: lwt_huffman_shuffle_8_8
+RESULT iteration=1 type=lwt_huffman_shuffle_8_8 operation=ctor file=/scratch/data/large/wiki.txt size=17179869184 height=29 alpha_bits=8 alphabet_size=212 time_in_s=428.428 threads=1 space_in_bytes=11633304308 working_space=129821691810 mode=fixed seed=0 ds_order=1 ext_get_huffman_codes=49.9661 ext_make_tree=378.461 ext_ctor=0 ext_init=0 ext_split=0 ext_get_borders=0 ext_merge=0
+Sentinel values: 30, 2, 36
+Benchmark: lwt_huffman_shuffle_16_8
+RESULT iteration=1 type=lwt_huffman_shuffle_16_8 operation=ctor file=/scratch/data/large/wiki.txt size=17179869184 height=29 alpha_bits=8 alphabet_size=212 time_in_s=303.407 threads=1 space_in_bytes=11633304308 working_space=129821691810 mode=fixed seed=0 ds_order=2 ext_get_huffman_codes=57.8212 ext_make_tree=245.586 ext_ctor=0 ext_init=0 ext_split=0 ext_get_borders=0 ext_merge=0
+Sentinel values: 30, 2, 36
+Benchmark: lwt_huffman_shuffle_32_8
+RESULT iteration=1 type=lwt_huffman_shuffle_32_8 operation=ctor file=/scratch/data/large/wiki.txt size=17179869184 height=29 alpha_bits=8 alphabet_size=212 time_in_s=246.659 threads=1 space_in_bytes=11633304308 working_space=129821691810 mode=fixed seed=0 ds_order=3 ext_get_huffman_codes=57.8479 ext_make_tree=188.812 ext_ctor=0 ext_init=0 ext_split=0 ext_get_borders=0 ext_merge=0
+Sentinel values: 30, 2, 36
+Benchmark: lwt_huffman_shuffle_64_8
+RESULT iteration=1 type=lwt_huffman_shuffle_64_8 operation=ctor file=/scratch/data/large/wiki.txt size=17179869184 height=29 alpha_bits=8 alphabet_size=212 time_in_s=212.984 threads=1 space_in_bytes=11633304308 working_space=129821691810 mode=fixed seed=0 ds_order=4 ext_get_huffman_codes=58.1192 ext_make_tree=154.865 ext_ctor=0 ext_init=0 ext_split=0 ext_get_borders=0 ext_merge=0
+Sentinel values: 30, 2, 36
+Benchmark: wm_huffman_pext_16_4
+RESULT iteration=1 type=wm_huffman_pext_16_4 operation=ctor file=/scratch/data/large/wiki.txt size=17179869184 height=29 alpha_bits=8 alphabet_size=212 time_in_s=440.256 threads=1 space_in_bytes=11633304308 working_space=129821691810 mode=fixed seed=0 ds_order=5 ext_get_huffman_codes=58.3986 ext_make_tree=381.858 ext_ctor=0 ext_init=0 ext_split=0 ext_get_borders=0 ext_merge=0
+Sentinel values: 30, 2, 36
+Benchmark: wm_huffman_shuffle_8_8
+RESULT iteration=1 type=wm_huffman_shuffle_8_8 operation=ctor file=/scratch/data/large/wiki.txt size=17179869184 height=29 alpha_bits=8 alphabet_size=212 time_in_s=410.281 threads=1 space_in_bytes=11633304308 working_space=129821691810 mode=fixed seed=0 ds_order=6 ext_get_huffman_codes=49.9662 ext_make_tree=360.314 ext_ctor=0 ext_init=0 ext_split=0 ext_get_borders=0 ext_merge=0
+Sentinel values: 30, 2, 36
+Benchmark: wm_huffman_shuffle_16_8
+RESULT iteration=1 type=wm_huffman_shuffle_16_8 operation=ctor file=/scratch/data/large/wiki.txt size=17179869184 height=29 alpha_bits=8 alphabet_size=212 time_in_s=332.614 threads=1 space_in_bytes=11633304308 working_space=129821691810 mode=fixed seed=0 ds_order=7 ext_get_huffman_codes=58.6325 ext_make_tree=273.981 ext_ctor=0 ext_init=0 ext_split=0 ext_get_borders=0 ext_merge=0
+Sentinel values: 30, 2, 36
+Benchmark: wm_huffman_shuffle_32_8
+RESULT iteration=1 type=wm_huffman_shuffle_32_8 operation=ctor file=/scratch/data/large/wiki.txt size=17179869184 height=29 alpha_bits=8 alphabet_size=212 time_in_s=263.176 threads=1 space_in_bytes=11633304308 working_space=129821691810 mode=fixed seed=0 ds_order=8 ext_get_huffman_codes=58.8367 ext_make_tree=204.34 ext_ctor=0 ext_init=0 ext_split=0 ext_get_borders=0 ext_merge=0
+Sentinel values: 30, 2, 36
+Benchmark: wm_huffman_shuffle_64_8
+RESULT iteration=1 type=wm_huffman_shuffle_64_8 operation=ctor file=/scratch/data/large/wiki.txt size=17179869184 height=29 alpha_bits=8 alphabet_size=212 time_in_s=234.882 threads=1 space_in_bytes=11633304308 working_space=129821691810 mode=fixed seed=0 ds_order=9 ext_get_huffman_codes=58.7938 ext_make_tree=176.088 ext_ctor=0 ext_init=0 ext_split=0 ext_get_borders=0 ext_merge=0
+Sentinel values: 30, 2, 36
+
+Iteration 2...
+Benchmark: lwt_huffman_pext_16_4
+RESULT iteration=2 type=lwt_huffman_pext_16_4 operation=ctor file=/scratch/data/large/wiki.txt size=17179869184 height=29 alpha_bits=8 alphabet_size=212 time_in_s=351.393 threads=1 space_in_bytes=11633304308 working_space=129821691810 mode=fixed seed=0 ds_order=0 ext_get_huffman_codes=58.834 ext_make_tree=292.559 ext_ctor=0 ext_init=0 ext_split=0 ext_get_borders=0 ext_merge=0
+Sentinel values: 30, 2, 36
+Benchmark: lwt_huffman_shuffle_8_8
+RESULT iteration=2 type=lwt_huffman_shuffle_8_8 operation=ctor file=/scratch/data/large/wiki.txt size=17179869184 height=29 alpha_bits=8 alphabet_size=212 time_in_s=427.282 threads=1 space_in_bytes=11633304308 working_space=129821691810 mode=fixed seed=0 ds_order=1 ext_get_huffman_codes=49.966 ext_make_tree=377.316 ext_ctor=0 ext_init=0 ext_split=0 ext_get_borders=0 ext_merge=0
+Sentinel values: 30, 2, 36
+Benchmark: lwt_huffman_shuffle_16_8
+RESULT iteration=2 type=lwt_huffman_shuffle_16_8 operation=ctor file=/scratch/data/large/wiki.txt size=17179869184 height=29 alpha_bits=8 alphabet_size=212 time_in_s=305.157 threads=1 space_in_bytes=11633304308 working_space=129821691810 mode=fixed seed=0 ds_order=2 ext_get_huffman_codes=58.8626 ext_make_tree=246.295 ext_ctor=0 ext_init=0 ext_split=0 ext_get_borders=0 ext_merge=0
+Sentinel values: 30, 2, 36
+Benchmark: lwt_huffman_shuffle_32_8
+RESULT iteration=2 type=lwt_huffman_shuffle_32_8 operation=ctor file=/scratch/data/large/wiki.txt size=17179869184 height=29 alpha_bits=8 alphabet_size=212 time_in_s=246.746 threads=1 space_in_bytes=11633304308 working_space=129821691810 mode=fixed seed=0 ds_order=3 ext_get_huffman_codes=58.833 ext_make_tree=187.913 ext_ctor=0 ext_init=0 ext_split=0 ext_get_borders=0 ext_merge=0
+Sentinel values: 30, 2, 36
+Benchmark: lwt_huffman_shuffle_64_8
+RESULT iteration=2 type=lwt_huffman_shuffle_64_8 operation=ctor file=/scratch/data/large/wiki.txt size=17179869184 height=29 alpha_bits=8 alphabet_size=212 time_in_s=214.01 threads=1 space_in_bytes=11633304308 working_space=129821691810 mode=fixed seed=0 ds_order=4 ext_get_huffman_codes=58.8652 ext_make_tree=155.137 ext_ctor=0 ext_init=0 ext_split=0 ext_get_borders=0 ext_merge=0
+Sentinel values: 30, 2, 36
+Benchmark: wm_huffman_pext_16_4
+RESULT iteration=2 type=wm_huffman_pext_16_4 operation=ctor file=/scratch/data/large/wiki.txt size=17179869184 height=29 alpha_bits=8 alphabet_size=212 time_in_s=438.56 threads=1 space_in_bytes=11633304308 working_space=129821691810 mode=fixed seed=0 ds_order=5 ext_get_huffman_codes=59.319 ext_make_tree=379.241 ext_ctor=0 ext_init=0 ext_split=0 ext_get_borders=0 ext_merge=0
+Sentinel values: 30, 2, 36
+Benchmark: wm_huffman_shuffle_8_8
+RESULT iteration=2 type=wm_huffman_shuffle_8_8 operation=ctor file=/scratch/data/large/wiki.txt size=17179869184 height=29 alpha_bits=8 alphabet_size=212 time_in_s=413.111 threads=1 space_in_bytes=11633304308 working_space=129821691810 mode=fixed seed=0 ds_order=6 ext_get_huffman_codes=49.967 ext_make_tree=363.144 ext_ctor=0 ext_init=0 ext_split=0 ext_get_borders=0 ext_merge=0
+Sentinel values: 30, 2, 36
+Benchmark: wm_huffman_shuffle_16_8
+RESULT iteration=2 type=wm_huffman_shuffle_16_8 operation=ctor file=/scratch/data/large/wiki.txt size=17179869184 height=29 alpha_bits=8 alphabet_size=212 time_in_s=329.76 threads=1 space_in_bytes=11633304308 working_space=129821691810 mode=fixed seed=0 ds_order=7 ext_get_huffman_codes=59.547 ext_make_tree=270.207 ext_ctor=0 ext_init=0 ext_split=0 ext_get_borders=0 ext_merge=0
+Sentinel values: 30, 2, 36
+Benchmark: wm_huffman_shuffle_32_8
+RESULT iteration=2 type=wm_huffman_shuffle_32_8 operation=ctor file=/scratch/data/large/wiki.txt size=17179869184 height=29 alpha_bits=8 alphabet_size=212 time_in_s=264.418 threads=1 space_in_bytes=11633304308 working_space=129821691810 mode=fixed seed=0 ds_order=8 ext_get_huffman_codes=59.5298 ext_make_tree=204.881 ext_ctor=0 ext_init=0 ext_split=0 ext_get_borders=0 ext_merge=0
+Sentinel values: 30, 2, 36
+Benchmark: wm_huffman_shuffle_64_8
+RESULT iteration=2 type=wm_huffman_shuffle_64_8 operation=ctor file=/scratch/data/large/wiki.txt size=17179869184 height=29 alpha_bits=8 alphabet_size=212 time_in_s=236.711 threads=1 space_in_bytes=11633304308 working_space=129821691810 mode=fixed seed=0 ds_order=9 ext_get_huffman_codes=59.5155 ext_make_tree=177.195 ext_ctor=0 ext_init=0 ext_split=0 ext_get_borders=0 ext_merge=0
+Sentinel values: 30, 2, 36
+
+Iteration 3...
+Benchmark: lwt_huffman_pext_16_4
+RESULT iteration=3 type=lwt_huffman_pext_16_4 operation=ctor file=/scratch/data/large/wiki.txt size=17179869184 height=29 alpha_bits=8 alphabet_size=212 time_in_s=352.257 threads=1 space_in_bytes=11633304308 working_space=129821691810 mode=fixed seed=0 ds_order=0 ext_get_huffman_codes=59.8593 ext_make_tree=292.398 ext_ctor=0 ext_init=0 ext_split=0 ext_get_borders=0 ext_merge=0
+Sentinel values: 30, 2, 36
+Benchmark: lwt_huffman_shuffle_8_8
+RESULT iteration=3 type=lwt_huffman_shuffle_8_8 operation=ctor file=/scratch/data/large/wiki.txt size=17179869184 height=29 alpha_bits=8 alphabet_size=212 time_in_s=426.849 threads=1 space_in_bytes=11633304308 working_space=129821691810 mode=fixed seed=0 ds_order=1 ext_get_huffman_codes=49.9686 ext_make_tree=376.88 ext_ctor=0 ext_init=0 ext_split=0 ext_get_borders=0 ext_merge=0
+Sentinel values: 30, 2, 36
+Benchmark: lwt_huffman_shuffle_16_8
+RESULT iteration=3 type=lwt_huffman_shuffle_16_8 operation=ctor file=/scratch/data/large/wiki.txt size=17179869184 height=29 alpha_bits=8 alphabet_size=212 time_in_s=304.24 threads=1 space_in_bytes=11633304308 working_space=129821691810 mode=fixed seed=0 ds_order=2 ext_get_huffman_codes=60.1207 ext_make_tree=244.12 ext_ctor=0 ext_init=0 ext_split=0 ext_get_borders=0 ext_merge=0
+Sentinel values: 30, 2, 36
+Benchmark: lwt_huffman_shuffle_32_8
+RESULT iteration=3 type=lwt_huffman_shuffle_32_8 operation=ctor file=/scratch/data/large/wiki.txt size=17179869184 height=29 alpha_bits=8 alphabet_size=212 time_in_s=246.84 threads=1 space_in_bytes=11633304308 working_space=129821691810 mode=fixed seed=0 ds_order=3 ext_get_huffman_codes=60.1756 ext_make_tree=186.658 ext_ctor=0 ext_init=0 ext_split=0 ext_get_borders=0 ext_merge=0
+Sentinel values: 30, 2, 36
+Benchmark: lwt_huffman_shuffle_64_8
+RESULT iteration=3 type=lwt_huffman_shuffle_64_8 operation=ctor file=/scratch/data/large/wiki.txt size=17179869184 height=29 alpha_bits=8 alphabet_size=212 time_in_s=215.687 threads=1 space_in_bytes=11633304308 working_space=129821691810 mode=fixed seed=0 ds_order=4 ext_get_huffman_codes=60.2783 ext_make_tree=155.408 ext_ctor=0 ext_init=0 ext_split=0 ext_get_borders=0 ext_merge=0
+Sentinel values: 30, 2, 36
+Benchmark: wm_huffman_pext_16_4
+RESULT iteration=3 type=wm_huffman_pext_16_4 operation=ctor file=/scratch/data/large/wiki.txt size=17179869184 height=29 alpha_bits=8 alphabet_size=212 time_in_s=440.982 threads=1 space_in_bytes=11633304308 working_space=129821691810 mode=fixed seed=0 ds_order=5 ext_get_huffman_codes=60.3128 ext_make_tree=380.669 ext_ctor=0 ext_init=0 ext_split=0 ext_get_borders=0 ext_merge=0
+Sentinel values: 30, 2, 36
+Benchmark: wm_huffman_shuffle_8_8
+RESULT iteration=3 type=wm_huffman_shuffle_8_8 operation=ctor file=/scratch/data/large/wiki.txt size=17179869184 height=29 alpha_bits=8 alphabet_size=212 time_in_s=409.527 threads=1 space_in_bytes=11633304308 working_space=129821691810 mode=fixed seed=0 ds_order=6 ext_get_huffman_codes=49.978 ext_make_tree=359.548 ext_ctor=0 ext_init=0 ext_split=0 ext_get_borders=0 ext_merge=0
+Sentinel values: 30, 2, 36
+Benchmark: wm_huffman_shuffle_16_8
+RESULT iteration=3 type=wm_huffman_shuffle_16_8 operation=ctor file=/scratch/data/large/wiki.txt size=17179869184 height=29 alpha_bits=8 alphabet_size=212 time_in_s=331.368 threads=1 space_in_bytes=11633304308 working_space=129821691810 mode=fixed seed=0 ds_order=7 ext_get_huffman_codes=60.5554 ext_make_tree=270.812 ext_ctor=0 ext_init=0 ext_split=0 ext_get_borders=0 ext_merge=0
+Sentinel values: 30, 2, 36
+Benchmark: wm_huffman_shuffle_32_8
+RESULT iteration=3 type=wm_huffman_shuffle_32_8 operation=ctor file=/scratch/data/large/wiki.txt size=17179869184 height=29 alpha_bits=8 alphabet_size=212 time_in_s=266.27 threads=1 space_in_bytes=11633304308 working_space=129821691810 mode=fixed seed=0 ds_order=8 ext_get_huffman_codes=60.9509 ext_make_tree=205.319 ext_ctor=0 ext_init=0 ext_split=0 ext_get_borders=0 ext_merge=0
+Sentinel values: 30, 2, 36
+Benchmark: wm_huffman_shuffle_64_8
+RESULT iteration=3 type=wm_huffman_shuffle_64_8 operation=ctor file=/scratch/data/large/wiki.txt size=17179869184 height=29 alpha_bits=8 alphabet_size=212 time_in_s=235.728 threads=1 space_in_bytes=11633304308 working_space=129821691810 mode=fixed seed=0 ds_order=9 ext_get_huffman_codes=60.8405 ext_make_tree=174.888 ext_ctor=0 ext_init=0 ext_split=0 ext_get_borders=0 ext_merge=0
+Sentinel values: 30, 2, 36
+
+Iteration 4...
+Benchmark: lwt_huffman_pext_16_4
+RESULT iteration=4 type=lwt_huffman_pext_16_4 operation=ctor file=/scratch/data/large/wiki.txt size=17179869184 height=29 alpha_bits=8 alphabet_size=212 time_in_s=353.273 threads=1 space_in_bytes=11633304308 working_space=129821691810 mode=fixed seed=0 ds_order=0 ext_get_huffman_codes=60.82 ext_make_tree=292.453 ext_ctor=0 ext_init=0 ext_split=0 ext_get_borders=0 ext_merge=0
+Sentinel values: 30, 2, 36
+Benchmark: lwt_huffman_shuffle_8_8
+RESULT iteration=4 type=lwt_huffman_shuffle_8_8 operation=ctor file=/scratch/data/large/wiki.txt size=17179869184 height=29 alpha_bits=8 alphabet_size=212 time_in_s=427.302 threads=1 space_in_bytes=11633304308 working_space=129821691810 mode=fixed seed=0 ds_order=1 ext_get_huffman_codes=49.9705 ext_make_tree=377.331 ext_ctor=0 ext_init=0 ext_split=0 ext_get_borders=0 ext_merge=0
+Sentinel values: 30, 2, 36
+Benchmark: lwt_huffman_shuffle_16_8
+RESULT iteration=4 type=lwt_huffman_shuffle_16_8 operation=ctor file=/scratch/data/large/wiki.txt size=17179869184 height=29 alpha_bits=8 alphabet_size=212 time_in_s=305.639 threads=1 space_in_bytes=11633304308 working_space=129821691810 mode=fixed seed=0 ds_order=2 ext_get_huffman_codes=60.6716 ext_make_tree=244.967 ext_ctor=0 ext_init=0 ext_split=0 ext_get_borders=0 ext_merge=0
+Sentinel values: 30, 2, 36
+Benchmark: lwt_huffman_shuffle_32_8
+RESULT iteration=4 type=lwt_huffman_shuffle_32_8 operation=ctor file=/scratch/data/large/wiki.txt size=17179869184 height=29 alpha_bits=8 alphabet_size=212 time_in_s=248.619 threads=1 space_in_bytes=11633304308 working_space=129821691810 mode=fixed seed=0 ds_order=3 ext_get_huffman_codes=61.0813 ext_make_tree=187.538 ext_ctor=0 ext_init=0 ext_split=0 ext_get_borders=0 ext_merge=0
+Sentinel values: 30, 2, 36
+Benchmark: lwt_huffman_shuffle_64_8
+RESULT iteration=4 type=lwt_huffman_shuffle_64_8 operation=ctor file=/scratch/data/large/wiki.txt size=17179869184 height=29 alpha_bits=8 alphabet_size=212 time_in_s=215.961 threads=1 space_in_bytes=11633304308 working_space=129821691810 mode=fixed seed=0 ds_order=4 ext_get_huffman_codes=61.1887 ext_make_tree=154.765 ext_ctor=0 ext_init=0 ext_split=0 ext_get_borders=0 ext_merge=0
+Sentinel values: 30, 2, 36
+Benchmark: wm_huffman_pext_16_4
+RESULT iteration=4 type=wm_huffman_pext_16_4 operation=ctor file=/scratch/data/large/wiki.txt size=17179869184 height=29 alpha_bits=8 alphabet_size=212 time_in_s=441.128 threads=1 space_in_bytes=11633304308 working_space=129821691810 mode=fixed seed=0 ds_order=5 ext_get_huffman_codes=61.1302 ext_make_tree=379.998 ext_ctor=0 ext_init=0 ext_split=0 ext_get_borders=0 ext_merge=0
+Sentinel values: 30, 2, 36
+Benchmark: wm_huffman_shuffle_8_8
+RESULT iteration=4 type=wm_huffman_shuffle_8_8 operation=ctor file=/scratch/data/large/wiki.txt size=17179869184 height=29 alpha_bits=8 alphabet_size=212 time_in_s=411.081 threads=1 space_in_bytes=11633304308 working_space=129821691810 mode=fixed seed=0 ds_order=6 ext_get_huffman_codes=49.9662 ext_make_tree=361.115 ext_ctor=0 ext_init=0 ext_split=0 ext_get_borders=0 ext_merge=0
+Sentinel values: 30, 2, 36
+Benchmark: wm_huffman_shuffle_16_8
+RESULT iteration=4 type=wm_huffman_shuffle_16_8 operation=ctor file=/scratch/data/large/wiki.txt size=17179869184 height=29 alpha_bits=8 alphabet_size=212 time_in_s=328.513 threads=1 space_in_bytes=11633304308 working_space=129821691810 mode=fixed seed=0 ds_order=7 ext_get_huffman_codes=61.26 ext_make_tree=267.253 ext_ctor=0 ext_init=0 ext_split=0 ext_get_borders=0 ext_merge=0
+Sentinel values: 30, 2, 36
+Benchmark: wm_huffman_shuffle_32_8
+RESULT iteration=4 type=wm_huffman_shuffle_32_8 operation=ctor file=/scratch/data/large/wiki.txt size=17179869184 height=29 alpha_bits=8 alphabet_size=212 time_in_s=266.132 threads=1 space_in_bytes=11633304308 working_space=129821691810 mode=fixed seed=0 ds_order=8 ext_get_huffman_codes=61.378 ext_make_tree=204.754 ext_ctor=0 ext_init=0 ext_split=0 ext_get_borders=0 ext_merge=0
+Sentinel values: 30, 2, 36
+Benchmark: wm_huffman_shuffle_64_8
+RESULT iteration=4 type=wm_huffman_shuffle_64_8 operation=ctor file=/scratch/data/large/wiki.txt size=17179869184 height=29 alpha_bits=8 alphabet_size=212 time_in_s=236.576 threads=1 space_in_bytes=11633304308 working_space=129821691810 mode=fixed seed=0 ds_order=9 ext_get_huffman_codes=61.2936 ext_make_tree=175.276 ext_ctor=0 ext_init=0 ext_split=0 ext_get_borders=0 ext_merge=0
+Sentinel values: 30, 2, 36
+
+
+
+Done
+Finish Time: 2022-05-20-02-02-51

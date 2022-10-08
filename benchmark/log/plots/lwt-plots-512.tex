@@ -1,0 +1,128 @@
+% -*- mode: latex; mode: flyspell; ispell-local-dictionary: "en_US"; coding: utf-8; fill-column: 80 -*-
+
+\documentclass{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+
+\usepackage{amsmath,amsfonts,amssymb}
+\usepackage{fullpage}
+\usepackage{verbatim}
+
+\usepackage{tikz,pgfplots}
+
+% LWT = triangle
+% LWT RECURSIVE = square
+% WT = x
+% PWM = diamond
+
+% basic = red
+% no lut = black
+% lut = blue
+% pext = violet
+% pshufb = brown
+\pgfplotscreateplotcyclelist{wtcycles} {
+  red, every mark/.append style = {solid}, mark = square*\\
+  black, every mark/.append style = {solid}, mark = *\\
+  orange!75!black, every mark/.append style = {solid}, mark = triangle*\\
+  green!50!black, every mark/.append style = {solid}, mark = diamond*\\
+  violet, every mark/.append style = {solid}, mark = star\\  
+  blue, every mark/.append style = {solid}, mark = star\\
+}
+
+
+\pgfplotsset{
+  width = 150mm,
+  height = 100mm,
+  major grid style = { thin, dotted, color = black!50 },
+  minor grid style = { thin, dotted, color = black!50 },
+  grid,
+  xtick distance = 1,
+  every axis/.append style = {
+    line width = 0.5pt,
+    tick style = {
+      line cap = round,
+      thin,
+      major tick length = 4pt,
+      minor tick length = 2pt,
+    },
+  },
+  legend cell align = left,
+  legend pos = north west,
+  cycle list name = {wtcycles},
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+
+\title{WT Benchmark}
+\author{Jan-Philipp Tarnowski}
+\maketitle
+
+
+
+% IMPORT-DATA stats results-2022-02-25--18-15-19.out
+
+\begin{center}
+\begin{tikzpicture}
+  \begin{axis}[
+  title={WT Construction Time, $\log \sigma = 8$},
+  legend style = { at = {(0.5, -0.15)}, anchor = north},
+	xlabel={Element Count [$\log_2$]},
+	ylabel={MBit/s},
+    ]
+
+			%% -MULTIPLOT(type) SELECT LOG(2, size) AS x, MEDIAN((8 * (size / CAST(time_in_s AS Float))) / (1024 * 1024)) AS y,MULTIPLOT
+			%% -FROM stats WHERE alphabet_size = 256 GROUP BY MULTIPLOT,x ORDER BY MULTIPLOT,x
+      \addplot coordinates { (28.0,741.003) (29.0,728.798) (30.0,731.533) };
+      \addlegendentry{\texttt{pext} / \texttt{pshufb}, $\tau = 8$, $N = 8$ (64 bits)};
+   \addplot coordinates { (28.0,939.394) (29.0,942.393) (30.0,944.243) };
+   \addlegendentry{\texttt{vpshufbitqmb} / \texttt{pshufb}, $\tau = 8$, $N = 16$ (128 bits)};
+   \addplot coordinates { (28.0,1405.44) (29.0,1409.97) (30.0,1415.93) };
+   \addlegendentry{\texttt{vpshufbitqmb} / \texttt{vcompressb}, $\tau = 8$, $N = 32$ (256 bits)};
+   \addplot coordinates { (28.0,1629.83) (29.0,1636.31) (30.0,1642.32) };
+   \addlegendentry{\texttt{vpshufbitqmb} / \texttt{vcompressb}, $\tau = 8$, $N = 64$ (512 bits)};
+   \addplot coordinates { (28.0,970.487) (29.0,973.201) (30.0,974.377) };
+   \addlegendentry{Prefix Counting [PWM]};
+   \addplot coordinates { (28.0,894.538) (29.0,895.706) (30.0,895.469) };
+   \addlegendentry{Prefix Sorting [PWM]};
+
+  \end{axis}
+\end{tikzpicture}
+\end{center}
+
+
+\begin{center}
+\begin{tikzpicture}
+  \begin{axis}[
+  title={WT Construction Time, $\log \sigma = 16$},
+  legend style = { at = {(0.5, -0.15)}, anchor = north},
+	xlabel={Element Count [$\log_2$]},
+	ylabel={MBit/s},
+    ]
+
+			%% -MULTIPLOT(type) SELECT LOG(2, size) AS x, MEDIAN((8 * (size / CAST(time_in_s AS Float))) / (1024 * 1024)) AS y,MULTIPLOT
+			%% -FROM stats WHERE alphabet_size = 65536  GROUP BY MULTIPLOT,x ORDER BY MULTIPLOT,x
+      \addplot coordinates { (28.0,345.582) (29.0,347.673) (30.0,346.682) };
+      \addlegendentry{\texttt{pext} / \texttt{pshufb}, $\tau = 8$, $N = 8$ (64 bits)};
+   \addplot coordinates { (28.0,445.629) (29.0,447.935) (30.0,448.172) };
+   \addlegendentry{\texttt{vpshufbitqmb} / \texttt{pshufb}, $\tau = 8$, $N = 16$ (128 bits)};
+   \addplot coordinates { (28.0,662.016) (29.0,663.836) (30.0,665.427) };
+   \addlegendentry{\texttt{vpshufbitqmb} / \texttt{vcompressb}, $\tau = 8$, $N = 32$ (256 bits)};
+   \addplot coordinates { (28.0,790.093) (29.0,792.631) (30.0,794.53) };
+   \addlegendentry{\texttt{vpshufbitqmb} / \texttt{vcompressb}, $\tau = 8$, $N = 64$ (512 bits)};
+   \addplot coordinates { (28.0,306.69) (29.0,281.145) (30.0,241.364) };
+   \addlegendentry{Prefix Counting [PWM]};
+   \addplot coordinates { (28.0,175.278) (29.0,170.016) (30.0,166.985) };
+   \addlegendentry{Prefix Sorting [PWM]};
+
+  \end{axis}
+\end{tikzpicture}
+\end{center}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\end{document}

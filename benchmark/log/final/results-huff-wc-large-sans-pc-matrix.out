@@ -1,0 +1,320 @@
+
+Running WT Benchmark at 2022-05-20--07-02-34...
+Git branch: huff2
+Git commit: 85bf0c2b6b868bbbbb875fb31193f98648757138
+Git commit (short): 85bf0c2
+Build Type: Release
+
+Command: /scratch/tarnowski/mawt/build/benchmark/benchmark_wt/benchmark_wt --iterations 5 --file /scratch/data/large/cc.txt --file-alpha-bits 8 --file /scratch/data/large/dna.txt --file-alpha-bits 8 --file /scratch/data/large/wiki.txt --file-alpha-bits 8 --compute-effective-alphabet --min 16GiB --ext get_huffman_codes --ext make_tree --ext ctor --ext init --ext split --ext get_borders --ext merge --no-highlight
+
+Starting Wavelet Tree Benchmark
+Current time: 2022-05-20-07-02-34
+
+Config:
+
+Iterations: 5
+Reading files from disk:
+File: /scratch/data/large/cc.txt (8 bits)
+File: /scratch/data/large/dna.txt (8 bits)
+File: /scratch/data/large/wiki.txt (8 bits)
+Getting prefix of 17179869184 elements
+Implementations: dummy, basic, twophase_no_lut, twophase_4_4, twophase_pext_pext, twophase_pext_pshufb, lwt_basic, lwt_twophase_no_lut, lwt_twophase_4_4, lwt_twophase_pext_pext, lwt_twophase_pext_pshufb, pwm_pc, pwm_ps
+Distribution: uniform
+Is random seed: false
+Seed: 0
+Extra keys: get_huffman_codes, make_tree, ctor, init, split, get_borders, merge
+Verifying Results: false
+Computing Effective Alphabet: true
+Real Seed: 0
+
+Starting Benchmark...
+Text: /scratch/data/large/cc.txt (8 bits)...
+Reading text from /scratch/data/large/cc.txt...
+Reading 8 bits
+Text size: 17179869184
+Computed effective alphabet of text, 243 characters, depth: 8
+Text width: 1 byte(s) (was 1 byte(s))
+Iteration 0...
+[ EXPECTED ]: 114, 129, 32
+Benchmark: pwm_10wx_huff_pcIhLb1EE_tree_huffman
+RESULT iteration=0 type=pwm_10wx_huff_pcIhLb1EE_tree_huffman operation=ctor file=/scratch/data/large/cc.txt size=17179869184 height=24 alpha_bits=8 alphabet_size=243 time_in_s=678.67 threads=1 space_in_bytes=13371599016 working_space=30551495584 mode=fixed seed=0 ds_order=0 ext_get_huffman_codes=- ext_make_tree=- ext_ctor=- ext_init=- ext_split=- ext_get_borders=- ext_merge=-
+Sentinel values: 114, 129, 32
+Benchmark: pwm_13wx_huff_pc_ssIhLb1EE_tree_huffman
+RESULT iteration=0 type=pwm_13wx_huff_pc_ssIhLb1EE_tree_huffman operation=ctor file=/scratch/data/large/cc.txt size=17179869184 height=24 alpha_bits=8 alphabet_size=243 time_in_s=612.105 threads=1 space_in_bytes=13371598824 working_space=30551495392 mode=fixed seed=0 ds_order=1 ext_get_huffman_codes=- ext_make_tree=- ext_ctor=- ext_init=- ext_split=- ext_get_borders=- ext_merge=-
+Sentinel values: 114, 129, 32
+Benchmark: pwm_10wx_huff_psIhLb1EE_tree_huffman
+RESULT iteration=0 type=pwm_10wx_huff_psIhLb1EE_tree_huffman operation=ctor file=/scratch/data/large/cc.txt size=17179869184 height=24 alpha_bits=8 alphabet_size=243 time_in_s=817.422 threads=1 space_in_bytes=13371598824 working_space=47731364576 mode=fixed seed=0 ds_order=2 ext_get_huffman_codes=- ext_make_tree=- ext_ctor=- ext_init=- ext_split=- ext_get_borders=- ext_merge=-
+Sentinel values: 114, 129, 32
+Benchmark: pwm_13wx_huff_pc_ssIhLb0EE_matrix_huffman
+RESULT iteration=0 type=pwm_13wx_huff_pc_ssIhLb0EE_matrix_huffman operation=ctor file=/scratch/data/large/cc.txt size=17179869184 height=24 alpha_bits=8 alphabet_size=243 time_in_s=699.76 threads=1 space_in_bytes=13371599040 working_space=47731364576 mode=fixed seed=0 ds_order=3 ext_get_huffman_codes=- ext_make_tree=- ext_ctor=- ext_init=- ext_split=- ext_get_borders=- ext_merge=-
+Sentinel values: 114, 129, 32
+Benchmark: pwm_10wx_huff_psIhLb0EE_matrix_huffman
+RESULT iteration=0 type=pwm_10wx_huff_psIhLb0EE_matrix_huffman operation=ctor file=/scratch/data/large/cc.txt size=17179869184 height=24 alpha_bits=8 alphabet_size=243 time_in_s=879.737 threads=1 space_in_bytes=13371599040 working_space=47865594776 mode=fixed seed=0 ds_order=4 ext_get_huffman_codes=- ext_make_tree=- ext_ctor=- ext_init=- ext_split=- ext_get_borders=- ext_merge=-
+Sentinel values: 112, 162, 32
+!! RESULT MISMATCH !!
+Iteration: 1 of 5, Implementation: pwm_10wx_huff_psIhLb0EE_matrix_huffman
+Expected: 114, got: 112
+
+Iteration 1...
+Benchmark: pwm_10wx_huff_pcIhLb1EE_tree_huffman
+RESULT iteration=1 type=pwm_10wx_huff_pcIhLb1EE_tree_huffman operation=ctor file=/scratch/data/large/cc.txt size=17179869184 height=24 alpha_bits=8 alphabet_size=243 time_in_s=688.189 threads=1 space_in_bytes=13371598824 working_space=47865594487 mode=fixed seed=0 ds_order=0 ext_get_huffman_codes=- ext_make_tree=- ext_ctor=- ext_init=- ext_split=- ext_get_borders=- ext_merge=-
+Sentinel values: 114, 129, 32
+Benchmark: pwm_13wx_huff_pc_ssIhLb1EE_tree_huffman
+RESULT iteration=1 type=pwm_13wx_huff_pc_ssIhLb1EE_tree_huffman operation=ctor file=/scratch/data/large/cc.txt size=17179869184 height=24 alpha_bits=8 alphabet_size=243 time_in_s=636.364 threads=1 space_in_bytes=13371598824 working_space=47865594487 mode=fixed seed=0 ds_order=1 ext_get_huffman_codes=- ext_make_tree=- ext_ctor=- ext_init=- ext_split=- ext_get_borders=- ext_merge=-
+Sentinel values: 114, 129, 32
+Benchmark: pwm_10wx_huff_psIhLb1EE_tree_huffman
+RESULT iteration=1 type=pwm_10wx_huff_psIhLb1EE_tree_huffman operation=ctor file=/scratch/data/large/cc.txt size=17179869184 height=24 alpha_bits=8 alphabet_size=243 time_in_s=784.904 threads=1 space_in_bytes=13371598824 working_space=47865594487 mode=fixed seed=0 ds_order=2 ext_get_huffman_codes=- ext_make_tree=- ext_ctor=- ext_init=- ext_split=- ext_get_borders=- ext_merge=-
+Sentinel values: 114, 129, 32
+Benchmark: pwm_13wx_huff_pc_ssIhLb0EE_matrix_huffman
+RESULT iteration=1 type=pwm_13wx_huff_pc_ssIhLb0EE_matrix_huffman operation=ctor file=/scratch/data/large/cc.txt size=17179869184 height=24 alpha_bits=8 alphabet_size=243 time_in_s=821.057 threads=1 space_in_bytes=13371599040 working_space=47865594487 mode=fixed seed=0 ds_order=3 ext_get_huffman_codes=- ext_make_tree=- ext_ctor=- ext_init=- ext_split=- ext_get_borders=- ext_merge=-
+Sentinel values: 114, 129, 32
+Benchmark: pwm_10wx_huff_psIhLb0EE_matrix_huffman
+RESULT iteration=1 type=pwm_10wx_huff_psIhLb0EE_matrix_huffman operation=ctor file=/scratch/data/large/cc.txt size=17179869184 height=24 alpha_bits=8 alphabet_size=243 time_in_s=883.662 threads=1 space_in_bytes=13371599040 working_space=47865594776 mode=fixed seed=0 ds_order=4 ext_get_huffman_codes=- ext_make_tree=- ext_ctor=- ext_init=- ext_split=- ext_get_borders=- ext_merge=-
+Sentinel values: 112, 162, 32
+
+Iteration 2...
+Benchmark: pwm_10wx_huff_pcIhLb1EE_tree_huffman
+RESULT iteration=2 type=pwm_10wx_huff_pcIhLb1EE_tree_huffman operation=ctor file=/scratch/data/large/cc.txt size=17179869184 height=24 alpha_bits=8 alphabet_size=243 time_in_s=764.045 threads=1 space_in_bytes=13371598824 working_space=47865594776 mode=fixed seed=0 ds_order=0 ext_get_huffman_codes=- ext_make_tree=- ext_ctor=- ext_init=- ext_split=- ext_get_borders=- ext_merge=-
+Sentinel values: 114, 129, 32
+Benchmark: pwm_13wx_huff_pc_ssIhLb1EE_tree_huffman
+RESULT iteration=2 type=pwm_13wx_huff_pc_ssIhLb1EE_tree_huffman operation=ctor file=/scratch/data/large/cc.txt size=17179869184 height=24 alpha_bits=8 alphabet_size=243 time_in_s=612.873 threads=1 space_in_bytes=13371598824 working_space=47865594776 mode=fixed seed=0 ds_order=1 ext_get_huffman_codes=- ext_make_tree=- ext_ctor=- ext_init=- ext_split=- ext_get_borders=- ext_merge=-
+Sentinel values: 114, 129, 32
+Benchmark: pwm_10wx_huff_psIhLb1EE_tree_huffman
+RESULT iteration=2 type=pwm_10wx_huff_psIhLb1EE_tree_huffman operation=ctor file=/scratch/data/large/cc.txt size=17179869184 height=24 alpha_bits=8 alphabet_size=243 time_in_s=846.526 threads=1 space_in_bytes=13371598824 working_space=47865594776 mode=fixed seed=0 ds_order=2 ext_get_huffman_codes=- ext_make_tree=- ext_ctor=- ext_init=- ext_split=- ext_get_borders=- ext_merge=-
+Sentinel values: 114, 129, 32
+Benchmark: pwm_13wx_huff_pc_ssIhLb0EE_matrix_huffman
+RESULT iteration=2 type=pwm_13wx_huff_pc_ssIhLb0EE_matrix_huffman operation=ctor file=/scratch/data/large/cc.txt size=17179869184 height=24 alpha_bits=8 alphabet_size=243 time_in_s=710.536 threads=1 space_in_bytes=13371599040 working_space=47865594776 mode=fixed seed=0 ds_order=3 ext_get_huffman_codes=- ext_make_tree=- ext_ctor=- ext_init=- ext_split=- ext_get_borders=- ext_merge=-
+Sentinel values: 114, 129, 32
+Benchmark: pwm_10wx_huff_psIhLb0EE_matrix_huffman
+RESULT iteration=2 type=pwm_10wx_huff_psIhLb0EE_matrix_huffman operation=ctor file=/scratch/data/large/cc.txt size=17179869184 height=24 alpha_bits=8 alphabet_size=243 time_in_s=877.965 threads=1 space_in_bytes=13371599040 working_space=47865594776 mode=fixed seed=0 ds_order=4 ext_get_huffman_codes=- ext_make_tree=- ext_ctor=- ext_init=- ext_split=- ext_get_borders=- ext_merge=-
+Sentinel values: 112, 162, 32
+
+Iteration 3...
+Benchmark: pwm_10wx_huff_pcIhLb1EE_tree_huffman
+RESULT iteration=3 type=pwm_10wx_huff_pcIhLb1EE_tree_huffman operation=ctor file=/scratch/data/large/cc.txt size=17179869184 height=24 alpha_bits=8 alphabet_size=243 time_in_s=679.515 threads=1 space_in_bytes=13371598824 working_space=47865594776 mode=fixed seed=0 ds_order=0 ext_get_huffman_codes=- ext_make_tree=- ext_ctor=- ext_init=- ext_split=- ext_get_borders=- ext_merge=-
+Sentinel values: 114, 129, 32
+Benchmark: pwm_13wx_huff_pc_ssIhLb1EE_tree_huffman
+RESULT iteration=3 type=pwm_13wx_huff_pc_ssIhLb1EE_tree_huffman operation=ctor file=/scratch/data/large/cc.txt size=17179869184 height=24 alpha_bits=8 alphabet_size=243 time_in_s=613.952 threads=1 space_in_bytes=13371598824 working_space=47865594776 mode=fixed seed=0 ds_order=1 ext_get_huffman_codes=- ext_make_tree=- ext_ctor=- ext_init=- ext_split=- ext_get_borders=- ext_merge=-
+Sentinel values: 114, 129, 32
+Benchmark: pwm_10wx_huff_psIhLb1EE_tree_huffman
+RESULT iteration=3 type=pwm_10wx_huff_psIhLb1EE_tree_huffman operation=ctor file=/scratch/data/large/cc.txt size=17179869184 height=24 alpha_bits=8 alphabet_size=243 time_in_s=1082.81 threads=1 space_in_bytes=13371598824 working_space=47865594776 mode=fixed seed=0 ds_order=2 ext_get_huffman_codes=- ext_make_tree=- ext_ctor=- ext_init=- ext_split=- ext_get_borders=- ext_merge=-
+Sentinel values: 114, 129, 32
+Benchmark: pwm_13wx_huff_pc_ssIhLb0EE_matrix_huffman
+RESULT iteration=3 type=pwm_13wx_huff_pc_ssIhLb0EE_matrix_huffman operation=ctor file=/scratch/data/large/cc.txt size=17179869184 height=24 alpha_bits=8 alphabet_size=243 time_in_s=693.692 threads=1 space_in_bytes=13371599040 working_space=47865594776 mode=fixed seed=0 ds_order=3 ext_get_huffman_codes=- ext_make_tree=- ext_ctor=- ext_init=- ext_split=- ext_get_borders=- ext_merge=-
+Sentinel values: 114, 129, 32
+Benchmark: pwm_10wx_huff_psIhLb0EE_matrix_huffman
+RESULT iteration=3 type=pwm_10wx_huff_psIhLb0EE_matrix_huffman operation=ctor file=/scratch/data/large/cc.txt size=17179869184 height=24 alpha_bits=8 alphabet_size=243 time_in_s=881.307 threads=1 space_in_bytes=13371599040 working_space=47865594776 mode=fixed seed=0 ds_order=4 ext_get_huffman_codes=- ext_make_tree=- ext_ctor=- ext_init=- ext_split=- ext_get_borders=- ext_merge=-
+Sentinel values: 112, 162, 32
+
+Iteration 4...
+Benchmark: pwm_10wx_huff_pcIhLb1EE_tree_huffman
+RESULT iteration=4 type=pwm_10wx_huff_pcIhLb1EE_tree_huffman operation=ctor file=/scratch/data/large/cc.txt size=17179869184 height=24 alpha_bits=8 alphabet_size=243 time_in_s=775.883 threads=1 space_in_bytes=13371598824 working_space=47865594776 mode=fixed seed=0 ds_order=0 ext_get_huffman_codes=- ext_make_tree=- ext_ctor=- ext_init=- ext_split=- ext_get_borders=- ext_merge=-
+Sentinel values: 114, 129, 32
+Benchmark: pwm_13wx_huff_pc_ssIhLb1EE_tree_huffman
+RESULT iteration=4 type=pwm_13wx_huff_pc_ssIhLb1EE_tree_huffman operation=ctor file=/scratch/data/large/cc.txt size=17179869184 height=24 alpha_bits=8 alphabet_size=243 time_in_s=628.677 threads=1 space_in_bytes=13371598824 working_space=47865594776 mode=fixed seed=0 ds_order=1 ext_get_huffman_codes=- ext_make_tree=- ext_ctor=- ext_init=- ext_split=- ext_get_borders=- ext_merge=-
+Sentinel values: 114, 129, 32
+Benchmark: pwm_10wx_huff_psIhLb1EE_tree_huffman
+RESULT iteration=4 type=pwm_10wx_huff_psIhLb1EE_tree_huffman operation=ctor file=/scratch/data/large/cc.txt size=17179869184 height=24 alpha_bits=8 alphabet_size=243 time_in_s=805.526 threads=1 space_in_bytes=13371598824 working_space=47865594776 mode=fixed seed=0 ds_order=2 ext_get_huffman_codes=- ext_make_tree=- ext_ctor=- ext_init=- ext_split=- ext_get_borders=- ext_merge=-
+Sentinel values: 114, 129, 32
+Benchmark: pwm_13wx_huff_pc_ssIhLb0EE_matrix_huffman
+RESULT iteration=4 type=pwm_13wx_huff_pc_ssIhLb0EE_matrix_huffman operation=ctor file=/scratch/data/large/cc.txt size=17179869184 height=24 alpha_bits=8 alphabet_size=243 time_in_s=695.731 threads=1 space_in_bytes=13371599040 working_space=47865594776 mode=fixed seed=0 ds_order=3 ext_get_huffman_codes=- ext_make_tree=- ext_ctor=- ext_init=- ext_split=- ext_get_borders=- ext_merge=-
+Sentinel values: 114, 129, 32
+Benchmark: pwm_10wx_huff_psIhLb0EE_matrix_huffman
+RESULT iteration=4 type=pwm_10wx_huff_psIhLb0EE_matrix_huffman operation=ctor file=/scratch/data/large/cc.txt size=17179869184 height=24 alpha_bits=8 alphabet_size=243 time_in_s=898.696 threads=1 space_in_bytes=13371599040 working_space=47865594776 mode=fixed seed=0 ds_order=4 ext_get_huffman_codes=- ext_make_tree=- ext_ctor=- ext_init=- ext_split=- ext_get_borders=- ext_merge=-
+Sentinel values: 112, 162, 32
+
+
+Text: /scratch/data/large/dna.txt (8 bits)...
+Reading text from /scratch/data/large/dna.txt...
+Reading 8 bits
+Text size: 17179869184
+Computed effective alphabet of text, 4 characters, depth: 2
+Text width: 1 byte(s) (was 1 byte(s))
+Iteration 0...
+[ EXPECTED ]: 2, 3, 0
+Benchmark: pwm_10wx_huff_pcIhLb1EE_tree_huffman
+RESULT iteration=0 type=pwm_10wx_huff_pcIhLb1EE_tree_huffman operation=ctor file=/scratch/data/large/dna.txt size=17179869184 height=2 alpha_bits=2 alphabet_size=4 time_in_s=188.525 threads=1 space_in_bytes=4294967984 working_space=47865594775 mode=fixed seed=0 ds_order=0 ext_get_huffman_codes=- ext_make_tree=- ext_ctor=- ext_init=- ext_split=- ext_get_borders=- ext_merge=-
+Sentinel values: 2, 3, 0
+Benchmark: pwm_13wx_huff_pc_ssIhLb1EE_tree_huffman
+RESULT iteration=0 type=pwm_13wx_huff_pc_ssIhLb1EE_tree_huffman operation=ctor file=/scratch/data/large/dna.txt size=17179869184 height=2 alpha_bits=2 alphabet_size=4 time_in_s=185.03 threads=1 space_in_bytes=4294967984 working_space=47865594775 mode=fixed seed=0 ds_order=1 ext_get_huffman_codes=- ext_make_tree=- ext_ctor=- ext_init=- ext_split=- ext_get_borders=- ext_merge=-
+Sentinel values: 2, 3, 0
+Benchmark: pwm_10wx_huff_psIhLb1EE_tree_huffman
+RESULT iteration=0 type=pwm_10wx_huff_psIhLb1EE_tree_huffman operation=ctor file=/scratch/data/large/dna.txt size=17179869184 height=2 alpha_bits=2 alphabet_size=4 time_in_s=234.198 threads=1 space_in_bytes=4294967984 working_space=47865594775 mode=fixed seed=0 ds_order=2 ext_get_huffman_codes=- ext_make_tree=- ext_ctor=- ext_init=- ext_split=- ext_get_borders=- ext_merge=-
+Sentinel values: 2, 3, 0
+Benchmark: pwm_13wx_huff_pc_ssIhLb0EE_matrix_huffman
+RESULT iteration=0 type=pwm_13wx_huff_pc_ssIhLb0EE_matrix_huffman operation=ctor file=/scratch/data/large/dna.txt size=17179869184 height=2 alpha_bits=2 alphabet_size=4 time_in_s=183.98 threads=1 space_in_bytes=4294968024 working_space=47865594775 mode=fixed seed=0 ds_order=3 ext_get_huffman_codes=- ext_make_tree=- ext_ctor=- ext_init=- ext_split=- ext_get_borders=- ext_merge=-
+Sentinel values: 2, 3, 0
+Benchmark: pwm_10wx_huff_psIhLb0EE_matrix_huffman
+RESULT iteration=0 type=pwm_10wx_huff_psIhLb0EE_matrix_huffman operation=ctor file=/scratch/data/large/dna.txt size=17179869184 height=2 alpha_bits=2 alphabet_size=4 time_in_s=228.666 threads=1 space_in_bytes=4294968024 working_space=47865594775 mode=fixed seed=0 ds_order=4 ext_get_huffman_codes=- ext_make_tree=- ext_ctor=- ext_init=- ext_split=- ext_get_borders=- ext_merge=-
+Sentinel values: 2, 3, 0
+
+Iteration 1...
+Benchmark: pwm_10wx_huff_pcIhLb1EE_tree_huffman
+RESULT iteration=1 type=pwm_10wx_huff_pcIhLb1EE_tree_huffman operation=ctor file=/scratch/data/large/dna.txt size=17179869184 height=2 alpha_bits=2 alphabet_size=4 time_in_s=181.573 threads=1 space_in_bytes=4294967984 working_space=47865594775 mode=fixed seed=0 ds_order=0 ext_get_huffman_codes=- ext_make_tree=- ext_ctor=- ext_init=- ext_split=- ext_get_borders=- ext_merge=-
+Sentinel values: 2, 3, 0
+Benchmark: pwm_13wx_huff_pc_ssIhLb1EE_tree_huffman
+RESULT iteration=1 type=pwm_13wx_huff_pc_ssIhLb1EE_tree_huffman operation=ctor file=/scratch/data/large/dna.txt size=17179869184 height=2 alpha_bits=2 alphabet_size=4 time_in_s=185.305 threads=1 space_in_bytes=4294967984 working_space=47865594775 mode=fixed seed=0 ds_order=1 ext_get_huffman_codes=- ext_make_tree=- ext_ctor=- ext_init=- ext_split=- ext_get_borders=- ext_merge=-
+Sentinel values: 2, 3, 0
+Benchmark: pwm_10wx_huff_psIhLb1EE_tree_huffman
+RESULT iteration=1 type=pwm_10wx_huff_psIhLb1EE_tree_huffman operation=ctor file=/scratch/data/large/dna.txt size=17179869184 height=2 alpha_bits=2 alphabet_size=4 time_in_s=234.459 threads=1 space_in_bytes=4294967984 working_space=47865594775 mode=fixed seed=0 ds_order=2 ext_get_huffman_codes=- ext_make_tree=- ext_ctor=- ext_init=- ext_split=- ext_get_borders=- ext_merge=-
+Sentinel values: 2, 3, 0
+Benchmark: pwm_13wx_huff_pc_ssIhLb0EE_matrix_huffman
+RESULT iteration=1 type=pwm_13wx_huff_pc_ssIhLb0EE_matrix_huffman operation=ctor file=/scratch/data/large/dna.txt size=17179869184 height=2 alpha_bits=2 alphabet_size=4 time_in_s=185.158 threads=1 space_in_bytes=4294968024 working_space=47865594775 mode=fixed seed=0 ds_order=3 ext_get_huffman_codes=- ext_make_tree=- ext_ctor=- ext_init=- ext_split=- ext_get_borders=- ext_merge=-
+Sentinel values: 2, 3, 0
+Benchmark: pwm_10wx_huff_psIhLb0EE_matrix_huffman
+RESULT iteration=1 type=pwm_10wx_huff_psIhLb0EE_matrix_huffman operation=ctor file=/scratch/data/large/dna.txt size=17179869184 height=2 alpha_bits=2 alphabet_size=4 time_in_s=226.54 threads=1 space_in_bytes=4294968024 working_space=47865594775 mode=fixed seed=0 ds_order=4 ext_get_huffman_codes=- ext_make_tree=- ext_ctor=- ext_init=- ext_split=- ext_get_borders=- ext_merge=-
+Sentinel values: 2, 3, 0
+
+Iteration 2...
+Benchmark: pwm_10wx_huff_pcIhLb1EE_tree_huffman
+RESULT iteration=2 type=pwm_10wx_huff_pcIhLb1EE_tree_huffman operation=ctor file=/scratch/data/large/dna.txt size=17179869184 height=2 alpha_bits=2 alphabet_size=4 time_in_s=178.744 threads=1 space_in_bytes=4294967984 working_space=47865594775 mode=fixed seed=0 ds_order=0 ext_get_huffman_codes=- ext_make_tree=- ext_ctor=- ext_init=- ext_split=- ext_get_borders=- ext_merge=-
+Sentinel values: 2, 3, 0
+Benchmark: pwm_13wx_huff_pc_ssIhLb1EE_tree_huffman
+RESULT iteration=2 type=pwm_13wx_huff_pc_ssIhLb1EE_tree_huffman operation=ctor file=/scratch/data/large/dna.txt size=17179869184 height=2 alpha_bits=2 alphabet_size=4 time_in_s=184.978 threads=1 space_in_bytes=4294967984 working_space=47865594775 mode=fixed seed=0 ds_order=1 ext_get_huffman_codes=- ext_make_tree=- ext_ctor=- ext_init=- ext_split=- ext_get_borders=- ext_merge=-
+Sentinel values: 2, 3, 0
+Benchmark: pwm_10wx_huff_psIhLb1EE_tree_huffman
+RESULT iteration=2 type=pwm_10wx_huff_psIhLb1EE_tree_huffman operation=ctor file=/scratch/data/large/dna.txt size=17179869184 height=2 alpha_bits=2 alphabet_size=4 time_in_s=234.215 threads=1 space_in_bytes=4294967984 working_space=47865594775 mode=fixed seed=0 ds_order=2 ext_get_huffman_codes=- ext_make_tree=- ext_ctor=- ext_init=- ext_split=- ext_get_borders=- ext_merge=-
+Sentinel values: 2, 3, 0
+Benchmark: pwm_13wx_huff_pc_ssIhLb0EE_matrix_huffman
+RESULT iteration=2 type=pwm_13wx_huff_pc_ssIhLb0EE_matrix_huffman operation=ctor file=/scratch/data/large/dna.txt size=17179869184 height=2 alpha_bits=2 alphabet_size=4 time_in_s=183.955 threads=1 space_in_bytes=4294968024 working_space=47865594775 mode=fixed seed=0 ds_order=3 ext_get_huffman_codes=- ext_make_tree=- ext_ctor=- ext_init=- ext_split=- ext_get_borders=- ext_merge=-
+Sentinel values: 2, 3, 0
+Benchmark: pwm_10wx_huff_psIhLb0EE_matrix_huffman
+RESULT iteration=2 type=pwm_10wx_huff_psIhLb0EE_matrix_huffman operation=ctor file=/scratch/data/large/dna.txt size=17179869184 height=2 alpha_bits=2 alphabet_size=4 time_in_s=225.802 threads=1 space_in_bytes=4294968024 working_space=47865594775 mode=fixed seed=0 ds_order=4 ext_get_huffman_codes=- ext_make_tree=- ext_ctor=- ext_init=- ext_split=- ext_get_borders=- ext_merge=-
+Sentinel values: 2, 3, 0
+
+Iteration 3...
+Benchmark: pwm_10wx_huff_pcIhLb1EE_tree_huffman
+RESULT iteration=3 type=pwm_10wx_huff_pcIhLb1EE_tree_huffman operation=ctor file=/scratch/data/large/dna.txt size=17179869184 height=2 alpha_bits=2 alphabet_size=4 time_in_s=178.689 threads=1 space_in_bytes=4294967984 working_space=47865594775 mode=fixed seed=0 ds_order=0 ext_get_huffman_codes=- ext_make_tree=- ext_ctor=- ext_init=- ext_split=- ext_get_borders=- ext_merge=-
+Sentinel values: 2, 3, 0
+Benchmark: pwm_13wx_huff_pc_ssIhLb1EE_tree_huffman
+RESULT iteration=3 type=pwm_13wx_huff_pc_ssIhLb1EE_tree_huffman operation=ctor file=/scratch/data/large/dna.txt size=17179869184 height=2 alpha_bits=2 alphabet_size=4 time_in_s=185.653 threads=1 space_in_bytes=4294967984 working_space=47865594775 mode=fixed seed=0 ds_order=1 ext_get_huffman_codes=- ext_make_tree=- ext_ctor=- ext_init=- ext_split=- ext_get_borders=- ext_merge=-
+Sentinel values: 2, 3, 0
+Benchmark: pwm_10wx_huff_psIhLb1EE_tree_huffman
+RESULT iteration=3 type=pwm_10wx_huff_psIhLb1EE_tree_huffman operation=ctor file=/scratch/data/large/dna.txt size=17179869184 height=2 alpha_bits=2 alphabet_size=4 time_in_s=231.616 threads=1 space_in_bytes=4294967984 working_space=47865594775 mode=fixed seed=0 ds_order=2 ext_get_huffman_codes=- ext_make_tree=- ext_ctor=- ext_init=- ext_split=- ext_get_borders=- ext_merge=-
+Sentinel values: 2, 3, 0
+Benchmark: pwm_13wx_huff_pc_ssIhLb0EE_matrix_huffman
+RESULT iteration=3 type=pwm_13wx_huff_pc_ssIhLb0EE_matrix_huffman operation=ctor file=/scratch/data/large/dna.txt size=17179869184 height=2 alpha_bits=2 alphabet_size=4 time_in_s=184.247 threads=1 space_in_bytes=4294968024 working_space=47865594775 mode=fixed seed=0 ds_order=3 ext_get_huffman_codes=- ext_make_tree=- ext_ctor=- ext_init=- ext_split=- ext_get_borders=- ext_merge=-
+Sentinel values: 2, 3, 0
+Benchmark: pwm_10wx_huff_psIhLb0EE_matrix_huffman
+RESULT iteration=3 type=pwm_10wx_huff_psIhLb0EE_matrix_huffman operation=ctor file=/scratch/data/large/dna.txt size=17179869184 height=2 alpha_bits=2 alphabet_size=4 time_in_s=225.804 threads=1 space_in_bytes=4294968024 working_space=47865594775 mode=fixed seed=0 ds_order=4 ext_get_huffman_codes=- ext_make_tree=- ext_ctor=- ext_init=- ext_split=- ext_get_borders=- ext_merge=-
+Sentinel values: 2, 3, 0
+
+Iteration 4...
+Benchmark: pwm_10wx_huff_pcIhLb1EE_tree_huffman
+RESULT iteration=4 type=pwm_10wx_huff_pcIhLb1EE_tree_huffman operation=ctor file=/scratch/data/large/dna.txt size=17179869184 height=2 alpha_bits=2 alphabet_size=4 time_in_s=179.835 threads=1 space_in_bytes=4294967984 working_space=47865594775 mode=fixed seed=0 ds_order=0 ext_get_huffman_codes=- ext_make_tree=- ext_ctor=- ext_init=- ext_split=- ext_get_borders=- ext_merge=-
+Sentinel values: 2, 3, 0
+Benchmark: pwm_13wx_huff_pc_ssIhLb1EE_tree_huffman
+RESULT iteration=4 type=pwm_13wx_huff_pc_ssIhLb1EE_tree_huffman operation=ctor file=/scratch/data/large/dna.txt size=17179869184 height=2 alpha_bits=2 alphabet_size=4 time_in_s=184.985 threads=1 space_in_bytes=4294967984 working_space=47865594775 mode=fixed seed=0 ds_order=1 ext_get_huffman_codes=- ext_make_tree=- ext_ctor=- ext_init=- ext_split=- ext_get_borders=- ext_merge=-
+Sentinel values: 2, 3, 0
+Benchmark: pwm_10wx_huff_psIhLb1EE_tree_huffman
+RESULT iteration=4 type=pwm_10wx_huff_psIhLb1EE_tree_huffman operation=ctor file=/scratch/data/large/dna.txt size=17179869184 height=2 alpha_bits=2 alphabet_size=4 time_in_s=233.5 threads=1 space_in_bytes=4294967984 working_space=47865594775 mode=fixed seed=0 ds_order=2 ext_get_huffman_codes=- ext_make_tree=- ext_ctor=- ext_init=- ext_split=- ext_get_borders=- ext_merge=-
+Sentinel values: 2, 3, 0
+Benchmark: pwm_13wx_huff_pc_ssIhLb0EE_matrix_huffman
+RESULT iteration=4 type=pwm_13wx_huff_pc_ssIhLb0EE_matrix_huffman operation=ctor file=/scratch/data/large/dna.txt size=17179869184 height=2 alpha_bits=2 alphabet_size=4 time_in_s=185.741 threads=1 space_in_bytes=4294968024 working_space=47865594775 mode=fixed seed=0 ds_order=3 ext_get_huffman_codes=- ext_make_tree=- ext_ctor=- ext_init=- ext_split=- ext_get_borders=- ext_merge=-
+Sentinel values: 2, 3, 0
+Benchmark: pwm_10wx_huff_psIhLb0EE_matrix_huffman
+RESULT iteration=4 type=pwm_10wx_huff_psIhLb0EE_matrix_huffman operation=ctor file=/scratch/data/large/dna.txt size=17179869184 height=2 alpha_bits=2 alphabet_size=4 time_in_s=225.21 threads=1 space_in_bytes=4294968024 working_space=47865594775 mode=fixed seed=0 ds_order=4 ext_get_huffman_codes=- ext_make_tree=- ext_ctor=- ext_init=- ext_split=- ext_get_borders=- ext_merge=-
+Sentinel values: 2, 3, 0
+
+
+Text: /scratch/data/large/wiki.txt (8 bits)...
+Reading text from /scratch/data/large/wiki.txt...
+Reading 8 bits
+Text size: 17179869184
+Computed effective alphabet of text, 212 characters, depth: 8
+Text width: 1 byte(s) (was 1 byte(s))
+Iteration 0...
+[ EXPECTED ]: 30, 2, 36
+Benchmark: pwm_10wx_huff_pcIhLb1EE_tree_huffman
+RESULT iteration=0 type=pwm_10wx_huff_pcIhLb1EE_tree_huffman operation=ctor file=/scratch/data/large/wiki.txt size=17179869184 height=29 alpha_bits=8 alphabet_size=212 time_in_s=613.737 threads=1 space_in_bytes=11633307320 working_space=47865594774 mode=fixed seed=0 ds_order=0 ext_get_huffman_codes=- ext_make_tree=- ext_ctor=- ext_init=- ext_split=- ext_get_borders=- ext_merge=-
+Sentinel values: 30, 2, 36
+Benchmark: pwm_13wx_huff_pc_ssIhLb1EE_tree_huffman
+RESULT iteration=0 type=pwm_13wx_huff_pc_ssIhLb1EE_tree_huffman operation=ctor file=/scratch/data/large/wiki.txt size=17179869184 height=29 alpha_bits=8 alphabet_size=212 time_in_s=559.436 threads=1 space_in_bytes=11633307320 working_space=47865594774 mode=fixed seed=0 ds_order=1 ext_get_huffman_codes=- ext_make_tree=- ext_ctor=- ext_init=- ext_split=- ext_get_borders=- ext_merge=-
+Sentinel values: 30, 2, 36
+Benchmark: pwm_10wx_huff_psIhLb1EE_tree_huffman
+RESULT iteration=0 type=pwm_10wx_huff_psIhLb1EE_tree_huffman operation=ctor file=/scratch/data/large/wiki.txt size=17179869184 height=29 alpha_bits=8 alphabet_size=212 time_in_s=723.906 threads=1 space_in_bytes=11633307320 working_space=47865594774 mode=fixed seed=0 ds_order=2 ext_get_huffman_codes=- ext_make_tree=- ext_ctor=- ext_init=- ext_split=- ext_get_borders=- ext_merge=-
+Sentinel values: 30, 2, 36
+Benchmark: pwm_13wx_huff_pc_ssIhLb0EE_matrix_huffman
+RESULT iteration=0 type=pwm_13wx_huff_pc_ssIhLb0EE_matrix_huffman operation=ctor file=/scratch/data/large/wiki.txt size=17179869184 height=29 alpha_bits=8 alphabet_size=212 time_in_s=610.094 threads=1 space_in_bytes=11633307576 working_space=47865594774 mode=fixed seed=0 ds_order=3 ext_get_huffman_codes=- ext_make_tree=- ext_ctor=- ext_init=- ext_split=- ext_get_borders=- ext_merge=-
+Sentinel values: 30, 2, 36
+Benchmark: pwm_10wx_huff_psIhLb0EE_matrix_huffman
+RESULT iteration=0 type=pwm_10wx_huff_psIhLb0EE_matrix_huffman operation=ctor file=/scratch/data/large/wiki.txt size=17179869184 height=29 alpha_bits=8 alphabet_size=212 time_in_s=846.685 threads=1 space_in_bytes=11633307576 working_space=50288047832 mode=fixed seed=0 ds_order=4 ext_get_huffman_codes=- ext_make_tree=- ext_ctor=- ext_init=- ext_split=- ext_get_borders=- ext_merge=-
+Sentinel values: 71, 2, 79
+
+Iteration 1...
+Benchmark: pwm_10wx_huff_pcIhLb1EE_tree_huffman
+RESULT iteration=1 type=pwm_10wx_huff_pcIhLb1EE_tree_huffman operation=ctor file=/scratch/data/large/wiki.txt size=17179869184 height=29 alpha_bits=8 alphabet_size=212 time_in_s=614.622 threads=1 space_in_bytes=11633307320 working_space=50288047832 mode=fixed seed=0 ds_order=0 ext_get_huffman_codes=- ext_make_tree=- ext_ctor=- ext_init=- ext_split=- ext_get_borders=- ext_merge=-
+Sentinel values: 30, 2, 36
+Benchmark: pwm_13wx_huff_pc_ssIhLb1EE_tree_huffman
+RESULT iteration=1 type=pwm_13wx_huff_pc_ssIhLb1EE_tree_huffman operation=ctor file=/scratch/data/large/wiki.txt size=17179869184 height=29 alpha_bits=8 alphabet_size=212 time_in_s=557.878 threads=1 space_in_bytes=11633307320 working_space=50288047832 mode=fixed seed=0 ds_order=1 ext_get_huffman_codes=- ext_make_tree=- ext_ctor=- ext_init=- ext_split=- ext_get_borders=- ext_merge=-
+Sentinel values: 30, 2, 36
+Benchmark: pwm_10wx_huff_psIhLb1EE_tree_huffman
+RESULT iteration=1 type=pwm_10wx_huff_psIhLb1EE_tree_huffman operation=ctor file=/scratch/data/large/wiki.txt size=17179869184 height=29 alpha_bits=8 alphabet_size=212 time_in_s=736.651 threads=1 space_in_bytes=11633307320 working_space=50288047832 mode=fixed seed=0 ds_order=2 ext_get_huffman_codes=- ext_make_tree=- ext_ctor=- ext_init=- ext_split=- ext_get_borders=- ext_merge=-
+Sentinel values: 30, 2, 36
+Benchmark: pwm_13wx_huff_pc_ssIhLb0EE_matrix_huffman
+RESULT iteration=1 type=pwm_13wx_huff_pc_ssIhLb0EE_matrix_huffman operation=ctor file=/scratch/data/large/wiki.txt size=17179869184 height=29 alpha_bits=8 alphabet_size=212 time_in_s=629.176 threads=1 space_in_bytes=11633307576 working_space=50288047832 mode=fixed seed=0 ds_order=3 ext_get_huffman_codes=- ext_make_tree=- ext_ctor=- ext_init=- ext_split=- ext_get_borders=- ext_merge=-
+Sentinel values: 30, 2, 36
+Benchmark: pwm_10wx_huff_psIhLb0EE_matrix_huffman
+RESULT iteration=1 type=pwm_10wx_huff_psIhLb0EE_matrix_huffman operation=ctor file=/scratch/data/large/wiki.txt size=17179869184 height=29 alpha_bits=8 alphabet_size=212 time_in_s=794.258 threads=1 space_in_bytes=11633307576 working_space=50288047832 mode=fixed seed=0 ds_order=4 ext_get_huffman_codes=- ext_make_tree=- ext_ctor=- ext_init=- ext_split=- ext_get_borders=- ext_merge=-
+Sentinel values: 71, 2, 79
+
+Iteration 2...
+Benchmark: pwm_10wx_huff_pcIhLb1EE_tree_huffman
+RESULT iteration=2 type=pwm_10wx_huff_pcIhLb1EE_tree_huffman operation=ctor file=/scratch/data/large/wiki.txt size=17179869184 height=29 alpha_bits=8 alphabet_size=212 time_in_s=613.617 threads=1 space_in_bytes=11633307320 working_space=50288047832 mode=fixed seed=0 ds_order=0 ext_get_huffman_codes=- ext_make_tree=- ext_ctor=- ext_init=- ext_split=- ext_get_borders=- ext_merge=-
+Sentinel values: 30, 2, 36
+Benchmark: pwm_13wx_huff_pc_ssIhLb1EE_tree_huffman
+RESULT iteration=2 type=pwm_13wx_huff_pc_ssIhLb1EE_tree_huffman operation=ctor file=/scratch/data/large/wiki.txt size=17179869184 height=29 alpha_bits=8 alphabet_size=212 time_in_s=560.006 threads=1 space_in_bytes=11633307320 working_space=50288047832 mode=fixed seed=0 ds_order=1 ext_get_huffman_codes=- ext_make_tree=- ext_ctor=- ext_init=- ext_split=- ext_get_borders=- ext_merge=-
+Sentinel values: 30, 2, 36
+Benchmark: pwm_10wx_huff_psIhLb1EE_tree_huffman
+RESULT iteration=2 type=pwm_10wx_huff_psIhLb1EE_tree_huffman operation=ctor file=/scratch/data/large/wiki.txt size=17179869184 height=29 alpha_bits=8 alphabet_size=212 time_in_s=721.218 threads=1 space_in_bytes=11633307320 working_space=50288047832 mode=fixed seed=0 ds_order=2 ext_get_huffman_codes=- ext_make_tree=- ext_ctor=- ext_init=- ext_split=- ext_get_borders=- ext_merge=-
+Sentinel values: 30, 2, 36
+Benchmark: pwm_13wx_huff_pc_ssIhLb0EE_matrix_huffman
+RESULT iteration=2 type=pwm_13wx_huff_pc_ssIhLb0EE_matrix_huffman operation=ctor file=/scratch/data/large/wiki.txt size=17179869184 height=29 alpha_bits=8 alphabet_size=212 time_in_s=607.674 threads=1 space_in_bytes=11633307576 working_space=50288047832 mode=fixed seed=0 ds_order=3 ext_get_huffman_codes=- ext_make_tree=- ext_ctor=- ext_init=- ext_split=- ext_get_borders=- ext_merge=-
+Sentinel values: 30, 2, 36
+Benchmark: pwm_10wx_huff_psIhLb0EE_matrix_huffman
+RESULT iteration=2 type=pwm_10wx_huff_psIhLb0EE_matrix_huffman operation=ctor file=/scratch/data/large/wiki.txt size=17179869184 height=29 alpha_bits=8 alphabet_size=212 time_in_s=794.551 threads=1 space_in_bytes=11633307576 working_space=50288047832 mode=fixed seed=0 ds_order=4 ext_get_huffman_codes=- ext_make_tree=- ext_ctor=- ext_init=- ext_split=- ext_get_borders=- ext_merge=-
+Sentinel values: 71, 2, 79
+
+Iteration 3...
+Benchmark: pwm_10wx_huff_pcIhLb1EE_tree_huffman
+RESULT iteration=3 type=pwm_10wx_huff_pcIhLb1EE_tree_huffman operation=ctor file=/scratch/data/large/wiki.txt size=17179869184 height=29 alpha_bits=8 alphabet_size=212 time_in_s=691.445 threads=1 space_in_bytes=11633307320 working_space=50288047832 mode=fixed seed=0 ds_order=0 ext_get_huffman_codes=- ext_make_tree=- ext_ctor=- ext_init=- ext_split=- ext_get_borders=- ext_merge=-
+Sentinel values: 30, 2, 36
+Benchmark: pwm_13wx_huff_pc_ssIhLb1EE_tree_huffman
+RESULT iteration=3 type=pwm_13wx_huff_pc_ssIhLb1EE_tree_huffman operation=ctor file=/scratch/data/large/wiki.txt size=17179869184 height=29 alpha_bits=8 alphabet_size=212 time_in_s=597.169 threads=1 space_in_bytes=11633307320 working_space=50288047832 mode=fixed seed=0 ds_order=1 ext_get_huffman_codes=- ext_make_tree=- ext_ctor=- ext_init=- ext_split=- ext_get_borders=- ext_merge=-
+Sentinel values: 30, 2, 36
+Benchmark: pwm_10wx_huff_psIhLb1EE_tree_huffman
+RESULT iteration=3 type=pwm_10wx_huff_psIhLb1EE_tree_huffman operation=ctor file=/scratch/data/large/wiki.txt size=17179869184 height=29 alpha_bits=8 alphabet_size=212 time_in_s=722.477 threads=1 space_in_bytes=11633307320 working_space=50288047832 mode=fixed seed=0 ds_order=2 ext_get_huffman_codes=- ext_make_tree=- ext_ctor=- ext_init=- ext_split=- ext_get_borders=- ext_merge=-
+Sentinel values: 30, 2, 36
+Benchmark: pwm_13wx_huff_pc_ssIhLb0EE_matrix_huffman
+RESULT iteration=3 type=pwm_13wx_huff_pc_ssIhLb0EE_matrix_huffman operation=ctor file=/scratch/data/large/wiki.txt size=17179869184 height=29 alpha_bits=8 alphabet_size=212 time_in_s=607.436 threads=1 space_in_bytes=11633307576 working_space=50288047832 mode=fixed seed=0 ds_order=3 ext_get_huffman_codes=- ext_make_tree=- ext_ctor=- ext_init=- ext_split=- ext_get_borders=- ext_merge=-
+Sentinel values: 30, 2, 36
+Benchmark: pwm_10wx_huff_psIhLb0EE_matrix_huffman
+RESULT iteration=3 type=pwm_10wx_huff_psIhLb0EE_matrix_huffman operation=ctor file=/scratch/data/large/wiki.txt size=17179869184 height=29 alpha_bits=8 alphabet_size=212 time_in_s=796.587 threads=1 space_in_bytes=11633307576 working_space=50288047832 mode=fixed seed=0 ds_order=4 ext_get_huffman_codes=- ext_make_tree=- ext_ctor=- ext_init=- ext_split=- ext_get_borders=- ext_merge=-
+Sentinel values: 71, 2, 79
+
+Iteration 4...
+Benchmark: pwm_10wx_huff_pcIhLb1EE_tree_huffman
+RESULT iteration=4 type=pwm_10wx_huff_pcIhLb1EE_tree_huffman operation=ctor file=/scratch/data/large/wiki.txt size=17179869184 height=29 alpha_bits=8 alphabet_size=212 time_in_s=612.69 threads=1 space_in_bytes=11633307320 working_space=50288047832 mode=fixed seed=0 ds_order=0 ext_get_huffman_codes=- ext_make_tree=- ext_ctor=- ext_init=- ext_split=- ext_get_borders=- ext_merge=-
+Sentinel values: 30, 2, 36
+Benchmark: pwm_13wx_huff_pc_ssIhLb1EE_tree_huffman
+RESULT iteration=4 type=pwm_13wx_huff_pc_ssIhLb1EE_tree_huffman operation=ctor file=/scratch/data/large/wiki.txt size=17179869184 height=29 alpha_bits=8 alphabet_size=212 time_in_s=558.421 threads=1 space_in_bytes=11633307320 working_space=50288047832 mode=fixed seed=0 ds_order=1 ext_get_huffman_codes=- ext_make_tree=- ext_ctor=- ext_init=- ext_split=- ext_get_borders=- ext_merge=-
+Sentinel values: 30, 2, 36
+Benchmark: pwm_10wx_huff_psIhLb1EE_tree_huffman
+RESULT iteration=4 type=pwm_10wx_huff_psIhLb1EE_tree_huffman operation=ctor file=/scratch/data/large/wiki.txt size=17179869184 height=29 alpha_bits=8 alphabet_size=212 time_in_s=721.371 threads=1 space_in_bytes=11633307320 working_space=50288047832 mode=fixed seed=0 ds_order=2 ext_get_huffman_codes=- ext_make_tree=- ext_ctor=- ext_init=- ext_split=- ext_get_borders=- ext_merge=-
+Sentinel values: 30, 2, 36
+Benchmark: pwm_13wx_huff_pc_ssIhLb0EE_matrix_huffman
+RESULT iteration=4 type=pwm_13wx_huff_pc_ssIhLb0EE_matrix_huffman operation=ctor file=/scratch/data/large/wiki.txt size=17179869184 height=29 alpha_bits=8 alphabet_size=212 time_in_s=607.373 threads=1 space_in_bytes=11633307576 working_space=50288047832 mode=fixed seed=0 ds_order=3 ext_get_huffman_codes=- ext_make_tree=- ext_ctor=- ext_init=- ext_split=- ext_get_borders=- ext_merge=-
+Sentinel values: 30, 2, 36
+Benchmark: pwm_10wx_huff_psIhLb0EE_matrix_huffman
+RESULT iteration=4 type=pwm_10wx_huff_psIhLb0EE_matrix_huffman operation=ctor file=/scratch/data/large/wiki.txt size=17179869184 height=29 alpha_bits=8 alphabet_size=212 time_in_s=792.487 threads=1 space_in_bytes=11633307576 working_space=50288047832 mode=fixed seed=0 ds_order=4 ext_get_huffman_codes=- ext_make_tree=- ext_ctor=- ext_init=- ext_split=- ext_get_borders=- ext_merge=-
+Sentinel values: 71, 2, 79
+
+
+
+!! Warning !! Mismatch detected
+Iteration: 1 of 5, Implementation: pwm_10wx_huff_psIhLb0EE_matrix_huffman
+Expected: 114, got: 112
+Failed implementations: 
+- pwm_10wx_huff_psIhLb0EE_matrix_huffman
+Done
+Finish Time: 2022-05-20-22-56-52
